@@ -33,7 +33,7 @@ img {
 .precio-borrar{
     display: flex;
     flex-flow: column;   
-    justify-content: start; 
+    justify-content: flex-start; 
 }
 
 .precio-borrar p, .precio-borrar button {
