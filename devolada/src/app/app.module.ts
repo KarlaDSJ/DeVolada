@@ -5,11 +5,13 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CarritoComponent } from './carrito/carrito.component';
+import { MetodoPagoComponent } from './metodo-pago/metodo-pago.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CarritoComponent
+    CarritoComponent,
+    MetodoPagoComponent
   ],
   imports: [
     BrowserModule,
