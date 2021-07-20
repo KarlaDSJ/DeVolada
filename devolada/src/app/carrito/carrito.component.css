@@ -40,6 +40,16 @@ img {
     margin: 0 auto;
 }
 
+.col-6 {
+    display: flex;
+    justify-content: flex-end;    
+}
+
+.col-6 button{
+    margin-right: 120px;
+}
+   
+
 /* .sec-precio{
     display: flex;
     flex-direction: column;
