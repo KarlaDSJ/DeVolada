@@ -1,0 +1,41 @@
+<div class="container"> 
+    <div class="row mb-3">
+        <div class="col text-center">
+            <p class="fs-3">Tienes {{listaP.length}} artículos en tu 🛒</p>
+        </div>
+    </div>
+    
+    
+    <!-- Mostramos los productos -->
+    <div class="row mb-5" *ngFor="let producto of listaP; index as i">
+        
+        <!-- Tarjetita -->
+        <div class="col">
+            <!-- COMENTAR src es atributo dinámico (binding atributte)  -->
+            <img [attr.src]="producto.imagenp" alt="Imagen del producto" width="100" height="100">
+        </div>
+        <div class="col">
+            <p class="text-bolder">{{producto.nombre}}</p>
+            <p class="text-secondary">ID: {{producto.idP}} </p>
+        </div>
+        <div class="col">
+            <div class="btn-group rounded-pill" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-secondary" (click) = "disminuirCP(i)">-</button>
+                <span class="cantidad-p">{{producto.cant}} </span>
+                <button type="button" class="btn btn-secondary" (click) = "aumentarCP(i)">+</button>
+              </div>
+        </div>
+        <div class="col precio-borrar">
+            <p class="text-bolder"> $ {{producto.precioP}} </p>
+            <button type="button" class="btn btn-link" (click) = "eliminarP(i)" >Eliminar</button>
+        </div>
+        
+    </div>
+
+
+    <div class="row justify-content-end">        
+        <div class="col-3 text-end">Total</div>
+        <div class="col-3 text-center text-bolder">${{total}} </div>
+    </div>
+
+</div>
