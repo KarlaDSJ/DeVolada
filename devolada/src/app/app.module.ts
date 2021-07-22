@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
@@ -16,7 +17,8 @@ import { MetodoPagoComponent } from './metodo-pago/metodo-pago.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    FormsModule // Para las entradas (inputs) o formularios
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -14,12 +14,18 @@ export class MetodoPagoComponent implements OnInit {
     estado: "Ciudad de México", cp: 94523 }
   ];
 
+  calleNum ="Churubusco 152";
+
   // Formato en el que se muestra una dirección 
   formato(i:number) : string {
     let dir = "";
     dir = this.listaDir[i].calleNum+", "+ this.listaDir[i].colonia+", "+this.listaDir[i].ciudad+", "+
     this.listaDir[i].estado+", "+this.listaDir[i].cp;
     return dir;
+  }
+
+  guardarDir():void{
+    console.log("Nueva dir: ", this.calleNum);    
   }
   
 

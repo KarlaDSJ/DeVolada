@@ -21,26 +21,25 @@
     </div>
 
     <!-- Agregar nueva dirección -->
-    <div class="container mt-3">
-        
-        <button class="btn btn-light fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    <div class="container mt-3 ">        
+        <button class="btn btn-light fs-5 mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
             ➕ Agregar una dirección
         </button>
         
-        <div class="collapse" id="collapseExample">
-            <div class="container">
-                
+        <div class="collapse border border-white p-2 py-3" id="collapseExample">
+            
+            <div class="container">                
                 <div class="form-floating mb-3">
-                    <input class="form-control" id="floatingInput" value="Churubusco 152">
-                    <label for="floatingInput">Calle y número</label>
+                    <input class="form-control" id="calle-numero" [(ngModel)]="calleNum" name="calleNum">
+                    <label for="calle-numero">Calle y número</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input class="form-control" id="floatingInput" value="Evolución">
-                    <label for="floatingInput">Colonia</label>
+                    <input class="form-control" id="colonia" value="Evolución">
+                    <label for="colonia">Colonia</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input class="form-control" id="floatingInput" value="Benito Juárez">
-                    <label for="floatingInput">Ciudad</label>
+                    <input class="form-control" id="ciudad" value="Benito Juárez">
+                    <label for="ciudad">Delegación</label>
                 </div>
                 <div class="form-floating mb-3">
                     <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
@@ -82,13 +81,13 @@
                     <label for="floatingSelect">Estado</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input class="form-control" id="floatingInput" value="12356">
-                    <label for="floatingInput">Código Postal</label>
+                    <input class="form-control" id="cp" value="12356">
+                    <label for="cp">Código Postal</label>
                 </div>
 
                 <div class="row margin-auto" >
-                    <div class="col-12">
-                        <button type="button" class="btn btn-outline-primary">Agregar</button>
+                    <div class="col d-flex justify-content-center">
+                        <button type="button" class="btn btn-outline-primary" (click)='guardarDir()'>Agregar</button>
                     </div>
                 </div>
                 
