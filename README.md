@@ -13,13 +13,24 @@ Los compradores y vendedores podrán mostrar sus productos y ofertas sin la nece
 - Antonio Reyes Martínez, *responsable de la colaboración*
 
 
-## Ambiente de desarrollo:
-| Herramienta      | Versión |
-| :--------------: | :-----: |
-| Bootstrap        |  5.0.2  |
-| Flask-SQLAlchemy | 2.0.1   |
-| Angular          | 7.19.0  |
-| Python           | 3.6.9   |
+## Backend
+
+### Instalación
+```
+cd backend
+python3 -m venv venv
+source venv/bin/activate
+pip3 install -r requirements.txt
+```
+
+### Ejecución
+```
+cd backend
+source venv/bin/activate
+export FLASK_APP=main.py
+export FLASK_ENV=development
+flask run
+```
 
 
 
