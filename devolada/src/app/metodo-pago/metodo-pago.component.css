@@ -1,8 +1,0 @@
-.col-6 {
-    display: flex;
-    justify-content: flex-end;    
-}
-
-.col-6 button{
-    margin-right: 120px;
-}

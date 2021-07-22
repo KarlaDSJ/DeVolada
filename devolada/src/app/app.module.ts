@@ -12,6 +12,8 @@ import { ProductoComponent } from './producto/producto.component';
 import { TarjetaProductoComponent } from './tarjeta-producto/tarjeta-producto.component';
 import { MasVendidosComponent } from './mas-vendidos/mas-vendidos.component';
 import { TodosComponent } from './todos/todos.component';
+import { DireccionComponent } from './direccion/direccion.component';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { TodosComponent } from './todos/todos.component';
     ProductoComponent,
     TarjetaProductoComponent,
     MasVendidosComponent,
-    TodosComponent
+    TodosComponent,
+    DireccionComponent
   ],
   imports: [
     BrowserModule,
