@@ -7,12 +7,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { MetodoPagoComponent } from './metodo-pago/metodo-pago.component';
+import { DireccionComponent } from './direccion/direccion.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CarritoComponent,
-    MetodoPagoComponent
+    MetodoPagoComponent,
+    DireccionComponent
   ],
   imports: [
     BrowserModule,
