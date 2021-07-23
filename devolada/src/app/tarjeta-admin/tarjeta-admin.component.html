@@ -1,1 +1,25 @@
-<p>tarjeta-admin works!</p>
+
+<div class="card m-2" style="width: 18rem;">
+    <!-- Foto principal y descripción breve del producto -->
+    <div class="img">
+      <img src="https://www.punto-informatico.it/app/uploads/2020/05/lg_gram.jpg" class="card-img-top" alt="nombre del producto">
+      <p class="info card-img-top">Perrito salvaje.</p>
+    </div>
+      <!-- Información del producto -->
+      <div class="card-body">
+        <!-- Nombre -->
+        <h6 class="card-title">Nombre del producto</h6>
+        <p class="card-text fw-light">
+          <!-- ID -->
+          ID del producto <br>
+          <!-- Precio -->
+          <span class="fw-bold">$100 MXM</span> <br>
+          <!-- Calificación -->
+          <span class="text-warning">★★★★★</span> (7 opiniones) 
+        </p>
+        <!-- Botón para ver información completa -->
+        <a routerLink="/producto" routerLinkActive="active"
+           class="btn btn-primary btn-sm w-100 rounded-pill">
+          Ver producto
+       </a>
+  </div>

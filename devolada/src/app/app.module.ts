@@ -14,6 +14,7 @@ import { MasVendidosComponent } from './mas-vendidos/mas-vendidos.component';
 import { TodosComponent } from './todos/todos.component';
 import { DireccionComponent } from './direccion/direccion.component';
 import { TarjetaAdminComponent } from './tarjeta-admin/tarjeta-admin.component';
+import { MisProductosComponent } from './mis-productos/mis-productos.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { TarjetaAdminComponent } from './tarjeta-admin/tarjeta-admin.component';
     MasVendidosComponent,
     TodosComponent,
     DireccionComponent,
-    TarjetaAdminComponent
+    TarjetaAdminComponent,
+    MisProductosComponent
   ],
   imports: [
     BrowserModule,
