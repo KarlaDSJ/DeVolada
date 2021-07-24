@@ -15,7 +15,12 @@ import { TodosComponent } from './todos/todos.component';
 import { DireccionComponent } from './direccion/direccion.component';
 import { TarjetaAdminComponent } from './tarjeta-admin/tarjeta-admin.component';
 import { MisProductosComponent } from './mis-productos/mis-productos.component';
+<<<<<<< HEAD
 import { CompraFinalizadaComponent } from './compra-finalizada/compra-finalizada.component';
+=======
+import { ResenasComponent } from './resenas/resenas.component';
+import { CrearResenaComponent } from './crear-resena/crear-resena.component';
+>>>>>>> 86f12f7312af2fa3c1885fd7f828c7b32532aae2
 
 
 @NgModule({
@@ -31,7 +36,12 @@ import { CompraFinalizadaComponent } from './compra-finalizada/compra-finalizada
     DireccionComponent,
     TarjetaAdminComponent,
     MisProductosComponent,
+<<<<<<< HEAD
     CompraFinalizadaComponent
+=======
+    ResenasComponent,
+    CrearResenaComponent
+>>>>>>> 86f12f7312af2fa3c1885fd7f828c7b32532aae2
   ],
   imports: [
     BrowserModule,
