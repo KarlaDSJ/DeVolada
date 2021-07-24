@@ -16,6 +16,7 @@ import { DireccionComponent } from './direccion/direccion.component';
 import { TarjetaAdminComponent } from './tarjeta-admin/tarjeta-admin.component';
 import { MisProductosComponent } from './mis-productos/mis-productos.component';
 import { ResenasComponent } from './resenas/resenas.component';
+import { CrearResenaComponent } from './crear-resena/crear-resena.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { ResenasComponent } from './resenas/resenas.component';
     DireccionComponent,
     TarjetaAdminComponent,
     MisProductosComponent,
-    ResenasComponent
+    ResenasComponent,
+    CrearResenaComponent
   ],
   imports: [
     BrowserModule,
