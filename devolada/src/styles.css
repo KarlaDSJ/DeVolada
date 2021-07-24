@@ -3,4 +3,13 @@
 
 /* Utilizo ésta fuente para TODAS mis vistas :p */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap');
-body {font-family: 'Montserrat', sans-serif;} 
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--color-fondo);
+} 
+
+/* Variables globlales (son como macros) */
+/* Esto es global */
+:root {
+    --color-fondo: rgb(248, 246, 246);
+}
