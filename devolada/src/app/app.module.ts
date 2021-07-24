@@ -15,6 +15,7 @@ import { TodosComponent } from './todos/todos.component';
 import { DireccionComponent } from './direccion/direccion.component';
 import { TarjetaAdminComponent } from './tarjeta-admin/tarjeta-admin.component';
 import { MisProductosComponent } from './mis-productos/mis-productos.component';
+import { CompraFinalizadaComponent } from './compra-finalizada/compra-finalizada.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { MisProductosComponent } from './mis-productos/mis-productos.component';
     TodosComponent,
     DireccionComponent,
     TarjetaAdminComponent,
-    MisProductosComponent
+    MisProductosComponent,
+    CompraFinalizadaComponent
   ],
   imports: [
     BrowserModule,
