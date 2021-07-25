@@ -18,6 +18,7 @@ import { MisProductosComponent } from './mis-productos/mis-productos.component';
 import { CompraFinalizadaComponent } from './compra-finalizada/compra-finalizada.component';
 import { ResenasComponent } from './resenas/resenas.component';
 import { CrearResenaComponent } from './crear-resena/crear-resena.component';
+import { VerResenasComponent } from './ver-resenas/ver-resenas.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { CrearResenaComponent } from './crear-resena/crear-resena.component';
     MisProductosComponent,
     CompraFinalizadaComponent,
     ResenasComponent,
-    CrearResenaComponent
+    CrearResenaComponent,
+    VerResenasComponent
   ],
   imports: [
     BrowserModule,

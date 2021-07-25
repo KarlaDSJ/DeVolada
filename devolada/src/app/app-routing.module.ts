@@ -8,6 +8,7 @@ import { MetodoPagoComponent } from './metodo-pago/metodo-pago.component';
 import { MisProductosComponent } from './mis-productos/mis-productos.component';
 import { CompraFinalizadaComponent } from './compra-finalizada/compra-finalizada.component';
 import { CrearResenaComponent } from './crear-resena/crear-resena.component';
+import { VerResenasComponent } from './ver-resenas/ver-resenas.component';
 
 const routes: Routes = [
   {path: 'carrito', component: CarritoComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'mis-productos', component: MisProductosComponent},
   {path: 'compra-finalizada', component: CompraFinalizadaComponent},
   {path: 'crear-resena', component: CrearResenaComponent},
+  {path: 'ver-resenas', component: VerResenasComponent},
 ];
 
 @NgModule({
