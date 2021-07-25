@@ -52,6 +52,7 @@ export class DireccionComponent implements OnInit {
     });          
   }
 
+  // Obtiene la dirección y crea la nueva vista 
   obtenerDir(f:NgForm){
     this.vdir = true;
     if(f.invalid){
