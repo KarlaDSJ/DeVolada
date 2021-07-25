@@ -1,134 +1,143 @@
+<!-- control+shift+i para identar todo en vs-code -->
+
 <div class="container">
-    <p class="fs-3 text-center">¿A dónde deberíamos enviar tu pedido? 📦 </p>
-    
+    <h2 class="text-center mb-4">
+        ¿A dónde deberíamos enviar tu pedido? 📦
+    </h2>
+
     <!-- Lista de direcciones -->
     <div class="container">
         <div class="row">
             <p class="fs-5"> 🏠 Mis direcciones</p>
-            
-            <div class="row mb-2 " *ngFor="let dir of listaDir, index as i">
-                
-                <!-- Guardar la dirección en una variables/objeto -->
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        {{formato(i)}}
-                    </label>
-                </div>
-                
-            </div>
-        </div>    
-    </div>
 
-    <!-- Agregar nueva dirección -->
-    <div class="container mt-3 ">        
-        <button class="btn btn-light fs-5 mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" >
-            ➕ Agregar una dirección
-        </button>
-        
-        <div class="collapse border border-white p-2 py-3" id="collapseExample">
-
-            <form class="row g-3 needs-validation" [ngClass]="{'was-validated': validez}" (ngSubmit)="validarDir(f)" #f="ngForm" novalidate>
-            <div class="container">                
-                <div class="form-floating mb-3">
-                    <input class="form-control" id="calle" name="calle" ngModel required>
-                    <label for="calle">Calle</label>
-                    <div class="invalid-feedback">
-                        Ingresa tu calle. 
-                      </div>
-                </div>
-                <div class="form-floating mb-3">
-                    <input class="form-control" pattern="\d+" id="numero" name="num" ngModel required>
-                    <label for="numero">Número</label>
-                    <div class="invalid-feedback">
-                        Ingresa tu número exterior. 
-                      </div>
-                </div>
-                <div class="form-floating mb-3">
-                    <input class="form-control" id="colonia" name="colonia" ngModel required>
-                    <label for="colonia">Colonia</label>
-                    <div class="invalid-feedback">
-                        Ingresa tu colonia.
-                      </div>
-                </div>
-                <div class="form-floating mb-3">
-                    <input class="form-control" id="ciudad" name="ciudad" ngModel required>
-                    <label for="ciudad">Delegación</label>
-                    <div class="invalid-feedback">
-                        Ingresa tu delegación.
-                      </div>
-                </div>
-
-                <div class="form-floating mb-3">
-                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="estado" ngModel required>
-                        <option selected disabled value="">Selecciona un estado</option>                        
-                        <option value="Aguascalientes">Aguascalientes</option>
-                        <option value="Baja California">Baja California</option>
-                        <option value="Baja California Sur">Baja California Sur</option>
-                        <option value="Campeche">Campeche</option>
-                        <option value="Chiapas">Chiapas</option>
-                        <option value="Chihuahua">Chihuahua</option>
-                        <option value="CDMX">Ciudad de México</option>
-                        <option value="Coahuila">Coahuila</option>
-                        <option value="Colima">Colima</option>
-                        <option value="Durango">Durango</option>
-                        <option value="Estado de México">Estado de México</option>
-                        <option value="Guanajuato">Guanajuato</option>
-                        <option value="Guerrero">Guerrero</option>
-                        <option value="Hidalgo">Hidalgo</option>
-                        <option value="Jalisco">Jalisco</option>
-                        <option value="Michoacán">Michoacán</option>
-                        <option value="Morelos">Morelos</option>
-                        <option value="Nayarit">Nayarit</option>
-                        <option value="Nuevo León">Nuevo León</option>
-                        <option value="Oaxaca">Oaxaca</option>
-                        <option value="Puebla">Puebla</option>
-                        <option value="Querétaro">Querétaro</option>
-                        <option value="Quintana Roo">Quintana Roo</option>
-                        <option value="San Luis Potosí">San Luis Potosí</option>
-                        <option value="Sinaloa">Sinaloa</option>
-                        <option value="Sonora">Sonora</option>
-                        <option value="Tabasco">Tabasco</option>
-                        <option value="Tamaulipas">Tamaulipas</option>
-                        <option value="Tlaxcala">Tlaxcala</option>
-                        <option value="Veracruz">Veracruz</option>
-                        <option value="Yucatán">Yucatán</option>
-                        <option value="Zacatecas">Zacatecas</option>
-
-                    </select>
-                    <label for="floatingSelect">Estado</label>
-                    <div class="invalid-feedback">
-                        Elige un estado.
-                      </div>
-                </div>
-                <div class="form-floating mb-3">
-                    <input class="form-control" pattern="\d{5}" id="cp" name="cp" ngModel required>
-                    <label for="cp">Código Postal</label>
-                    <div class="invalid-feedback">
-                        Ingresa tu código postal.
-                      </div>
-                </div>
-                
-
-                <div class="row margin-auto" >
-                    <div class="col d-flex justify-content-center">
-                        <button type="submit" class="btn btn-outline-primary" >Agregar</button>
+            <form class="row g-3 needs-validation" #myForm="ngForm" (submit)="obtenerDir(myForm)"
+                [ngClass]="{'was-validated': vdir}" novalidate>
+                <div class="row mb-2 " *ngFor="let dir of listaDir, index as i, last as isLast">
+                    <div class="form-check">
+                        <input class="form-check-input" [id]="'dir'+i" type="radio" ngModel [value]="formato(i)"
+                            name="dirElig" ngModel required>
+                        <label class="form-check-label" [for]="'dir'+i">
+                            {{formato(i)}}
+                        </label>
+                        <div *ngIf="isLast" class="invalid-feedback">
+                            Selecciona una dirección.
+                        </div>
                     </div>
                 </div>
-                                
 
-            </div>
+
+                <!-- Agregar nueva dirección -->
+                <div class="container mt-3 ">
+                    <button class="btn btn-light fs-5 mb-3" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        ➕ Agregar una dirección
+                    </button>
+
+                    <div class="collapse border border-white p-2 py-3" id="collapseExample">
+
+                        <form class="row g-3 needs-validation" [ngClass]="{'was-validated': validez}"
+                            (ngSubmit)="validarDir(f)" #f="ngForm" novalidate>
+
+                            <div class="container">
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="calle" name="calle" ngModel required>
+                                    <label for="calle">Calle</label>
+                                    <div class="invalid-feedback">
+                                        Ingresa tu calle.
+                                    </div>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" pattern="\d+" id="numero" name="num" ngModel required>
+                                    <label for="numero">Número</label>
+                                    <div class="invalid-feedback">
+                                        Ingresa tu número exterior.
+                                    </div>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="colonia" name="colonia" ngModel required>
+                                    <label for="colonia">Colonia</label>
+                                    <div class="invalid-feedback">
+                                        Ingresa tu colonia.
+                                    </div>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="ciudad" name="ciudad" ngModel required>
+                                    <label for="ciudad">Delegación</label>
+                                    <div class="invalid-feedback">
+                                        Ingresa tu delegación.
+                                    </div>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <select class="form-select" id="floatingSelect"
+                                        aria-label="Floating label select example" name="estado" ngModel required>
+                                        <option selected disabled value="">Selecciona un estado</option>
+                                        <option value="Aguascalientes">Aguascalientes</option>
+                                        <option value="Baja California">Baja California</option>
+                                        <option value="Baja California Sur">Baja California Sur</option>
+                                        <option value="Campeche">Campeche</option>
+                                        <option value="Chiapas">Chiapas</option>
+                                        <option value="Chihuahua">Chihuahua</option>
+                                        <option value="CDMX">Ciudad de México</option>
+                                        <option value="Coahuila">Coahuila</option>
+                                        <option value="Colima">Colima</option>
+                                        <option value="Durango">Durango</option>
+                                        <option value="Estado de México">Estado de México</option>
+                                        <option value="Guanajuato">Guanajuato</option>
+                                        <option value="Guerrero">Guerrero</option>
+                                        <option value="Hidalgo">Hidalgo</option>
+                                        <option value="Jalisco">Jalisco</option>
+                                        <option value="Michoacán">Michoacán</option>
+                                        <option value="Morelos">Morelos</option>
+                                        <option value="Nayarit">Nayarit</option>
+                                        <option value="Nuevo León">Nuevo León</option>
+                                        <option value="Oaxaca">Oaxaca</option>
+                                        <option value="Puebla">Puebla</option>
+                                        <option value="Querétaro">Querétaro</option>
+                                        <option value="Quintana Roo">Quintana Roo</option>
+                                        <option value="San Luis Potosí">San Luis Potosí</option>
+                                        <option value="Sinaloa">Sinaloa</option>
+                                        <option value="Sonora">Sonora</option>
+                                        <option value="Tabasco">Tabasco</option>
+                                        <option value="Tamaulipas">Tamaulipas</option>
+                                        <option value="Tlaxcala">Tlaxcala</option>
+                                        <option value="Veracruz">Veracruz</option>
+                                        <option value="Yucatán">Yucatán</option>
+                                        <option value="Zacatecas">Zacatecas</option>
+                                    </select>
+                                    <label for="floatingSelect">Estado</label>
+                                    <div class="invalid-feedback">
+                                        Elige un estado.
+                                    </div>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" pattern="\d{5}" id="cp" name="cp" ngModel required>
+                                    <label for="cp">Código Postal</label>
+                                    <div class="invalid-feedback">
+                                        Ingresa tu código postal.
+                                    </div>
+                                </div>
+
+                                <div class="row margin-auto">
+                                    <div class="col d-flex justify-content-center">
+                                        <button type="submit" class="btn btn-outline-primary px-5">Agregar</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Continuar compra -->
+                <div class="d-flex container justify-content-end mt-4 pe-5">
+                    <button type="submit" class="btn btn-primary rounded-pill me-0 me-ms-5 px-5">
+                        Continuar
+                    </button>
+                </div>
+
             </form>
         </div>
     </div>
-    
-    <!-- Continuar compra -->
 
-    <div class="container">
-        <div class="row justify-content-end mt-4" >
-            <div class="col-6">
-                <button type="button" class="btn btn-primary"  [disabled]="listaDir.length==0" >Continuar</button>
-            </div>
-        </div>
-    </div>
 </div>

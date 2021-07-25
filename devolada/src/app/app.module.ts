@@ -15,6 +15,10 @@ import { TodosComponent } from './todos/todos.component';
 import { DireccionComponent } from './direccion/direccion.component';
 import { TarjetaAdminComponent } from './tarjeta-admin/tarjeta-admin.component';
 import { MisProductosComponent } from './mis-productos/mis-productos.component';
+import { CompraFinalizadaComponent } from './compra-finalizada/compra-finalizada.component';
+import { ResenasComponent } from './resenas/resenas.component';
+import { CrearResenaComponent } from './crear-resena/crear-resena.component';
+import { VerResenasComponent } from './ver-resenas/ver-resenas.component';
 
 
 @NgModule({
@@ -29,7 +33,11 @@ import { MisProductosComponent } from './mis-productos/mis-productos.component';
     TodosComponent,
     DireccionComponent,
     TarjetaAdminComponent,
-    MisProductosComponent
+    MisProductosComponent,
+    CompraFinalizadaComponent,
+    ResenasComponent,
+    CrearResenaComponent,
+    VerResenasComponent
   ],
   imports: [
     BrowserModule,

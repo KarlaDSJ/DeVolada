@@ -1,6 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-metodo-pago',
@@ -17,6 +18,8 @@ export class MetodoPagoComponent implements OnInit {
   ];
 
   valida = false;
+  vtar = false;
+  tar="";
 
   // Formato en el que se muestra una tarjeta
   formato(i:number) : string {
@@ -54,7 +57,26 @@ export class MetodoPagoComponent implements OnInit {
       return "MasterCard";    
   }
 
-  constructor() { }
+  // Obtiene el método de pago elegido 
+  // Redirecciona a la info de la compra
+  obtenerTar(f:NgForm){
+    this.vtar = true;
+    if(f.invalid){
+      return;
+    }
+    
+    this.tar= f.value.tarElig;
+    // console.log(f.value.tarElig);
+    this.router.navigate([ '/compra-finalizada' ])
+
+  }
+
+  // Cancela la compra y redirige a la página de inicio
+  cancelar(){
+    this.router.navigate([ '/inicio' ])
+  }
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }

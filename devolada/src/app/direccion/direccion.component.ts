@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-direccion',
@@ -18,6 +19,11 @@ export class DireccionComponent implements OnInit {
   ];
   
   validez=false;
+  vdir = false;
+  direccionEntrega="";
+
+
+
 
   // Formato en el que se muestra una dirección 
   formato(i:number) : string {
@@ -27,8 +33,11 @@ export class DireccionComponent implements OnInit {
     return dir;
   }
   
+
+
   // Valida los campos del formulario 
   validarDir(f:NgForm){
+    
     this.validez= true;
     if (f.invalid) {
       return;
@@ -40,10 +49,23 @@ export class DireccionComponent implements OnInit {
       ciudad: f.value.ciudad,
       estado: f.value.estado,
       cp: Number(f.value.cp)
-    });       
+    });          
   }
 
-  constructor() { }
+  // Obtiene la dirección y crea la nueva vista 
+  obtenerDir(f:NgForm){
+    this.vdir = true;
+    if(f.invalid){
+      return;
+    }
+
+    this.direccionEntrega= f.value.dirElig;
+    this.router.navigate([ '/metodo-pago' ])
+  }
+
+  
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {    
   }
