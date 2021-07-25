@@ -49,9 +49,6 @@ img {
     margin-right: 120px;
 }
    
-
-/* .sec-precio{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-} */
+.btn-group > button {
+    border: none;
+}
