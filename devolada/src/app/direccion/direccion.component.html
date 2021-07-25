@@ -5,25 +5,22 @@
         ¿A dónde deberíamos enviar tu pedido? 📦
     </h2>
 
+
     <!-- Lista de direcciones -->
     <div class="container">
         <div class="row">
             <p class="fs-5"> 🏠 Mis direcciones</p>
-
-              <!-- class="row g-3 needs-validation" -->
-            <form  #myForm="ngForm" (submit)="onSubmit(myForm.value)" novalidate>
-                <div class="row mb-2 " *ngFor="let dir of listaDir, index as i, last as isLast">
-                    <!-- Guardar la dirección en una variables/objeto -->
-                    <div class="form-check">
-                        <!-- class="form-check-input" -->
-                        <input  [attr.id]="'dir'+i" type="radio" ngModel [attr.value] ="i" name="dirElig"  ngModel>
-                        <!-- class="form-check-label"  -->
-                        <label [attr.for]="'dir'+i">
+              
+            <form  class="row g-3 needs-validation" #myForm="ngForm" (submit)="obtenerDir(myForm)" [ngClass]="{'was-validated': vdir}" novalidate>
+                <div class="row mb-2 " *ngFor="let dir of listaDir, index as i, last as isLast">                    
+                    <div class="form-check">                        
+                        <input class="form-check-input" [id]="'dir'+i" type="radio" ngModel [value] ="formato(i)" name="dirElig"  ngModel required>                        
+                        <label class="form-check-label" [for]="'dir'+i">
                             {{formato(i)}}
                         </label>
-                        <!-- <div *ngIf="isLast" class="invalid-feedback">
+                        <div *ngIf="isLast" class="invalid-feedback">
                             Selecciona una dirección. 
-                        </div> -->
+                        </div>
                     </div>
                 </div>
 
@@ -33,8 +30,12 @@
                 <div class="container">
                     <div class="row justify-content-end mt-4">
                         <div class="col-6">
-                            <button type="submit" class="btn btn-primary rounded-pill"
-                                [disabled]="listaDir.length==0">Continuar</button>
+                            <!-- [disabled]="listaDir.length==0"  -->
+                            <!-- <a routerLink="/metodo-pago" tabindex="-1" type="button" class="btn btn-primary rounded-pill"
+                                (click) ="obtenerDir(myForm)">Continuar</a> -->
+                            <button type="submit" class="btn btn-primary rounded-pill">
+                                Continuar
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -121,7 +122,6 @@
                             <option value="Veracruz">Veracruz</option>
                             <option value="Yucatán">Yucatán</option>
                             <option value="Zacatecas">Zacatecas</option>
-
                         </select>
                         <label for="floatingSelect">Estado</label>
                         <div class="invalid-feedback">
