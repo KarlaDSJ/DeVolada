@@ -57,6 +57,8 @@ export class MetodoPagoComponent implements OnInit {
       return "MasterCard";    
   }
 
+  // Obtiene el método de pago elegido 
+  // Redirecciona a la info de la compra
   obtenerTar(f:NgForm){
     this.vtar = true;
     if(f.invalid){
