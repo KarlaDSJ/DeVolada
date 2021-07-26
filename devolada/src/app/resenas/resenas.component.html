@@ -100,15 +100,20 @@
                 </div>
                 <small class="mb-3">Comparte tu reseña con otros usuarios</small>
                 <!-- Botón de Escribir Reseña -->
-                <div class="col-12" style="text-align: center;">
-                    <!--
-                    <div class="d-grid gap-2">
+                <!--
+                    <div class="d-grid gap-2 mx-auto">
                         <button class="btn btn-primary" type="button">Escribir Reseña</button>
                     </div>
-                    -->
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-light border-primary" type="button">Escribir Reseña</button>
-                    </div>
+                -->
+
+                <div class="col-11">
+                    <div class="d-grid">
+                        <a routerLink="/crear-resena" routerLinkActive="active"
+                        class="btn btn-light border-primary btn-ms rounded-pill">
+                        Escribir Reseña
+                        </a>
+                    </div> 
+                    
                 </div>
             </div> <br>            
         </div> <br>
@@ -176,9 +181,12 @@
                 <small>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae eius doloribus cupiditate qui obcaecati placeat? Expedita dolore repellat doloremque provident obcaecati minima aspernatur dolorem soluta laborum, repudiandae rerum quod sit.</small> <br>
             </div> <br>
             <!-- Ver todas las reseñas -->
-            <div class="d-grid gap-2 col-7 mx-auto">
-                <button class="btn btn-light border border-primary" type="button" >Ver todas las reseñas</button>
-              </div> 
+            <div class="d-grid col-7 mx-auto">
+                <a routerLink="/ver-resenas" routerLinkActive="active"
+                class="btn btn-light border-primary btn-ms rounded-pill">
+                Ver todas las reseñas
+                </a>
+            </div> 
         </div>
     </div>
 </div>
