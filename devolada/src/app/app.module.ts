@@ -19,6 +19,7 @@ import { CompraFinalizadaComponent } from './compra-finalizada/compra-finalizada
 import { ResenasComponent } from './resenas/resenas.component';
 import { CrearResenaComponent } from './crear-resena/crear-resena.component';
 import { VerResenasComponent } from './ver-resenas/ver-resenas.component';
+import {CarouselModule} from 'primeng/carousel';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { VerResenasComponent } from './ver-resenas/ver-resenas.component';
     BrowserModule,
     AppRoutingModule,
     RouterModule,
-    FormsModule // Para las entradas (inputs) o formularios
+    FormsModule, // Para las entradas (inputs) o formularios
+    CarouselModule //Para mostrar los productos en Todos
   ],
   providers: [],
   bootstrap: [AppComponent]

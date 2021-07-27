@@ -3,8 +3,8 @@
   <div class="d-flex flex-row justify-content-between align-items-center">
     <!-- Nombre -->
     <div>
-      <h4>Nombre del producto</h4>
-      <h6 class="text-muted">ID producto</h6>
+      <h4>{{ producto.nombre }}</h4>
+      <h6 class="text-muted">{{ id }}</h6>
     </div>
     <!-- Calificación -->
     <div>
@@ -14,33 +14,21 @@
   
   
   <!-- Imagenes del producto -->
-  <div id="carouselExampleControls" class="carousel slide h-25 w-50 mx-auto" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="https://www.punto-informatico.it/app/uploads/2020/05/lg_gram.jpg" class="d-block w-100" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="https://www.punto-informatico.it/app/uploads/2020/05/lg_gram.jpg" class="d-block w-100" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="https://www.punto-informatico.it/app/uploads/2020/05/lg_gram.jpg" class="d-block w-100" alt="...">
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+  <div class="content-section implementation carousel-demo">
+    <p-carousel [value]="producto.fotos" styleClass="custom-carousel" [numVisible]="3" [numScroll]="2"
+        [circular]="true" [autoplayInterval]="0" [responsiveOptions]="responsiveOptions">
+        <ng-template let-foto pTemplate="item">
+          <img [src]="foto" class="d-block w-100" [alt]="producto.nombre">
+        </ng-template>
+    </p-carousel>
   </div>
+
   <!-- Precio -->
-  <p class="mt-6 fs-3 fw-bold text-end">$100 MXN</p>
+  <p class="mt-6 fs-3 fw-bold text-end">${{ producto.precio }} MXN</p>
   <div class="d-flex flex-row justify-content-between align-items-center">
     <!-- Descripción -->
     <p class="text-justify w-75  font-monospace">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet cursus sit amet dictum. Quisque non tellus orci ac auctor. Quis vel eros donec ac odio tempor orci dapibus ultrices. Aliquam ut porttitor leo a diam sollicitudin tempor. Nibh ipsum consequat nisl vel. Non tellus orci ac auctor augue mauris. Et ultrices neque ornare aenean euismod elementum nisi quis. Facilisi morbi tempus iaculis urna id volutpat. Cras sed felis eget velit aliquet sagittis. Aliquam ultrices sagittis orci a scelerisque purus. Enim blandit volutpat maecenas volutpat blandit aliquam etiam erat velit.
+      {{ producto.descripcion }}
     </p>
     <!-- Agregar al carrito-->
     <div>
