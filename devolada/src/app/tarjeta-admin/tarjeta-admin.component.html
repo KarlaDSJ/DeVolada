@@ -1,25 +1,70 @@
 
-<div class="card m-2" style="width: 18rem;">
-    <!-- Foto principal y descripción breve del producto -->
-    <div class="img">
-      <img src="https://www.punto-informatico.it/app/uploads/2020/05/lg_gram.jpg" class="card-img-top" alt="nombre del producto">
-      <p class="info card-img-top">Perrito salvaje.</p>
+<div class="view container-sm">
+  <div class="card-admin ">
+    <div class="row">
+        <div class="col-md-4 ">
+            <!-- Imagen del producto-->
+            <img class="card-img " 
+                  src="https://www.punto-informatico.it/app/uploads/2020/05/lg_gram.jpg" 
+                  alt="Imagen producto">
+        </div>
+    
+        <div class="col-md-8">
+
+            <!-- Nombre e ID del producto-->
+            <h2 class="card-title mt-2"> Nombre del producto
+              <small class="card-id text-muted"> ID-producto</small>
+            </h2>
+
+            <!-- Precio del producto-->
+            <h3 class="card-price text-primary"> $ 100 <small>MXM</small> </h3>
+
+            <!-- Calificacion del producto-->
+            <p class="card-rating text-muted fs-4">
+              <span class="stars text-warning">★★★</span>
+              <span class="stars ">★★</span>
+              <span class="opinions fw-lighter font-fa"> (7 opiniones) </span> 
+            </p>
+
+            <!-- Descripcion del producto-->
+            <p class="card-description text-secondary"> Breve resumen de la descripción del producto. 
+              Texto de relleno acerca de un perrito salvaje que fue puesto en venta
+              en internet...
+            </p>
+            
+            
+            
+              <div class="card-foot d-flex justify-content-between">
+
+                <div class="card-units d-flex justify-content-between">
+                  <!-- Unidades vendidas -->
+                  <p class="sells font-weight-bold text-success"> 17 <span> ventas </span></p>
+                  <!-- Unidades disponibles -->
+                  <p class="sells text-secondary"> 5 <span> disponibles </span></p>
+                </div>
+
+                <div class="card-buttons d-flex justify-content-between">
+                  <!-- Boton de editar-->
+                  <button class="btn btn-outline-primary"> 
+                    <i class="bi bi-pencil-square"></i> 
+                    <span>  </span> 
+                  </button> 
+                  <!-- Boton de eliminar-->
+                  <button class="btn btn-outline-danger"> 
+                    <i class="bi bi-trash-fill"></i>  
+                    <span>  </span> 
+                  </button> 
+                </div>
+
+              </div>
+
+        </div>
+      </div>
     </div>
-      <!-- Información del producto -->
-      <div class="card-body">
-        <!-- Nombre -->
-        <h6 class="card-title">Nombre del producto</h6>
-        <p class="card-text fw-light">
-          <!-- ID -->
-          ID del producto <br>
-          <!-- Precio -->
-          <span class="fw-bold">$100 MXM</span> <br>
-          <!-- Calificación -->
-          <span class="text-warning">★★★★★</span> (7 opiniones) 
-        </p>
-        <!-- Botón para ver información completa -->
-        <a routerLink="/producto" routerLinkActive="active"
-           class="btn btn-primary btn-sm w-100 rounded-pill">
-          Ver producto
-       </a>
-  </div>
+</div>
+
+
+
+
+
+
