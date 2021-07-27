@@ -24,6 +24,17 @@ npm install
 ### Ejecución
 ```
 cd devolada
-npm start / ng serve / ng s
+```
+y 
+```
+npm start 
+```
+ó 
+```
+ng serve 
+```
+ó 
+```
+ng s
 ```
 
