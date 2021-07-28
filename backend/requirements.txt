@@ -1,3 +1,4 @@
 Flask==2.0.1
 SQLAlchemy==1.4.21
 marshmallow==3.12.2
+mysqlclient==2.0.3
