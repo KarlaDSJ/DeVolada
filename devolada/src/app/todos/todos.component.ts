@@ -112,17 +112,17 @@ export class TodosComponent implements OnInit {
     constructor() {
         this.responsiveOptions = [
           {
-            breakpoint: '1024px',
+            breakpoint: '1078px',
             numVisible: 3,
             numScroll: 2
-          }, 
+          },
           {
-            breakpoint: '768px',
+            breakpoint: '840px',
             numVisible: 2,
             numScroll: 1
           },
           {
-            breakpoint: '560px',
+            breakpoint: '575px',
             numVisible: 1,
             numScroll: 1
           }];

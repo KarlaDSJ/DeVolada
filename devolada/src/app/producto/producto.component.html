@@ -1,17 +1,21 @@
 
 <div class="w-75 mx-auto p-3">
-  <div class="d-flex flex-row justify-content-between align-items-center">
-    <!-- Nombre -->
-    <div>
-      <h4>{{ producto.nombre }}</h4>
-      <h6 class="text-muted">{{ id }}</h6>
-    </div>
-    <!-- Calificación -->
-    <div>
-      <span class="text-warning fs-2">★★★<span class="text-muted fs-2">★★</span></span>
+  <div>
+    <div class="row justify-content-between">
+      <div class="col-4">
+        <div>
+          <!-- Nombre -->
+          <h3>{{ producto.nombre }}</h3>
+          <!-- ID -->
+          <h6 class="text-muted"> ID {{ id }}</h6>
+        </div>
+      </div>
+     <!-- Calificación -->
+      <div class="col-4">
+        <span class="text-warning fs-2">★★★<span class="text-muted fs-2">★★</span></span>
+      </div>
     </div>
   </div>
-  
   
   <!-- Imagenes del producto -->
   <div class="content-section implementation carousel-demo">
@@ -23,21 +27,28 @@
     </p-carousel>
   </div>
 
-  <!-- Precio -->
-  <p class="mt-6 fs-3 fw-bold text-end">${{ producto.precio }} MXN</p>
-  <div class="d-flex flex-row justify-content-between align-items-center">
-    <!-- Descripción -->
-    <p class="text-justify w-75  font-monospace">
-      {{ producto.descripcion }}
-    </p>
-    <!-- Agregar al carrito-->
-    <div>
-      <a routerLink="/producto" routerLinkActive="active"
-      class="btn btn-primary btn-lg w-100 rounded-pill mx-auto">
-      Agregar
-      </a>
+  <div>
+    <div class="row justify-content-between">
+      <div class="col-4 p-2">
+        <!-- Precio -->
+        <h4>${{ producto.precio }} MXN</h4>
+      </div>
+      <!-- Agregar al carrito-->
+      <div class="col-4 p-2">
+        <a routerLink="/producto" routerLinkActive="active"
+        class="btn btn-primary w-75 mb-3 rounded-pill mx-auto">
+        Agregar
+        </a>
+      </div>
     </div>
-    
+    <div class="row align-items-center">
+      <div class="col-12">
+        <!-- Descripción -->
+        <p class="text-justify w-100 lh-sm">
+          {{ producto.descripcion }}
+        </p>
+      </div>
+    </div>
   </div>
   
 </div>
