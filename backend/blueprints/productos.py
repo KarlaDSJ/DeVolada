@@ -1,7 +1,8 @@
+from main import db
 from flask import Blueprint, request, jsonify
 from models.productoM import Producto
 from schemas.productoE import ProductoEsquema
-from main import db
+
 
 producto = Blueprint('producto', __name__)
 
