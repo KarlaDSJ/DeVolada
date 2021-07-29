@@ -1,55 +1,66 @@
+<nav aria-label="breadcrumb" class="m-3">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a routerLink="/inicio"
+         routerLinkActive="active">
+        Inicio
+     </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">{{ producto.nombre }}</li>
+  </ol>
+</nav>
+
 
 <div class="w-75 mx-auto p-3">
-  <div class="d-flex flex-row justify-content-between align-items-center">
-    <!-- Nombre -->
-    <div>
-      <h4>Nombre del producto</h4>
-      <h6 class="text-muted">ID producto</h6>
-    </div>
-    <!-- Calificación -->
-    <div>
-      <span class="text-warning fs-2">★★★<span class="text-muted fs-2">★★</span></span>
+  <div>
+    <div class="row justify-content-between">
+      <div class="col-4">
+        <div>
+          <!-- Nombre -->
+          <h3>{{ producto.nombre }}</h3>
+          <!-- ID -->
+          <h6 class="text-muted"> ID {{ id }}</h6>
+        </div>
+      </div>
+     <!-- Calificación -->
+      <div class="col-4">
+        <span class="text-warning fs-2">★★★<span class="text-muted fs-2">★★</span></span>
+      </div>
     </div>
   </div>
-  
   
   <!-- Imagenes del producto -->
-  <div id="carouselExampleControls" class="carousel slide h-25 w-50 mx-auto" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="https://www.punto-informatico.it/app/uploads/2020/05/lg_gram.jpg" class="d-block w-100" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="https://www.punto-informatico.it/app/uploads/2020/05/lg_gram.jpg" class="d-block w-100" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="https://www.punto-informatico.it/app/uploads/2020/05/lg_gram.jpg" class="d-block w-100" alt="...">
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+  <div class="content-section implementation carousel-demo">
+    <p-carousel [value]="producto.fotos" styleClass="custom-carousel" [numVisible]="3" [numScroll]="2"
+        [circular]="true" [autoplayInterval]="0" [responsiveOptions]="responsiveOptions">
+        <ng-template let-foto pTemplate="item">
+          <img [src]="foto" class="d-block w-100" [alt]="producto.nombre">
+        </ng-template>
+    </p-carousel>
   </div>
-  <!-- Precio -->
-  <p class="mt-6 fs-3 fw-bold text-end">$100 MXN</p>
-  <div class="d-flex flex-row justify-content-between align-items-center">
-    <!-- Descripción -->
-    <p class="text-justify w-75  font-monospace">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet cursus sit amet dictum. Quisque non tellus orci ac auctor. Quis vel eros donec ac odio tempor orci dapibus ultrices. Aliquam ut porttitor leo a diam sollicitudin tempor. Nibh ipsum consequat nisl vel. Non tellus orci ac auctor augue mauris. Et ultrices neque ornare aenean euismod elementum nisi quis. Facilisi morbi tempus iaculis urna id volutpat. Cras sed felis eget velit aliquet sagittis. Aliquam ultrices sagittis orci a scelerisque purus. Enim blandit volutpat maecenas volutpat blandit aliquam etiam erat velit.
-    </p>
-    <!-- Agregar al carrito-->
-    <div>
-      <a routerLink="/producto" routerLinkActive="active"
-      class="btn btn-primary btn-lg w-100 rounded-pill mx-auto">
-      Agregar
-      </a>
+
+  <div>
+    <div class="row justify-content-between">
+      <div class="col-4 p-2">
+        <!-- Precio -->
+        <h4>${{ producto.precio }} MXN</h4>
+      </div>
+      <!-- Agregar al carrito-->
+      <div class="col-4 p-2">
+        <a routerLink="/producto" routerLinkActive="active"
+        class="btn btn-primary w-75 mb-3 rounded-pill mx-auto">
+        Agregar
+        </a>
+      </div>
     </div>
-    
+    <div class="row align-items-center">
+      <div class="col-12">
+        <!-- Descripción -->
+        <p class="text-justify w-100 lh-sm">
+          {{ producto.descripcion }}
+        </p>
+      </div>
+    </div>
   </div>
   
 </div>

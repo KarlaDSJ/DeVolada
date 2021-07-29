@@ -14,7 +14,7 @@ const routes: Routes = [
   {path: 'carrito', component: CarritoComponent},
   {path: 'metodo-pago', component: MetodoPagoComponent},
   {path: 'inicio', component: InicioComponent},
-  {path: 'producto', component: ProductoComponent},
+  {path: 'producto/:id', component: ProductoComponent},
   {path: 'direccion', component: DireccionComponent},
   {path: 'mis-productos', component: MisProductosComponent},
   {path: 'compra-finalizada', component: CompraFinalizadaComponent},

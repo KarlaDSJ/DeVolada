@@ -1,56 +1,17 @@
-<div class="m-5 p-2">
+<div class=" p-2">
     <!-- Sección que muestra todos los productos -->
     <h4 class="m-3 p-2 
-               bg-warning 
-               w-25 rounded-pill
+               bg-secondary bg-gradient 
+               rounded-pill
                text-center">Todos 🛒</h4>
 
     <!-- Todos los productos -->
-    <div id="carouselExampleControls" class="carousel carousel-dark slide" data-ride="carousel">
-        <div class="carousel-inner">
-            <!-- Página 1 -->
-            <div class="carousel-item active">
-                <div class="cards-wrapper">
-                    <!-- Tarjeta de productos -->
-                    <app-tarjeta-producto></app-tarjeta-producto>
-                    <app-tarjeta-producto></app-tarjeta-producto>
-                    <app-tarjeta-producto></app-tarjeta-producto>
-                    <app-tarjeta-producto></app-tarjeta-producto>
-                    <app-tarjeta-producto></app-tarjeta-producto>
-                
-                </div>
-            </div>
-            <!-- Página 2 -->
-            <div class="carousel-item">
-                <div class="cards-wrapper">
-                    <!-- Tarjeta de productos -->
-                    <app-tarjeta-producto></app-tarjeta-producto>
-                    <app-tarjeta-producto></app-tarjeta-producto>
-                    <app-tarjeta-producto></app-tarjeta-producto>
-                    <app-tarjeta-producto></app-tarjeta-producto>
-                    <app-tarjeta-producto></app-tarjeta-producto>
-                </div>
-            </div>
-            <!-- Página 3 -->
-            <div class="carousel-item">
-                <div class="cards-wrapper">
-                    <!-- Tarjeta de productos -->
-                    <app-tarjeta-producto></app-tarjeta-producto>
-                    <app-tarjeta-producto></app-tarjeta-producto>
-                    <app-tarjeta-producto></app-tarjeta-producto>
-                    <app-tarjeta-producto></app-tarjeta-producto>
-                    <app-tarjeta-producto></app-tarjeta-producto>
-                </div>
-            </div>
-        </div>
-
-        <!-- Flechas para moverse -->
-        <button class="carousel-control-prev p-1" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Anterior</span>
-        </button>
-        <button class="carousel-control-next p-1" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Siguiente</span>
-        </button>
+    <div class="content-section implementation carousel-demo">
+        <p-carousel [value]="todos" styleClass="custom-carousel" [numVisible]="4" [numScroll]="2"
+            [circular]="true" [autoplayInterval]="0" [responsiveOptions]="responsiveOptions">
+            <ng-template let-producto pTemplate="item">
+                <app-tarjeta-producto [producto] = producto></app-tarjeta-producto>
+            </ng-template>
+        </p-carousel>
+    </div>
 </div>

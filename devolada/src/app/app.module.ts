@@ -20,6 +20,7 @@ import { ResenasComponent } from './resenas/resenas.component';
 import { CrearResenaComponent } from './crear-resena/crear-resena.component';
 import { VerResenasComponent } from './ver-resenas/ver-resenas.component';
 import { FormAltaProductoComponent } from './form-alta-producto/form-alta-producto.component';
+import { CarouselModule } from 'primeng/carousel';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { FormAltaProductoComponent } from './form-alta-producto/form-alta-produc
     BrowserModule,
     AppRoutingModule,
     RouterModule,
-    FormsModule // Para las entradas (inputs) o formularios
+    FormsModule, // Para las entradas (inputs) o formularios
+    CarouselModule //Para mostrar los productos en Todos
   ],
   providers: [],
   bootstrap: [AppComponent]
