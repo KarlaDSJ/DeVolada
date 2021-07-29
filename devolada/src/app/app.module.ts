@@ -19,6 +19,7 @@ import { CompraFinalizadaComponent } from './compra-finalizada/compra-finalizada
 import { ResenasComponent } from './resenas/resenas.component';
 import { CrearResenaComponent } from './crear-resena/crear-resena.component';
 import { VerResenasComponent } from './ver-resenas/ver-resenas.component';
+import { FormAltaProductoComponent } from './form-alta-producto/form-alta-producto.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { VerResenasComponent } from './ver-resenas/ver-resenas.component';
     CompraFinalizadaComponent,
     ResenasComponent,
     CrearResenaComponent,
-    VerResenasComponent
+    VerResenasComponent,
+    FormAltaProductoComponent
   ],
   imports: [
     BrowserModule,
