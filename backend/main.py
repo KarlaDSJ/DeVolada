@@ -30,13 +30,14 @@ app.register_blueprint(logout)
 #app.register_blueprint(before)
 app.register_blueprint(after)
 app.register_blueprint(cookie)
+
 db.init_app(app)
 csrf.init_app(app)
-app.run(port=7000)
-if __name__ == '__main__':
 
-   
-    
+
+
+if __name__ == '__main__':
+    app.run(port=7000)
     with app.app_context():
         db.create_all()
         ma.init_app(app)
