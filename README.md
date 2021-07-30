@@ -13,11 +13,30 @@ Los compradores y vendedores podrán mostrar sus productos y ofertas sin la nece
 - Antonio Reyes Martínez, *responsable de la colaboración*
 
 
+## Backend
+
+### Instalación
+```
+cd backend
+python3 -m venv venv
+source venv/bin/activate
+pip3 install -r requirements.txt
+```
+
+### Ejecución
+```
+cd backend
+source venv/bin/activate
+export FLASK_APP=main.py
+export FLASK_ENV=development
+flask run
+```
+
 ## Frontend
 
 ### Instalación
 ```
-cd devolada
+cd frontend
 npm install
 ```
 
