@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.css';
 
+/* Iconitos gratis */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css");
+
 /* Utilizo ésta fuente para TODAS mis vistas :p */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap');
 body {
