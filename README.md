@@ -36,7 +36,7 @@ flask run
 
 ### Instalación
 ```
-cd devolada
+cd frontend
 npm install
 ```
 
