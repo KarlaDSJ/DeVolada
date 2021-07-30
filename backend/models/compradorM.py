@@ -1,4 +1,3 @@
-from enum import unique
 from main import db
 from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
