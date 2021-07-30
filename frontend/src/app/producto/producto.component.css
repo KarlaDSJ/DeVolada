@@ -1,0 +1,18 @@
+img{
+    height: 200px;
+    object-fit: contain;
+ }
+
+ p {
+    text-align: justify;
+ }
+
+ /* Tuve que agregar esto porque el col-sm no funcionaba :( */
+ @media only screen and (max-width: 760px) {
+    .row div{
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+  }
+ 

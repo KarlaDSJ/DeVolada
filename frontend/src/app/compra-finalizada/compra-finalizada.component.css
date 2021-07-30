@@ -1,0 +1,12 @@
+.producto > p{
+    width: max-content;
+    margin-bottom: .5rem;
+}
+
+.mis-productos {
+    margin-left: 5em;
+}
+
+img {
+    object-fit: contain;
+}

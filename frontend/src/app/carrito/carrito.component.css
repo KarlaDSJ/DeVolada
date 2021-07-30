@@ -1,0 +1,54 @@
+img {
+    object-fit: contain;
+}
+
+.text-secondary{
+    font-size: .8rem;
+}
+
+.cantidad-p{
+    display: flex;
+    padding: .3rem 1.3rem; 
+    text-align: center;   
+    margin: auto;
+    height: 100%;
+    border: 2px solid rgb(197, 193, 193);
+}
+
+.btn-secondary, .cantidad-p{
+    background-color: rgb(197, 193, 193);
+    border-color:  rgb(197, 193, 193);
+    color: black;
+}
+
+.btn-group{
+    overflow: hidden;
+    margin-top: 12px;       
+}
+
+.text-bolder{    
+    font-weight: 700;
+}
+
+.precio-borrar{
+    display: flex;
+    flex-flow: column;   
+    justify-content: flex-start; 
+}
+
+.precio-borrar p, .precio-borrar button {
+    margin: 0 auto;
+}
+
+.col-6 {
+    display: flex;
+    justify-content: flex-end;    
+}
+
+.col-6 button{
+    margin-right: 120px;
+}
+   
+.btn-group > button {
+    border: none;
+}

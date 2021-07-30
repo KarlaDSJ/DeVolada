@@ -1,0 +1,10 @@
+.input-group-text {
+    background: none;
+    border: none;
+   }
+   
+/* Centrar lo botones de cancelar y continuar */
+.can-con{
+    display: flex;
+    justify-content: center;
+}
