@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `comprador` (
   `nombre` VARCHAR(45) NOT NULL,
   `telefono` VARCHAR(15) NOT NULL,
   `contrasenia` VARCHAR(106) NOT NULL,
-  PRIMARY KEY (`correo`))
+  PRIMARY KEY (correo))
 ENGINE = InnoDB;
 
 
@@ -108,7 +108,7 @@ ENGINE = InnoDB;
 -- Table   `DireccionComprador`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `direccionComprador` (
-  `idDir` INT NOT NULL,
+  idDir INT NOT NULL AUTO_INCREMENT,
   correo varchar(45) not null,
   `estado` VARCHAR(45) NOT NULL,
   `ciudad` VARCHAR(45) NOT NULL,
@@ -130,17 +130,17 @@ ENGINE = InnoDB;
 -- Table   `Producto`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `producto` (
-  `idProducto` INT NOT NULL,
+  idProducto INT NOT NULL AUTO_INCREMENT,
   correo VARCHAR(45) not null,
-  `precio` FLOAT NOT NULL,
-  `nombre` VARCHAR(45) NOT NULL,
-  `descripcion` VARCHAR(100) NOT NULL,
-  `vendidos` INT NOT NULL,
-  `disponibles` INT NOT NULL,
-  PRIMARY KEY (`idProducto`),
+  precio FLOAT NOT NULL,
+  nombre VARCHAR(45) NOT NULL,
+  descripcion VARCHAR(100) NOT NULL,
+  vendidos INT NOT NULL,
+  disponibles INT NOT NULL,
+  PRIMARY KEY (idProducto),
   CONSTRAINT correo_producto
     FOREIGN KEY (correo)
-    REFERENCES  `vendedor` (correo)
+    REFERENCES  vendedor (correo)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -181,8 +181,8 @@ ENGINE = InnoDB;
 -- Table   `Carrito`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `carrito` (
-  `idCarrito` INT NOT NULL,
-  PRIMARY KEY (`idCarrito`))
+  idCarrito INT NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (idCarrito))
 ENGINE = InnoDB;
 
 
@@ -215,15 +215,15 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS  `contener` (
 	idProducto int not null,
 	idCarrito int not null,
-	`cantidad` INT NOT NULL,
+	cantidad INT NOT NULL,
   CONSTRAINT idProducto_contener
     FOREIGN KEY (idProducto)
-    REFERENCES   `producto` (idProducto)
+    REFERENCES   producto (idProducto)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT idCarrito_contener
     FOREIGN KEY (idCarrito)
-    REFERENCES   `carrito` (idCarrito))
+    REFERENCES   carrito (idCarrito))
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
@@ -263,8 +263,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table   `Compra`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS   `compra` (
-  `idCompra` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `compra` (
+  idCompra INT NOT NULL AUTO_INCREMENT,
   correo varchar(45) not null,
   idDir int not null,
   numero int not null,
@@ -272,8 +272,8 @@ CREATE TABLE IF NOT EXISTS   `compra` (
   CONSTRAINT correo_comprador_compra
     FOREIGN KEY (correo)
     REFERENCES   `comprador` (correo)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE NO ACTION         -- Cómo cambia respecto a las acciones
+    ON UPDATE NO ACTION,        -- en las otras tablas
   CONSTRAINT correo_tarComprador_compra
     FOREIGN KEY (correo)
     REFERENCES   tarjetaComprador (correo)

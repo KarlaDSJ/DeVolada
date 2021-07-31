@@ -9,7 +9,7 @@ producto = Blueprint('producto', __name__)
 producto_esquema = ProductoEsquema()
 productos_esquema = ProductoEsquema(many=True)
 
-@producto.route('/', methods=['GET'])
+@producto.route('/producto', methods=['GET'])
 def get():
     return jsonify ({'msg': 'Bienvenido a DeVolada'})
 
