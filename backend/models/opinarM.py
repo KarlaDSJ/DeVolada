@@ -11,4 +11,3 @@ class Opinar(db.Model):
         self.correo = correo
         self.opinion = opinion
         self.calificacion = calificacion
-
