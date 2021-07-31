@@ -1,6 +1,5 @@
 from main import db
 
-
 class Imagen(db.Model):
     __tablename__ = 'imagen'
     imagen = db.Column(db.String(45),primary_key = True, unique=True)
