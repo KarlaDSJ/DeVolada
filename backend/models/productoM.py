@@ -1,7 +1,7 @@
 from main import db
 
 class Producto(db.Model):
-    id_producto = db.Column(db.Integer, primary_key=True)
+    idProducto = db.Column(db.Integer, primary_key=True)
     correo = db.Column(db.Unicode)
     precio = db.Column(db.Float)
     nombre = db.Column(db.Unicode)
