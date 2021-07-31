@@ -21,6 +21,7 @@ import { CrearResenaComponent } from './crear-resena/crear-resena.component';
 import { VerResenasComponent } from './ver-resenas/ver-resenas.component';
 import { FormAltaProductoComponent } from './form-alta-producto/form-alta-producto.component';
 import { CarouselModule } from 'primeng/carousel';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { CarouselModule } from 'primeng/carousel';
     ResenasComponent,
     CrearResenaComponent,
     VerResenasComponent,
-    FormAltaProductoComponent
+    FormAltaProductoComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
