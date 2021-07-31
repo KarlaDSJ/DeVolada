@@ -1,0 +1,29 @@
+
+
+body { 
+    background-color: #F5F7FA;
+    margin: 0;
+    height: 100%;
+    
+}
+
+#title{
+    text-align: left;
+    color: black;
+}
+#title h1{
+    font-size: 1.3em;
+
+}
+#title i{
+    position: relative;
+    font-size: 1.5em;
+    right: 0.3em;
+}
+
+
+.products{
+    background-color: #F5F7FA;
+    width: 70%;
+    max-width: 800px;
+}

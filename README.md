@@ -32,5 +32,28 @@ export FLASK_ENV=development
 flask run
 ```
 
+## Frontend
 
+### Instalación
+```
+cd frontend
+npm install
+```
+
+### Ejecución
+```
+cd devolada
+```
+y 
+```
+npm start 
+```
+ó 
+```
+ng serve 
+```
+ó 
+```
+ng s
+```
 

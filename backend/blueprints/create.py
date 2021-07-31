@@ -18,8 +18,7 @@ def crear():
         comprador = Comprador(create_form.email.data,
                               create_form.nombre.data,
                               create_form.telefono.data,
-                              create_form.contrasenia.data )
-        print(create_form.email.data)                
+                              create_form.contrasenia.data )               
         db.session.add(comprador)
         db.session.commit()
         success_message = 'Se registro el usuario correctamente'

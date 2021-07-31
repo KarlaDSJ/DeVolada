@@ -1,0 +1,109 @@
+<button type="button" class="btn btn-primary" data-toggle="modal" 
+    data-target="#formularioAlta"> Large modal
+</button>
+
+
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center" >Formato para dar de alta producto</h5>
+            </div>
+
+            <div class="modal-body">
+                
+                <div class="d-flex flex-column " id="imagesFormContainer" >
+                    
+                    <div class=" title">
+                        <h6> Imágenes del producto </h6>
+                    </div>
+                    
+                    <div class="d-flex flex-row justify-content-start border overflow-scroll" id="imagesForm" >
+
+                        <div class="d-flex flex-shrink-0 img-uploaded">
+                            <img class="img-thumbnail" 
+                            src="https://www.punto-informatico.it/app/uploads/2020/05/lg_gram.jpg" 
+                            alt="Imagen producto">
+                            <button type="button" class="btn-close" aria-label="Close"></button>
+                        </div>
+    
+                        <div class="d-flex flex-shrink-0 border align-items-center justify-content-center flex-column overflow-hidden img-uploaded" id="imageUpload">
+                            <button type="button" class="btn" onclick="document.getElementById('getFile').click()">
+                                <div class="d-flex align-items-center justify-content-center flex-column">
+                                    <input type="file" accept="image/*" class="d-none">
+                                    <i class="bi bi-images"></i>
+                                    Agregar <br> nueva imagen
+                                </div>
+                            </button>
+                            <input type='file' id="getFile" style="display:none">
+                        </div>
+        
+                    </div> <!-- imgForm -->
+                </div> <!-- container -->
+
+
+                <div class="row">
+                    <div class="col input-container">
+                        <label for="input-name">Nombre del producto</label>
+                        <input type="text" id="input-name" class="form-control is-invalid" placeholder="Escribe un nombre" >
+                        <div class="invalid-feedback"> Por favor escriba un nombre para su producto. </div>
+                    </div>
+
+                    <div class="col input-container">
+                        <label for="input-price">Precio del producto</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">$</span>
+                            </div>
+                            <input type="text" id="input-price" class="form-control is-invalid" placeholder="0.00">
+                            <div class="input-group-append ">
+                              <span class="input-group-text">MXM</span>
+                            </div>
+                            <div class="invalid-feedback"> Por favor introduzca un precio válido. </div>
+                        </div>
+                        
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col input-container">
+                        <label for="input-units">Cantidad de unidades</label>
+                        <input type="number" id="input-units" min="1" class="form-control is-invalid" placeholder="1">
+                        <div class="invalid-feedback"> Por favor introduzca un cantidad válida. </div>
+                    </div>
+    
+                    <div class="col input-container">
+                        <label for="input-tags">Palabras clave</label>
+                        <input type="text" id="input-tags" class="form-control is-invalid">
+                        <div class="invalid-feedback"> Por favor introduzca al menos una palabra clave. </div>
+                    </div>
+                </div>
+
+
+                <div class="col input-container">
+                    <label for="input-description">Descripción del producto</label>
+                    <textarea class="form-control is-invalid" id="input-description" rows="3"></textarea>
+                    <div class="invalid-feedback"> Por favor escriba una descripción para su producto. </div>
+                </div>
+
+                <div class="col input-container">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="input-terms">
+                        <label class="form-check-label is-invalid" for="terms">Aceptar términos y condiciones</label>
+                        <div class="invalid-feedback"> Debes aceptar los términos y condiciones para continuar. </div>
+                    </div>
+                </div>
+
+
+
+            </div> <!-- modal-body -->
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary">Finalizar</button>
+            </div>
+
+        </div> <!-- modal-content -->
+
+    </div> <!-- modal-dialog -->

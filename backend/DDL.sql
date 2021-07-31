@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `comprador` (
   `correo` varchar(45) NOT NULL,
   `nombre` VARCHAR(45) NOT NULL,
   `telefono` VARCHAR(15) NOT NULL,
-  `contrasenia` VARCHAR(45) NOT NULL,
+  `contrasenia` VARCHAR(106) NOT NULL,
   PRIMARY KEY (`correo`))
 ENGINE = InnoDB;
 
