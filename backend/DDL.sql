@@ -55,7 +55,7 @@ ENGINE = InnoDB;
 -- Table   `DireccionVendedor`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `direccionVendedor` (
-  `idDir` INT NOT NULL,
+  `idDir` INT NOT NULL AUTO_INCREMENT,
   correo varchar(45) not null,
   `estado` VARCHAR(45) NOT NULL,
   `ciudad` VARCHAR(45) NOT NULL,
