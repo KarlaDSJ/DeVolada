@@ -11,8 +11,9 @@ compradores_esquema = CompradorEsquema(many=True)
 @comprador.route('/comprador/<correo>', methods=['GET'])
 def obtener_comprador(correo):    
     comprador = Comprador.query.get(correo)
-    return jsonify({'correo': comprador.correo, 'nombre': comprador.nombre,
-                    'telefono': comprador.telefono})
+    # return jsonify({'correo': comprador.correo, 'nombre': comprador.nombre,
+    #                 'telefono': comprador.telefono})
+    return comprador_esquema.jsonify(comprador)
 
 
 @comprador.route('/comprador', methods=['POST'])
