@@ -10,7 +10,8 @@ class ProductoEsquema(ma.Schema):
     descripcion = fields.Str()
     vendidos = fields.Int()
     disponibles = fields.Int()
-    fotos = fields.Nested(ImagenEsquema, many=True, only=('imagen',))
+    #imagenes = fields.Nested(ImagenEsquema, only=('imagen',), many=True)
+    imagenes = fields.Nested(ImagenEsquema, only=('imagen',))
 
     class Meta:
-        fields = ("id", "correo", "precio", "nombre", "descripcion", "vendidos", "disponibles", "fotos")
+        fields = ("id", "correo", "precio", "nombre", "descripcion", "vendidos", "disponibles", "imagenes")

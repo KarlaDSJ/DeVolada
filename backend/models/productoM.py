@@ -12,8 +12,8 @@ class Producto(db.Model):
     vendidos = db.Column(db.Integer)
     disponibles = db.Column(db.Integer)
     # Relaciones  
-    imagenes = db.relationship('Imagen')
-    #categoria = db.relationship('Categoria') 
+    imagenes = db.relationship('Imagen', uselist=False, lazy='select')
+    #categoria = db.relationship('Categoria', uselist=False, lazy='select') 
 
     def __init__(self, correo, precio, nombre, descripcion, vendidos, disponible):
         self.correo = correo

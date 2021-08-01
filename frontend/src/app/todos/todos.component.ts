@@ -1,4 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductosService } from "../productos.service";
+
+interface IProducto {
+  id: String;
+  correo: String;
+  precio: number;
+  nombre: String;
+  descripcion: String;
+  vendidos: number;
+  disponibles: number;
+  imagenes: String[];
+}
 
 @Component({
   selector: 'app-todos',
@@ -8,6 +20,7 @@ import { Component, OnInit } from '@angular/core';
 
 export class TodosComponent implements OnInit {
 
+  productos:IProducto[] = [];
   todos = [{
     "id" : 1010,
     "precio": 20000,
@@ -109,7 +122,7 @@ export class TodosComponent implements OnInit {
 
   responsiveOptions:any;
 
-    constructor() {
+    constructor(private _productoService: ProductosService) {
         this.responsiveOptions = [
           {
             breakpoint: '1078px',
@@ -130,7 +143,11 @@ export class TodosComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    this._productoService.getProductos()
+          .subscribe(data => {
+            this.productos = data;
+            console.log(this.productos);
+          })
   }
 
 }

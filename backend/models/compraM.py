@@ -10,7 +10,7 @@ class Compra (db.Model):
     idDir = db.Column(db.Integer, db.ForeignKey('direccionComprador.idDir'))
     tarjeta = db.Column(db.String(45), db.ForeignKey('tarjetaComprador.numero'))  
     # Relaciones
-    productos_comprados = db.relationship('Incluir')
+    productos_comprados = db.relationship('Incluir', uselist=False, lazy='select')
 
 
     def __init__ (self, correo, idDir, tarjeta):

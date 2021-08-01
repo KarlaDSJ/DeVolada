@@ -5,4 +5,4 @@ class ImagenEsquema(ma.Schema):
    imagen = fields.Str() 
    idProducto = fields.Str() 
    class Meta:
-        fields = ("idProducto", "imagen")
+        fields = ("imagen","idProducto")
