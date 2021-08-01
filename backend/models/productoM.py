@@ -10,7 +10,10 @@ class Producto(db.Model):
     nombre = db.Column(db.String(45))
     descripcion = db.Column(db.String(100)) #Creo que 100 es poco
     vendidos = db.Column(db.Integer)
-    disponibles = db.Column(db.Integer)    
+    disponibles = db.Column(db.Integer)  
+
+    # Relaciones
+    contenido_en = db.relationship('Contener', backref='producto', lazy=True)              
 
 
     def __init__(self, correo, precio, nombre, descripcion, vendidos, disponible):
