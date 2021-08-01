@@ -23,6 +23,8 @@ from blueprints.vendedor import vendedor
 from blueprints.producto import producto
 from blueprints.carrito import carrito
 from blueprints.pertenecer import pertenecer
+from blueprints.contener import contener
+
 
 app = Flask(__name__)
 csrf = CSRFProtect()
@@ -35,6 +37,8 @@ app.register_blueprint(vendedor)
 app.register_blueprint(producto)
 app.register_blueprint(carrito)
 app.register_blueprint(pertenecer)
+app.register_blueprint(contener)
+
 
 # Ya estaban 
 app.register_blueprint(index)
