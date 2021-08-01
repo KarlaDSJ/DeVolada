@@ -16,7 +16,6 @@ from blueprints.logout import logout
 #from blueprints.before import before
 from blueprints.after import after
 from blueprints.cookie import cookie
-from blueprints.adminProducto import adminProducto
 
 app = Flask(__name__)
 csrf = CSRFProtect()
@@ -28,22 +27,18 @@ app.register_blueprint(index)
 app.register_blueprint(login)
 app.register_blueprint(create)
 app.register_blueprint(logout)
+app.register_blueprint(producto)
 #app.register_blueprint(before)
 app.register_blueprint(after)
 app.register_blueprint(cookie)
-app.register_blueprint(adminProducto)
 
 
 db.init_app(app)
 csrf.init_app(app)
-app.run(port=7000)
-
-
-
+app.run()
 
 
 if __name__ == '__main__':
-    app.run(port=7000)
     with app.app_context():
         db.create_all()
         ma.init_app(app)

@@ -1,8 +1,9 @@
 from flask_mail import Mail, Message
 from flask import current_app as app
 from main import db
-from flask import Blueprint, request, jsonify
-import models.compraM
+from flask import Blueprint, request
+from models.compraM import Compra
+from schemas.compraS import compraEsquema
 # from schemas.productoE import ProductoEsquema
 
 compra = Blueprint('compra', __name__)
@@ -10,7 +11,7 @@ compra = Blueprint('compra', __name__)
 compra_esquema = compraEsquema()
 compras_esquema = compraEsquema(many=True)
 
-@producto.route('/compra', methods=['POST'])
+@compra.route('/compra', methods=['POST'])
 def finalizar_compra():
     correo = request.json['correo']    
     nombre = request.json['nombre']
