@@ -3,6 +3,7 @@
 -- Model: New Model    Version: 1.0
 -- MySQL Workbench Forward Engineering
 
+
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -25,7 +26,7 @@ USE `mydb` ;
 CREATE TABLE IF NOT EXISTS `vendedor` (
   `nombre` VARCHAR(45) NULL,
   `telefono` VARCHAR(45) NULL,
-  `contrasenia` VARCHAR(45) NULL,
+  `contrasenia` VARCHAR(106) NULL,
   `correo` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`correo`))
 ENGINE = InnoDB;
@@ -134,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `producto` (
   correo VARCHAR(45) not null,
   precio FLOAT NOT NULL,
   nombre VARCHAR(45) NOT NULL,
-  descripcion VARCHAR(100) NOT NULL,
+  descripcion VARCHAR(500) NOT NULL,
   vendidos INT NOT NULL,
   disponibles INT NOT NULL,
   PRIMARY KEY (idProducto),
@@ -150,7 +151,7 @@ ENGINE = InnoDB;
 -- Table   `Imagen`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS   `imagen` (
-  `imagen` VARCHAR(45) NOT NULL,
+  `imagen` VARCHAR(100) NOT NULL,
   `idProducto` int NOT NULL,
   PRIMARY KEY (`imagen`, idProducto),
   CONSTRAINT idProducto_imagen
@@ -215,6 +216,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS  `contener` (
 	idProducto int not null,
 	idCarrito int not null,
+	primary key (idProducto, idCarrito),
 	cantidad INT NOT NULL,
   CONSTRAINT idProducto_contener
     FOREIGN KEY (idProducto)
@@ -233,6 +235,7 @@ CREATE TABLE IF NOT EXISTS  `incluir` (
 	idProducto int not null,
 	idCompra int not null,
 	`cantidad` INT NOT NULL,
+	primary key (idProducto, idCompra),
   CONSTRAINT idProducto_incluir
     FOREIGN KEY (idProducto)
     REFERENCES   `producto` (idProducto)
@@ -249,6 +252,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS  `pertenecer` (
 	correo varchar(45) not null,
 	idCarrito int not null,
+	primary key (correo, idCarrito),
   CONSTRAINT correo_pertenecer
     FOREIGN KEY (correo)
     REFERENCES   `comprador` (correo)
@@ -258,6 +262,9 @@ CREATE TABLE IF NOT EXISTS  `pertenecer` (
     FOREIGN KEY (idCarrito)
     REFERENCES   `carrito` (idCarrito))
 ENGINE = InnoDB;
+
+
+-- drop table `mydb`.`pertenecer` ;
 
 
 -- -----------------------------------------------------
