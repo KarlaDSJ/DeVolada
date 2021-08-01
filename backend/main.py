@@ -19,13 +19,18 @@ from blueprints.cookie import cookie
 
 # Mis blueprints
 from blueprints.comprador import comprador
+from blueprints.vendedor import vendedor
+from blueprints.producto import producto
 
 app = Flask(__name__)
 csrf = CSRFProtect()
 
 app.config.from_object(DevelopmentConfig)
 
+
 app.register_blueprint(comprador)
+app.register_blueprint(vendedor)
+app.register_blueprint(producto)
 
 # Ya estaban 
 app.register_blueprint(index)
