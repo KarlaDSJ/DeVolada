@@ -30,6 +30,7 @@ from blueprints.carrito import carrito
 from blueprints.pertenecer import pertenecer
 from blueprints.contener import contener
 from blueprints.direccionComprador import direccionComprador
+from blueprints.tarjetaComprador import tarjetaComprador
 
 
 app = Flask(__name__)
@@ -46,6 +47,7 @@ app.register_blueprint(carrito)
 app.register_blueprint(pertenecer)
 app.register_blueprint(contener)
 app.register_blueprint(direccionComprador)
+app.register_blueprint(tarjetaComprador)
 
 """
 # Ya estaban 
