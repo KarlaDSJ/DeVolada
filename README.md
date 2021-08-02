@@ -40,7 +40,7 @@ export FLASK_APP=main.py
 export FLASK_ENV=development
 flask run
 ```
-### Ejecución Linux
+### Ejecución Windows
 ```
 cd backend
 venv/bin/activate
