@@ -91,9 +91,9 @@ ENGINE = InnoDB;
 -- Table   `TarjetaComprador`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `tarjetaComprador` (
-  `numero` INT NOT NULL,
+  `numero` varchar(16) NOT NULL,
   correo varchar(45) not null,
-  `dueno` VARCHAR(45) NOT NULL,
+  `dueno` VARCHAR(60) NOT NULL,
   `fechaCad` DATE NOT NULL,
   `cvv` INT NOT NULL,
   PRIMARY KEY (`numero`, correo),
@@ -216,17 +216,17 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS  `contener` (
 	idProducto int not null,
 	idCarrito int not null,
-	primary key (idProducto, idCarrito),
 	cantidad INT NOT NULL,
+	primary key (idProducto, idCarrito),
   CONSTRAINT idProducto_contener
     FOREIGN KEY (idProducto)
-    REFERENCES   producto (idProducto)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES   producto (idProducto),
   CONSTRAINT idCarrito_contener
     FOREIGN KEY (idCarrito)
     REFERENCES   carrito (idCarrito))
 ENGINE = InnoDB;
+
+
 
 -- -----------------------------------------------------
 -- Table   `incluir`
@@ -274,7 +274,7 @@ CREATE TABLE IF NOT EXISTS `compra` (
   idCompra INT NOT NULL AUTO_INCREMENT,
   correo varchar(45) not null,
   idDir int not null,
-  numero int not null,
+  numero varchar(16) not null,
   PRIMARY KEY (`idCompra`),
   CONSTRAINT correo_comprador_compra
     FOREIGN KEY (correo)
