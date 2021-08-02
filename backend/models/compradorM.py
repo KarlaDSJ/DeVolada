@@ -8,9 +8,10 @@ class Comprador(db.Model):
     nombre = db.Column(db.Unicode)
     telefono = db.Column(db.String(15))
     contrasenia = db.Column(db.String(105))
+
     # # Relaciones
     # compras = db.relationship('Compra', backref='comprador', lazy=True) # Relación entre Compra y Comprador    
-    carrito_propio = db.relationship('Pertenecer', backref='comprador', lazy=True)
+    #carrito_propio = db.relationship('pertenecer', backref='comprador', lazy=True)
     # productos_carrito = db.relationship('Contener', backref='comprador', lazy=True) 
     # productos_compra = db.relationship('Incluir', backref='comprador', lazy=True)
 
@@ -21,7 +22,6 @@ class Comprador(db.Model):
     # carrito = db.relationship('Carrito', secondary=pertenecer, lazy='subquery',
     #     backref=db.backref('comprador', lazy=True))
 
-    
 
     def __init__(self,correo, nombre,telefono,contrasenia):
         self.correo = correo

@@ -2,8 +2,8 @@ from main import db
 
 class Imagen(db.Model):
     __tablename__ = 'imagen'
-    imagen = db.Column(db.String(45),primary_key = True, unique=True)
-    idProducto = db.ForeignKey('imagen.producto'),
+    imagen = db.Column(db.String(100),primary_key = True, unique=True)
+    idProducto = db.Column(db.Integer,db.ForeignKey('producto.idProducto'))
 
     def __init__(self,imagen,idProducto):
         self.imagen = imagen

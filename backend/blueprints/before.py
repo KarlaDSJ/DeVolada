@@ -1,4 +1,4 @@
-from flask import Blueprint , render_template
+from flask import Blueprint
 from flask import redirect
 from flask import url_for
 from flask import session
