@@ -1,17 +1,20 @@
 from schemas.imagenS import ImagenEsquema
+from schemas.categoriaS import CategoriaEsquema
 from main import ma
 from marshmallow import fields
 
 class ProductoEsquema(ma.Schema):
-    id = fields.Int()
+    """Esquema para el modelo productoM"""
+    idProducto = fields.Int()
     correo = fields.Email()
     precio = fields.Float()
     nombre = fields.Str()
     descripcion = fields.Str()
     vendidos = fields.Int()
     disponibles = fields.Int()
-    #imagenes = fields.Nested(ImagenEsquema, only=('imagen',), many=True)
-    imagenes = fields.Nested(ImagenEsquema, only=('imagen',))
+    imagenes = fields.List(fields.Nested(ImagenEsquema, only=('imagen',)))
+    categoria = fields.List(fields.Nested(CategoriaEsquema, only=('categoria',)))
 
     class Meta:
-        fields = ("id", "correo", "precio", "nombre", "descripcion", "vendidos", "disponibles", "imagenes")
+        """Formato de salida"""
+        fields = ("id", "correo", "precio", "nombre", "descripcion", "vendidos", "disponibles", "imagenes", "categoria")

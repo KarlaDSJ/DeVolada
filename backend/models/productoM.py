@@ -1,5 +1,7 @@
 from main import db
+"""Importamos los modelos para que no cause error las relaciones"""
 from models import imagenM
+from models import categoriaM
 
 class Producto(db.Model):
     """Modelo de la tabla Producto de la BD"""
@@ -11,9 +13,9 @@ class Producto(db.Model):
     descripcion = db.Column(db.String(500))
     vendidos = db.Column(db.Integer)
     disponibles = db.Column(db.Integer)
-    # Relaciones  
-    imagenes = db.relationship('Imagen', uselist=False, lazy='select')
-    #categoria = db.relationship('Categoria', uselist=False, lazy='select') 
+    # Relaciones (harán el join cuando seleccionemos los productos)
+    imagenes = db.relationship('Imagen', lazy='select')
+    categoria = db.relationship('Categoria', lazy='select') 
 
     def __init__(self, correo, precio, nombre, descripcion, vendidos, disponible):
         self.correo = correo

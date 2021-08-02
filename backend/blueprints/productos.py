@@ -2,9 +2,9 @@ from sqlalchemy import desc, func
 from main import db
 from flask import Blueprint, request, jsonify
 from models.productoM import Producto
+from models.categoriaM import Categoria
 #from models.incluirM import Incluir
 from schemas.productoS import ProductoEsquema
-from schemas.imagenS import ImagenEsquema
 
 producto = Blueprint('producto', __name__)
 
@@ -12,11 +12,10 @@ producto = Blueprint('producto', __name__)
 
 producto_esquema = ProductoEsquema()
 productos_esquema = ProductoEsquema(many=True)
-foto_esquema = ImagenEsquema()
-fotos_esquema = ImagenEsquema(many=True)
 
 """---------------- Rutas ----------------"""
-#Falta que el producto jale las fotos y la categoría 
+#Falta que regrese el id
+
 @producto.route('/producto/id', methods=['GET'])
 def get_producto():
     """Nos regresa la información del producto con
@@ -40,8 +39,15 @@ def search_productos():
       con el nombre y categoría"""
     categoria = request.json['categoria']
     nombre = request.json['nombre']
-
-    productos = db.session.query(Producto).filter_by(nombre=nombre).all()
+    if len(categoria) == 0:
+        #buscamos por nombre
+        productos = db.session.query(Producto).filter_by(nombre=nombre).all()
+    elif len(nombre) == 0:
+        #Buscamos por categoria
+        productos = db.session.query(Producto).join(Categoria).filter_by(categoria=categoria).all()
+    else:
+        #Busqueda por nombre y categoria
+        productos = db.session.query(Producto).filter_by(nombre=nombre).join(Categoria).filter_by(categoria=categoria).all()
     return productos_esquema.jsonify(productos)
 
 @producto.route('/producto/top5', methods=['GET'])
