@@ -26,9 +26,9 @@ from blueprints.showResenas import showResenas
 from blueprints.productos import producto
 from blueprints.comprador import comprador
 from blueprints.vendedor import vendedor
-"""from blueprints.carrito import carrito
+from blueprints.carrito import carrito
 from blueprints.pertenecer import pertenecer
-from blueprints.contener import contener"""
+from blueprints.contener import contener
 
 
 app = Flask(__name__)
@@ -41,11 +41,11 @@ app.config.from_object(DevelopmentConfig)
 app.register_blueprint(comprador)
 app.register_blueprint(vendedor)
 app.register_blueprint(producto)
-"""app.register_blueprint(carrito)
+app.register_blueprint(carrito)
 app.register_blueprint(pertenecer)
 app.register_blueprint(contener)
 
-
+"""
 # Ya estaban 
 app.register_blueprint(index)
 app.register_blueprint(login)
