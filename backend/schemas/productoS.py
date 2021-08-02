@@ -17,4 +17,4 @@ class ProductoEsquema(ma.Schema):
 
     class Meta:
         """Formato de salida"""
-        fields = ("id", "correo", "precio", "nombre", "descripcion", "vendidos", "disponibles", "imagenes", "categoria")
+        fields = ("idProducto", "correo", "precio", "nombre", "descripcion", "vendidos", "disponibles", "imagenes", "categoria")
