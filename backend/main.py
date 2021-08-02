@@ -14,6 +14,8 @@ from blueprints.create import create
 from blueprints.logout import logout
 from blueprints.after import after
 from blueprints.cookie import cookie
+from blueprints.imagen import imagen
+from blueprints.categoria import categoria
 from blueprints.createResena import createResena
 from blueprints.showResenas import showResenas
 #from blueprints.before import before
@@ -52,11 +54,12 @@ app.register_blueprint(logout)
 app.register_blueprint(producto)
 app.register_blueprint(after)
 app.register_blueprint(cookie)
+app.register_blueprint(imagen)
+app.register_blueprint(categoria)
 app.register_blueprint(createResena)
 app.register_blueprint(showResenas)
 #app.register_blueprint(before)
 # app.register_blueprint(adminProducto)
-
 
 # Configuraciones para envíos de correos en compra
 app.config['MAIL_SERVER']='smtp.gmail.com'
