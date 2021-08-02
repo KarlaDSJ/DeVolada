@@ -1,30 +1,60 @@
+from sqlalchemy import desc, func
 from main import db
 from flask import Blueprint, request, jsonify
 from models.productoM import Producto
+from models.categoriaM import Categoria
+#from models.incluirM import Incluir
 from schemas.productoS import ProductoEsquema
 
-
 producto = Blueprint('producto', __name__)
+
+"""---------------- Esquemas ----------------"""
 
 producto_esquema = ProductoEsquema()
 productos_esquema = ProductoEsquema(many=True)
 
-@producto.route('/producto', methods=['GET'])
-def get():
-    return jsonify ({'msg': 'Bienvenido a DeVolada'})
+"""---------------- Rutas ----------------"""
+#Falta que regrese el id
 
-@producto.route('/producto', methods=['POST'])
-def agrega_producto():
-    correo = request.json['correo']
-    precio = request.json['precio']
+@producto.route('/producto/id', methods=['GET'])
+def get_producto():
+    """Nos regresa la información del producto con
+     imagenes, sin categoría ni reseñas"""
+    id = request.json['id']
+    producto = db.session.query(Producto).filter_by(idProducto=id).first()
+
+    return producto_esquema.jsonify(producto)
+
+@producto.route('/productos', methods=['GET'])
+def get_productos():
+    """Nos regresa todos los productos"""
+    productos = db.session.query(Producto).all()
+ 
+    return productos_esquema.jsonify(productos)
+
+#Hay que modificar la query si nos mandan una categoría
+@producto.route('/producto/buscar', methods=['GET'])
+def search_productos():
+    """Nos regresa todos los productos que coincidan 
+      con el nombre y categoría"""
+    categoria = request.json['categoria']
     nombre = request.json['nombre']
-    descripcion = request.json['descripcion']
-    vendidos = request.json['vendidos']
-    disponible = request.json['disponible']
+    if len(categoria) == 0:
+        #buscamos por nombre
+        productos = db.session.query(Producto).filter_by(nombre=nombre).all()
+    elif len(nombre) == 0:
+        #Buscamos por categoria
+        productos = db.session.query(Producto).join(Categoria).filter_by(categoria=categoria).all()
+    else:
+        #Busqueda por nombre y categoria
+        productos = db.session.query(Producto).filter_by(nombre=nombre).join(Categoria).filter_by(categoria=categoria).all()
+    return productos_esquema.jsonify(productos)
 
-    producto_nuevo = Producto(correo, precio, nombre, descripcion, vendidos, disponible)
-
-    db.session.add(producto_nuevo)
-    db.session.commit()
-
-    return producto_esquema.jsonify(producto_nuevo)
+@producto.route('/producto/top5', methods=['GET'])
+def top5_productos():
+    """Nos regresa los 5 productos más vendidos, si no hay ventas 
+    nos regresa los 5 más recientes"""
+    ##productos = db.session.query(func.sum(Incluir.cantidad).label('count'), Incluir.producto).group_by(Incluir.producto).order_by(desc('count')).limit(5)
+    ##if len(productos) == 0: #Probar que lo de arriba funcione
+    productos = db.session.query(Producto).order_by(Producto.idProducto.desc()).limit(5)
+    return productos_esquema.jsonify(productos)

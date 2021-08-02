@@ -42,7 +42,7 @@ npm install
 
 ### Ejecución
 ```
-cd devolada
+cd frontend/
 ```
 y 
 ```
