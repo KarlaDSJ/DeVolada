@@ -4,7 +4,7 @@ import {HttpParams} from "@angular/common/http";
 import { Observable } from 'rxjs';
 
 export interface IProducto {
-  id: String;
+  idProducto: String;
   correo: String;
   precio: number;
   nombre: String;
@@ -56,9 +56,8 @@ export class ProductosService {
   /*
     Nos regresa la informacion de un producto
   */
-  getProducto(id:number): Observable<IProducto[]>{
-    const params = new HttpParams().set('id', id);
-    return this._http.get<IProducto[]>(this._url+"/producto/id", { params: params });
+  getProducto(id:number): Observable<IProducto>{
+    return this._http.get<IProducto>(this._url+"/producto/"+id);
   }
 
 }

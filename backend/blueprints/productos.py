@@ -16,11 +16,10 @@ productos_esquema = ProductoEsquema(many=True)
 """---------------- Rutas ----------------"""
 #Falta que regrese el id
 
-@producto.route('/producto/id', methods=['GET'])
-def get_producto():
+@producto.route('/producto/<id>', methods=['GET'])
+def get_producto(id):
     """Nos regresa la información del producto con
      imagenes, sin categoría ni reseñas"""
-    id = request.json['id']
     producto = db.session.query(Producto).filter_by(idProducto=id).first()
 
     return producto_esquema.jsonify(producto)

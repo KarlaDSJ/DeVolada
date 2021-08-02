@@ -12,7 +12,7 @@ import { IProducto } from "../productos.service";
 
 export class ProductoComponent implements OnInit {
 
-  producto: IProducto[];
+  producto: IProducto;
 
   id: any = "";
   responsiveOptions:any;
