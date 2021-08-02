@@ -9,8 +9,10 @@ import { MisProductosComponent } from './mis-productos/mis-productos.component';
 import { CompraFinalizadaComponent } from './compra-finalizada/compra-finalizada.component';
 import { CrearResenaComponent } from './crear-resena/crear-resena.component';
 import { VerResenasComponent } from './ver-resenas/ver-resenas.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
+  {path:  'login', component: LoginComponent},
   {path: 'carrito', component: CarritoComponent},
   {path: 'metodo-pago', component: MetodoPagoComponent},
   {path: 'inicio', component: InicioComponent},
