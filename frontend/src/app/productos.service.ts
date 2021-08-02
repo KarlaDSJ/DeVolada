@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {HttpParams} from "@angular/common/http";
 import { Observable } from 'rxjs';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/do';
 
-interface IProducto {
+export interface IProducto {
   id: String;
   correo: String;
   precio: number;
@@ -13,7 +11,12 @@ interface IProducto {
   descripcion: String;
   vendidos: number;
   disponibles: number;
-  imagenes: String[];
+  imagenes: {
+    imagen: String
+  }[];
+  categorias: {
+    categoria: String
+  }[];
 }
 
 @Injectable({
@@ -24,11 +27,38 @@ export class ProductosService {
 
   constructor(private _http: HttpClient) { }
 
+  /*
+    Nos regresa todos los productos
+  */
   getProductos(): Observable<IProducto[]>{
-    return this._http.get<IProducto[]>(this._url+"/productos");
+    return this._http.get<IProducto[]>(this._url+"/productos")
   }
 
-  private handleError(err: HttpErrorResponse){
-    return Observable.throw(err.message);
+  /*
+    Nos el top 5 de productos más vendidos, en caso de no ser posible 
+    nos regresa los productos agregados recientemente 
+  */
+  getTop5(): Observable<IProducto[]>{
+    return this._http.get<IProducto[]>(this._url+"/producto/top5");
   }
+
+  /*
+    Busca productos por categoria y/o por nombre
+  */
+  searchProductos(categoria:string, nombre:string): Observable<IProducto[]>{
+    const params = new HttpParams()
+      .set('nombre', nombre)
+      .set('categoria', categoria);
+
+    return this._http.get<IProducto[]>(this._url+"/producto/buscar", {params});
+  }
+
+  /*
+    Nos regresa la informacion de un producto
+  */
+  getProducto(id:number): Observable<IProducto[]>{
+    const params = new HttpParams().set('id', id);
+    return this._http.get<IProducto[]>(this._url+"/producto/id", { params: params });
+  }
+
 }
