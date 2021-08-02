@@ -10,7 +10,7 @@ class Incluir(db.Model):
                        nullable=False)  
     cantidad = db.Column(db.Integer)
     #Relaciones
-    producto = db.relationship('Producto', uselist=False, lazy='select') 
+    producto = db.relationship('producto', uselist=False, lazy='select') 
 
     def __init__ (self, idProducto, idCompra, cantidad):
         self.idCompra = idCompra

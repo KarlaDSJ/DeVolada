@@ -1,5 +1,4 @@
 from main import db
-from sqlalchemy import ForeignKey
 from sqlalchemy import relationship
 
 class DireccionComprador(db.Model):
@@ -7,7 +6,7 @@ class DireccionComprador(db.Model):
     __tablename__ = 'direccionComprador'
     
     id_dir = db.Column(db.Integer, primary_key=True)
-    correo = db.Column(db.String(45), ForeignKey('comprador.correo'))
+    correo = db.Column(db.String(45), db.ForeignKey('comprador.correo'))
     estado = db.Column(db.String(45))
     ciudad = db.Column(db.String(45))
     colonia = db.Column(db.String(45)) 
