@@ -6,7 +6,6 @@ from schemas.contenerE import ContenerEsquema
 from schemas.productoS import ProductoEsquema
 
 from marshmallow import Schema, fields
-# from pprint import pprint
 
 contener = Blueprint('contener', __name__)
 
@@ -87,7 +86,7 @@ def productos_en_el_carrito():
     productos = Contener.query.filter_by(idCarrito=idCarrito).all()
 
     producto_esquema = ProductoEsquema(
-        only=('idProducto', 'precio', 'nombre', 'disponibles'))
+        only=("idProducto", "precio", "nombre", "disponibles", "imagenes"))
 
     datos = conteneres_esquema.dump(productos)
 
