@@ -22,6 +22,9 @@ import { VerResenasComponent } from './ver-resenas/ver-resenas.component';
 import { FormAltaProductoComponent } from './form-alta-producto/form-alta-producto.component';
 import { CarouselModule } from 'primeng/carousel';
 import { LoginComponent } from './login/login.component';
+import { BarraNavCompradorComponent } from './barra-nav-comprador/barra-nav-comprador.component';
+import { BarraNavVendedorComponent } from './barra-nav-vendedor/barra-nav-vendedor.component';
+import { BarraNavLogComponent } from './barra-nav-log/barra-nav-log.component';
 
 
 @NgModule({
@@ -42,7 +45,10 @@ import { LoginComponent } from './login/login.component';
     CrearResenaComponent,
     VerResenasComponent,
     FormAltaProductoComponent,
-    LoginComponent
+    LoginComponent,
+    BarraNavCompradorComponent,
+    BarraNavVendedorComponent,
+    BarraNavLogComponent
   ],
   imports: [
     BrowserModule,
