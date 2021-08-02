@@ -10,15 +10,14 @@
       <h6 class="card-title">{{ producto.nombre }}</h6>
       <p class="card-text fw-light">
         <!-- ID -->
-        ID <!-- {{ producto.id }} --> <br>
+        ID {{ producto.idProducto }}<!-- {{ producto.id }} --> <br>
         <!-- Precio -->
         <span class="fw-bold">${{ producto.precio }} MXM</span> <br>
         <!-- Calificación -->
         <span class="text-warning">★★★★★</span> (7 opiniones) 
       </p>
       <!-- Botón para ver información completa -->
-       <!--<a [routerLink]="['/producto', producto.id]"-->
-        <a [routerLink]="['/producto', 10]"
+       <a [routerLink]="['/producto', producto.idProducto]"
          routerLinkActive="active" 
          class="btn btn-primary btn-sm w-100 rounded-pill">
         Ver producto
