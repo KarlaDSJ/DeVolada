@@ -11,7 +11,7 @@ class Comprador(db.Model):
 
     # # Relaciones
     # compras = db.relationship('Compra', backref='comprador', lazy=True) # Relación entre Compra y Comprador    
-    #carrito_propio = db.relationship('pertenecer', backref='comprador', lazy=True)
+    carrito_propio = db.relationship('Pertenecer', backref='comprador', lazy=True)
     # productos_carrito = db.relationship('Contener', backref='comprador', lazy=True) 
     # productos_compra = db.relationship('Incluir', backref='comprador', lazy=True)
 

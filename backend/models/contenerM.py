@@ -9,7 +9,7 @@ class Contener(db.Model):
                        nullable=False, primary_key=True, unique=True)  
     cantidad = db.Column(db.Integer)
     #Relaciones
-    productos = db.relationship('producto') 
+    productos = db.relationship('Producto') 
 
     def __init__ (self, idProducto, idCarrito, cantidad):
         self.idCarrito = idCarrito
