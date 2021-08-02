@@ -12,7 +12,7 @@ class Vendedor(db.Model):
     # Relaciones
     #direcciones = db.relationship('DireccionVendedor') 
     #tarjetas = db.relationship('TarjetaVendedor')
-    #productos = db.relationship('producto', backref='vendedor', lazy=True)
+    productos = db.relationship('Producto', backref='vendedor', lazy=True)
 
 
     def __init__(self,correo, nombre,telefono,contrasenia):
