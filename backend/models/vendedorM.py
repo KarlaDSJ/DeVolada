@@ -8,6 +8,10 @@ class Vendedor(db.Model):
     nombre = db.Column(db.Unicode)
     telefono = db.Column(db.String(15))
     contrasenia = db.Column(db.String(105))
+    # Relaciones
+    productos = db.relationship('Producto')
+    direcciones = db.relationship('DireccionVendedor') 
+    tarjetas = db.relationship('TarjetaVendedor')
 
     def __init__(self,correo, nombre,telefono,contrasenia):
         self.correo = correo

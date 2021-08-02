@@ -23,6 +23,9 @@ import { FormAltaProductoComponent } from './form-alta-producto/form-alta-produc
 import { CarouselModule } from 'primeng/carousel';
 import { LoginComponent } from './login/login.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
+
 
 @NgModule({
   declarations: [
@@ -49,7 +52,8 @@ import { LoginComponent } from './login/login.component';
     AppRoutingModule,
     RouterModule,
     FormsModule, // Para las entradas (inputs) o formularios
-    CarouselModule //Para mostrar los productos en Todos
+    CarouselModule, //Para mostrar los productos en Todos
+    HttpClientModule //Para hacer peticiones
   ],
   providers: [],
   bootstrap: [AppComponent]
