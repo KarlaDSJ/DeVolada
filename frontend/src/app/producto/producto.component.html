@@ -6,7 +6,7 @@
         Inicio
      </a>
     </li>
-    <li class="breadcrumb-item active" aria-current="page">{{ producto.nombre }}</li>
+    <li class="breadcrumb-item active" aria-current="page">{{ producto[0].nombre }}</li>
   </ol>
 </nav>
 
@@ -17,7 +17,7 @@
       <div class="col-4">
         <div>
           <!-- Nombre -->
-          <h3>{{ producto.nombre }}</h3>
+          <h3>{{ producto[0].nombre }}</h3>
           <!-- ID -->
           <h6 class="text-muted"> ID {{ id }}</h6>
         </div>
@@ -31,10 +31,10 @@
   
   <!-- Imagenes del producto -->
   <div class="content-section implementation carousel-demo">
-    <p-carousel [value]="producto.fotos" styleClass="custom-carousel" [numVisible]="3" [numScroll]="2"
+    <p-carousel [value]="producto[0].imagenes" styleClass="custom-carousel" [numVisible]="3" [numScroll]="2"
         [circular]="true" [autoplayInterval]="0" [responsiveOptions]="responsiveOptions">
         <ng-template let-foto pTemplate="item">
-          <img [src]="foto" class="d-block w-100" [alt]="producto.nombre">
+          <img [src]="foto.imagen" class="d-block w-100" [alt]="producto[0].nombre">
         </ng-template>
     </p-carousel>
   </div>
@@ -43,7 +43,7 @@
     <div class="row justify-content-between">
       <div class="col-4 p-2">
         <!-- Precio -->
-        <h4>${{ producto.precio }} MXN</h4>
+        <h4>${{ producto[0].precio }} MXN</h4>
       </div>
       <!-- Agregar al carrito-->
       <div class="col-4 p-2">
@@ -57,7 +57,7 @@
       <div class="col-12">
         <!-- Descripción -->
         <p class="text-justify w-100 lh-sm">
-          {{ producto.descripcion }}
+          {{ producto[0].descripcion }}
         </p>
       </div>
     </div>

@@ -4,10 +4,10 @@
                bg-secondary bg-gradient 
                rounded-pill
                text-center">Todos 🛒</h4>
-
+    <span> {{ productos.length }} productos</span>
     <!-- Todos los productos -->
     <div class="content-section implementation carousel-demo">
-        <p-carousel [value]="todos" styleClass="custom-carousel" [numVisible]="4" [numScroll]="2"
+        <p-carousel [value]="productos" styleClass="custom-carousel" [numVisible]="4" [numScroll]="2"
             [circular]="true" [autoplayInterval]="0" [responsiveOptions]="responsiveOptions">
             <ng-template let-producto pTemplate="item">
                 <app-tarjeta-producto [producto] = producto></app-tarjeta-producto>
