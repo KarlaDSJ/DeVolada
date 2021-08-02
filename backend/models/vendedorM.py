@@ -2,12 +2,16 @@ from main import db
 from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
 
-class Vendedor(db.Model):
-    __tablename__ = 'vendedor'
+class Vendedor(db.Model):    
+    # __tablename__ = 'vendedor'
     correo = db.Column(db.String(45),primary_key = True, unique=True)
     nombre = db.Column(db.Unicode)
     telefono = db.Column(db.String(15))
     contrasenia = db.Column(db.String(105))
+
+    # Relaciones
+    productos = db.relationship('Producto', backref='vendedor', lazy=True)
+
 
     def __init__(self,correo, nombre,telefono,contrasenia):
         self.correo = correo
