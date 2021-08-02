@@ -15,45 +15,65 @@
             </div>
         </div>
         </div>
-        <!-- Línea de separación -->
-        <div class="row mb-5">
-            <div class="col-12">
-                <hr size="3" >
-            </div>
+    </div>
+    <!-- Línea de separación -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <hr size="3" >
         </div>
-        <!-- Calificación -->
-        <div class="row">
-            <div class="col-12">
-                <p class="fs-5 mb-1"> Calificación</p>
-            </div>
+    </div>
+    <!-- Calificación -->
+    <div class="row">
+        <div class="col-12">
+            <p class="fs-5 mb-2"> Calificación</p>
         </div>
-        <div class="row">
-            <div class="col-12 mb-5">
-                <span style="font-size:400%" class="text-muted bd-highlight ">★★★★★</span> 
-            </div>
+    </div>
+    <!-- Calificación de 1 a 5 apartir de # de estrellas-->
+    <div class="row ">
+        <div class="col-lg-4 align-self-start">
+            <form>
+                <p class="clasificacion" style="font-size:350%">
+                    <input id="radio1" type="radio" name="estrellas" value="5"><!--
+                    --><label for="radio1">★</label><!--
+                    --><input id="radio2" type="radio" name="estrellas" value="4"><!--
+                    --><label for="radio2">★</label><!--
+                    --><input id="radio3" type="radio" name="estrellas" value="3"><!--
+                    --><label for="radio3">★</label><!--
+                    --><input id="radio4" type="radio" name="estrellas" value="2"><!--
+                    --><label for="radio4">★</label><!--
+                    --><input id="radio5" type="radio" name="estrellas" value="1"><!--
+                    --><label for="radio5">★</label>
+                </p>
+            </form>
         </div>
-        <!-- Línea de separación -->
-        <div class="row mb-5">
-            <div class="col-12">
-                <hr size="3" >
-            </div>
+    </div>
+    <!-- Línea de separación -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <hr size="3" >
         </div>
-        <!-- Agregar un comentario escrito -->
-        <div class="row">
-            <div class="col-12">
-                <p class="fs-5 mb-3"> Agregar un comentario escrito </p>
-            </div>
+    </div>
+    <!-- Agregar un comentario escrito -->
+    <div class="row">
+        <div class="col-12">
+            <p class="fs-5 mb-3"> Agregar un comentario escrito </p>
         </div>
-        <!-- Caja de comentarios -->
-        <div class="row">
-            <div class="form-floating mb-2">
-                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 240px"></textarea>
-                <label for="floatingTextarea">Comentario</label>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <form>
+                <!-- Caja de comentarios -->
+                <div class="row">
+                    <div class="form-floating mb-2">
+                        <label for="exampleFormControlTextarea1" class="form-label">Comentario</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="height: 200px"></textarea>
+                    </div>
+                </div>
+            </form>
         </div>
-        <!-- Botón de guardar Reseña -->
-        <div class="d-grid gap-2 justify-content-md-end">
-            <button class="btn btn-primary" type="submit">Guardar</button>
-          </div>
+    </div>
+    <!-- Botón de guardar Reseña -->
+    <div class="d-grid justify-content-sm-end">
+        <button class="btn btn-primary" type="submit">Guardar</button>
     </div>
 </div> <br>

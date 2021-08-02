@@ -14,6 +14,8 @@ from blueprints.create import create
 from blueprints.logout import logout
 from blueprints.after import after
 from blueprints.cookie import cookie
+from blueprints.createResena import createResena
+from blueprints.showResenas import showResenas
 #from blueprints.before import before
 # from blueprints.adminProducto import adminProducto
 # from blueprints.productos import producto
@@ -25,6 +27,7 @@ from blueprints.producto import producto
 from blueprints.carrito import carrito
 from blueprints.pertenecer import pertenecer
 from blueprints.contener import contener
+
 
 app = Flask(__name__)
 csrf = CSRFProtect()
@@ -49,6 +52,8 @@ app.register_blueprint(logout)
 app.register_blueprint(producto)
 app.register_blueprint(after)
 app.register_blueprint(cookie)
+app.register_blueprint(createResena)
+app.register_blueprint(showResenas)
 #app.register_blueprint(before)
 # app.register_blueprint(adminProducto)
 
@@ -60,7 +65,6 @@ app.config['MAIL_USERNAME'] = 'mercadodevolada@gmail.com'
 app.config['MAIL_PASSWORD'] = '7yR9Y5iDhrmXKjG'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
-
 
 db.init_app(app)
 # Lo comenté porque necesitaba iniciar sesión para hacer peticiones
