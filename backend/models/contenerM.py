@@ -8,8 +8,6 @@ class Contener(db.Model):
     idCarrito = db.Column(db.Integer, db.ForeignKey('carrito.idCarrito'),
                        nullable=False, primary_key=True, unique=True)  
     cantidad = db.Column(db.Integer)
-    #Relaciones
-    productos = db.relationship('producto') 
 
     def __init__ (self, idProducto, idCarrito, cantidad):
         self.idCarrito = idCarrito

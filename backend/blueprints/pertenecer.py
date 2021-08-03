@@ -21,7 +21,7 @@ def obtener_datos():
 
 @pertenecer.route('/pertenecer/carrito', methods=['GET'])
 def obtener_dueno():    
-    idCarrito = request.args.get('idCarrito', '')
+    idCarrito = request.args.get('idCarrito', '')    
     pertenecer = Pertenecer.query.filter_by(idCarrito=idCarrito).first()
     
     if pertenecer is None:
