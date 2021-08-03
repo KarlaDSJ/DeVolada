@@ -20,7 +20,7 @@ export class ResenasService {
   constructor(private _http: HttpClient) { }
 
   /*
-    Nos regresa todos los productos
+    Crea una reseña para un producto
   */
   crearResenas(idProducto:string, correo:string, calificacion:number, opinion:string) : Observable<IResena[]>{
     const params = new HttpParams()
@@ -32,7 +32,7 @@ export class ResenasService {
   }
 
    /*
-    Nos regresa la informacion de un producto
+    Regresa todas las reseñas de un producto
   */
     mostrarResenas(idProducto:string): Observable<IResena[]>{
         const params = new HttpParams().set('idProducto', idProducto);
