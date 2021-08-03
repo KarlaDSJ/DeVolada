@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import {HttpParams} from "@angular/common/http";
 import { Observable } from 'rxjs';
+import { ProductosService } from './productos.service';
 
 export interface IResena {
   idProducto: String;
