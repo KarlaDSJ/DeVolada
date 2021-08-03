@@ -3,36 +3,40 @@ from flask import current_app as app
 from main import db
 from flask import Blueprint, request
 from models.compraM import Compra
-from schemas.compraS import compraEsquema
-# from schemas.productoE import ProductoEsquema
+from models.compradorM import Comprador
+from schemas.compraS import CompraEsquema
+from pprint import pprint
 
 compra = Blueprint('compra', __name__)
 
-compra_esquema = compraEsquema()
-compras_esquema = compraEsquema(many=True)
+compra_esquema = CompraEsquema()
+compras_esquema = CompraEsquema(many=True)
 
 @compra.route('/compra', methods=['POST'])
 def finalizar_compra():
     correo = request.json['correo']    
-    nombre = request.json['nombre']
-    tarjeta = request.json['tarjeta']
+    # Ingreso la tarjeta ya cifrada
     idDir = request.json['idDir']
-    total = request.json['total']
+    tarjeta = request.json['tarjeta']
+    total = request.json['total']    
+    compra_nueva = Compra(correo, idDir, tarjeta, total)
 
+    nombre = Comprador.query.get(correo).nombre
+    pprint(nombre)
     enviar_correo(correo, nombre, total)
-
-    compra_nueva = Compra(correo, idDir, tarjeta)
-
-
     db.session.add(compra_nueva)
     db.session.commit()
+
+    return compra_esquema.jsonify(compra_nueva)
 
 def enviar_correo(correo, nombre, total):
     mail = Mail(app)
     try:
-        mensaje = Message('DeVolada', sender = correo, recipients = [correo])
-        mensaje.body = f"Hola  {nombre}! \n Gracias por realizar tu compra en DeVolada \n El total de tu compra es {total}"
+        mensaje = Message('Compra en DeVolada', sender='mercadodevolada@gmail.com', recipients=[f'{correo}'])
+        mensaje.body = f"Hola  {nombre}! \n Gracias por realizar tu compra en DeVolada\n El total de tu compra es de {total} pesos"
         mail.send(mensaje)
-    except Exception:
-        raise
+    except Exception as e:
+        print("Excepción: \n")
+        print(e)
+        raise    
     return "Correo enviado :)"
