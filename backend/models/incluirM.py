@@ -4,13 +4,11 @@ from main import db
 # Productos comprados 
 class Incluir(db.Model):
     __tablename__ = 'incluir'
-    idProducto = db.Column(db.Integer, db.ForeignKey('producto.id_producto'),
-                       nullable=False)  
+    idProducto = db.Column(db.Integer, db.ForeignKey('producto.idProducto'),
+                       primary_key=True, nullable=False)  
     idCompra = db.Column(db.Integer, db.ForeignKey('compra.idCompra'),
-                       nullable=False)  
+                        primary_key=True, nullable=False)  
     cantidad = db.Column(db.Integer)
-    #Relaciones
-    producto = db.relationship('Producto', uselist=False, lazy='select') 
 
     def __init__ (self, idProducto, idCompra, cantidad):
         self.idCompra = idCompra

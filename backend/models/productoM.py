@@ -19,7 +19,8 @@ class Producto(db.Model):
     categoria = db.relationship('Categoria',lazy='select') 
     
     # contenido_en = db.relationship('Contener', back_populates='productos') 
-    contenido_en = db.relationship('Contener', backref='contenido_en')              
+    contenido_en = db.relationship('Contener', backref='contenido_en') 
+    comprado_en = db.relationship('Incluir', backref='producto')             
 
     def __init__(self, correo, precio, nombre, descripcion, vendidos, disponible):
         self.correo = correo

@@ -12,9 +12,8 @@ class Compra (db.Model):
     idDir = db.Column(db.Integer, db.ForeignKey('direccionComprador.idDir'))
     numero = db.Column(db.String(45), db.ForeignKey('tarjetaComprador.numero')) 
     total = db.Column(db.Float)
-    # Relaciones
-    # comprador = db.relationship('Comprador', lazy='select') #Para saber que comprador la hizo 
-    # productos_comprados = db.relationship('incluir', uselist=False, lazy='select')
+    # Relaciones    
+    productos_comprados = db.relationship('Incluir', backref='compra', lazy='select')
 
 
     def __init__ (self, correo, idDir, tarjeta, total):

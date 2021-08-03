@@ -33,6 +33,8 @@ from blueprints.contener import contener
 from blueprints.direccionComprador import direccionComprador
 from blueprints.tarjetaComprador import tarjetaComprador
 from blueprints.compra import compra
+from blueprints.incluir import incluir
+
 
 
 app = Flask(__name__)
@@ -51,6 +53,8 @@ app.register_blueprint(contener)
 app.register_blueprint(direccionComprador)
 app.register_blueprint(tarjetaComprador)
 app.register_blueprint(compra)
+app.register_blueprint(incluir)
+
 
 """
 # Ya estaban 
