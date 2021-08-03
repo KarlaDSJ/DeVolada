@@ -44,7 +44,7 @@ def agrega_direccionComprador():
 
 
 
-@direccionComprador.route('/direccionComprador/<correo>/direcciones', methods=['GET'])
+@direccionComprador.route('/direccionComprador/direcciones/<correo>', methods=['GET'])
 def obtener_productos_direccionComprador(correo): 
     '''Obtiene una lista con todas las direcciones de un comprador'''
 
