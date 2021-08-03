@@ -16,16 +16,15 @@ from blueprints.after import after
 from blueprints.cookie import cookie
 from blueprints.imagen import imagen
 from blueprints.categoria import categoria
-from blueprints.createResena import createResena
-from blueprints.showResenas import showResenas
 #from blueprints.before import before
 # from blueprints.adminProducto import adminProducto
 
 
 # Mis blueprints"""
-from blueprints.productos import producto
+from blueprints.producto import producto
 from blueprints.comprador import comprador
 from blueprints.vendedor import vendedor
+from blueprints.resena import resena
 """from blueprints.carrito import carrito
 from blueprints.pertenecer import pertenecer
 from blueprints.contener import contener"""
@@ -41,6 +40,7 @@ app.config.from_object(DevelopmentConfig)
 app.register_blueprint(comprador)
 app.register_blueprint(vendedor)
 app.register_blueprint(producto)
+app.register_blueprint(resena)
 """app.register_blueprint(carrito)
 app.register_blueprint(pertenecer)
 app.register_blueprint(contener)
@@ -54,9 +54,7 @@ app.register_blueprint(logout)
 app.register_blueprint(after)
 app.register_blueprint(cookie)
 app.register_blueprint(imagen)
-app.register_blueprint(categoria)
-app.register_blueprint(createResena)
-app.register_blueprint(showResenas)"""
+app.register_blueprint(categoria)"""
 #app.register_blueprint(before)
 # app.register_blueprint(adminProducto)
 
