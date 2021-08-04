@@ -37,11 +37,8 @@ ENGINE = InnoDB;
 -- Table   `TarjetaVendedor`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `tarjetaVendedor` (
-  `numero` INT NOT NULL,
+  `numero` varchar(16) NOT NULL,
   correo varchar(45) not null,
-  `duenio` VARCHAR(45) NOT NULL,
-  `fechaCad` DATE NOT NULL,
-  `cvv` INT NOT NULL,
   PRIMARY KEY (`numero`, correo),
   CONSTRAINT correo_tarjetaVendedor
     FOREIGN KEY (correo)

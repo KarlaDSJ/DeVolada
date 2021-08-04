@@ -1,5 +1,5 @@
 from main import db
-from sqlalchemy import relationship
+
 
 class DireccionComprador(db.Model):
     """Modelo de la tabla direccionComprador de la BD"""

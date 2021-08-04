@@ -30,7 +30,8 @@ def finalizar_compra():
 def enviar_correo(correo, nombre, total):
     mail = Mail(app)
     try:
-        mensaje = Message('DeVolada', sender = correo, recipients = [correo])
+        mensaje = Message("DeVolada", sender="mercadodevolada@gmail.com", recipients = [correo])
+        
         mensaje.body = f"Hola  {nombre}! \n Gracias por realizar tu compra en DeVolada \n El total de tu compra es {total}"
         mail.send(mensaje)
     except Exception:
