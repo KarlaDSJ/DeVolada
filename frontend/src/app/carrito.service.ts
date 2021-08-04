@@ -9,6 +9,27 @@ export interface ICarrito {
   }[]
 }
 
+export interface IProductoCarrito{
+  idProducto: number,
+  precio: number,
+  nombre: string, 
+  disponibles: number,
+  cantidad: number, 
+  imagenes: {
+    imagen: string
+  }[]
+}
+
+export interface IContenerProducto{
+  idProducto: number,
+  idCarrito: number,
+  cantidad: number
+}
+
+export interface IMensaje{
+  msg: string
+}
+
 export interface ICompra{
   'correo':string,
   'idDir': number,
@@ -37,6 +58,20 @@ export class CarritoService {
     return this._http.post<ICarrito>(this._url+"/carrito",{})
   }
 
+  obtenerProductos(idCarrito:number) : Observable<IProductoCarrito[]>{
+    return this._http.get<IProductoCarrito[]>(`${this._url}/contener?idCarrito=${idCarrito}`)
+  }
+
+  cambiarCantidad(idProducto:number, idCarrito:number, cantidad:number): Observable<IContenerProducto>{
+    return this._http.put<IContenerProducto>(`${this._url}/contener?idProducto=${idProducto}&idCarrito=${idCarrito}`,{cantidad:cantidad})
+  }
+
+  eliminarProducto(idProducto:number, idCarrito:number): Observable<IMensaje>{
+    return this._http.delete<IMensaje>(`${this._url}/contener?idProducto=${idProducto}&idCarrito=${idCarrito}`)
+  }
+
+  obtenerTotal(idCarrito:number): Observable<number> {
+    return this._http.get<number>(`${this._url}/totalCarrito?idCarrito=${idCarrito}`)
 
   /*
     Registra una compra en la base de datos 
