@@ -10,6 +10,17 @@ export interface ICarrito {
   }[]
 }
 
+export interface IProductoCarrito{
+  idProducto: number,
+  precio: number,
+  nombre: string, 
+  disponibles: number,
+  cantidad: number, 
+  imagenes: {
+    imagen: string
+  }[]
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -24,4 +35,7 @@ export class CarritoService {
     return this._http.post<ICarrito>(this._url+"/carrito",{})
   }
 
+  obtenerProductos(idCarrito) : Observable<IProductoCarrito[]>{
+    return this._http.get<IProductoCarrito[]>(`${this._url}/contener?idCarrito=${idCarrito}`)
+  }
 }

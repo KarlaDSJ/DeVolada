@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IProductoCarrito } from '../carrito.service';
+import { CarritoService } from '../carrito.service';
 
 @Component({
   selector: 'app-carrito',
@@ -7,22 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarritoComponent implements OnInit {
   
-  nombreP = "Nombre del producto";
-  cant = 1;
-  idP = 12;
-  precioP = 450.00;
-  imagenP = "https://i.pinimg.com/originals/1a/ac/af/1aacaff36d04df6b1d189c6f22b4ceb9.jpg";
-  disp = 3;
+  // Consulta a la base de datos 
+  idCarrito = 1
 
   // Consulta a la base de datos
-  listaP = [
-    {imagenp: "https://i.pinimg.com/originals/1a/ac/af/1aacaff36d04df6b1d189c6f22b4ceb9.jpg", 
-    nombre: "Shiba bb", cant: 1, idP: 12, precioP: 500, disp: 4},
-    {imagenp: "https://demascotas.info/wp-content/uploads/2018/01/dog-3098176_1280.jpg", 
-    nombre: "Shiba bb", cant: 1, idP: 13, precioP: 800, disp: 1}    
-  ];
-  
-
+  listaP = [];  
   
   public get total() : number {
     let total = 0;
@@ -31,7 +22,6 @@ export class CarritoComponent implements OnInit {
     });
     return total;
   }
-  
 
   // Aumenta la cantidad de un producto acorde a los disponibles. 
   aumentarCP(indice: number): void{
@@ -47,15 +37,25 @@ export class CarritoComponent implements OnInit {
     }   
   }
 
-
   // Elimina un producto 
   eliminarP(i: number): void{
     this.listaP.splice(i,1);    
   }
   
-  constructor() { }
+  constructor(private _carritoService: CarritoService) { }
 
   ngOnInit(): void {
+    this._carritoService.obtenerProductos(this.idCarrito)
+          .subscribe(data => {            
+            this.listaP = data.map(x => ({
+              imagenp:x.imagenes[0].imagen, 
+              nombre: x.nombre,
+              cant: x.cantidad,
+              idP: x.idProducto,
+              precioP: x.precio,
+              disp: x.disponibles
+            }))
+          })
   }
 
 }
