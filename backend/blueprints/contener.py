@@ -4,6 +4,7 @@ from models.contenerM import Contener
 from models.productoM import Producto
 from schemas.contenerE import ContenerEsquema
 from schemas.productoS import ProductoEsquema
+from pprint import pprint
 
 from marshmallow import Schema, fields
 
@@ -57,11 +58,14 @@ def actualizar_cantidad():
     relación. En caso de no poder aumentar la cantidad la deja
     cómo estaba'''
 
+
     idProducto = request.args.get('idProducto', '')
     idCarrito = request.args.get('idCarrito', '')
 
     cantidad = request.json['cantidad']
     contener = Contener.query.get((idProducto, idCarrito))
+    pprint(contener)
+
     disponibles = Producto.query.get(idProducto).disponibles
 
     if (disponibles >= cantidad):
@@ -98,6 +102,24 @@ def productos_en_el_carrito():
         item.update(informacion)
 
     return jsonify(datos)
+
+
+@contener.route('/totalCarrito', methods=['GET'])
+def obtener_total ():   
+    idCarrito = request.args.get('idCarrito', '')
+    productos = Contener.query.filter_by(idCarrito=idCarrito).all()
+    producto_esquema = ProductoEsquema(
+        only=("idProducto", "precio"))
+
+    datos = conteneres_esquema.dump(productos)
+    total = 0
+    for item in datos:
+        x = item.pop('idProducto')
+        prod = Producto.query.get(x)        
+        precio = prod.precio
+        total+= precio * item.pop('cantidad')
+
+    return jsonify(total)
 
 
 @contener.route('/contener', methods=['DELETE'])

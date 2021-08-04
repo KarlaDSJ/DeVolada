@@ -21,6 +21,16 @@ export interface IProductoCarrito{
   }[]
 }
 
+export interface IContenerProducto{
+  idProducto: number,
+  idCarrito: number,
+  cantidad: number
+}
+
+export interface IMensaje{
+  msg: string
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +45,19 @@ export class CarritoService {
     return this._http.post<ICarrito>(this._url+"/carrito",{})
   }
 
-  obtenerProductos(idCarrito) : Observable<IProductoCarrito[]>{
+  obtenerProductos(idCarrito:number) : Observable<IProductoCarrito[]>{
     return this._http.get<IProductoCarrito[]>(`${this._url}/contener?idCarrito=${idCarrito}`)
+  }
+
+  cambiarCantidad(idProducto:number, idCarrito:number, cantidad:number): Observable<IContenerProducto>{
+    return this._http.put<IContenerProducto>(`${this._url}/contener?idProducto=${idProducto}&idCarrito=${idCarrito}`,{cantidad:cantidad})
+  }
+
+  eliminarProducto(idProducto:number, idCarrito:number): Observable<IMensaje>{
+    return this._http.delete<IMensaje>(`${this._url}/contener?idProducto=${idProducto}&idCarrito=${idCarrito}`)
+  }
+
+  obtenerTotal(idCarrito:number): Observable<number> {
+    return this._http.get<number>(`${this._url}/totalCarrito?idCarrito=${idCarrito}`)
   }
 }
