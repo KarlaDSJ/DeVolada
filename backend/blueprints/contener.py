@@ -44,7 +44,7 @@ def agregar_producto():
             db.session.commit()
             return jsonify({'msg': 'Se agregó al carrito'})
         else:
-            return jsonify({'msg': 'No se puede agregar al carrito'})
+            return jsonify({'msg': 'Ya no hay más productos disponibles'}), 400
 
 
 @contener.route('/contener', methods=['PUT'])
@@ -144,7 +144,7 @@ def eliminar_producto():
 
 
 
-@contener.route('/contener', methods=['DELETE'])
+@contener.route('/limpiarCarrito', methods=['DELETE'])
 def limpiar_carrito():
     '''Limpia el carrito del que se le pasa el id en la ruta
     como "idCarrito".
@@ -152,6 +152,7 @@ def limpiar_carrito():
     Returns:
     Mensaje en formato json indicando si se pudo limpiar o no.'''
 
+    pprint("Hola mundo ")
     idCarrito = request.args.get('idCarrito', '')
 
     productos = Contener.query.filter_by(idCarrito=idCarrito)
@@ -164,8 +165,10 @@ def limpiar_carrito():
             id_producto = item['idProducto']
             id_carrito = item['idCarrito']
             producto = Contener.query.get((id_producto, id_carrito))
+            pprint(producto)
             db.session.delete(producto)
             db.session.commit()
         return jsonify({'msg': 'Se limpió el carrito'})
     except Exception as e:
+        pprint(e)
         return jsonify({'msg': 'Hubo un error'})

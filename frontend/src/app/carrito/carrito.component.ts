@@ -46,7 +46,11 @@ export class CarritoComponent implements OnInit {
     this._carritoService.eliminarProducto( this.listaP[i].idP, this.idCarrito)
           .subscribe() 
     // Simulamos que se quita :D 
-    this.listaP.splice(i,1);    
+    this.listaP.splice(i,1); 
+    
+    // Petición para limpiar el carrito 
+    // this._carritoService.limpiarCarrito( this.idCarrito)
+    //       .subscribe() 
   }
   
   constructor(private _carritoService: CarritoService) { }
