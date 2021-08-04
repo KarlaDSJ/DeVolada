@@ -21,13 +21,13 @@ from blueprints.adminProducto import adminProducto
 """
 
 
-# Mis blueprints"""
+# Mis blueprints    
 from blueprints.producto import producto
 from blueprints.comprador import comprador
 from blueprints.vendedor import vendedor
 from blueprints.imagen import imagen
 from blueprints.categoria import categoria
-from blueprints.direccion import direccion
+from blueprints.direccionVendedor import direccionVendedor
 
 """from blueprints.carrito import carrito
 from blueprints.pertenecer import pertenecer
@@ -51,7 +51,7 @@ app.register_blueprint(vendedor)
 app.register_blueprint(producto)
 app.register_blueprint(imagen)
 app.register_blueprint(categoria)
-app.register_blueprint(direccion)
+app.register_blueprint(direccionVendedor)
 
 
 """
@@ -64,18 +64,16 @@ app.register_blueprint(direccionComprador)
 app.register_blueprint(tarjetaComprador)
 app.register_blueprint(compra)
 app.register_blueprint(incluir)
-"""
+
 # Ya estaban 
-app.register_blueprint(index)
-app.register_blueprint(login)
-app.register_blueprint(create)
-app.register_blueprint(logout)
-app.register_blueprint(after)
-app.register_blueprint(cookie)
-app.register_blueprint(imagen)
-app.register_blueprint(categoria)
-app.register_blueprint(before)
-app.register_blueprint(adminProducto)
+# app.register_blueprint(index)
+# app.register_blueprint(login)
+# app.register_blueprint(create)
+# app.register_blueprint(logout)
+# app.register_blueprint(after)
+# app.register_blueprint(cookie)
+# app.register_blueprint(before)
+"""
 
 
 # Configuraciones para envíos de correos en compra
