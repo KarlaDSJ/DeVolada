@@ -34,11 +34,30 @@
             </li>
             
           </ul>
-          <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-light" type="submit">Search</button>
-          </form>
+          <!-- Para buscar un producto por nombre o categoría -->
+          <div class="w-50 d-flex flex-row-reverse">
+            <div class="w-75 input-group mb-3">
+              <select #categoria class="form-select bg-dark text-white" aria-label="Categorías">
+                <option selected>Categorías</option>
+                <option *ngFor="let categoria of categorias" [value]="categoria.categoria">{{ categoria.categoria }}</option>
+              </select>
+              <input #nombre type="text" class="form-control" aria-label="Text input with dropdown button">
+              <button class="btn btn-outline-light" type="button" (click)="buscar(categoria.value, nombre.value)">Buscar</button>
+            </div>
+          </div>
+          
         </div>
       </div>
     </nav>
   </header>
+
+  <div *ngIf="busqueda">
+    <button type="button" class="btn-close float-end m-3" aria-label="Close" (click)="cerrar()"></button>
+      <h4 class="m-3 p-2 
+      bg-secondary bg-gradient 
+      rounded-pill
+      text-center">Resultados 🛒</h4>
+    <app-carrusel *ngIf="productos.length != 0" [productos] = 'productos'></app-carrusel>
+    <p *ngIf="productos.length == 0">No hay productos con esa descripción :(</p>
+  </div>
+  
