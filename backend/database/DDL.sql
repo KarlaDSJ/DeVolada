@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `direccionVendedor` (
   `estado` VARCHAR(45) NOT NULL,
   `ciudad` VARCHAR(45) NOT NULL,
   `colonia` VARCHAR(45) NOT NULL,
-  `cp` VARCHAR(45) NOT NULL,
+  `cp` INT NOT NULL,
   `calle` VARCHAR(45) NOT NULL,
   `numero` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idDir`, correo),
@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `direccionComprador` (
   `colonia` VARCHAR(45) NOT NULL,
   `cp` INT NOT NULL,
   `calle` VARCHAR(45) NOT NULL,
-  `numero` INT NOT NULL,
+  `numero` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idDir`, correo),
   CONSTRAINT correo_dirComprador
     FOREIGN KEY (correo)

@@ -14,8 +14,8 @@ class Producto(db.Model):
     vendidos = db.Column(db.Integer)
     disponibles = db.Column(db.Integer)
     # Relaciones (harán el join cuando seleccionemos los productos)
-    imagenes = db.relationship('Imagen', lazy='select')
-    categoria = db.relationship('Categoria',lazy='select') 
+    imagenes = db.relationship('Imagen', cascade="all, delete-orphan", lazy='select')
+    categoria = db.relationship('Categoria', cascade="all, delete-orphan",lazy='select') 
     #contenido_en = db.relationship('Contener', backref='producto', lazy=True)              
 
     def __init__(self, correo, precio, nombre, descripcion, vendidos, disponible):

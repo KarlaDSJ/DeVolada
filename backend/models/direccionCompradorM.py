@@ -1,11 +1,10 @@
 from main import db
-from sqlalchemy import relationship
 
 class DireccionComprador(db.Model):
     """Modelo de la tabla direccionComprador de la BD"""
     __tablename__ = 'direccionComprador'
     
-    id_dir = db.Column(db.Integer, primary_key=True)
+    idDir = db.Column(db.Integer, primary_key=True)
     correo = db.Column(db.String(45), db.ForeignKey('comprador.correo'))
     estado = db.Column(db.String(45))
     ciudad = db.Column(db.String(45))
