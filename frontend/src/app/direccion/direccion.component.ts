@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute  } from '@angular/router';
 
 @Component({
   selector: 'app-direccion',
@@ -22,7 +22,14 @@ export class DireccionComponent implements OnInit {
   vdir = false;
   direccionEntrega="";
 
+  idCarrito:string;
 
+  constructor(private router: Router, private _route:ActivatedRoute) { }
+
+  ngOnInit(): void { 
+    //Obtiene el id del carrito
+    this.idCarrito = this._route.snapshot.paramMap.get('idCarrito');   
+  }
 
 
   // Formato en el que se muestra una dirección 
@@ -58,16 +65,10 @@ export class DireccionComponent implements OnInit {
     if(f.invalid){
       return;
     }
-
+    let id = 1
+    //Ket aquí de alguna manera tienes que obtener el id de la dirección
     this.direccionEntrega= f.value.dirElig;
-    this.router.navigate([ '/metodo-pago' ])
-  }
-
-  
-
-  constructor(private router: Router) { }
-
-  ngOnInit(): void {    
+    this.router.navigate([ '/metodo-pago/'+ this.idCarrito +'/'+id])
   }
 
 }

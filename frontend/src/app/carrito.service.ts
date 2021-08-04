@@ -31,16 +31,16 @@ export interface IMensaje{
 }
 
 export interface ICompra{
-  'correo':string,
-  'idDir': number,
-  'tarjeta':string,
-  'total':number,
+  correo:string,
+  idDir: string,
+  tarjeta:string,
+  total:number,
 }
 
 export interface IIncluir{
-  'idCompra': number,
-  'idProducto': number,
-  'cantidad':number,
+  idCompra: number,
+  idProducto: number,
+  cantidad:number,
 }
 
 @Injectable({
@@ -70,8 +70,10 @@ export class CarritoService {
     return this._http.delete<IMensaje>(`${this._url}/contener?idProducto=${idProducto}&idCarrito=${idCarrito}`)
   }
 
-  obtenerTotal(idCarrito:number): Observable<number> {
+  obtenerTotal(idCarrito:string): Observable<number> {
     return this._http.get<number>(`${this._url}/totalCarrito?idCarrito=${idCarrito}`)
+
+  }
 
   /*
     Registra una compra en la base de datos 

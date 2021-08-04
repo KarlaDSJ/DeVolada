@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-metodo-pago',
@@ -20,6 +20,17 @@ export class MetodoPagoComponent implements OnInit {
   valida = false;
   vtar = false;
   tar="";
+  idDireccion:string;
+  idCarrito:string;
+
+  constructor(private router: Router, private _route:ActivatedRoute) { }
+
+  ngOnInit(): void {
+    //Obtiene el id de la dirección de la compra
+    this.idDireccion = this._route.snapshot.paramMap.get('idDir');
+    //Obtiene el id del carrito
+    this.idCarrito = this._route.snapshot.paramMap.get('idCarrito');
+  }
 
   // Formato en el que se muestra una tarjeta
   formato(i:number) : string {
@@ -66,8 +77,9 @@ export class MetodoPagoComponent implements OnInit {
     }
     
     this.tar= f.value.tarElig;
+    let num = 1; //Esto debe cambiarse por el num de la tarjeta de la compra
     // console.log(f.value.tarElig);
-    this.router.navigate([ '/compra-finalizada' ])
+    this.router.navigate([ '/compra-finalizada/'+ this.idCarrito + "/" + this.idDireccion + "/" + num])
 
   }
 
@@ -75,10 +87,4 @@ export class MetodoPagoComponent implements OnInit {
   cancelar(){
     this.router.navigate([ '/inicio' ])
   }
-
-  constructor(private router: Router) { }
-
-  ngOnInit(): void {
-  }
-
 }
