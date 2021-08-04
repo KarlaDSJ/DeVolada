@@ -9,9 +9,10 @@ class DireccionComprador(db.Model):
     estado = db.Column(db.String(45))
     ciudad = db.Column(db.String(45))
     colonia = db.Column(db.String(45)) 
-    cp = db.Column(db.Integer)
-    calle = db.Column(db.Integer) 
-    numero = db.Column(db.String(45))
+    cp = db.Column(db.Integer) 
+    calle = db.Column(db.String(45)) 
+    numero = db.Column(db.Integer)
+
 
     def __init__(self, correo, estado, ciudad, colonia, cp, calle, numero):
         self.correo = correo
