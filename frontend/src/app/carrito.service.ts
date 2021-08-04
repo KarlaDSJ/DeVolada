@@ -43,6 +43,17 @@ export interface IIncluir{
   cantidad:number,
 }
 
+export interface IDireccion{
+  idDie: number,
+  correo: string,
+  estado: string,
+  ciudad: string,
+  colonia: string,
+  cp: string,
+  calle: string,
+  numero: string,
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -88,13 +99,13 @@ export class CarritoService {
   */
   incluirProductos(incluir:IIncluir): Observable<any>{
     const params = JSON.stringify(incluir);
-    return this._http.post<IIncluir>(this._url+"/compra", params, {headers: this.headers});
+    return this._http.post<any>(this._url+"/compra", params, {headers: this.headers});
   }
 
-  /* 
-    Nos regresa el Id de los productos comprados y cantidad de los mismos
+  /*
+    Agrega un producto a la compra en la base de datos
   */
-  productosComprados(idCompra:number): Observable<IIncluir[]>{
-    return this._http.get<IIncluir[]>(this._url+"/compra/"+idCompra);
+  getDireccion(idDir:string): Observable<IDireccion>{
+    return this._http.get<IDireccion>(this._url+"/direccionComprador/"+idDir);
   }
 }

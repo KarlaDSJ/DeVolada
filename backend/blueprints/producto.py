@@ -75,14 +75,3 @@ def agrega_producto():
     db.session.commit()
 
     return producto_esquema.jsonify(producto_nuevo)
-
-@producto.route('/producto/lista', methods=['POST'])
-def get_list_productos(): 
-    """Dada una lista de idProducto regresa el 
-    nombre y las imágenes de cada uno"""
-    productos = []
-
-    for id in request.json['ids']:
-        productos.pop(db.session.query(Producto).filter_by(nombre=id))
-
-    return  productos_esquema.jsonify(productos)

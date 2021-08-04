@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CarritoService } from "../carrito.service";
-import { ICompra, IIncluir } from "../carrito.service";
+import { visitLexicalEnvironment } from 'typescript';
+import { CarritoService} from "../carrito.service";
+import { ICompra, IDireccion, IProductoCarrito } from "../carrito.service";
 
 @Component({
   selector: 'app-compra-finalizada',
@@ -27,6 +28,8 @@ export class CompraFinalizadaComponent implements OnInit {
   idDireccion:string;
   numTarjeta:string;
   idCarrito:string;
+  direccion:IDireccion;
+  productos:IProductoCarrito[];
   compra:ICompra;
   total: number;
 
@@ -39,13 +42,19 @@ export class CompraFinalizadaComponent implements OnInit {
     this.numTarjeta = this._route.snapshot.paramMap.get('numTar');
     //Obtiene el número de tarjeta de la compra
     this.idCarrito= this._route.snapshot.paramMap.get('idCarrito');
-    this.getTotal
+    this.getCarrito();
+    this.getDireccion();
   }
   
-  getTotal(){
-    this._carritoService.obtenerTotal(this.idCarrito)
+  /*
+    Obtiene los datos del carrito
+    Total, productos y sus fotos
+  */
+  getCarrito(){
+    this._carritoService.obtenerProductos(+this.idCarrito)
           .subscribe(data => {
-            this.total = data;
+            this.total = data.reduce(((sum, val) => sum + val.precio*val.cantidad), 0);
+            this.productos = data;
             this.compra ={
               'correo': this.correo,
               'idDir': this.idDireccion,
@@ -56,16 +65,42 @@ export class CompraFinalizadaComponent implements OnInit {
           })
   }
 
+  /*
+    Obtiene la dirección de entrega
+  */
+  getDireccion(){
+    this._carritoService.getDireccion(this.idDireccion)
+          .subscribe(data => {
+            this.direccion = data;
+          })
+  }
+
+  /*
+    Genera la compra
+   */
   comprar(){
     this._carritoService.finalizarCompra(this.compra)
     .subscribe(data => {
       this.compra = data;
-      //this.getProductos();
+      this.setProductos();
     })
   }
 
-  getProductos(){
-    
+  /*
+    Agrega los productos a la compra (relación Incluir)
+  */
+  setProductos(){
+    this.productos.forEach(function(i) {
+      let producto = {
+        idCompra: this.compra,
+        idProducto: i.idProducto,
+        cantidad: i.cantidad,
+      };
+      this._carritoService.incluirProductos(producto)
+        .subscribe(data => {
+          console.log(data);
+        })
+    });
   }
 
 }
