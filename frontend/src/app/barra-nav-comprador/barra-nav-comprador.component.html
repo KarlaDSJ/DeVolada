@@ -51,13 +51,22 @@
     </nav>
   </header>
 
+  <!-- Resultados de la búsqueda -->
   <div *ngIf="busqueda">
-    <button type="button" class="btn-close float-end m-3" aria-label="Close" (click)="cerrar()"></button>
-      <h4 class="m-3 p-2 
-      bg-secondary bg-gradient 
-      rounded-pill
-      text-center">Resultados 🛒</h4>
+    <button type="button" class="btn-close float-end m-4" aria-label="Close" (click)="cerrar()"></button>
+      <h4 *ngIf="productos.length != 0"
+          class="m-3 p-2 
+          bg-secondary bg-gradient 
+          rounded-pill
+          text-center">
+          Resultados 🛒
+      </h4>
     <app-carrusel *ngIf="productos.length != 0" [productos] = 'productos'></app-carrusel>
-    <p *ngIf="productos.length == 0">No hay productos con esa descripción :(</p>
+    <!-- Mensaje que se muestra cuando no hay resutados -->
+    <p *ngIf="productos.length == 0"
+       class="text-center fs-3 text-muted lh-lg m-2">
+        No hay productos con esa descripción :( <br>
+        Para registrar un producto inicia sesión como vendedor 
+    </p>
   </div>
   

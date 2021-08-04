@@ -16,6 +16,9 @@ export class BarraNavCompradorComponent implements OnInit {
 
   constructor(private _productoService: ProductosService) { }
 
+  /*
+    Carga las categorías en el buscador
+  */
   ngOnInit(): void {
     this._productoService.getCaregoria()
           .subscribe(data => {
@@ -23,18 +26,24 @@ export class BarraNavCompradorComponent implements OnInit {
           })
   }
 
+  /*
+    Hace la petición para buscar productos por nombre y categoría
+    Muestra en pantalla los productos 
+  */
   buscar(categoria:string, nombre:string){
     if(categoria == "Categorías")
       categoria = "";
 
     this._productoService.searchProductos(categoria, nombre)
           .subscribe(data => {
-            console.log(categoria);
             this.productos = data;
             this.busqueda = true;
           })
   }
 
+  /*
+  Para eliminar de la vista el resultado de la búsqueda
+  */
   cerrar(){
     this.productos = [];
     this.busqueda = false;
