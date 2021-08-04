@@ -78,7 +78,8 @@ export class CarritoService {
 
   obtenerTotal(idCarrito:number): Observable<number> {
     return this._http.get<number>(`${this._url}/totalCarrito?idCarrito=${idCarrito}`)
-
+  }
+  
   /*
     Registra una compra en la base de datos 
   */
