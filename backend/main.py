@@ -9,19 +9,16 @@ ma = Marshmallow()
 
 from flask_wtf.csrf import CSRFProtect
 from config import DevelopmentConfig
-"""
 
 
 
-from blueprints.after import after
-from blueprints.cookie import cookie
+
 from blueprints.imagen import imagen
 from blueprints.categoria import categoria
 from blueprints.before import before
-from blueprints.adminProducto import adminProducto
-"""
-
-
+# from blueprints.adminProducto import adminProducto
+from blueprints.after import after
+from blueprints.cookie import cookie
 from blueprints.logout import logout
 from blueprints.create import create
 from blueprints.login import login
@@ -57,27 +54,18 @@ app.register_blueprint(create)
 app.register_blueprint(logout)
 app.register_blueprint(carrito)
 app.register_blueprint(resena)
-app.register_blueprint(carrito)
 app.register_blueprint(pertenecer)
 app.register_blueprint(contener)
 app.register_blueprint(direccionComprador)
 app.register_blueprint(tarjetaComprador)
 app.register_blueprint(compra)
 app.register_blueprint(incluir)
-
-
-
-# Ya estaban 
-
-
-
-
 app.register_blueprint(after)
 app.register_blueprint(cookie)
 app.register_blueprint(imagen)
 app.register_blueprint(categoria)
 app.register_blueprint(before)
-app.register_blueprint(adminProducto)
+# app.register_blueprint(adminProducto)
 
 
 
