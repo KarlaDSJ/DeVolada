@@ -11,14 +11,29 @@ export interface IResena {
   opinion: String;
 }
 
+export interface IInfoProducto {
+  idProducto: string;
+  nombre: String;
+  imagen: String;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class ResenasService {
   private _url = "http://127.0.0.1:5000";
 
+  infoProducto: IInfoProducto;
+
   constructor(private _http: HttpClient) { }
 
+  setInfoProducto(info: IInfoProducto){
+    this.infoProducto = info;
+  }
+
+  getInfoProducto(): IInfoProducto{
+    return this.infoProducto;
+  }
   /*
     Crea una reseña para un producto
   */
@@ -39,4 +54,12 @@ export class ResenasService {
         return this._http.get<IResena[]>(this._url+"/mostrarResenas", { params: params });
     }
 
+  /*
+    Regresa las 5 primeras reseñas de un producto
+  */
+    mostrar5Resenas(idProducto:string): Observable<IResena[]>{
+      const params = new HttpParams().set('idProducto', idProducto);
+      return this._http.get<IResena[]>(this._url+"/resenas", { params: params })
+    }
+    
 }

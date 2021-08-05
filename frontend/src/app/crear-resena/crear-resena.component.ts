@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ResenasService } from "../resenas.service";
+import { ResenasService, IInfoProducto } from "../resenas.service";
 import { IResena } from "../resenas.service";
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-crear-resena',
@@ -11,9 +12,11 @@ import { IResena } from "../resenas.service";
 export class CrearResenaComponent implements OnInit {
 
   resenas :  IResena;
+  listaT = ['★','★','★','★','★'];
+  vtar = false;
+  infoProducto: IInfoProducto;
 
-  idProducto:any;
-  correo:any;
+  correo = 'perritosalva@gmail.com';
   calificacion:any;
   opinion:any;
 
@@ -23,9 +26,14 @@ export class CrearResenaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.infoProducto=this._ResenasService.getInfoProducto();
   }
 
-  submit() {
-    this._ResenasService.crearResenas(this.idProducto,this.correo,this.opinion,this.calificacion)
+  submit(f:NgForm) {
+    this._ResenasService.crearResenas(this.infoProducto.idProducto,this.correo,this.opinion,this.calificacion)
+    this.vtar = true
+    console.log(f.value.calificacionElegida)
   }
+
+
 }

@@ -1,7 +1,8 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Output} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductosService } from "../productos.service";
 import { IProducto } from "../productos.service";
+import { ResenasService } from '../resenas.service';
 
 @Component({
   selector: 'app-producto',
@@ -13,11 +14,12 @@ import { IProducto } from "../productos.service";
 export class ProductoComponent implements OnInit {
 
   producto: IProducto[];
+  info: any;
 
   id: any = "";
   responsiveOptions:any;
 
-  constructor(private _route:ActivatedRoute, private _productoService: ProductosService) {
+  constructor(private _route:ActivatedRoute, private _productoService: ProductosService, private _ResenasService: ResenasService) {
     //Opciones para hacer responsivo el carrusel de fotos del productos
     this.responsiveOptions = [
       {
@@ -34,6 +36,8 @@ export class ProductoComponent implements OnInit {
     this._productoService.getProducto(this.id)
           .subscribe(data => {
             this.producto = data;
+            this.info = {'id':this.id, 'nombre':this.producto[0].nombre, 'imagen':this.producto[0].imagenes[0].imagen}
+            this._ResenasService.setInfoProducto(this.info)
           })
   }
 

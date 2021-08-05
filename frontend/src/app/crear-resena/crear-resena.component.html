@@ -3,15 +3,15 @@
     <!-- Imagen, nombre y ID del producto -->
     <div class="row">
         <div class="col-3 mb-5">
-        <img src="https://www.punto-informatico.it/app/uploads/2020/05/lg_gram.jpg" class="d-block w-100" alt="...">
+        <img [src]="infoProducto.imagen" class="d-block w-100" [alt]="infoProducto.nombre">
         </div>
         <div class="col-9 mb-5">
         <div class="row">
             <div class="col-8 col-sm-8">
-                <p>Nombre del producto</p>
+                <p>Nombre del producto {{infoProducto.nombre}}</p>
             </div>
             <div class="col-4 col-sm-4">
-                <p>ID</p>
+                <p>ID {{infoProducto.idProducto}}</p>
             </div>
         </div>
         </div>
@@ -29,30 +29,27 @@
         </div>
     </div>
     <!-- Calificación de 1 a 5 apartir de # de estrellas-->
+    
     <div class="row ">
         <div class="col-lg-4 align-self-start">
-            <form #form="ngForm" (submit)="submit()">
-                <input type="text" [(ngModel)]=idProducto>
-                <input type="text" [(ngModel)]=correo>
+            <!--
+            <form [formGroup]="form" (submit)="submit()">
                 <p class="clasificacion" style="font-size:350%">
-                       <input id="radio1" type="radio" name="estrellas" [(ngModel)=calificacion]><!--
-                    --><label for="radio1">★</label><!--
-                    --><input id="radio2" type="radio" name="estrellas" [(ngModel)=calificacion]><!--
-                    --><label for="radio2">★</label><!--
-                    --><input id="radio3" type="radio" name="estrellas" [(ngModel)=calificacion]><!--
-                    --><label for="radio3">★</label><!--
-                    --><input id="radio4" type="radio" name="estrellas" [(ngModel)=calificacion]><!--
-                    --><label for="radio4">★</label><!--
-                    --><input id="radio5" type="radio" name="estrellas" [(ngModel)=calificacion]><!--
-                    --><label for="radio5">★</label>
+                    <input id="radio1" type="radio" [(ngModel)]="calificacion"  name="estrellas1" >
+                    
+                    <label for="radio1">★</label>
+                    <input id="radio2" type="radio" [(ngModel)]="calificacion"   name="estrellas2" ><label for="radio2">★</label>
+                    <input id="radio3" type="radio" [(ngModel)]="calificacion" name="estrellas3" ><label for="radio3">★</label>
+                    <input id="radio4" type="radio" [(ngModel)]="calificacion"  name="estrellas4"><label for="radio4">★</label>
+                    <input id="radio5" type="radio" [(ngModel)]="calificacion" name="estrellas5"><label for="radio5">★</label>
                 </p>
-                <!-- Línea de separación -->
+
                 <div class="row mb-5">
                     <div class="col-12">
                         <hr size="3" >
                     </div>
                 </div>
-                <!-- Agregar un comentario escrito -->
+
                 <div class="row">
                     <div class="col-12">
                         <p class="fs-5 mb-3"> Agregar un comentario escrito </p>
@@ -60,7 +57,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <!-- Caja de comentarios -->
+
                         <div class="row">
                             <div class="form-floating mb-2">
                                 <label for="exampleFormControlTextarea1" class="form-label">Comentario</label>
@@ -70,10 +67,40 @@
                     </div>
                 </div>
             </form>
-        </div>
-    </div>
-    <!-- Botón de guardar Reseña -->
-    <div class="d-grid justify-content-sm-end">
-        <button class="btn btn-primary" type="submit">Guardar</button>
+            -->
+            <form class="row g-3" #myForm="ngForm" (submit)="submit(myForm)">
+                <div class="row mb-3">
+                    <div class="form-check d-flex flex-row-reverse">
+                        <input id="radio5" type="radio" name="estrellas5" >  
+                        <label for="radio5">★</label>
+                        <input id="radio4" type="radio" name="estrellas4" ><label for="radio4">★</label>
+                        <input id="radio3" type="radio" name="estrellas3" ><label for="radio3">★</label>
+                        <input id="radio2" type="radio" name="estrellas2"><label for="radio2">★</label>
+                        <input id="radio1" type="radio" name="estrellas1"><label for="radio1">★</label>
+                        <!--
+                            <input class="form-check-input" [id]="'flexRadioDefault'+i" type="radio" [value]="i"
+                            name="calificacionElegida">
+                        <label class="form-check-label" [for]="'flexRadioDefault'+i">
+                            {{tar}}
+                        </label>
+                        -->
+                    </div>
+                </div>
+                <div class="row">
+                    <h5>Comentario</h5>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="form-floating mb-2">
+                                <textarea class="form-control" [(ngModel)]=opinion id="exampleFormControlTextarea1"  placeholder="Comentario" rows="3" style="height: 200px"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="submit">Guardar</button>
+            </form>
+            </div>
     </div>
 </div> <br>
+
