@@ -31,3 +31,14 @@ def crear_resena():
      db.session.commit()
 
      return jsonify({'mensaje':'todo bien'})
+
+#Funcion que muestra las primeras 5 reseñas de un producto
+@resena.route('/resenas/<id>', methods=['GET'])
+def ver_5_resenas(id):
+     #diccionario en python
+     resenas = Opinar.query.filter_by(idProducto=id).limit(5)
+     print(resenas)
+     
+     #Creamos un archivo json con el diccionario que le pedimos a nuestra BD
+     return opiniones_esquema.jsonify(resenas)
+

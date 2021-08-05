@@ -1,5 +1,5 @@
-from schemas.imagenS import ImagenEsquema
-from schemas.categoriaS import CategoriaEsquema
+from schemas.imagenE import ImagenEsquema
+from schemas.categoriaE import CategoriaEsquema
 from main import ma
 from marshmallow import fields
 

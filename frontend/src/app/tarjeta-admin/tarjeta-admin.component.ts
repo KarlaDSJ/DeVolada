@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { IProducto } from "../productos.service";
 
 @Component({
   selector: 'app-tarjeta-admin',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TarjetaAdminComponent implements OnInit {
 
+  @Input() producto: IProducto;
+
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
 }

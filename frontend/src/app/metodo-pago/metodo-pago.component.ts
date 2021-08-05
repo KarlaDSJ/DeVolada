@@ -16,6 +16,7 @@ export class MetodoPagoComponent implements OnInit {
 
   // Cambiar por la consulta a la base
   comprador = "kethrim.tradmateos@gmail.com"
+  // comprador = "zogilvie1w@ezinearticles.com"
   direccionEntrega = -2;
   idCarrito = 1;
 

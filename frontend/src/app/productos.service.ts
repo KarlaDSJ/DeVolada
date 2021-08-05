@@ -57,6 +57,13 @@ export class ProductosService {
     return this._http.post<IProducto[]>(this._url+"/producto/buscar", params, {headers: this.headers});
   }
 
+   /*
+    Obtiene todos los productos de un vendedor a partir de su correo.
+  */
+  obtenProductosVendedor(correo:string): Observable<IProducto[]>{
+    return this._http.get<IProducto[]>(this._url+"/productos/vendedor/" + correo );
+  }
+
   /*
     Nos regresa la informacion de un producto
   */

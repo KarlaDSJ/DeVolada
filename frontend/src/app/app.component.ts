@@ -13,8 +13,9 @@ export class AppComponent {
 
   constructor(@Inject(DOCUMENT) document: any) { 
     
-    let url = 'http://localhost:4200'
-    // console.log(document.location.href);
+    //let url = 'http://localhost:4200'
+    let url = 'http://localhost:33271' 
+    console.log(document.location.href);
     
     if (document.location.href == url+'/' || document.location.href == url+'/registrar'){
       this.esComprador = false;

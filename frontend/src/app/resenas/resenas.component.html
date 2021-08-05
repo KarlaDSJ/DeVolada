@@ -123,70 +123,20 @@
         <div class="col-6">
             <h5> Comentarios </h5> <br>
             <div class="list-group">
-                <!-- Usuario 1-->
-                <div class="d-flex w-100 justify-content-between">
-                    <!-- Nombre del usuario -->
-                    <h6 class="mb-2">Omar Gramer</h6>
-                    <!-- Calificación-->
-                    <div> 
-                        <span class="text-warning fs-4 bd-highlight">★★★★<span class="text-muted fs-4 bd-highlight">★</span></span>
+                <div *ngFor="let resena of resenias">
+                    <!-- Usuario 1-->
+                    <div class="d-flex w-100 justify-content-between">
+                        <!-- Nombre del usuario -->
+                        <h6 class="mb-2">Omar Gramer</h6>
+                        <!-- Calificación-->
+                        <div> 
+                            <span class="text-warning fs-4 bd-highlight">★★★★<span class="text-muted fs-4 bd-highlight">★</span></span>
+                        </div>
                     </div>
-                </div>
-                <!-- Puedo agregar una etiqueta p aquí -->
-                <!-- Comentario -->
-                <small>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sint sit repudiandae temporibus quod placeat consequuntur, ipsam in dignissimos itaque architecto molestias odio beatae neque nobis, commodi ea! Temporibus, maxime omnis..</small> <br>
-                <!-- Usuario 2-->
-                <div class="d-flex w-100 justify-content-between">
-                    <!-- Nombre del usuario -->
-                    <h6 class="mb-2">Marco Orduña</h6>
-                    <!-- Calificación-->
-                    <div>
-                        <span class="text-warning fs-4 bd-highlight">★★★<span class="text-muted fs-4 bd-highlight">★★</span></span>
-                    </div>
-                </div>
-                <!-- Comentario -->
-                <small>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus nulla voluptates ducimus expedita laborum alias tempora maxime perspiciatis culpa vero dignissimos optio, neque placeat, nemo voluptate eos odio similique. Iusto?</small> <br>
-                <!-- Usuario 3-->
-                <div class="d-flex w-100 bd-highlight">
-                    <!-- Nombre del usuario -->
-                    <h5 class="mb-2 flex-grow-1 bd-highlight">Kethrim Trad</h5>
-                    <!-- Calificación-->
-                    <div>
-                        <span class="text-warning fs-4 bd-highlight">★★<span class="text-muted fs-4 bd-highlight">★★★</span></span>
-                    </div>
-                </div>
-                <!-- Comentario -->
-                <small>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae eius doloribus cupiditate qui obcaecati placeat? Expedita dolore repellat doloremque provident obcaecati minima aspernatur dolorem soluta laborum, repudiandae rerum quod sit.</small> <br>
-                <!-- Usuario 4-->
-                <div class="d-flex w-100 bd-highlight">
-                    <!-- Nombre del usuario -->
-                    <h5 class="mb-2 flex-grow-1 bd-highlight">Denia Salas</h5>
-                    <!-- Calificación-->
-                    <div>
-                        <span class="text-warning fs-4 bd-highlight">★★★★<span class="text-muted fs-4 bd-highlight">★</span></span>
-                    </div>
-                </div>
-                <!-- Comentario -->
-                <small>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae eius doloribus cupiditate qui obcaecati placeat? Expedita dolore repellat doloremque provident obcaecati minima aspernatur dolorem soluta laborum, repudiandae rerum quod sit.</small> <br>
-                <!-- Usuario 5-->
-                <div class="d-flex w-100 bd-highlight">
-                    <!-- Nombre del usuario -->
-                    <h5 class="mb-2 flex-grow-1 bd-highlight">Antonio Reyes</h5>
-                    <!-- Calificación-->
-                    <div>
-                        <span class="text-warning fs-4 bd-highlight">★★★★<span class="text-muted fs-4 bd-highlight">★</span></span>
-                    </div>
-                </div>
-                <!-- Comentario -->
-                <small>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae eius doloribus cupiditate qui obcaecati placeat? Expedita dolore repellat doloremque provident obcaecati minima aspernatur dolorem soluta laborum, repudiandae rerum quod sit.</small> <br>
-            </div> <br>
-            <!-- Ver todas las reseñas -->
-            <div class="d-grid col-7 mx-auto">
-                <a routerLink="/ver-resenas" routerLinkActive="active"
-                class="btn btn-light border-primary btn-ms rounded-pill">
-                Ver todas las reseñas
-                </a>
-            </div> 
+                    <!-- Puedo agregar una etiqueta p aquí -->
+                    <!-- Comentario -->
+                    <small>{{resena.opinion}}</small> <br> 
+                </div>    
         </div>
     </div>
 </div>
