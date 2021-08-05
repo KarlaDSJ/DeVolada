@@ -9,7 +9,7 @@ from schemas.vendedorE import VendedorEsquema
 from models.direccionCompradorM import DireccionComprador
 from models.direccionVendedorM import DireccionVendedor
 from models.tarjetaVendedorM import TarjetaVendedor
-from schemas.direccionS import DireccionEsquema
+from schemas.direccionE import DireccionEsquema
 from random import choice
 from flask import current_app as app
 from flask_mail import Message,Mail

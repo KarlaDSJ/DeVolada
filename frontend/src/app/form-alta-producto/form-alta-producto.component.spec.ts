@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormAltaProductoComponent } from './form-alta-producto.component';
 
 describe('FormAltaProductoComponent', () => {
