@@ -22,6 +22,14 @@ from blueprints.adminProducto import adminProducto
 
 
 # Mis blueprints    
+
+from blueprints.before import before
+from blueprints.after import after
+from blueprints.cookie import cookie
+from blueprints.logout import logout
+from blueprints.create import create
+from blueprints.login import login
+from blueprints.index import index
 from blueprints.producto import producto
 from blueprints.comprador import comprador
 from blueprints.vendedor import vendedor
@@ -36,15 +44,16 @@ from blueprints.direccionComprador import direccionComprador
 from blueprints.tarjetaComprador import tarjetaComprador
 from blueprints.compra import compra
 from blueprints.incluir import incluir
+from blueprints.categoria import categoria
 """
-
 
 app = Flask(__name__)
 csrf = CSRFProtect()
 CORS(app)
 
 app.config.from_object(DevelopmentConfig)
-
+mail = Mail()
+mail.init_app(app)
 
 app.register_blueprint(comprador)
 app.register_blueprint(vendedor)
@@ -57,7 +66,12 @@ app.register_blueprint(direccionVendedor)
 """
 app.register_blueprint(carrito)
 app.register_blueprint(resena)
+app.register_blueprint(login)
+app.register_blueprint(index)
+app.register_blueprint(create)
+app.register_blueprint(logout)
 app.register_blueprint(carrito)
+app.register_blueprint(resena)
 app.register_blueprint(pertenecer)
 app.register_blueprint(contener)
 app.register_blueprint(direccionComprador)
@@ -83,6 +97,11 @@ app.config['MAIL_USERNAME'] = 'mercadodevolada@gmail.com'
 app.config['MAIL_PASSWORD'] = '7yR9Y5iDhrmXKjG'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
+app.register_blueprint(after)
+app.register_blueprint(cookie)
+app.register_blueprint(before)
+
+
 
 db.init_app(app)
 # Lo comenté porque necesitaba iniciar sesión para hacer peticiones

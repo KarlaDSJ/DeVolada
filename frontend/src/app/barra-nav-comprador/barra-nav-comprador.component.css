@@ -5,3 +5,23 @@
     filter: invert();
 
 }
+
+h4 {
+    width: 300px;
+}
+
+ /* Buscador responsivo */
+ @media only screen and (max-width: 990px) {
+    .buscador{
+      width: 100% !important;
+      flex-direction: row !important;
+      justify-content: center;
+    }
+  }
+  /* Buscador responsivo */
+  @media only screen and (max-width: 550px) {
+    .buscador *{
+      width: 80% !important;
+      flex-direction: column !important;
+    }
+  }

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import {HttpParams} from "@angular/common/http";
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface IProducto {
@@ -14,9 +13,11 @@ export interface IProducto {
   imagenes: {
     imagen: String
   }[];
-  categorias: {
-    categoria: String
-  }[];
+  categorias: ICategoria[];
+}
+
+export interface ICategoria {
+  categoria: String
 }
 
 @Injectable({
@@ -26,6 +27,8 @@ export class ProductosService {
   private _url = "http://127.0.0.1:5000";
 
   constructor(private _http: HttpClient) { }
+
+  headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   /*
     Nos regresa todos los productos
@@ -46,11 +49,12 @@ export class ProductosService {
     Busca productos por categoria y/o por nombre
   */
   searchProductos(categoria:string, nombre:string): Observable<IProducto[]>{
-    const params = new HttpParams()
-      .set('nombre', nombre)
-      .set('categoria', categoria);
+    const params = JSON.stringify({
+      'nombre': nombre,
+      'categoria': categoria
+    });
 
-    return this._http.get<IProducto[]>(this._url+"/producto/buscar", {params});
+    return this._http.post<IProducto[]>(this._url+"/producto/buscar", params, {headers: this.headers});
   }
 
    /*
@@ -65,6 +69,13 @@ export class ProductosService {
   */
   getProducto(id:number): Observable<IProducto>{
     return this._http.get<IProducto>(this._url+"/producto/"+id);
+  }
+
+  /*
+    BNos regresa todas las categorías
+  */
+  getCaregoria(): Observable<ICategoria[]>{
+    return this._http.get<ICategoria[]>(this._url+"/categorias");
   }
 
 }

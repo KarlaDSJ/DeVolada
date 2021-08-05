@@ -27,6 +27,9 @@ import { BarraNavVendedorComponent } from './barra-nav-vendedor/barra-nav-vended
 import { BarraNavLogComponent } from './barra-nav-log/barra-nav-log.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { RegistrarComponent } from './registrar/registrar.component';
+import { CarruselComponent } from './carrusel/carrusel.component';
 
 
 
@@ -51,7 +54,9 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     BarraNavCompradorComponent,
     BarraNavVendedorComponent,
-    BarraNavLogComponent
+    BarraNavLogComponent,
+    RegistrarComponent,
+    CarruselComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +64,9 @@ import { HttpClientModule } from '@angular/common/http';
     RouterModule,
     FormsModule, // Para las entradas (inputs) o formularios
     CarouselModule, //Para mostrar los productos en Todos
-    HttpClientModule //Para hacer peticiones
+    HttpClientModule, //Para hacer peticiones
+    //=> Basic usage (forRoot can also take options, see the wiki)
+    SweetAlert2Module.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

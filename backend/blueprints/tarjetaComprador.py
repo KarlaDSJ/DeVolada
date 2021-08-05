@@ -15,7 +15,7 @@ tarjetaCompradores_esquema = TarjetaCompradorEsquema( many=True)
 @tarjetaComprador.route('/tarjetaComprador', methods=['POST'])
 def agregar_tarjeta():
 
-    correo = request.args.get('correo', '')
+    correo = request.json['correo']
     numero = request.json['numero']
     cvv = request.json['cvv']
     duenio = request.json['duenio']

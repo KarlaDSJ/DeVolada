@@ -14,7 +14,6 @@ producto_esquema = ProductoEsquema()
 productos_esquema = ProductoEsquema(many=True)
 
 """---------------- Rutas ----------------"""
-#Falta que regrese el id
 
 @producto.route('/producto/<id>', methods=['GET'])
 def get_producto(id):
@@ -32,7 +31,7 @@ def get_productos():
     return productos_esquema.jsonify(productos)
 
 #Hay que modificar la query si nos mandan una categoría
-@producto.route('/producto/buscar', methods=['GET'])
+@producto.route('/producto/buscar', methods=['POST'])
 def search_productos():
     """Nos regresa todos los productos que coincidan 
       con el nombre y categoría"""
@@ -69,6 +68,8 @@ def obten_productos_vendedor(correo):
 #Agrega un producto a la base de datos.
 @producto.route('/producto', methods=['POST'])
 def agrega_producto():    
+    """ Agrega un producto a la base de datos
+        nos regresa la información del mismo"""
     correo = request.json['correo']
     nombre = request.json['nombre']
     precio = request.json['precio']
