@@ -76,3 +76,10 @@ ng serve
 ng s
 ```
 
+## Base de datos
+### Instalación
+```
+cd /backend/database/data
+mysql -u root -p < ../DDL.sql
+mysql -u root -p mydb < ../DML.sql
+```

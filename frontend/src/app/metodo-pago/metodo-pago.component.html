@@ -86,10 +86,15 @@
                     </div>
                 </div>
                 
+                <swal #cancelarCompra title="¿Quieres cancelar tu compra?"  icon="question"
+                    [showCancelButton]="true" [focusCancel]="false" (confirm)="cancelar()"
+                    [swalOptions]="{ confirmButtonText: 'Si', cancelButtonText: 'No' , cancelButtonColor : '  #a4a8a9 ', iconColor : '  #06bae1  '}">
+                </swal>
+
                 <!-- Continuar y cancelar compra  -->
                 <div class="row mb-3">
                     <div class="col can-con">
-                        <button type="button" class="btn btn-outline-danger rounded-pill px-5" data-bs-toggle="modal" data-bs-target="#cancelacion">Cancelar compra</button>
+                        <button type="button" class="btn btn-outline-danger rounded-pill px-5" (click)="cancelarCompra.fire()">Cancelar compra</button>
                     </div>
                     <div class="col can-con">
                         <button type="submit" class="btn btn-outline-primary rounded-pill px-5">Finalizar compra</button>
@@ -100,23 +105,4 @@
         </div>
     </div>
 </div>
-  
-  <!-- Cancelación de compra -->
-  <!-- tabindex="-1" -->
-  <div class="modal fade" id="cancelacion" aria-labelledby="exampleModalLabel" >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">          
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          ¿Estás seguro de que quieres cancelar tu compra?
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-          <button type="button" class="btn btn-primary" (click)="cancelar()" data-bs-dismiss="modal" >Si</button>
-        </div>
-      </div>
-    </div>
-  </div>
   

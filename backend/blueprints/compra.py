@@ -8,6 +8,7 @@ from models.productoM import Producto
 from models.incluirM import Incluir
 from schemas.compraS import CompraEsquema
 from schemas.incluirE import IncluirEsquema
+from schemas.productoS import ProductoEsquema
 from pprint import pprint
 
 compra = Blueprint('compra', __name__)
@@ -51,8 +52,22 @@ def productos_comprados (id_compra):
     compra = Compra.query.get(id_compra)  
     productos_incluidos = Incluir.query.filter_by(idCompra=id_compra).all()
     inclusion_esquema = IncluirEsquema(many=True, only=('idProducto', 'cantidad'))
+    datos = inclusion_esquema.dump(productos_incluidos)
 
-    return inclusion_esquema.jsonify(productos_incluidos)
+    producto_esquema = ProductoEsquema(
+        only=("idProducto", "nombre", "imagenes"))
+
+    for item in datos:        
+        x = item.pop('idProducto')
+        prod = Producto.query.get(x)
+        # Disminuyo la cantidad de cada producto en los disponibles
+        prod.disponibles -= item['cantidad']
+        db.session.commit()
+        # Agregó la información al json 
+        informacion = producto_esquema.dump(prod)
+        item.update(informacion)
+
+    return jsonify(datos)
 
 
 

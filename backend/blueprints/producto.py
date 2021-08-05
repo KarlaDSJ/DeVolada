@@ -57,16 +57,10 @@ def top5_productos():
     productos = db.session.query(Producto).order_by(Producto.idProducto.desc()).limit(5)
     return productos_esquema.jsonify(productos)
 
-
-"""@producto.route('/producto/<id>', methods=['GET'])
-def obtener_producto(id):    
-    producto = Producto.query.get(id)
-    return jsonify({'vendedor_correo': producto.correo, 'nombre': producto.nombre,
-                    'disponibles': producto.disponibles})"""
-
-
 @producto.route('/producto', methods=['POST'])
 def agrega_producto():    
+    """ Agrega un producto a la base de datos
+        nos regresa la información del mismo"""
     correo = request.json['correo']
     nombre = request.json['nombre']
     precio = request.json['precio']
