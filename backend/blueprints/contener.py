@@ -4,6 +4,7 @@ from models.contenerM import Contener
 from models.productoM import Producto
 from schemas.contenerE import ContenerEsquema
 from schemas.productoS import ProductoEsquema
+from pprint import pprint
 
 from marshmallow import Schema, fields
 
@@ -43,7 +44,7 @@ def agregar_producto():
             db.session.commit()
             return jsonify({'msg': 'Se agregó al carrito'})
         else:
-            return jsonify({'msg': 'No se puede agregar al carrito'})
+            return jsonify({'msg': 'Ya no hay más productos disponibles'}), 400
 
 
 @contener.route('/contener', methods=['PUT'])
@@ -57,11 +58,14 @@ def actualizar_cantidad():
     relación. En caso de no poder aumentar la cantidad la deja
     cómo estaba'''
 
+
     idProducto = request.args.get('idProducto', '')
     idCarrito = request.args.get('idCarrito', '')
 
     cantidad = request.json['cantidad']
     contener = Contener.query.get((idProducto, idCarrito))
+    pprint(contener)
+
     disponibles = Producto.query.get(idProducto).disponibles
 
     if (disponibles >= cantidad):
@@ -100,6 +104,24 @@ def productos_en_el_carrito():
     return jsonify(datos)
 
 
+@contener.route('/totalCarrito', methods=['GET'])
+def obtener_total ():   
+    idCarrito = request.args.get('idCarrito', '')
+    productos = Contener.query.filter_by(idCarrito=idCarrito).all()
+    producto_esquema = ProductoEsquema(
+        only=("idProducto", "precio"))
+
+    datos = conteneres_esquema.dump(productos)
+    total = 0
+    for item in datos:
+        x = item.pop('idProducto')
+        prod = Producto.query.get(x)        
+        precio = prod.precio
+        total+= precio * item.pop('cantidad')
+
+    return jsonify(total)
+
+
 @contener.route('/contener', methods=['DELETE'])
 def eliminar_producto():
     '''Elimina el producto del carrito, ambos son parámetros 
@@ -122,7 +144,7 @@ def eliminar_producto():
 
 
 
-@contener.route('/contener', methods=['DELETE'])
+@contener.route('/limpiarCarrito', methods=['DELETE'])
 def limpiar_carrito():
     '''Limpia el carrito del que se le pasa el id en la ruta
     como "idCarrito".
@@ -130,6 +152,7 @@ def limpiar_carrito():
     Returns:
     Mensaje en formato json indicando si se pudo limpiar o no.'''
 
+    pprint("Hola mundo ")
     idCarrito = request.args.get('idCarrito', '')
 
     productos = Contener.query.filter_by(idCarrito=idCarrito)
@@ -142,8 +165,10 @@ def limpiar_carrito():
             id_producto = item['idProducto']
             id_carrito = item['idCarrito']
             producto = Contener.query.get((id_producto, id_carrito))
+            pprint(producto)
             db.session.delete(producto)
             db.session.commit()
         return jsonify({'msg': 'Se limpió el carrito'})
     except Exception as e:
+        pprint(e)
         return jsonify({'msg': 'Hubo un error'})

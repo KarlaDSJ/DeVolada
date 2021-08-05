@@ -14,7 +14,7 @@ def obtener_carrito(id_carrito):
     if carrito is None:
         return jsonify({'msg': 'No existe el carrito :('})
     else:
-        return jsonify({'msg': 'Si existe el carrito :)'})
+        return jsonify({'msg': 'Si existe el carrito :)'})      
 
 
 @carrito.route('/carrito', methods=['POST'])
