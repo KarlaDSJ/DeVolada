@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductosService } from "../productos.service";
 import { IProducto } from "../productos.service";
+import { ResenasService } from '../resenas.service';
 import { CarritoService } from '../carrito.service';
 import Swal from 'sweetalert2';
 
@@ -14,8 +15,8 @@ import Swal from 'sweetalert2';
 
 export class ProductoComponent implements OnInit {
 
+  info: any;
   producto: IProducto;
-
   id: any = "";
   responsiveOptions: any;
   // Cambiar por el carrito del comprador
@@ -42,6 +43,7 @@ export class ProductoComponent implements OnInit {
   constructor(private _route: ActivatedRoute,
     private _productoService: ProductosService,
     private _carritoService: CarritoService) {
+
     //Opciones para hacer responsivo el carrusel de fotos del productos
     this.responsiveOptions = [
       {
@@ -56,9 +58,11 @@ export class ProductoComponent implements OnInit {
     this.id = this._route.snapshot.paramMap.get('id');
     //Nos regresa todos los productos
     this._productoService.getProducto(this.id)
-      .subscribe(data => {
-        this.producto = data;
-      })
+          .subscribe(data => {
+            this.producto = data;
+            this.info = {'id':this.id, 'nombre':this.producto[0].nombre, 'imagen':this.producto[0].imagenes[0].imagen}
+            this._ResenasService.setInfoProducto(this.info)
+          })
   }
 
 }
