@@ -1,5 +1,7 @@
 from main import ma
+from marshmallow import fields
 
-class ProductoEsquema(ma.Schema):
+class CompraEsquema(ma.Schema):
     class Meta:
-        fields = ('correo', 'total', 'nombre', 'idDir', 'tarjeta')
+
+        fields = ('correo', 'idDir', 'numero', 'total')

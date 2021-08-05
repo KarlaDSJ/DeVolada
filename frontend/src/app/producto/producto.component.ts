@@ -1,4 +1,4 @@
-import { Component, OnInit, Output} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductosService } from "../productos.service";
 import { IProducto } from "../productos.service";
@@ -13,9 +13,8 @@ import { ResenasService } from '../resenas.service';
 
 export class ProductoComponent implements OnInit {
 
-  producto: IProducto[];
   info: any;
-
+  producto: IProducto;
   id: any = "";
   responsiveOptions:any;
 

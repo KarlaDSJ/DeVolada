@@ -15,15 +15,24 @@ Los compradores y vendedores podrán mostrar sus productos y ofertas sin la nece
 
 ## Backend
 
-### Instalación
+### Instalación Linux
 ```
 cd backend
 python3 -m venv venv
 source venv/bin/activate
 pip3 install -r requirements.txt
 ```
+### Instalación Windows
+```
+cd backend
+python3 -m venv venv
+venv/bin/activate
+pip3 install -r requirements.txt
 
-### Ejecución
+```
+
+
+### Ejecución Linux
 ```
 cd backend
 source venv/bin/activate
@@ -31,16 +40,26 @@ export FLASK_APP=main.py
 export FLASK_ENV=development
 flask run
 ```
+### Ejecución Windows
+```
+cd backend
+venv/bin/activate
+set FLASK_APP=main.py
+set FLASK_ENV=development
+flask run
+```
+
+
 
 ## Frontend
 
-### Instalación
+### Instalación Linux y Winodws
 ```
 cd frontend
 npm install
 ```
 
-### Ejecución
+### Ejecución Linux y Windows
 ```
 cd frontend/
 ```

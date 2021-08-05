@@ -2,6 +2,7 @@ from main import db
 """Importamos los modelos para que no cause error las relaciones"""
 from models import imagenM
 from models import categoriaM
+from models.contenerM import Contener
 
 class Producto(db.Model):
     """Modelo de la tabla Producto de la BD"""
@@ -15,8 +16,11 @@ class Producto(db.Model):
     disponibles = db.Column(db.Integer)
     # Relaciones (harán el join cuando seleccionemos los productos)
     imagenes = db.relationship('Imagen', lazy='select')
-    categoria = db.relationship('Categoria', lazy='select') 
-    contenido_en = db.relationship('Contener', backref='producto', lazy=True)              
+    categoria = db.relationship('Categoria',lazy='select') 
+    
+    # contenido_en = db.relationship('Contener', back_populates='productos') 
+    contenido_en = db.relationship('Contener', backref='contenido_en') 
+    comprado_en = db.relationship('Incluir', backref='producto')             
 
     def __init__(self, correo, precio, nombre, descripcion, vendidos, disponible):
         self.correo = correo

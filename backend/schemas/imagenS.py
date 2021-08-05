@@ -9,3 +9,4 @@ class ImagenEsquema(ma.Schema):
    class Meta:
       """Formato de salida"""
       fields = ("imagen","idProducto")
+
