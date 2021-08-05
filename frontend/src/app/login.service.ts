@@ -19,7 +19,7 @@ export interface ILogin {
     providedIn: 'root'
   })
 export class LoginService{
-    private _url = 'http://127.0.0.1:5000/';
+    private _url = 'http://127.0.0.1:5000';
     constructor(private _http: HttpClient){}
 
     IniciarSesionC(credenciales: {correoC:string, contraseniaC:string}): Observable<ILogin>{

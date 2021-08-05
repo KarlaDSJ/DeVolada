@@ -13,7 +13,7 @@ import { MetodoPagoService } from '../metodo-pago.service';
 
 export class MetodoPagoComponent implements OnInit {
 
-  comprador = "kethrim.tradmateos@gmail.com"
+  comprador = "zogilvie1w@ezinearticles.com"
   direccionEntrega = -2;
   // Cambiar por la consulta a la base
   listaT = [

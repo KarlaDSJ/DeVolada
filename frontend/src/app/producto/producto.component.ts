@@ -42,7 +42,8 @@ export class ProductoComponent implements OnInit {
 
   constructor(private _route: ActivatedRoute,
     private _productoService: ProductosService,
-    private _carritoService: CarritoService) {
+    private _carritoService: CarritoService,
+    private  _ResenasService: ResenasService){
 
     //Opciones para hacer responsivo el carrusel de fotos del productos
     this.responsiveOptions = [
@@ -60,7 +61,7 @@ export class ProductoComponent implements OnInit {
     this._productoService.getProducto(this.id)
           .subscribe(data => {
             this.producto = data;
-            this.info = {'id':this.id, 'nombre':this.producto[0].nombre, 'imagen':this.producto[0].imagenes[0].imagen}
+            this.info = {'idProducto':this.producto.idProducto, 'nombre':this.producto.nombre, 'imagen':this.producto.imagenes[0].imagen}
             this._ResenasService.setInfoProducto(this.info)
           })
   }
