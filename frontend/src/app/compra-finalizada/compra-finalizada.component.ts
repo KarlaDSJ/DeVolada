@@ -88,6 +88,7 @@ export class CompraFinalizadaComponent implements OnInit {
         this.guardarProductos().then(data => (
           this.incluirProductosCompra().then(data => (
             this._carritoService.limpiarCarrito(this.idCarrito).subscribe(
+              data => (2),
               error => (
                 Swal.fire({
                   title: error.msg,

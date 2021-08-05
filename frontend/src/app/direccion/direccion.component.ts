@@ -13,7 +13,8 @@ import Swal from 'sweetalert2';
 export class DireccionComponent implements OnInit {
 
   // Aquí debería usar el correo del comprador actual 
-  duenio = "zogilvie1w@ezinearticles.com"
+  // duenio = "zogilvie1w@ezinearticles.com"
+  duenio = "kethrim.tradmateos@gmail.com"
   
   listaDir = [];
   validez = false;
