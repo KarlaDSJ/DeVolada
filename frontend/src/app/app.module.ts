@@ -27,6 +27,7 @@ import { BarraNavVendedorComponent } from './barra-nav-vendedor/barra-nav-vended
 import { BarraNavLogComponent } from './barra-nav-log/barra-nav-log.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { RegistrarComponent } from './registrar/registrar.component';
 
 
 
@@ -51,7 +52,8 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     BarraNavCompradorComponent,
     BarraNavVendedorComponent,
-    BarraNavLogComponent
+    BarraNavLogComponent,
+    RegistrarComponent
   ],
   imports: [
     BrowserModule,

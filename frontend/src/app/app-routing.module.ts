@@ -10,8 +10,10 @@ import { CompraFinalizadaComponent } from './compra-finalizada/compra-finalizada
 import { CrearResenaComponent } from './crear-resena/crear-resena.component';
 import { VerResenasComponent } from './ver-resenas/ver-resenas.component';
 import { LoginComponent } from './login/login.component';
+import { RegistrarComponent } from './registrar/registrar.component';
 
 const routes: Routes = [
+  {path: 'registrar', component: RegistrarComponent},
   {path:  'login', component: LoginComponent},
   {path: 'carrito', component: CarritoComponent},
   {path: 'metodo-pago', component: MetodoPagoComponent},
