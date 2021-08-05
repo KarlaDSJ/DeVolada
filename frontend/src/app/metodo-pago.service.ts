@@ -39,4 +39,8 @@ export class MetodoPagoService {
     return this._http.get<ITarInfo[]>(`${this._url}/tarjetasComprador?correo=${correo}`)
   }
 
+  async obtenerTarjeta(correo:string, numero: string): Promise<ITarInfo>{
+    return this._http.get<ITarInfo>(`${this._url}/tarjetaComprador?correo=${correo}&numero=${numero}`).toPromise()
+  }
+
 }

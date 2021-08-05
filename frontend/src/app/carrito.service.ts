@@ -36,6 +36,7 @@ export interface IMensaje{
 }
 
 export interface ICompra{
+  idCompra: number,
   correo:string,
   idDir: string,
   tarjeta:string,
@@ -140,8 +141,8 @@ export class CarritoService {
    * @param idCarrito identificador del carrito
    * @returns Total del carrito
    */
-  obtenerTotal(idCarrito:number): Observable<number> {
-    return this._http.get<number>(`${this._url}/totalCarrito?idCarrito=${idCarrito}`)
+  async obtenerTotal(idCarrito:number): Promise<Observable<number>> {
+    return this._http.get<Observable<number>>(`${this._url}/totalCarrito?idCarrito=${idCarrito}`).toPromise()
   }
   
   /**
@@ -156,9 +157,9 @@ export class CarritoService {
   /*
     Registra una compra en la base de datos 
   */
-  finalizarCompra(compra:ICompra): Observable<ICompra>{
-    const params = JSON.stringify(compra);
-    return this._http.post<ICompra>(this._url+"/compra", params, {headers: this.headers});
+  async finalizarCompra(correo:string, idDir:number, tarjeta: string, total: number): Promise<ICompra>{
+    // const params = JSON.stringify(compra);
+    return this._http.post<ICompra>(this._url+"/compra",{correo, idDir, tarjeta, total}).toPromise()
   }
 
   /*

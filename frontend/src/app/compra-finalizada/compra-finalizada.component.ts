@@ -36,71 +36,71 @@ export class CompraFinalizadaComponent implements OnInit {
   constructor(private _route:ActivatedRoute, private _carritoService: CarritoService) { }
 
   ngOnInit(): void {
-    //Obtiene el id de la dirección de la compra
-    this.idDireccion = this._route.snapshot.paramMap.get('idDir');
-    //Obtiene el número de tarjeta de la compra
-    this.numTarjeta = this._route.snapshot.paramMap.get('numTar');
-    //Obtiene el número de tarjeta de la compra
-    this.idCarrito= this._route.snapshot.paramMap.get('idCarrito');
-    this.getCarrito();
-    this.getDireccion();
+    // //Obtiene el id de la dirección de la compra
+    // this.idDireccion = this._route.snapshot.paramMap.get('idDir');
+    // //Obtiene el número de tarjeta de la compra
+    // this.numTarjeta = this._route.snapshot.paramMap.get('numTar');
+    // //Obtiene el número de tarjeta de la compra
+    // this.idCarrito= this._route.snapshot.paramMap.get('idCarrito');
+    // this.getCarrito();
+    // this.getDireccion();
   }
   
   /*
     Obtiene los datos del carrito
     Total, productos y sus fotos
   */
-  getCarrito(){
-    this._carritoService.obtenerProductos(+this.idCarrito)
-          .subscribe(data => {
-            this.total = data.reduce(((sum, val) => sum + val.precio*val.cantidad), 0);
-            this.productos = data;
-            this.compra ={
-              'correo': this.correo,
-              'idDir': this.idDireccion,
-              'tarjeta':this.numTarjeta,
-              'total': this.total,
-            }
-            this.comprar();
-          })
-  }
+  // getCarrito(){
+  //   this._carritoService.obtenerProductos(+this.idCarrito)
+  //         .subscribe(data => {
+  //           this.total = data.reduce(((sum, val) => sum + val.precio*val.cantidad), 0);
+  //           this.productos = data;
+  //           this.compra ={
+  //             'correo': this.correo,
+  //             'idDir': this.idDireccion,
+  //             'tarjeta':this.numTarjeta,
+  //             'total': this.total,
+  //           }
+  //           this.comprar();
+  //         })
+  // }
 
   /*
     Obtiene la dirección de entrega
   */
-  getDireccion(){
-    this._carritoService.getDireccion(this.idDireccion)
-          .subscribe(data => {
-            this.direccion = data;
-          })
-  }
+  // getDireccion(){
+  //   this._carritoService.getDireccion(this.idDireccion)
+  //         .subscribe(data => {
+  //           this.direccion = data;
+  //         })
+  // }
 
   /*
     Genera la compra
    */
-  comprar(){
-    this._carritoService.finalizarCompra(this.compra)
-    .subscribe(data => {
-      this.compra = data;
-      this.setProductos();
-    })
-  }
+  // comprar(){
+  //   this._carritoService.finalizarCompra(this.compra)
+  //   .subscribe(data => {
+  //     this.compra = data;
+  //     this.setProductos();
+  //   })
+  // }
 
   /*
     Agrega los productos a la compra (relación Incluir)
   */
-  setProductos(){
-    this.productos.forEach(function(i) {
-      let producto = {
-        idCompra: this.compra,
-        idProducto: i.idProducto,
-        cantidad: i.cantidad,
-      };
-      this._carritoService.incluirProductos(producto)
-        .subscribe(data => {
-          console.log(data);
-        })
-    });
-  }
+  // setProductos(){
+  //   this.productos.forEach(function(i) {
+  //     let producto = {
+  //       idCompra: this.compra,
+  //       idProducto: i.idProducto,
+  //       cantidad: i.cantidad,
+  //     };
+  //     this._carritoService.incluirProductos(producto)
+  //       .subscribe(data => {
+  //         console.log(data);
+  //       })
+  //   });
+  // }
 
 }

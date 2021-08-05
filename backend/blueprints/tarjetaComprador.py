@@ -33,13 +33,12 @@ def agregar_tarjeta():
 def obtener_tarjeta():
 
     correo = request.args.get('correo', '')
-    numero = request.json['numero']
+    numero = request.args.get('numero', '')
     num_cifrado = generar_codigo(numero)
-    tarjeta = TarjetaComprador.query.get((num_cifrado,correo))
-
+    tarjeta = TarjetaComprador.query.get((num_cifrado,correo))    
     num = obtener_codigo(tarjeta.numero)
     pprint(num)
-    return jsonify({'msg':tarjeta.numero})   
+    return jsonify({'tarjeta':tarjeta.numero})   
 
 
 @tarjetaComprador.route('/tarjetasComprador', methods=['GET'])

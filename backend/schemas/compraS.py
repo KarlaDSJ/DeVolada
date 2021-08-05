@@ -4,4 +4,4 @@ from marshmallow import fields
 class CompraEsquema(ma.Schema):
     class Meta:
 
-        fields = ('correo', 'idDir', 'numero', 'total')
+        fields = ('idCompra', 'correo', 'idDir', 'numero', 'total')
