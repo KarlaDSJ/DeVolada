@@ -14,7 +14,7 @@ import { RegistrarComponent } from './registrar/registrar.component';
 
 const routes: Routes = [
   {path: 'registrar', component: RegistrarComponent},
-  {path:  'login', component: LoginComponent},
+  {path:  '', component: LoginComponent},
   {path: 'carrito', component: CarritoComponent},
   {path: 'metodo-pago', component: MetodoPagoComponent},
   {path: 'inicio', component: InicioComponent},

@@ -52,7 +52,7 @@ dataC = {
     console.log(this.dataC)
     this._registrarService.registrarC(this.dataC).subscribe(response => {
       console.log(this.dataC)
-      this.router.navigate(['/login']);
+      this.router.navigate(['/']);
     
     })
 
@@ -61,7 +61,7 @@ dataC = {
   submitV(){
     this._registrarService.registrarV(this.dataV).subscribe(response => {
       
-      this.router.navigate(['/login']);
+      this.router.navigate(['/']);
     
     })
 

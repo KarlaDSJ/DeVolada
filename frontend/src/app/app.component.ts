@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +11,12 @@ export class AppComponent {
   esComprador = true;
 
 
-  constructor(private router: Router) { 
-    console.log(this.router.url);
+  constructor(@Inject(DOCUMENT) document: any) { 
     
-    if (this.router.url == '/login' || this.router.url == '/registrar'){
+    let url = 'http://localhost:4200'
+    // console.log(document.location.href);
+    
+    if (document.location.href == url+'/' || document.location.href == url+'/registrar'){
       this.esComprador = false;
     }
   }
