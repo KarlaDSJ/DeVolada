@@ -1,4 +1,5 @@
 
+import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -11,6 +12,8 @@ import { Router } from '@angular/router';
 
 export class MetodoPagoComponent implements OnInit {
 
+
+  direccionEntrega = -2;
   // Cambiar por la consulta a la base
   listaT=[
     {tipo: "Visa", numero: "4975 4536 7895 1234",mes_exp: 10, anio_exp : 23, cvv: 123, nombre: "Keth bb"}, // Las visa comienzan con 4
@@ -20,6 +23,8 @@ export class MetodoPagoComponent implements OnInit {
   valida = false;
   vtar = false;
   tar="";
+
+
 
   // Formato en el que se muestra una tarjeta
   formato(i:number) : string {
@@ -68,6 +73,7 @@ export class MetodoPagoComponent implements OnInit {
     this.tar= f.value.tarElig;
     // console.log(f.value.tarElig);
     this.router.navigate([ '/compra-finalizada' ])
+    localStorage.removeItem('devoladaIdDir')
 
   }
 
@@ -79,6 +85,7 @@ export class MetodoPagoComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    this.direccionEntrega =  Number(localStorage.getItem('devoladaIdDir'))
   }
 
 }

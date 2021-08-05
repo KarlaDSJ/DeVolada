@@ -14,9 +14,9 @@
                 [ngClass]="{'was-validated': vdir}" novalidate>
                 <div class="row mb-2 " *ngFor="let dir of listaDir, index as i, last as isLast">
                     <div class="form-check">
-                        <input class="form-check-input" [id]="'dir'+i" type="radio" ngModel [value]="formato(i)"
+                        <input class="form-check-input" [id]="dir.idDir" type="radio" ngModel [value]="dir.idDir"
                             name="dirElig" ngModel required>
-                        <label class="form-check-label" [for]="'dir'+i">
+                        <label class="form-check-label" [for]="dir.idDir">
                             {{formato(i)}}
                         </label>
                         <div *ngIf="isLast" class="invalid-feedback">
@@ -129,8 +129,18 @@
                     </div>
                 </div>
 
+                <swal #cancelarCompra title="¿Quieres cancelar tu compra?"  icon="question"
+                    [showCancelButton]="true" [focusCancel]="false" (confirm)="cancelar()"
+                    [swalOptions]="{ confirmButtonText: 'Si', cancelButtonText: 'No' , cancelButtonColor : '  #a4a8a9 ', iconColor : '  #06bae1  '}">
+                </swal>
+
                 <!-- Continuar compra -->
                 <div class="d-flex container justify-content-end mt-4 pe-5">
+                    <div class="col can-con">
+                        <button type="button" class="btn btn-outline-danger rounded-pill px-5" (click)="cancelarCompra.fire()" >
+                            Cancelar compra
+                        </button>
+                    </div>
                     <button type="submit" class="btn btn-primary rounded-pill me-0 me-ms-5 px-5">
                         Continuar
                     </button>

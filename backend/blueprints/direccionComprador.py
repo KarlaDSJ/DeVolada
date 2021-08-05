@@ -15,7 +15,7 @@ def obtener_direccionComprador(id_direccionComprador):
     '''Obtiene la información de una dirección dado su id '''  
     direccionComprador = DireccionComprador.query.get(id_direccionComprador)
     if direccionComprador is None:
-        return jsonify({'msg': 'No existe esa direccion :('})
+        return jsonify({'msg': 'No existe esa direccion'}), 404
     else:
         return direccionComprador_esquema.jsonify(direccionComprador)
 
@@ -33,14 +33,15 @@ def agrega_direccionComprador():
     numero = request.json['numero']
 
     dirC = DireccionComprador.query.filter_by(correo=correo, estado=estado, ciudad=ciudad, colonia=colonia, cp=cp, calle=calle, numero=numero).first()
+    pprint(dirC)
     if dirC is None:
         dirC = DireccionComprador(correo, estado, ciudad, colonia, cp, calle, numero)
         pprint(dirC)
         db.session.add(dirC)
         db.session.commit()        
-        return direccionComprador_esquema.jsonify(dirC)
+        return jsonify({'msg': 'Se registró la dirección', 'idDir': dirC.idDir})
     else:
-        return jsonify({'msg': 'Esa dirección ya está registrada'})
+        return jsonify({'msg': 'Esa dirección ya está registrada'}), 400
 
 
 
