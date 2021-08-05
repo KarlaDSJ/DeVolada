@@ -10,15 +10,17 @@ import { CompraFinalizadaComponent } from './compra-finalizada/compra-finalizada
 import { CrearResenaComponent } from './crear-resena/crear-resena.component';
 import { VerResenasComponent } from './ver-resenas/ver-resenas.component';
 import { LoginComponent } from './login/login.component';
+import { RegistrarComponent } from './registrar/registrar.component';
 
 const routes: Routes = [
-  {path:  'login', component: LoginComponent},
+  {path: 'registrar', component: RegistrarComponent},
+  {path:  '', component: LoginComponent},
   {path: 'carrito', component: CarritoComponent},
-  {path: 'metodo-pago/:idCarrito/:idDir', component: MetodoPagoComponent}, 
+  {path: 'metodo-pago', component: MetodoPagoComponent}, 
   //Lleva el id del carrito y de la dirección
   {path: 'inicio', component: InicioComponent},
   {path: 'producto/:id', component: ProductoComponent}, //Lleva el id de producto
-  {path: 'direccion/:idCarrito', component: DireccionComponent}, //Lleva el id del Carrito
+  {path: 'direccion', component: DireccionComponent}, //Lleva el id del Carrito
   {path: 'mis-productos', component: MisProductosComponent},
   {path: 'compra-finalizada/:idCompra', component: CompraFinalizadaComponent},
   {path: 'crear-resena', component: CrearResenaComponent},

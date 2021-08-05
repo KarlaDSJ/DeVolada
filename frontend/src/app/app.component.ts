@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-// import from '';
+import { Component, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +8,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'devolada';
+  esComprador = true;
+
+
+  constructor(@Inject(DOCUMENT) document: any) { 
+    
+    let url = 'http://localhost:4200'
+    // console.log(document.location.href);
+    
+    if (document.location.href == url+'/' || document.location.href == url+'/registrar'){
+      this.esComprador = false;
+    }
+  }
 }
