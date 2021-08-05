@@ -20,8 +20,7 @@ const routes: Routes = [
   {path: 'producto/:id', component: ProductoComponent}, //Lleva el id de producto
   {path: 'direccion/:idCarrito', component: DireccionComponent}, //Lleva el id del Carrito
   {path: 'mis-productos', component: MisProductosComponent},
-  {path: 'compra-finalizada/:idCarrito/:idDir/:numTar', component: CompraFinalizadaComponent},
-  //Lleva el id del carrito y de la dirección, el número de tarjeta de la compra
+  {path: 'compra-finalizada/:idCompra', component: CompraFinalizadaComponent},
   {path: 'crear-resena', component: CrearResenaComponent},
   {path: 'ver-resenas', component: VerResenasComponent},
 ];
