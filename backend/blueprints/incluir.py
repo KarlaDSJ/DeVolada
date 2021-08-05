@@ -26,6 +26,6 @@ def incluir_productos():
         db.session.commit()
         return jsonify({'msg': 'se incluyó el producto a la compra'})
     else:
-        return jsonify({'msg':'No se pudo completar la petición'})
+        return jsonify({'msg':'No se pudo completar la petición'}), 400
     
 

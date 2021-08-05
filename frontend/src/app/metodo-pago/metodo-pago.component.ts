@@ -134,7 +134,7 @@ export class MetodoPagoComponent implements OnInit {
       .then(
         data => {
           idCompra = data.idCompra
-          console.log(idCompra)
+          // console.log(idCompra)
           // Mostrar la compra
           this.router.navigate(['/compra-finalizada', idCompra])
         },

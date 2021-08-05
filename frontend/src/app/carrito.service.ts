@@ -161,20 +161,17 @@ export class CarritoService {
     // const params = JSON.stringify(compra);
     return this._http.post<ICompra>(this._url+"/compra",{correo, idDir, tarjeta, total}).toPromise()
   }
-
-  /*
-    Agrega un producto a la compra en la base de datos
-  */
-  incluirProductos(incluir:IIncluir): Observable<any>{
-    const params = JSON.stringify(incluir);
-    return this._http.post<any>(this._url+"/compra", params, {headers: this.headers});
+  
+  /**
+   * Incluye un producto en una compra. Se requiere la cantidad
+   * @param producto identificador del producto
+   * @param compra identificador de la compra
+   * @param cantidad cantidad que se compró
+   * @returns Mensaje indicando si se pudo o no agregar usando la interfaz IMensaje
+   */
+  async incluirProductos(producto:number, compra:number, cantidad: number): Promise<IMensaje>{
+    return this._http.post<IMensaje>(`${this._url}/incluir`, {producto, compra, cantidad}).toPromise()
   }
 
-  /*
-    Agrega un producto a la compra en la base de datos
-  */
-  getDireccion(idDir:string): Observable<IDireccion>{
-    return this._http.get<IDireccion>(this._url+"/direccionComprador/"+idDir);
-  }
   
 }
