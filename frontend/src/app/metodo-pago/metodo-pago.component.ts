@@ -86,8 +86,11 @@ export class MetodoPagoComponent implements OnInit {
     }
 
     this.tar = f.value.tarElig;
-    // console.log(f.value.tarElig);
-    this.router.navigate(['/compra-finalizada'])
+    // Crear la compra
+    let idCompra = 0;
+
+    // Mostrar la compra
+    this.router.navigate(['/compra-finalizada', idCompra])
     localStorage.removeItem('devoladaIdDir')
 
   }
