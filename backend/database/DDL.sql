@@ -88,7 +88,7 @@ ENGINE = InnoDB;
 -- Table   `TarjetaComprador`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `tarjetaComprador` (
-  `numero` varchar(16) NOT NULL,
+  `numero` varchar(105) NOT NULL,
   correo varchar(45) not null,
   `dueno` VARCHAR(60) NOT NULL,
   `fechaCad` DATE NOT NULL,
@@ -271,7 +271,7 @@ CREATE TABLE IF NOT EXISTS `compra` (
   idCompra INT NOT NULL AUTO_INCREMENT,
   correo varchar(45) not null,
   idDir int not null,
-  numero varchar(16) not null,
+  numero varchar(105) not null,
   PRIMARY KEY (`idCompra`),
   CONSTRAINT correo_comprador_compra
     FOREIGN KEY (correo)

@@ -1,18 +1,18 @@
 from main import db
 
-
 class DireccionComprador(db.Model):
     """Modelo de la tabla direccionComprador de la BD"""
     __tablename__ = 'direccionComprador'
     
-    id_dir = db.Column(db.Integer, primary_key=True)
+    idDir = db.Column(db.Integer, primary_key=True)
     correo = db.Column(db.String(45), db.ForeignKey('comprador.correo'))
     estado = db.Column(db.String(45))
     ciudad = db.Column(db.String(45))
     colonia = db.Column(db.String(45)) 
-    cp = db.Column(db.String(45))
+    cp = db.Column(db.Integer) 
     calle = db.Column(db.String(45)) 
-    numero = db.Column(db.String(45))
+    numero = db.Column(db.Integer)
+
 
     def __init__(self, correo, estado, ciudad, colonia, cp, calle, numero):
         self.correo = correo

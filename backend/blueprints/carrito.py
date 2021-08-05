@@ -23,3 +23,12 @@ def agrega_carrito():
     db.session.add(carrito_nuevo)
     db.session.commit()        
     return carrito_esquema.jsonify(carrito_nuevo)
+
+
+@carrito.route('/carrito/<id_carrito>/productos', methods=['GET'])
+def obtener_productos_carrito(id_carrito):    
+    carrito = Carrito.query.get(id_carrito)
+    if carrito is None:
+        return jsonify({'msg': 'No existe el carrito :('})
+    else:
+        return carrito_esquema.jsonify(carrito)

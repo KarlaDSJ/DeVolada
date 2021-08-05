@@ -10,7 +10,8 @@ vendedores_esquema = VendedorEsquema(many=True)
 
 @vendedor.route('/vendedor/<correo>', methods=['GET'])
 def obtener_vendedor(correo):    
-    vendedor = db.session.query(Vendedor).get(correo)
+    vendedor = Vendedor.query.get(correo)
+    pprint(vendedor)
     return jsonify({'correo': vendedor.correo, 'nombre': vendedor.nombre,
                     'telefono': vendedor.telefono})
 

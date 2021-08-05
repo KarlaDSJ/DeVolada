@@ -6,7 +6,6 @@ from schemas.contenerE import ContenerEsquema
 from schemas.productoS import ProductoEsquema
 
 from marshmallow import Schema, fields
-# from pprint import pprint
 
 contener = Blueprint('contener', __name__)
 
@@ -18,7 +17,7 @@ conteneres_esquema = ContenerEsquema(
 @contener.route('/contener', methods=['POST'])
 def agregar_producto():
     '''Crea una relación contener entre un carrito y un producto.
-    Ambos pasados como parámetros de la ruta, "idProducto" y "idCarrito".
+    Ambos son pasados en el cuerpo como  "idProducto" y "idCarrito".
     Si ya existe la relación intenta aumentar la cantidad.
     
     Returns:
@@ -87,7 +86,7 @@ def productos_en_el_carrito():
     productos = Contener.query.filter_by(idCarrito=idCarrito).all()
 
     producto_esquema = ProductoEsquema(
-        only=('idProducto', 'precio', 'nombre', 'disponibles'))
+        only=("idProducto", "precio", "nombre", "disponibles", "imagenes"))
 
     datos = conteneres_esquema.dump(productos)
 
@@ -103,8 +102,8 @@ def productos_en_el_carrito():
 
 @contener.route('/contener', methods=['DELETE'])
 def eliminar_producto():
-    '''Elimina el producto del carrito, ambos parámetros de la ruta
-    "idCarrito" y "idProducto".
+    '''Elimina el producto del carrito, ambos son parámetros 
+    de la ruta. "idCarrito" y "idProducto". 
     
     Returns:
     Mensaje en formato json indicando si se pudo eliminar o no.'''
