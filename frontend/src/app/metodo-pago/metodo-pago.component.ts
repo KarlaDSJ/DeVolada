@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { MetodoPagoService } from '../metodo-pago.service';
 

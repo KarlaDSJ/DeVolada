@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {HttpParams} from "@angular/common/http";
 import { Observable } from 'rxjs';
 
@@ -26,6 +26,8 @@ export class ProductosService {
   private _url = "http://127.0.0.1:5000";
 
   constructor(private _http: HttpClient) { }
+
+  headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   /*
     Nos regresa todos los productos
@@ -60,4 +62,13 @@ export class ProductosService {
     return this._http.get<IProducto>(this._url+"/producto/"+id);
   }
 
+  /*
+    Nos regresa la informacion de un producto
+  */
+  getListaProductos(ids:number[]): Observable<IProducto[]>{
+    const params = JSON.stringify({
+      "ids": ids
+    });
+    return this._http.post<IProducto[]>(this._url+"/producto/lista", params, {headers: this.headers});
+  }
 }

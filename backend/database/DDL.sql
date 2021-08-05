@@ -26,7 +26,7 @@ USE `mydb` ;
 CREATE TABLE IF NOT EXISTS `vendedor` (
   `nombre` VARCHAR(45) NULL,
   `telefono` VARCHAR(45) NULL,
-  `contrasenia` VARCHAR(106) NULL,
+  `contrasenia` VARCHAR(120) NULL,
   `correo` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`correo`))
 ENGINE = InnoDB;
@@ -37,7 +37,7 @@ ENGINE = InnoDB;
 -- Table   `TarjetaVendedor`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `tarjetaVendedor` (
-  `numero` INT NOT NULL,
+  `numero` varchar(45) not NULL,
   correo varchar(45) not null,
   `duenio` VARCHAR(45) NOT NULL,
   `fechaCad` DATE NOT NULL,
@@ -92,7 +92,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `tarjetaComprador` (
   `numero` varchar(105) NOT NULL,
-  correo varchar(45) not null,
+  `correo` varchar(45) not null,
   `dueno` VARCHAR(60) NOT NULL,
   `fechaCad` DATE NOT NULL,
   `cvv` INT NOT NULL,
@@ -114,9 +114,9 @@ CREATE TABLE IF NOT EXISTS `direccionComprador` (
   `estado` VARCHAR(45) NOT NULL,
   `ciudad` VARCHAR(45) NOT NULL,
   `colonia` VARCHAR(45) NOT NULL,
-  `cp` INT NOT NULL,
+  `cp` VARCHAR(45) NOT NULL,
   `calle` VARCHAR(45) NOT NULL,
-  `numero` INT NOT NULL,
+  `numero` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idDir`, correo),
   CONSTRAINT correo_dirComprador
     FOREIGN KEY (correo)
@@ -275,6 +275,7 @@ CREATE TABLE IF NOT EXISTS `compra` (
   correo varchar(45) not null,
   idDir int not null,
   numero varchar(105) not null,
+  total double,
   PRIMARY KEY (`idCompra`),
   CONSTRAINT correo_comprador_compra
     FOREIGN KEY (correo)

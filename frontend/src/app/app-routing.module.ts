@@ -14,10 +14,11 @@ import { LoginComponent } from './login/login.component';
 const routes: Routes = [
   {path:  'login', component: LoginComponent},
   {path: 'carrito', component: CarritoComponent},
-  {path: 'metodo-pago', component: MetodoPagoComponent},
+  {path: 'metodo-pago/:idCarrito/:idDir', component: MetodoPagoComponent}, 
+  //Lleva el id del carrito y de la dirección
   {path: 'inicio', component: InicioComponent},
-  {path: 'producto/:id', component: ProductoComponent},
-  {path: 'direccion', component: DireccionComponent},
+  {path: 'producto/:id', component: ProductoComponent}, //Lleva el id de producto
+  {path: 'direccion/:idCarrito', component: DireccionComponent}, //Lleva el id del Carrito
   {path: 'mis-productos', component: MisProductosComponent},
   {path: 'compra-finalizada/:idCompra', component: CompraFinalizadaComponent},
   {path: 'crear-resena', component: CrearResenaComponent},
