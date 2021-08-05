@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "~12.1.2",
     "@angular/router": "~12.1.2",
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
+    "@sweetalert2/ngx-sweetalert2": "^10.0.0",
     "bootstrap": "^5.0.2",
     "bootstrap-icons": "^1.5.0",
     "primeicons": "^4.1.0",
