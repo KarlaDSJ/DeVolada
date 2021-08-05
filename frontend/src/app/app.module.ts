@@ -28,6 +28,7 @@ import { BarraNavLogComponent } from './barra-nav-log/barra-nav-log.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { RegistrarComponent } from './registrar/registrar.component';
+import { CarruselComponent } from './carrusel/carrusel.component';
 
 
 
@@ -53,7 +54,8 @@ import { RegistrarComponent } from './registrar/registrar.component';
     BarraNavCompradorComponent,
     BarraNavVendedorComponent,
     BarraNavLogComponent,
-    RegistrarComponent
+    RegistrarComponent,
+    CarruselComponent
   ],
   imports: [
     BrowserModule,

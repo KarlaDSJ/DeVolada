@@ -7,16 +7,16 @@ from schemas.categoriaS import CategoriaEsquema
 categoria = Blueprint('categoria', __name__)
 
 categoria_esquema = CategoriaEsquema()
-categoria_esquema = CategoriaEsquema(many=True)
+categorias_esquema = CategoriaEsquema(many=True)
 
 
 # Petición para agregar una categoría a la base de datos.
-@categoria.route('/categoria', methods=['POST'])
+"""@categoria.route('/categoria', methods=['POST'])
 def agrega_categoria():
     categoria  = request.json['categoria']
     idProducto = request.json['idProducto']
 
-    categoria_nueva = Imagen(categoria, idProducto)
+    categoria_nueva = Categoria(categoria, idProducto)
 
     db.session.add(categoria_nueva)
     db.session.commit()
@@ -46,4 +46,13 @@ def obtener_categoria():
 
     categoria_obtenida = db.session.query(Categoria).get((categoria,idProducto))
     
-    return jsonify({"categoria:": categoria_obtenida.categoria})
+    return jsonify({"categoria:": categoria_obtenida.categoria})"""
+
+
+@categoria.route('/categorias', methods=['GET'])
+def obtener_categoria():
+    """Función para obtener todas las categorías"""
+
+    categoria_obtenida = db.session.query(Categoria.categoria).distinct()
+    
+    return categorias_esquema.jsonify(categoria_obtenida)

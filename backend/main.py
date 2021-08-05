@@ -14,7 +14,6 @@ from config import DevelopmentConfig
 
 
 from blueprints.imagen import imagen
-from blueprints.categoria import categoria
 from blueprints.before import before
 # from blueprints.adminProducto import adminProducto
 from blueprints.after import after
@@ -34,7 +33,7 @@ from blueprints.direccionComprador import direccionComprador
 from blueprints.tarjetaComprador import tarjetaComprador
 from blueprints.compra import compra
 from blueprints.incluir import incluir
-
+from blueprints.categoria import categoria
 
 
 app = Flask(__name__)
@@ -63,7 +62,6 @@ app.register_blueprint(incluir)
 app.register_blueprint(after)
 app.register_blueprint(cookie)
 app.register_blueprint(imagen)
-app.register_blueprint(categoria)
 app.register_blueprint(before)
 # app.register_blueprint(adminProducto)
 
