@@ -16,10 +16,20 @@ export class ProductoComponent implements OnInit {
 
   producto: IProducto;
 
+
   id: any = "";
   responsiveOptions: any;
   // Cambiar por el carrito del comprador
   idCarrito = 1
+
+  deshabilitar() {
+    if (this.producto.disponibles <= 0) {
+      return true;
+    }
+    else
+      return false;
+
+  }
 
   agregar(): void {
     this._carritoService.agregarCarrito(this.id, this.idCarrito)
@@ -33,7 +43,7 @@ export class ProductoComponent implements OnInit {
         error => {
           Swal.fire({
             title: 'No se puede agregar',
-            text: error.error.msg ,
+            text: error.error.msg,
             icon: 'error'
           })
         })

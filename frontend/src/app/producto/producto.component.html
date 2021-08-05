@@ -48,7 +48,8 @@
 
       <!-- Agregar al carrito-->
       <div class="col-4 p-2">
-        <button class="btn btn-primary w-75 mb-3 rounded-pill mx-auto" (click)="agregar()">
+        <button class="btn btn-primary w-75 mb-3 rounded-pill mx-auto" id="agregar" (click)="agregar()" 
+        [disabled]="deshabilitar()">
         Agregar
       </button>
       </div>
