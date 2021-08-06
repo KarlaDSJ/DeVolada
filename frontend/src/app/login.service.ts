@@ -14,7 +14,6 @@ export interface ILogin {
 
     correoV: String;
     contraseniaV: String;
-    
 
 }
 
