@@ -11,7 +11,6 @@ login = Blueprint('login',__name__)
 def entrarC():
     correo = request.json['correoC']
     contrasenia = request.json['contraseniaC']
-    print(correo,contrasenia)
     comprador = Comprador.query.filter_by(correo = correo).first()
     
 
@@ -19,15 +18,11 @@ def entrarC():
         if (comprador.correo == correo and comprador.verify_password(contrasenia) ):
             session['email'] = correo
             sesionActiva = session['email']
-            print('todo bien')
-            return jsonify({'msg':'todo bien','session':sesionActiva })
-        else: 
-
-            print ('mal')
-            return jsonify({'msg': 'error'})
+            return jsonify({'msg':'success','session':sesionActiva, 'nombre': comprador.nombre })
+        else:
+            return jsonify({'msg': 'error_contrasenia'})
     else:
-        print('mal')
-        return jsonify({'msg': 'error'}) 
+        return jsonify({'msg': 'error_datos'}) 
 
 @login.route('/loginV', methods = ['GET', 'POST'])
 def entrarV():
@@ -41,12 +36,8 @@ def entrarV():
         if (vendedor.correo == correo and vendedor.verify_password(contrasenia) ):
             session['email'] = correo
             sesionActiva = session['email']
-            print('todo bien')
-            return jsonify({'msg':'todo bien','session':sesionActiva })
+            return jsonify({'msg':'success','session':sesionActiva, 'nombre': vendedor.nombre })
         else: 
-
-            print ('mal')
-            return jsonify({'msg': 'error'})
+            return jsonify({'msg': 'error_contrasenia'})
     else:
-        print('mal')
-        return jsonify({'msg': 'error'}) 
+        return jsonify({'msg': 'error_datos'})

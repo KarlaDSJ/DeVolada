@@ -13,7 +13,7 @@ from schemas.direccionE import DireccionEsquema
 from random import choice
 from flask import current_app as app
 from flask_mail import Message,Mail
-
+import re
 
 create = Blueprint('create',__name__)
 
@@ -47,19 +47,22 @@ def agrega_comprador():
     valores = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ<=>@#%&+"
     contraseniaRandom = ""
     contraseniaRandom = contraseniaRandom.join([choice(valores) for i in range(longitud)])
+    comprador = Comprador.query.filter_by(correo = correo).first()
     
-    enviar_correo(correo, nombre, contraseniaRandom)
-
-
-    direccion_nueva = DireccionComprador(correo, estado, ciudad, colonia, cp, calle, numero)
-    comprador_nuevo = Comprador(correo, nombre, telefono, contraseniaRandom)
-
-    db.session.add(comprador_nuevo)
-    db.session.commit()
-    db.session.add(direccion_nueva)
-    db.session.commit()
-
-    return jsonify({'msg':'todo salio correctamente'})
+    if(comprador is None):
+        if(verificar_arroba(correo)):
+            enviar_correo(correo, nombre, contraseniaRandom)
+            direccion_nueva = DireccionComprador(correo, estado, ciudad, colonia, cp, calle, numero)
+            comprador_nuevo = Comprador(correo, nombre, telefono, contraseniaRandom)
+            db.session.add(comprador_nuevo)
+            db.session.commit()
+            db.session.add(direccion_nueva)
+            db.session.commit()
+            return jsonify({'msg':'success'})
+        else:
+            return jsonify({'msg':'error_correo'})
+    else: 
+        return jsonify({'msg':'correo_registrado'})
 
 @create.route('/createV', methods=['POST'])
 def agrega_vendedor():
@@ -82,21 +85,25 @@ def agrega_vendedor():
     valores = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ<=>@#%&+"
     contraseniaRandom = ""
     contraseniaRandom = contraseniaRandom.join([choice(valores) for i in range(longitud)])
-    
-    enviar_correo(correo, nombre, contraseniaRandom)
-
-    direccion_nueva = DireccionVendedor(correo, estado, ciudad, colonia, cp, calle, numero)
-    vendedor_nuevo = Vendedor(correo, nombre, telefono, contraseniaRandom)
-    tarjeta_nueva = TarjetaVendedor(correo, tarjeta)   
-
-    db.session.add(vendedor_nuevo)
-    db.session.commit()
-    db.session.add(direccion_nueva)
-    db.session.commit()
-    db.session.add(tarjeta_nueva)
-    db.session.commit()
-
-    return jsonify({'msg':'todo salio correctamente'})
+    vendedor = Vendedor.query.filter_by(correo = correo).first()
+    if(vendedor is None):
+        if(verificar_arroba(correo)):
+            enviar_correo(correo, nombre, contraseniaRandom)
+            direccion_nueva = DireccionVendedor(correo, estado, ciudad, colonia, cp, calle, numero)
+            vendedor_nuevo = Vendedor(correo, nombre, telefono, contraseniaRandom)
+            tarjeta_nueva = TarjetaVendedor(correo, tarjeta) 
+            db.session.add(vendedor_nuevo)
+            db.session.commit()
+            db.session.add(direccion_nueva)
+            db.session.commit()
+            db.session.add(tarjeta_nueva)
+            db.session.commit()
+            return jsonify({'msg':'success'})
+        else:
+            return jsonify({'msg':'error_correo'})
+    else: 
+        return jsonify({'msg':'correo_registrado'})
+        
     
 def enviar_correo(correo, nombre, contrasenia):
     mail = Mail(app)
@@ -109,3 +116,10 @@ def enviar_correo(correo, nombre, contrasenia):
     except Exception:
         raise
     return "Correo enviado :)"
+
+def verificar_arroba(correo):
+    if re.match('^[(a-z0-9\_\-\.)]+@[(a-z0-9\_\-\.)]+\.[(a-z)]{2,15}$',correo.lower()):
+	    return True
+    else:
+	    return False   
+

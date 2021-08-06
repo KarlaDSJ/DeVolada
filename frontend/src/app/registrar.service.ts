@@ -5,7 +5,7 @@ import {HttpParams} from "@angular/common/http";
 
 export interface IRegistrar {
 
-
+    msg:string;
     correoC:string,
     nombreC:string,
     telefonoC : number,

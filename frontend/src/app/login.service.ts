@@ -5,6 +5,9 @@ import {HttpParams} from "@angular/common/http";
 
 export interface ILogin {
 
+    session:string;
+    msg:string;
+    nombre:string;
 
     correoC: String;
     contraseniaC: String;
