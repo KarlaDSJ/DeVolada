@@ -151,8 +151,7 @@ def limpiar_carrito():
     
     Returns:
     Mensaje en formato json indicando si se pudo limpiar o no.'''
-
-    pprint("Hola mundo ")
+    
     idCarrito = request.args.get('idCarrito', '')
 
     productos = Contener.query.filter_by(idCarrito=idCarrito)
@@ -164,11 +163,9 @@ def limpiar_carrito():
         for item in datos:
             id_producto = item['idProducto']
             id_carrito = item['idCarrito']
-            producto = Contener.query.get((id_producto, id_carrito))
-            pprint(producto)
+            producto = Contener.query.get((id_producto, id_carrito))            
             db.session.delete(producto)
             db.session.commit()
         return jsonify({'msg': 'Se limpió el carrito'})
     except Exception as e:
-        pprint(e)
         return jsonify({'msg': 'Hubo un error'})
