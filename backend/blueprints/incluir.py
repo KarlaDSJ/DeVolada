@@ -3,6 +3,7 @@ from flask import Blueprint, request, jsonify
 from models.compraM import Compra
 from models.productoM import Producto
 from models.incluirM import Incluir
+from models.productoM import Producto
 from pprint import pprint
 
 incluir = Blueprint('incluir', __name__)
@@ -22,6 +23,8 @@ def incluir_productos():
 
     if nueva_inclusion is None:
         nueva_inclusion = Incluir(producto, compra, cantidad)
+        Producto.query.get(producto).vendidos += cantidad
+        Producto.query.get(producto).disponibles -= cantidad
         db.session.add(nueva_inclusion)
         db.session.commit()
         return jsonify({'msg': 'se incluyó el producto a la compra'})

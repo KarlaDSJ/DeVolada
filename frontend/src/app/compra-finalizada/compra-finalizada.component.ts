@@ -30,30 +30,34 @@ export class CompraFinalizadaComponent implements OnInit {
     Incluye los productos en la compra    
   */
   async guardarProductos() {
-    this.listaP = this.productos.map(x => ({
-      imagenp: x.imagenes[0].imagen,
-      nombre: x.nombre,
-      cant: x.cantidad,
-      idP: x.idProducto,
-      precioP: x.precio,
-      disp: x.disponibles
-    }))
+    this.listaP = this.productos.map(
+      x => ({
+        imagenp: x.imagenes[0].imagen,
+        nombre: x.nombre,
+        cant: x.cantidad,
+        idP: x.idProducto,
+        precioP: x.precio,
+        disp: x.disponibles
+      }))
 
-    this.listaP.map(item => {
-      let producto = item.idP;
-      let compra = this.idCompra;
-      let cantidad = item.cant;
-      this._carritoService.incluirProductos(producto, compra, cantidad)
-        .then(
-          data => { },
-          error => {
-            Swal.fire({
-              title: 'No se pudo agregar a la compra',
-              text: error.error.msg,
-              icon: 'error'
-            })
-          })
-    })
+    // Peticiones el paralelo
+    await Promise.all(
+      this.listaP.map(
+        async (item) => {
+          let producto = item.idP;
+          let compra = this.idCompra;
+          let cantidad = item.cant;
+          this._carritoService.incluirProductos(producto, compra, cantidad)
+            .then(
+              data => { },
+              error => {
+                Swal.fire({
+                  title: 'No se pudo agregar el producto ' + producto + ' a la compra',
+                  text: error.error.msg,
+                  icon: 'error'
+                })
+              })
+        }))
   }
 
   async ngOnInit(): Promise<void> {
