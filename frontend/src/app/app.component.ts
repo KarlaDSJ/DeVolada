@@ -13,12 +13,14 @@ export class AppComponent {
 
   constructor(@Inject(DOCUMENT) document: any) { 
     
-    //let url = 'http://localhost:4200'
-    let url = 'http://localhost:33271' 
-    console.log(document.location.href);
+    let url = 'http://localhost:4200'
+    let url2 = 'http://localhost:33271'
     
-    if (document.location.href == url+'/' || document.location.href == url+'/registrar'){
+    if (document.location.href == url+'/' || document.location.href == url+'/registrar' 
+    || document.location.href == url2+'/' || document.location.href == url2+'/registrar'){
       this.esComprador = false;
-    }
+    } else{
+      this.esComprador = true;
+    }    
   }
 }
