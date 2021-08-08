@@ -17,8 +17,7 @@ const routes: Routes = [
   {path: 'registrar', component: RegistrarComponent},
   {path:  '', component: LoginComponent},
   {path: 'carrito', component: CarritoComponent, canActivate:[AuthGuard]},
-  {path: 'metodo-pago', component: MetodoPagoComponent, canActivate:[AuthGuard]}, 
-  //Lleva el id del carrito y de la dirección
+  {path: 'metodo-pago', component: MetodoPagoComponent, canActivate:[AuthGuard]},   
   {path: 'inicio', component: InicioComponent, canActivate:[AuthGuard]},
   {path: 'producto/:id', component: ProductoComponent, canActivate:[AuthGuard]}, //Lleva el id de producto
   {path: 'direccion', component: DireccionComponent, canActivate:[AuthGuard]}, //Lleva el id del Carrito

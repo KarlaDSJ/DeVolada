@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { MetodoPagoService } from '../metodo-pago.service';
 import { CarritoService } from '../carrito.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-metodo-pago',
@@ -15,10 +16,10 @@ import { CarritoService } from '../carrito.service';
 export class MetodoPagoComponent implements OnInit {
 
   // Cambiar por la consulta a la base
-  comprador = "kethrim.tradmateos@gmail.com"
+  comprador = ""
   // comprador = "zogilvie1w@ezinearticles.com"
   direccionEntrega = -2;
-  idCarrito = 1;
+  idCarrito = -1;
 
   listaT = [];
   valida = false;
@@ -101,31 +102,21 @@ export class MetodoPagoComponent implements OnInit {
     this.tar = f.value.tarElig;
     // Crear la compra    
     let tarElig = '' + this.tar;
-    this.obtenerTotalCompra().then(
-      meta => {
-        // console.log('Total ' + meta);
-        let total = meta;
-        this.obtenerTarjetaUsada(tarElig).then(
-          data => {
-            // console.log('Tarjeta '+data)
-            let tarjeta = data;
 
-            this.finalizarCompra(total, tarjeta);
-          },
-          error => {
-            Swal.fire({
-              title: 'Ocurrió un error al validar tu tarjeta',
-              icon: 'error'
-            })
-          })
-      },
-      error =>{
-        Swal.fire({
-          title: 'Ocurrió un error al obtener el total la compra',
-          icon: 'error'
-        })
-      });    
-
+    try {
+      let [total, tarjeta] = await Promise.all([
+        this._carritoService.obtenerTotal(this.idCarrito),
+        this._metodopagoService.obtenerTarjeta(this.comprador, tarElig)
+      ]);
+      console.log("Total", total);
+      this.finalizarCompra(total, tarjeta.tarjeta);
+    } catch (error) {
+      Swal.fire({
+        title: 'Ocurrió un error al finalizar tu compra',
+        text: 'Hubo un error con tu tarjeta y tu total. Inténtalo más tarde' + error.message,
+        icon: 'error'
+      })
+    }    
   }
 
 
@@ -135,13 +126,12 @@ export class MetodoPagoComponent implements OnInit {
       .then(
         data => {
           idCompra = data.idCompra
-          // console.log(idCompra)
-          // Mostrar la compra
           this.router.navigate(['/compra-finalizada', idCompra])
         },
         error => {
           Swal.fire({
             title: 'Ocurrió un error al finalizar la compra',
+            
             icon: 'error'
           })
         }
@@ -153,9 +143,23 @@ export class MetodoPagoComponent implements OnInit {
     this.router.navigate(['/inicio'])
   }
 
-  constructor(private router: Router, private _metodopagoService: MetodoPagoService, private _carritoService: CarritoService) { }
+  constructor(private router: Router,
+    private _metodopagoService: MetodoPagoService,
+    private _carritoService: CarritoService,
+    private cookie: CookieService) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.comprador = this.cookie.get('token_access');
+    try {
+      let datos = await this._carritoService.obtenerCarrito(this.comprador)
+      this.idCarrito = Number (datos.msg)
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Carrito no encontrado'
+      })
+    }
+
     this._metodopagoService.obtenerTarjetas(this.comprador)
       .subscribe(data => {
         this.listaT = data.map(x => ({

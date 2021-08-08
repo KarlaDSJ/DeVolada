@@ -5,6 +5,7 @@ import { IProducto } from "../productos.service";
 import { ResenasService } from '../resenas.service';
 import { CarritoService } from '../carrito.service';
 import Swal from 'sweetalert2';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-producto',
@@ -20,7 +21,7 @@ export class ProductoComponent implements OnInit {
   id: any = "";
   responsiveOptions: any;
   // Cambiar por el carrito del comprador
-  idCarrito = 1
+  idCarrito = -1;
 
   deshabilitar() {
     if (this.producto.disponibles <= 0) {
@@ -52,7 +53,8 @@ export class ProductoComponent implements OnInit {
   constructor(private _route: ActivatedRoute,
     private _productoService: ProductosService,
     private _carritoService: CarritoService,
-    private  _ResenasService: ResenasService){
+    private _ResenasService: ResenasService,
+    private cookie: CookieService) {
 
     //Opciones para hacer responsivo el carrusel de fotos del productos
     this.responsiveOptions = [
@@ -64,15 +66,25 @@ export class ProductoComponent implements OnInit {
     ];
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.id = this._route.snapshot.paramMap.get('id');
     //Nos regresa todos los productos
     this._productoService.getProducto(this.id)
-          .subscribe(data => {
-            this.producto = data;
-            this.info = {'idProducto':this.producto.idProducto, 'nombre':this.producto.nombre, 'imagen':this.producto.imagenes[0].imagen}
-            this._ResenasService.setInfoProducto(this.info)
-          })
+      .subscribe(data => {
+        this.producto = data;
+        this.info = { 'idProducto': this.producto.idProducto, 'nombre': this.producto.nombre, 'imagen': this.producto.imagenes[0].imagen }
+        this._ResenasService.setInfoProducto(this.info)
+      })
+    let correo = this.cookie.get('token_access');
+    try {
+      let datos = await this._carritoService.obtenerCarrito(correo)
+      this.idCarrito = Number(datos.msg)
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Carrito no encontrado'
+      })
+    }
   }
 
 }
