@@ -12,17 +12,20 @@ import { VerResenasComponent } from './ver-resenas/ver-resenas.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrarComponent } from './registrar/registrar.component';
 import { AuthGuard } from './auth.guard';
+import { DireccionGuard } from './direccion.guard';
+import { MetodoPagoGuard } from './metodo-pago.guard';
+import { CompraFinalizadaGuard } from './compra-finalizada.guard';
 
 const routes: Routes = [
   {path: 'registrar', component: RegistrarComponent},
   {path:  '', component: LoginComponent},
   {path: 'carrito', component: CarritoComponent, canActivate:[AuthGuard]},
-  {path: 'metodo-pago', component: MetodoPagoComponent, canActivate:[AuthGuard]},   
+  {path: 'metodo-pago', component: MetodoPagoComponent, canActivate:[AuthGuard, MetodoPagoGuard]},   
   {path: 'inicio', component: InicioComponent, canActivate:[AuthGuard]},
   {path: 'producto/:id', component: ProductoComponent, canActivate:[AuthGuard]}, //Lleva el id de producto
-  {path: 'direccion', component: DireccionComponent, canActivate:[AuthGuard]}, //Lleva el id del Carrito
+  {path: 'direccion', component: DireccionComponent, canActivate:[AuthGuard, DireccionGuard]}, //Lleva el id del Carrito
   {path: 'mis-productos', component: MisProductosComponent, canActivate:[AuthGuard]},
-  {path: 'compra-finalizada/:idCompra', component: CompraFinalizadaComponent, canActivate:[AuthGuard]},
+  {path: 'compra-finalizada/:idCompra', component: CompraFinalizadaComponent, canActivate:[AuthGuard, CompraFinalizadaGuard]},
   {path: 'crear-resena', component: CrearResenaComponent, canActivate:[AuthGuard]},
   {path: 'ver-resenas', component: VerResenasComponent, canActivate:[AuthGuard]},
 ];
