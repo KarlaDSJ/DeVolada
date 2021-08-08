@@ -76,8 +76,8 @@ export class CarritoService {
    * Crea un carrito 
    * @returns Interfaz de un carrito 
    */
-  crearCarrito(): Observable<ICarrito>{
-    return this._http.post<ICarrito>(this._url+"/carrito",{})
+  async crearCarrito(): Promise<ICarrito>{
+    return this._http.post<ICarrito>(this._url+"/carrito",{}).toPromise()
   }
 
   // PROBAR
@@ -87,8 +87,8 @@ export class CarritoService {
    * @param correo correo del comprador al que se le asignará el carrito  
    * @returns Correo del comprador y id del carrito con la interfaz ICarritoComprador
    */
-  asignarCarrito(idCarrito:number, correo:string): Observable<ICarritoComprador>{
-    return this._http.post<ICarritoComprador>(`${this._url}/pertenecer`, {idCarrito, correo})
+  async asignarCarrito(idCarrito:number, correo:string): Promise<ICarritoComprador>{
+    return this._http.post<ICarritoComprador>(`${this._url}/pertenecer`, {idCarrito, correo}).toPromise()
   }
 
   /**
