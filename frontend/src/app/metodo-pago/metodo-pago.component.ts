@@ -78,19 +78,6 @@ export class MetodoPagoComponent implements OnInit {
       return "MasterCard";
   }
 
-
-  async obtenerTotalCompra() {
-    let data = await this._carritoService.obtenerTotal(this.idCarrito);
-    console.log('Obtengo ' + data)
-    return data
-  }
-
-  async obtenerTarjetaUsada(tarElig) {
-    let data = await this._metodopagoService.obtenerTarjeta(this.comprador, tarElig);
-    // console.log(data.tarjeta)
-    return data.tarjeta
-  }
-
   // Obtiene el método de pago elegido 
   // Redirecciona a la info de la compra
   async obtenerTar(f: NgForm) {
@@ -102,7 +89,6 @@ export class MetodoPagoComponent implements OnInit {
     this.tar = f.value.tarElig;
     // Crear la compra    
     let tarElig = '' + this.tar;
-
     try {
       let [total, tarjeta] = await Promise.all([
         this._carritoService.obtenerTotal(this.idCarrito),
@@ -116,13 +102,13 @@ export class MetodoPagoComponent implements OnInit {
         text: 'Hubo un error con tu tarjeta y tu total. Inténtalo más tarde' + error.message,
         icon: 'error'
       })
-    }    
+    }
   }
 
 
   async finalizarCompra(total, tarjeta) {
     let idCompra = 0;
-    let datos = await this._carritoService.finalizarCompra(this.comprador, this.direccionEntrega, tarjeta, total)
+    await this._carritoService.finalizarCompra(this.comprador, this.direccionEntrega, tarjeta, total)
       .then(
         data => {
           idCompra = data.idCompra
@@ -131,7 +117,6 @@ export class MetodoPagoComponent implements OnInit {
         error => {
           Swal.fire({
             title: 'Ocurrió un error al finalizar la compra',
-            
             icon: 'error'
           })
         }
@@ -151,8 +136,15 @@ export class MetodoPagoComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.comprador = this.cookie.get('token_access');
     try {
-      let datos = await this._carritoService.obtenerCarrito(this.comprador)
-      this.idCarrito = Number (datos.msg)
+      let [datos, tarjetas] = await Promise.all([
+        this._carritoService.obtenerCarrito(this.comprador),
+        this._metodopagoService.obtenerTarjetas(this.comprador)
+      ])
+      this.idCarrito = Number(datos.msg)
+      this.listaT = tarjetas.map(x => ({
+        tipo: this.tipoT(x.tarjeta),
+        numero: x.tarjeta
+      }))
     } catch (error) {
       Swal.fire({
         icon: 'error',
@@ -160,13 +152,6 @@ export class MetodoPagoComponent implements OnInit {
       })
     }
 
-    this._metodopagoService.obtenerTarjetas(this.comprador)
-      .subscribe(data => {
-        this.listaT = data.map(x => ({
-          tipo: this.tipoT(x.tarjeta),
-          numero: x.tarjeta
-        }))
-      })
     this.direccionEntrega = Number(localStorage.getItem('devoladaIdDir'))
   }
 
