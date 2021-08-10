@@ -64,7 +64,6 @@ def actualizar_cantidad():
 
     cantidad = request.json['cantidad']
     contener = Contener.query.get((idProducto, idCarrito))
-    pprint(contener)
 
     disponibles = Producto.query.get(idProducto).disponibles
 
@@ -93,8 +92,7 @@ def productos_en_el_carrito():
         only=("idProducto", "precio", "nombre", "disponibles", "imagenes"))
 
     datos = conteneres_esquema.dump(productos)
-
-    # Aún falta unirlo con las imágenes
+    
     for item in datos:
         x = item.pop('idProducto')
         prod = Producto.query.get(x)
@@ -108,16 +106,13 @@ def productos_en_el_carrito():
 def obtener_total ():   
     idCarrito = request.args.get('idCarrito', '')
     productos = Contener.query.filter_by(idCarrito=idCarrito).all()
-    producto_esquema = ProductoEsquema(
-        only=("idProducto", "precio"))
 
     datos = conteneres_esquema.dump(productos)
     total = 0
     for item in datos:
         x = item.pop('idProducto')
-        prod = Producto.query.get(x)        
-        precio = prod.precio
-        total+= precio * item.pop('cantidad')
+        prod = Producto.query.get(x) 
+        total+= prod.precio * item.pop('cantidad')
 
     return jsonify(total)
 
@@ -151,8 +146,7 @@ def limpiar_carrito():
     
     Returns:
     Mensaje en formato json indicando si se pudo limpiar o no.'''
-
-    pprint("Hola mundo ")
+    
     idCarrito = request.args.get('idCarrito', '')
 
     productos = Contener.query.filter_by(idCarrito=idCarrito)
@@ -164,11 +158,9 @@ def limpiar_carrito():
         for item in datos:
             id_producto = item['idProducto']
             id_carrito = item['idCarrito']
-            producto = Contener.query.get((id_producto, id_carrito))
-            pprint(producto)
+            producto = Contener.query.get((id_producto, id_carrito))            
             db.session.delete(producto)
             db.session.commit()
         return jsonify({'msg': 'Se limpió el carrito'})
     except Exception as e:
-        pprint(e)
         return jsonify({'msg': 'Hubo un error'})

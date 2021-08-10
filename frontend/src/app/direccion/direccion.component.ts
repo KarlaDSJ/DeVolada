@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DireccionCompradorService } from '../direccion-comprador.service';
 import Swal from 'sweetalert2';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-direccion',
@@ -12,9 +13,8 @@ import Swal from 'sweetalert2';
 
 export class DireccionComponent implements OnInit {
 
-  // Aquí debería usar el correo del comprador actual 
-  duenio = "kethrim.tradmateos@gmail.com"
-  
+  // correo = "zogilvie1w@ezinearticles.com"
+  correo = ""  
   listaDir = [];
   validez = false;
   vdir = false;
@@ -36,7 +36,7 @@ export class DireccionComponent implements OnInit {
       return;
     }
 
-    this._direccionService.registrarDireccion(this.duenio, f.value.estado,f.value.ciudad, f.value.colonia, f.value.cp, f.value.calle, f.value.num)
+    this._direccionService.registrarDireccion(this.correo, f.value.estado,f.value.ciudad, f.value.colonia, f.value.cp, f.value.calle, f.value.num)
       .subscribe(data => {
         Swal.fire({
           title: 'Se agregó tu dirección',
@@ -69,7 +69,6 @@ export class DireccionComponent implements OnInit {
       return;
     }
     // Pasarsela a metodo-pago 
-    // this.direccionEntrega = f.value.dirElig;
     localStorage.setItem('devoladaIdDir', f.value.dirElig+'')
     this.router.navigate(['/metodo-pago'])
   }
@@ -79,10 +78,13 @@ export class DireccionComponent implements OnInit {
     this.router.navigate(['/inicio'])
   }
 
-  constructor(private router: Router, private _direccionService: DireccionCompradorService) { }
+  constructor(private router: Router, 
+    private _direccionService: DireccionCompradorService,
+    private cookie: CookieService) { }
 
   ngOnInit(): void {
-    this._direccionService.obtenerDirecciones(this.duenio)
+    this.correo = this.cookie.get('token_access'); 
+    this._direccionService.obtenerDirecciones(this.correo)
       .subscribe(data => {
         this.listaDir = data.map(x => ({
           calleNum: x.calle +" "+ x.numero,

@@ -28,6 +28,8 @@ import { BarraNavLogComponent } from './barra-nav-log/barra-nav-log.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { RegistrarComponent } from './registrar/registrar.component';
+import { CarruselComponent } from './carrusel/carrusel.component';
 
 
 
@@ -52,7 +54,9 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     LoginComponent,
     BarraNavCompradorComponent,
     BarraNavVendedorComponent,
-    BarraNavLogComponent
+    BarraNavLogComponent,
+    RegistrarComponent,
+    CarruselComponent
   ],
   imports: [
     BrowserModule,

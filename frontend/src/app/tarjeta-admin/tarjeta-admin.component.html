@@ -12,12 +12,12 @@
         <div class="col-md-8">
 
             <!-- Nombre e ID del producto-->
-            <h2 class="card-title mt-2"> Nombre del producto
-              <small class="card-id text-muted"> ID-producto</small>
+            <h2 class="card-title mt-2"> {{ producto.nombre }}
+              <small class="card-id text-muted"> ID: {{ producto.idProducto }} </small>
             </h2>
 
             <!-- Precio del producto-->
-            <h3 class="card-price text-primary"> $ 100 <small>MXM</small> </h3>
+            <h3 class="card-price text-primary"> $ {{ producto.precio }} <small>MXM</small> </h3>
 
             <!-- Calificacion del producto-->
             <p class="card-rating text-muted fs-4">
@@ -27,10 +27,7 @@
             </p>
 
             <!-- Descripcion del producto-->
-            <p class="card-description text-secondary"> Breve resumen de la descripción del producto. 
-              Texto de relleno acerca de un perrito salvaje que fue puesto en venta
-              en internet...
-            </p>
+            <p class="card-description text-secondary"> {{ producto.descripcion }} </p>
             
             
             
@@ -38,9 +35,9 @@
 
                 <div class="card-units d-flex justify-content-between">
                   <!-- Unidades vendidas -->
-                  <p class="sells font-weight-bold text-success"> 17 <span> ventas </span></p>
+                  <p class="sells font-weight-bold text-success"> {{ producto.vendidos }} <span> ventas </span></p>
                   <!-- Unidades disponibles -->
-                  <p class="sells text-secondary"> 5 <span> disponibles </span></p>
+                  <p class="sells text-secondary"> {{ producto.disponibles }} <span> disponibles </span></p>
                 </div>
 
                 <div class="card-buttons d-flex justify-content-between">

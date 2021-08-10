@@ -13,7 +13,6 @@ class DireccionComprador(db.Model):
     calle = db.Column(db.String(45)) 
     numero = db.Column(db.Integer)
 
-
     def __init__(self, correo, estado, ciudad, colonia, cp, calle, numero):
         self.correo = correo
         self.estado = estado

@@ -3,7 +3,8 @@ from main import db
 class DireccionVendedor(db.Model):
     """Modelo de la tabla direccionVendedor de la BD"""
     __tablename__ = 'direccionVendedor'
-    id_dir = db.Column(db.Integer, primary_key=True)
+    
+    idDir = db.Column(db.Integer, primary_key=True)
     correo = db.Column(db.String(45), db.ForeignKey('vendedor.correo'))
     estado = db.Column(db.String(45))
     ciudad = db.Column(db.String(45))

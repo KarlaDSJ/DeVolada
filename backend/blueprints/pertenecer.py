@@ -14,9 +14,9 @@ def obtener_datos():
     pertenecer = Pertenecer.query.filter_by(correo=correo).first()
     
     if pertenecer is None:
-        return jsonify({'msg': 'No existe un carrito para ese comprador :('})
+        return jsonify({'msg': 'No existe un carrito para ese comprador :('}), 404
     else:
-        return jsonify({'id_carrito': pertenecer.idCarrito})
+        return jsonify({'msg': pertenecer.idCarrito})
 
 
 @pertenecer.route('/pertenecer/carrito', methods=['GET'])
@@ -25,9 +25,9 @@ def obtener_dueno():
     pertenecer = Pertenecer.query.filter_by(idCarrito=idCarrito).first()
     
     if pertenecer is None:
-        return jsonify({'msg': 'No existe un comprador asignado a ese carrito :('})
+        return jsonify({'msg': 'No existe un comprador asignado a ese carrito :('}), 404
     else:
-        return jsonify({'dueno': pertenecer.correo})
+        return jsonify({'msg': pertenecer.correo})
 
 
 @pertenecer.route('/pertenecer', methods=['POST'])

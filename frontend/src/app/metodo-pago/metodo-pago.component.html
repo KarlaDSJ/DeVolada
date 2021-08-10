@@ -10,7 +10,7 @@
                 [ngClass]="{'was-validated': vtar}" novalidate>
                 <div class="row mb-2 " *ngFor="let tar of listaT, index as i, last as isLast">
                     <div class="form-check">
-                        <input class="form-check-input" [id]="'flexRadioDefault'+i" type="radio" [value]="formato(i)"
+                        <input class="form-check-input" [id]="'flexRadioDefault'+i" type="radio" [value]="tar.numero"
                             name="tarElig" ngModel required>
                         <label class="form-check-label" [for]="'flexRadioDefault'+i">
                             {{formato(i)}}

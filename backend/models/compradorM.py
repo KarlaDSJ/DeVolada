@@ -9,8 +9,16 @@ class Comprador(db.Model):
     telefono = db.Column(db.String(15))
     contrasenia = db.Column(db.String(105))
     # Relaciones    
-    carrito_propio = db.relationship('Pertenecer', backref='comprador', lazy=True)
-    tarjeta = db.relationship('TarjetaComprador', backref='duenio', lazy=True)
+    # carrito_propio = db.relationship('Pertenecer', backref='comprador', lazy=True)
+    # direcciones = db.relationship('DireccionComprador', backref='comprador')
+    # tarjetas = db.relationship('TarjetaComprador', backref='comprador', lazy='select')
+
+    # pertenecer = db.Table('pertenecer',
+    # db.Column('correo', db.String(45), db.ForeignKey('comprador.correo'), primary_key=True),
+    # db.Column('idCarrito', db.Integer, db.ForeignKey('carrito.idCarrito'), primary_key=True))
+
+    # carrito = db.relationship('Carrito', secondary=pertenecer, lazy='subquery',
+    #     backref=db.backref('comprador', lazy=True))
 
     
 

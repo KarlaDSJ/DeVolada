@@ -14,13 +14,11 @@ class Producto(db.Model):
     descripcion = db.Column(db.String(500))
     vendidos = db.Column(db.Integer)
     disponibles = db.Column(db.Integer)
+
     # Relaciones (harán el join cuando seleccionemos los productos)
-    imagenes = db.relationship('Imagen', lazy='select')
-    categoria = db.relationship('Categoria',lazy='select') 
-    
-    # contenido_en = db.relationship('Contener', back_populates='productos') 
-    contenido_en = db.relationship('Contener', backref='contenido_en') 
-    comprado_en = db.relationship('Incluir', backref='producto')             
+    imagenes = db.relationship('Imagen', cascade="all, delete-orphan", lazy='select')
+    categoria = db.relationship('Categoria', cascade="all, delete-orphan",lazy='select') 
+        
 
     def __init__(self, correo, precio, nombre, descripcion, vendidos, disponible):
         self.correo = correo

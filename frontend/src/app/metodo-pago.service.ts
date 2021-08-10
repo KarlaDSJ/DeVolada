@@ -35,8 +35,12 @@ export class MetodoPagoService {
    * @returns Información de las tarjetas que tiene el comprador usando la interfaz ITarInfo en una lista 
    */
 
-  obtenerTarjetas(correo:string): Observable<ITarInfo[]>{
-    return this._http.get<ITarInfo[]>(`${this._url}/tarjetasComprador?correo=${correo}`)
+  async obtenerTarjetas(correo:string): Promise<ITarInfo[]>{
+    return this._http.get<ITarInfo[]>(`${this._url}/tarjetasComprador?correo=${correo}`).toPromise()
+  }
+
+  async obtenerTarjeta(correo:string, numero: string): Promise<ITarInfo>{
+    return this._http.get<ITarInfo>(`${this._url}/tarjetaComprador?correo=${correo}&numero=${numero}`).toPromise()
   }
 
 }
