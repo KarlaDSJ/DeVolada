@@ -1,11 +1,11 @@
 from main import db
-from enum import unique
 
-# Carrito de compras 
+
+# Carrito de compras
 class Carrito (db.Model):
+    """ Modelo de la tabla carrito de la base de datos """
     __tablename__ = 'carrito'
     idCarrito = db.Column(db.Integer, primary_key=True, unique=True)
     # Relaciones
-    pertenece_a = db.relationship('Pertenecer', backref='carrito', lazy=True)        
-    productos = db.relationship('Contener', backref='carrito', lazy=True)        
-
+    pertenece_a = db.relationship('Pertenecer', backref='carrito', lazy=True)
+    productos = db.relationship('Contener', backref='carrito', lazy=True)
