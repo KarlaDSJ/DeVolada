@@ -17,9 +17,10 @@ import { MetodoPagoGuard } from './guard/metodo-pago.guard';
 import { CompraFinalizadaGuard } from './guard/compra-finalizada.guard';
 import { AuthVGuard } from './guard/auth-v.guard';
 import { importType } from '@angular/compiler/src/output/output_ast';
+import { LogoutGuard } from './guard/logout.guard';
 const routes: Routes = [
-  {path: 'registrar', component: RegistrarComponent},
-  {path: '', component: LoginComponent},
+  {path: 'registrar', component: RegistrarComponent, canActivate:[LogoutGuard]},
+  {path: '', component: LoginComponent,canActivate:[LogoutGuard]},
   {path: 'carrito', component: CarritoComponent, canActivate:[AuthGuard]},
   {path: 'metodo-pago', component: MetodoPagoComponent, canActivate:[AuthGuard, MetodoPagoGuard]},   
   {path: 'inicio', component: InicioComponent, canActivate:[AuthGuard]},

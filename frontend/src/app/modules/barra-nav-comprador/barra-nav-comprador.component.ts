@@ -52,7 +52,14 @@ export class BarraNavCompradorComponent implements OnInit {
   }
 
   logout(){
-    this._cookie.deleteAll();
+    while(true){
+      
+      this._cookie.deleteAll();
+      const sigue = this._cookie.check('token_accessC')
+      if(!sigue){break;}
+
+    }
+
     this._router.navigate(['/'])
     
   }
