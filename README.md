@@ -6,11 +6,11 @@ Poder comprar y vender artículos desde la comodidad de casa minimizando riesgos
 Los compradores y vendedores podrán mostrar sus productos y ofertas sin la necesidad de estar en contacto físicamente. Todo desde casa.
 
 ## Equipo de trabajo:
-- Karla Denia Salas Jiménez, *responsable de equipo*
-- Marco Antonio Orduña Ávila, *responsable técnico*
-- Kethrim Guadalupe Trad Mateos, *responsable de la calidad*
-- Omar Fernando Gramer Muñoz, *responsable de la colaboración*
-- Antonio Reyes Martínez, *responsable de la colaboración*
+- Marco, [*marcoantonio1999*](https://github.com/marcoantonio1999)
+- Kethrim, [*Kethrim*](https://github.com/Kethrim)
+- Omar, [*GramerOmarFC*](https://github.com/GramerOmarFC)
+- Antonio, [*antonioreyesmtz21*](https://github.com/antonioreyesmtz21)
+- Karla, [*KarlaDSJ*](https://github.com/KarlaDSJ)
 
 
 ## Backend
@@ -63,18 +63,16 @@ npm install
 ```
 cd frontend/
 ```
-y 
-```
-npm start 
-```
-ó 
-```
-ng serve 
-```
-ó 
-```
-ng s
-```
+Opciones
+* ```
+  npm start 
+  ```
+* ```
+  ng serve 
+  ```
+* ```
+  ng s
+  ```
 
 ## Base de datos
 ### Instalación
