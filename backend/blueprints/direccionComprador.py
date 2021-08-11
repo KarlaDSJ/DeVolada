@@ -12,7 +12,12 @@ direccionesComprador_esquema = DireccionCompradorEsquema(many=True)
 
 @direccionComprador.route('/direccionComprador/<id_direccionComprador>', methods=['GET'])
 def obtener_direccionComprador(id_direccionComprador):  
-    '''Obtiene la información de una dirección dado su id '''  
+    '''Obtiene la información de una dirección dado su id
+    Params:
+        id_direccionComprador: identificador de la dirección del comprador
+    Returns: 
+    Json con la información de la dirección, o un mensaje con error 404 al
+    no poder encontrarala '''  
     direccionComprador = DireccionComprador.query.get(id_direccionComprador)
     if direccionComprador is None:
         return jsonify({'msg': 'No existe esa direccion'}), 404
@@ -23,7 +28,11 @@ def obtener_direccionComprador(id_direccionComprador):
 # Maaaal. Debe revisar campo por campo para que no haya duplicados
 @direccionComprador.route('/direccionComprador', methods=['POST'])
 def agrega_direccionComprador(): 
-    '''Agrega una dirección a un comprador'''
+    '''Agrega una dirección a un comprador
+    Returns:
+    Json con un mensaje indicando que se registró, y su identificador. 
+    En caso de error, 400 con un mensaje indicando que ya ha sido 
+    registrada'''
     correo = request.json['correo']
     estado = request.json['estado'] 
     ciudad = request.json['ciudad'] 
@@ -46,8 +55,11 @@ def agrega_direccionComprador():
 
 
 @direccionComprador.route('/direccionComprador/direcciones/<correo>', methods=['GET'])
-def obtener_productos_direccionComprador(correo): 
-    '''Obtiene una lista con todas las direcciones de un comprador'''
+def obtener_direccionesComprador(correo): 
+    '''Obtiene una lista con todas las direcciones de un comprador
+    
+    Returns: 
+    Lista de todas las direcciones registradas'''
 
     direccionComprador = DireccionComprador.query.filter_by(correo=correo).all()
     return direccionesComprador_esquema.jsonify(direccionComprador)
