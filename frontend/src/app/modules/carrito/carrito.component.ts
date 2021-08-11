@@ -64,7 +64,8 @@ export class CarritoComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.correo = this.cookie.get('token_access');
+    this.correo = this.cookie.get('token_accessC');
+    console.log("Correo", this.correo);
     try {
       let datos = await this._carritoService.obtenerCarrito(this.correo)
       this.idCarrito = Number(datos.msg)

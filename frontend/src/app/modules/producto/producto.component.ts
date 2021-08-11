@@ -74,7 +74,7 @@ export class ProductoComponent implements OnInit {
         this.info = { 'idProducto': this.producto.idProducto, 'nombre': this.producto.nombre, 'imagen': this.producto.imagenes[0].imagen }
         this._ResenasService.setInfoProducto(this.info)
       })
-    let correo = this.cookie.get('token_access');
+    let correo = this.cookie.get('token_accessC');
     try {
       let datos = await this._carritoService.obtenerCarrito(correo)
       this.idCarrito = Number(datos.msg)

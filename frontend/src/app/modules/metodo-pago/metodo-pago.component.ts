@@ -150,7 +150,7 @@ export class MetodoPagoComponent implements OnInit {
     private cookie: CookieService) { }
 
   async ngOnInit(): Promise<void> {
-    this.comprador = this.cookie.get('token_access');
+    this.comprador = this.cookie.get('token_accessC');
     try {
       let [datos, tarjetas] = await Promise.all([
         this._carritoService.obtenerCarrito(this.comprador),

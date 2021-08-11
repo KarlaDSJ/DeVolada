@@ -96,7 +96,7 @@ export class DireccionComponent implements OnInit {
     private cookie: CookieService) { }
 
   ngOnInit(): void {
-    this.correo = this.cookie.get('token_access');
+    this.correo = this.cookie.get('token_accessC');
     this._direccionService.obtenerDirecciones(this.correo)
       .subscribe(data => {
         this.listaDir = data.map(x => ({
