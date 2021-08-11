@@ -10,11 +10,14 @@ import Swal from 'sweetalert2';
 })
 export class CarritoComponent implements OnInit {
 
-  // Consulta a la base de datos 
   idCarrito = -1;
   listaP = [];
   correo = "";
 
+  /**
+   * Obtiene el total del carrito 
+   * @returns total 
+   */
   public get total(): number {
     let totalP = 0
     this.listaP.forEach(element => {
@@ -23,7 +26,10 @@ export class CarritoComponent implements OnInit {
     return totalP
   }
 
-  // Aumenta la cantidad de un producto acorde a los disponibles. 
+  /**
+   * Aumenta la cantidad de un producto acorde a los disponibles. 
+   * @param indice posición de la lista de productos en el carrito
+   */
   aumentarCP(indice: number): void {
     if (this.listaP[indice].cant < this.listaP[indice].disp) {
       this._carritoService.cambiarCantidad(this.listaP[indice].idP, this.idCarrito, ++this.listaP[indice].cant)
@@ -31,7 +37,10 @@ export class CarritoComponent implements OnInit {
     }
   }
 
-  // Disminuye la cantidad de un producto. El límite es 1
+  /**
+   * Disminuye la cantidad de un producto. El límite es 1
+   * @param indice posición de la lista de productos en el carrito
+   */
   disminuirCP(indice: number): void {
     if (this.listaP[indice].cant > 1) {
       this._carritoService.cambiarCantidad(this.listaP[indice].idP, this.idCarrito, --this.listaP[indice].cant)
@@ -39,7 +48,10 @@ export class CarritoComponent implements OnInit {
     }
   }
 
-  // Elimina un producto 
+  /**
+   * Elimina un producto
+   * @param i posición de la lista de productos en el carrito
+   */
   eliminarP(i: number): void {
     this._carritoService.eliminarProducto(this.listaP[i].idP, this.idCarrito)
       .subscribe()
@@ -48,14 +60,14 @@ export class CarritoComponent implements OnInit {
   }
 
   constructor(private _carritoService: CarritoService,
-    private cookie: CookieService) {    
+    private cookie: CookieService) {
   }
 
   async ngOnInit(): Promise<void> {
-    this.correo = this.cookie.get('token_access');    
+    this.correo = this.cookie.get('token_access');
     try {
       let datos = await this._carritoService.obtenerCarrito(this.correo)
-      this.idCarrito = Number (datos.msg)
+      this.idCarrito = Number(datos.msg)
     } catch (error) {
       Swal.fire({
         icon: 'error',
@@ -78,7 +90,7 @@ export class CarritoComponent implements OnInit {
         icon: 'error',
         title: 'No se pueden obtener tus productos'
       })
-    }   
+    }
   }
 
 }

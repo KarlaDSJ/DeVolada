@@ -71,7 +71,6 @@ export class CarritoService {
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-  // PROBAR
   /**
    * Crea un carrito 
    * @returns Interfaz de un carrito 
@@ -80,7 +79,6 @@ export class CarritoService {
     return this._http.post<ICarrito>(this._url + "/carrito", {}).toPromise()
   }
 
-  // PROBAR
   /**
    * Asigna un carrito a un comprador
    * @param idCarrito identificador del carrito

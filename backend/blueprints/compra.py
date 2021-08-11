@@ -18,11 +18,13 @@ compras_esquema = CompraEsquema(many=True)
 
 @compra.route('/compra', methods=['POST'])
 def finalizar_compra():
-    ''' Finaliza una compra
-    
-    Returns: 
+    """
+    Finaliza una compra
+
+    Returns:
     Json con la info de la compra.
-    No incluye los productos comprados. '''
+    No incluye los productos comprados.
+    """
     correo = request.json['correo']    
     # Ingreso la tarjeta ya cifrada
     idDir = request.json['idDir']
@@ -45,8 +47,8 @@ def productos_comprados (id_compra):
     en una lista de json
     
     Params:
-    identificador de la compra de la que se quiere saber la info
-    
+        id_compra: identificador de la compra de la que se quiere 
+                   saber la info
     Returns:
     Lista de los productos y sus cantidades en formato json'''
     compra = Compra.query.get(id_compra)  
@@ -71,14 +73,16 @@ def productos_comprados (id_compra):
 
 
 
+
+
+
 def enviar_correo(correo, nombre, total):
     '''Manda un correo con el total de la compra a un comprador
     
     Params:
-    correo: destinatario
-    nombre: nombre del comprador
-    total: total de la compra
-    
+        correo: destinatario
+        nombre: nombre del comprador
+        total: total de la compra    
     Returns: 
     Mensaje indicando que se ha enviado'''
     mail = Mail(app)
