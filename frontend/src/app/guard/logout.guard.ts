@@ -35,8 +35,8 @@ export class LogoutGuard implements CanActivate {
     title: 'Error',
     text: 'Primero tienes que cerrar sesión'})
     
-    return false
-    ;}
+    return false;
+  }
  
   return true;
   }
