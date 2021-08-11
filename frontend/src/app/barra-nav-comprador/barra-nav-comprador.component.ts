@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ICategoria, ProductosService } from "../productos.service";
 import { IProducto } from "../productos.service";
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-barra-nav-comprador',
@@ -14,7 +16,7 @@ export class BarraNavCompradorComponent implements OnInit {
   busqueda: boolean = false;
 
 
-  constructor(private _productoService: ProductosService) { }
+  constructor(private _productoService: ProductosService, private _router:Router, private _cookie: CookieService) { }
 
   /*
     Carga las categorías en el buscador
@@ -47,5 +49,11 @@ export class BarraNavCompradorComponent implements OnInit {
   cerrar(){
     this.productos = [];
     this.busqueda = false;
+  }
+
+  logout(){
+    this._cookie.deleteAll();
+    this._router.navigate(['/'])
+    
   }
 }

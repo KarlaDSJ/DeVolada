@@ -77,7 +77,7 @@ export class RegistrarComponent implements OnInit {
         Swal.fire({
           icon: 'success',
           title: '¡Exito!',
-          text: 'Usuario registrado correctamente, te enviamos un correo a}' + this.dataC.correoC
+          text: 'Usuario registrado correctamente, te enviamos un correo a ' + this.dataC.correoC
         })
 
         // Se crea su carrito
@@ -133,9 +133,10 @@ export class RegistrarComponent implements OnInit {
         Swal.fire({
           icon: 'success',
           title: '¡Exito!',
-          text: 'Usuario registrado correctamente, te enviamos un correo a' + this.dataV.correoV
+          text: 'Usuario registrado correctamente, te enviamos un correo a  ' + this.dataV.correoV
+          
         })
-        this.router.navigate(['/l']);
+        this.router.navigate(['/']);
       }
       console.log(response)
 

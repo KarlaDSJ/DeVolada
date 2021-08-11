@@ -44,11 +44,10 @@ export class LoginComponent implements OnInit {
   this._loginService.IniciarSesionC(this.dataC).subscribe(response => {
     console.log(response)
     this.datos = response.msg;
-    this.cookieServive.set('token_access',response.session,1,'/')
     if (this.datos == 'error_datos'){
       Swal.fire({icon:'error',
-                title: 'oooops',
-                text: 'Los datos ingresados son incorectos'})
+      title: 'oooops',
+      text: 'Los datos ingresados son incorectos'})
     }
     if(this.datos == 'error_contrasenia'){
       Swal.fire({icon:'error',
@@ -61,8 +60,10 @@ export class LoginComponent implements OnInit {
       Swal.fire({icon:'success',
       title: 'Bienvenido de nuevo',
       text: this.nombre} )
+
+      this.cookieServive.set('token_accessC',response.session,1,'/')
       this.router.navigate(['/inicio']);
-        
+      
     }
     })
     
@@ -88,9 +89,10 @@ export class LoginComponent implements OnInit {
       Swal.fire({icon:'success',
       title: 'Bienvenido de nuevo',
       text: this.nombre} )
-      this.router.navigate(['/inicio']);
+      this.router.navigate(['/mis-productos']);
+      this.cookieServive.set('token_accessV',response.session,1,'/')
     }
-})
+  })
   }
 }
 
