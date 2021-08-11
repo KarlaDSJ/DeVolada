@@ -1,8 +1,10 @@
 from main import db
+from flask import app
 from flask import Blueprint, request, jsonify
 from models.imagenM import Imagen
 from schemas.imagenE import ImagenEsquema
-
+from werkzeug.utils import secure_filename
+import os
 
 imagen = Blueprint('imagen', __name__)
 
@@ -10,15 +12,28 @@ imagen_esquema = ImagenEsquema()
 imagen_esquema = ImagenEsquema(many=True)
 
 
-# Petición para agregar una imagen a la base de datos.
-@imagen.route('/imagen', methods=['POST'])
-def agrega_imagen():
-    imagen = request.json['imagen']
-    idProducto = request.json['idProducto']
-    imagen_nueva = Imagen(imagen, idProducto)
-    db.session.add(imagen_nueva)
-    db.session.commit()
-    return jsonify({"mensaje:": "Se subió la imagen correctamente"})
+
+# Petición para agregar las urls de las imagenes a la base de datos.
+@imagen.route('/imagen/<idProducto>', methods=['POST'])
+def agregar_url_imagenes(idProducto):
+    json_dict = request.get_json(force=True)
+    urls = []
+    for url in json_dict:
+        urls.insert( json_dict[url] )
+        imagen_nueva = Imagen(json_dict[url], idProducto)
+        db.session.add(imagen_nueva)
+        db.session.commit()
+    return jsonify({"mensaje": "Se subierons las urls correctamente" + urls })
+
+
+@imagen.route('/imagen/subir', methods = ['GET', 'POST'])
+def subir_imagen():
+   if request.method == 'POST':
+      imagen = request.files['file']
+      imagen_url = os.path.join("static", "ImagenesProductos", secure_filename(imagen.filename))
+      imagen.save(imagen_url)
+      return jsonify({"mensaje": "se subió la imagen", "url": imagen_url })
+
 
 
 # Petición para eliminar una imagen de la base de datos a través de su PK. 

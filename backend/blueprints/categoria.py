@@ -10,25 +10,23 @@ categoria_esquema = CategoriaEsquema()
 categorias_esquema = CategoriaEsquema(many=True)
 
 
-@categoria.route('/categoria', methods=['POST'])
-def agrega_categoria():
-    """Función para agregar una categoría a un producto"""
-    categoria  = request.json['categoria']
-    idProducto = request.json['idProducto']
-    categoria_nueva = Categoria(categoria, idProducto)
+@categoria.route('/categoria/agrega/<idProducto>', methods=['POST'])
+def agrega_categorias(idProducto):
+    """Función para agregar una lista de categorías a un producto"""
+    categorias = request.json['categorias']
 
-    categoria_nueva = Categoria(categoria, idProducto)
+    for categoria in categorias:
+        categoria_nueva = Categoria(categoria, idProducto)
+        db.session.add(categoria_nueva)
+        db.session.commit()
 
-    db.session.add(categoria_nueva)
-    db.session.commit()
-    return jsonify({"mensaje:": "Se agregó la categoría <" + categoria + "> en el producto <" + str(idProducto) + "> correctamente."})
+    return jsonify({"mensaje:": "Se agregaron las categorías <" + categorias + "> en el producto <" + str(idProducto) + "> correctamente."})
 
 
-@categoria.route('/categoria', methods=['DELETE'])
-def elimina_categoria():
+@categoria.route('/categoria/elimina/<idProducto>', methods=['DELETE'])
+def elimina_categoria(idProducto):
     """Función para eliminar una categoría de un producto"""
     categoria  = request.json['categoria']
-    idProducto = request.json['idProducto']
     categoria_eliminar = db.session.query(Categoria).get((categoria,idProducto))
     if( categoria_eliminar is None):
         return jsonify({"mensaje:": "Error. La <" + categoria + "> del producto <" + str(idProducto) + "> no existe."})

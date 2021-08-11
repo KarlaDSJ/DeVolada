@@ -22,7 +22,6 @@ export class CrearResenaComponent implements OnInit {
 
 
   constructor(private router: Router, private _ResenasService: ResenasService) { 
-
   }
 
   ngOnInit(): void {
