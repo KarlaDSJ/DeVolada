@@ -74,6 +74,7 @@ def productos_comprados (id_compra):
 
 
 
+
 def enviar_correo(correo, nombre, total):
     '''Manda un correo con el total de la compra a un comprador
     

@@ -21,6 +21,12 @@ class Comprador(db.Model):
             telefono: teléfono        
             contrasenia: contraseña
         """
+    # Relaciones    
+    carrito_propio = db.relationship('Pertenecer', backref='comprador', lazy=True)
+    tarjeta = db.relationship('TarjetaComprador', backref='duenio', lazy=True)
+    
+
+    def __init__(self,correo, nombre,telefono,contrasenia):
         self.correo = correo
         self.nombre = nombre
         self.telefono = telefono
