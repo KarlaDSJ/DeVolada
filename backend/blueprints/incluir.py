@@ -13,7 +13,8 @@ def incluir_productos():
     ''' Incluye un producto a una compra con una cantidad
     
     Returns:
-    Json indicando si se pudo o no completar la inclusión'''
+    Json indicando si se pudo o no completar la inclusión
+    En caso de que no se produce el error 400'''
     producto = request.json['producto']
     compra = request.json['compra']
     cantidad = request.json['cantidad']

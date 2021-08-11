@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { MetodoPagoService } from '../metodo-pago.service';
 import { CarritoService } from '../carrito.service';
@@ -15,27 +15,29 @@ import { CookieService } from 'ngx-cookie-service';
 
 export class MetodoPagoComponent implements OnInit {
 
-  // Cambiar por la consulta a la base
   comprador = ""
-  // comprador = "zogilvie1w@ezinearticles.com"
   direccionEntrega = -2;
   idCarrito = -1;
-
   listaT = [];
   valida = false;
   vtar = false;
   tar = "";
 
-
-
-  // Formato en el que se muestra una tarjeta
+  /**
+   * Formato en el que se muestra una tarjeta
+   * @param i elemento de la lista
+   * @returns cadena con información de la tarjeta 
+   */
   formato(i: number): string {
     let tar = "";
     tar = this.listaT[i].tipo + " terminada en " + this.listaT[i].numero.substr(-4, 4);
     return tar;
   }
 
-  // Validar una tarjeta
+  /**
+   * Valida una tarjeta elegida y la agrega a la lista de tarjetas 
+   * @param f formulario para la nueva tarjeta
+   */
   validarTar(f: NgForm) {
     console.log("Entré");
     this.valida = true;
@@ -54,22 +56,25 @@ export class MetodoPagoComponent implements OnInit {
             title: 'Se agregó tu tarjeta',
             icon: 'success'
           })
+          this.listaT.push({
+            tipo: this.tipoT(f.value.numero),
+            numero: f.value.numero
+          });
         },
         error => {
           Swal.fire({
-            title: 'Ocurrió un error',
-            text: 'Inténtalo más tarde',
+            title: 'Método de pago ya registrado',
+            text: 'Ya has registrado ésta tarjeta',
             icon: 'error'
           })
         })
-
-    this.listaT.push({
-      tipo: this.tipoT(f.value.numero),
-      numero: f.value.numero
-    });
   }
 
-  // Indica si una tarjeta es visa, mastercard o desconocida
+  /**
+   * Indica si una tarjeta es visa o mastercard 
+   * @param num número de tarjeta
+   * @returns Visa o MasterCard
+   */
   tipoT(num: string): string {
     let p = num.substr(0, 1);
     if (p == "4") {
@@ -78,8 +83,11 @@ export class MetodoPagoComponent implements OnInit {
       return "MasterCard";
   }
 
-  // Obtiene el método de pago elegido 
-  // Redirecciona a la info de la compra
+  /**
+   * Obtiene el método de pago elegido 
+   * Redirecciona a la info de la compra
+   * @param f formulario para obtener la tarjeta elegida
+   */
   async obtenerTar(f: NgForm) {
     this.vtar = true;
     if (f.invalid) {
@@ -94,7 +102,6 @@ export class MetodoPagoComponent implements OnInit {
         this._carritoService.obtenerTotal(this.idCarrito),
         this._metodopagoService.obtenerTarjeta(this.comprador, tarElig)
       ]);
-      console.log("Total", total);
       this.finalizarCompra(total, tarjeta.tarjeta);
     } catch (error) {
       Swal.fire({
@@ -106,6 +113,12 @@ export class MetodoPagoComponent implements OnInit {
   }
 
 
+  /**
+   * Crea una compra 
+   * No agrega los productos a ella
+   * @param total total de la compra
+   * @param tarjeta tarjeta elegida para pagar
+   */
   async finalizarCompra(total, tarjeta) {
     let idCompra = 0;
     await this._carritoService.finalizarCompra(this.comprador, this.direccionEntrega, tarjeta, total)
@@ -123,10 +136,13 @@ export class MetodoPagoComponent implements OnInit {
       )
   }
 
-  // Cancela la compra y redirige a la página de inicio
+  /**
+   * Cancela la compra y redirige a la página de inicio
+   */
   cancelar() {
     this.router.navigate(['/inicio'])
   }
+
 
   constructor(private router: Router,
     private _metodopagoService: MetodoPagoService,

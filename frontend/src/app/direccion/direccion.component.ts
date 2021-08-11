@@ -13,14 +13,17 @@ import { CookieService } from 'ngx-cookie-service';
 
 export class DireccionComponent implements OnInit {
 
-  // correo = "zogilvie1w@ezinearticles.com"
-  correo = ""  
+  correo = ""
   listaDir = [];
   validez = false;
   vdir = false;
   direccionEntrega = -1;
 
-  // Formato en el que se muestra una dirección 
+  /**
+   * Formato en el que se muestra una dirección 
+   * @param i índica de la lista de direcciones
+   * @returns cadena de texto con la información de una dirección
+   */
   formato(i: number): string {
     let dir = "";
     dir = this.listaDir[i].calleNum + ", " + this.listaDir[i].colonia + ", " + this.listaDir[i].ciudad + ", " +
@@ -28,7 +31,12 @@ export class DireccionComponent implements OnInit {
     return dir;
   }
 
-  // Valida los campos del formulario 
+  /**
+   * Valida los campos del formulario y la agrega a la base
+   * y a la lista en caso de ser válida. En caso contrario
+   * muestra un mensaje de error.
+   * @param f formulario en el que se registra la dirección
+   */
   validarDir(f: NgForm) {
 
     this.validez = true;
@@ -36,11 +44,11 @@ export class DireccionComponent implements OnInit {
       return;
     }
 
-    this._direccionService.registrarDireccion(this.correo, f.value.estado,f.value.ciudad, f.value.colonia, f.value.cp, f.value.calle, f.value.num)
+    this._direccionService.registrarDireccion(this.correo, f.value.estado, f.value.ciudad, f.value.colonia, f.value.cp, f.value.calle, f.value.num)
       .subscribe(data => {
         Swal.fire({
           title: 'Se agregó tu dirección',
-          text: data.idDir+"",
+          text: data.idDir + "",
           icon: 'success'
         })
         this.listaDir.push({
@@ -51,43 +59,48 @@ export class DireccionComponent implements OnInit {
           cp: Number(f.value.cp),
           idDir: data.idDir
         });
-        
+
       },
-      error => {
-        Swal.fire({
-          title: 'No se puede agregar',
-          text: error.error.msg ,
-          icon: 'error'
+        error => {
+          Swal.fire({
+            title: 'No se puede agregar',
+            text: error.error.msg,
+            icon: 'error'
+          })
         })
-      })   
   }
 
-  // Obtiene la dirección y crea la nueva vista 
+  /**
+   * Obtiene la dirección y crea la nueva vista metodo-pago
+   * @param f formulario en el que se muestran las direcciones   
+   */
   obtenerDir(f: NgForm) {
     this.vdir = true;
     if (f.invalid) {
       return;
     }
     // Pasarsela a metodo-pago 
-    localStorage.setItem('devoladaIdDir', f.value.dirElig+'')
+    localStorage.setItem('devoladaIdDir', f.value.dirElig + '')
     this.router.navigate(['/metodo-pago'])
   }
 
-  // Cancela la compra y redirige a la página de inicio
+  /**
+   * Cancela la compra y redirige a la página de inicio
+   */
   cancelar() {
     this.router.navigate(['/inicio'])
   }
 
-  constructor(private router: Router, 
+  constructor(private router: Router,
     private _direccionService: DireccionCompradorService,
     private cookie: CookieService) { }
 
   ngOnInit(): void {
-    this.correo = this.cookie.get('token_access'); 
+    this.correo = this.cookie.get('token_access');
     this._direccionService.obtenerDirecciones(this.correo)
       .subscribe(data => {
         this.listaDir = data.map(x => ({
-          calleNum: x.calle +" "+ x.numero,
+          calleNum: x.calle + " " + x.numero,
           colonia: x.colonia,
           ciudad: x.ciudad,
           estado: x.estado,
