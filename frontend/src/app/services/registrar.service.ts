@@ -1,11 +1,17 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
-import {HttpParams} from "@angular/common/http";
+
+/**
+ * Inteface para los tipos de datos para poder registrarse
+ */
 
 export interface IRegistrar {
 
-    msg:string;
+    msg:string; //mesnaje del JSON para ver si los datos son correctos
+    
+    //los datos del comprador
+
     correoC:string,
     nombreC:string,
     telefonoC : number,
@@ -15,6 +21,8 @@ export interface IRegistrar {
     cpC : string,
     calleC : string,
     numeroC : number
+
+    //los datos del vendedor
 
     correoV:string,
     nombreV:string,
@@ -32,9 +40,27 @@ export interface IRegistrar {
 @Injectable({
     providedIn: 'root'
   })
+
+/**
+ *Clase del servicio de registrar para que el componente de registrar se pueda subscribirse  
+*/
+
 export class RegistrarService{
-    private _url = 'http://127.0.0.1:5000/';
+    
+    private _url = 'http://127.0.0.1:5000/'; // la url del servidor para mandar las peticiones JSON
+    
+    /**
+     * Constructor de las clase
+     * @param _http el protocolo por el cual se van a enviar las peticiones
+     */
+
     constructor(private _http: HttpClient){}
+
+    /**
+     * Metodo para mandar los datos del comprador al servidor
+     * @param credenciales los datos del comprador
+     * @returns 
+     */
 
     registrarC(credenciales: {correoC:string,nombreC:string,telefonoC : string,
     estadoC : string,
@@ -45,6 +71,12 @@ export class RegistrarService{
     numeroC : number}): Observable<IRegistrar>{
         return this._http.post<IRegistrar>(this._url+"/createC",credenciales);
     }
+
+    /**
+     * Metodo para mandar los datos 
+     * @param credenciales 
+     * @returns 
+     */
     registrarV(credenciales: {correoV:string,nombreV:string,telefonoV : string,
         estadoV : string,
         ciudadV : string,

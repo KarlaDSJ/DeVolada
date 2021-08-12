@@ -1,47 +1,39 @@
+<!-- Barra de navegacion-->
+
 <app-barra-nav-log>   </app-barra-nav-log>
+
+<!-- Fin barra de navegación -->
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-    
-  
-
-  </head>
+</head>
  
-  <body>
-
-   
-
+<body>
     <div class="container">
-
         <div class="row">
             <div class="col-4">
-
             </div>
             <div class="col-4">
-                <h2 class="pb-4 pt-4">Registrate         ¡¡¡Es Gratis!!!</h2 >
-
+                <h2 class=" registrate pb-4 pt-4">Sé parte de nosotros</h2 >
             </div>
             <div class="col-4"></div>
-
         </div>
         <div class="row">
             <div class="col-6">
-
                 <div class="card">
                     <h2 class="text-center pt-3">¿Quiéres ser Comprador?</h2>
                     <div class="card-body">
-                            
+                        
+                        <!-- Inicio form -->                        
+                        
                         <form #form = "ngForm" (submit) = "submit()"action="">
-                                
                             <div class="input-group mb-3">
-                                 <label for="correo" class="form-label" style = "padding-right: 8px;">Correo Electrónico</label>
+                                <label for="correo" class="form-label" style = "padding-right: 8px;">Correo Electrónico</label>
                                  <input class="form-control" 
                                 type="email"
                                 id="correo"
@@ -50,20 +42,16 @@
                                 name="correoC"
                                 required
                                 >
-                               
-                                
                                 <label for="nombre" class="form-label" style="padding-left: 8px;padding-right:8px ;">Nombre</label>
                                 <input class="form-control" 
                                 type="text"
                                 id="nombre"
-                               
                                 [(ngModel)] = "dataC.nombreC"  
                                 name="nombreC"                        
                                 feedback = "Required"
                                 required
                                 >
                             </div>
-                             
                             <div class="input-group mb-3">
                                 <label for="telefono" class="form-label" style = "padding-right: 8px;">Teléfono</label>
                                 <input class="form-control" 
@@ -74,7 +62,6 @@
                                 feedback = "Required"
                                 required
                                 >
-
                                 <label for="estado" class="form-label" style="padding-left: 8px;padding-right:8px">Estado</label>
                                 <input class="form-control" 
                                 type="text"
@@ -85,7 +72,6 @@
                                 required
                                 >
                             </div>  
-                            
                             <div class="input-group mb-3">
                                 <label for="ciudad" class="form-label" style = "padding-right: 8px;">Ciudad</label>
                                 <input class="form-control" 
@@ -105,7 +91,7 @@
                                 feedback = "Required"
                                 required
                                 >
-                                <label for="cp" class="form-label" style="padding-left: 8px;padding-right:8px ;">Codigo Postal</label>
+                                <label for="cp" class="form-label" style="padding-left: 8px;padding-right:8px ;">Código Postal</label>
                                 <input class="form-control" 
                                 type="text"
                                 id="cp"           
@@ -135,27 +121,22 @@
                                 required
                                 >
                             </div>
-                            
                             <h5>Te enviaremos un correo de confirmación con la contraseña para poder acceder al sistema</h5>
-                            
-                            
-                                
-
-
-
-                            <div class="p-3"><button type="submit" class="btn btn-dark">Submit</button> </div>
-                            
+                            <div class="p-3"><button type="submit" class="btn btn-dark">Enviar</button> </div>
                         </form>
+
+                        <!-- Fin Form-->
+                    
                     </div>
                 </div>
-
-              
             </div>
             <div class="col-6">
-
                 <div class="card">
                     <h2 class="text-center pt-3">¿Quiéres ser Vendedor?</h2>
                     <div class="card-body">
+
+                        <!-- Inicio form --> 
+                        
                         <form #form = "ngForm" (submit) = "submitV()">
                             <div class="input-group mb-3">
                                 <label for="correo" class="form-label" style = "padding-right: 8px;">Correo Electrónico</label>
@@ -177,8 +158,7 @@
                                 required
                                 >
                             </div>
-                             
-                            <div class="input-group mb-3">
+                                <div class="input-group mb-3">
                                 <label for="telefono" class="form-label" style = "padding-right: 8px;">Teléfono</label>
                                 <input class="form-control" 
                                 type="tel"
@@ -188,7 +168,6 @@
                                 feedback = "Required"
                                 required
                                 >
-
                                 <label for="estado" class="form-label" style="padding-left: 8px;padding-right:8px">Estado</label>
                                 <input class="form-control" 
                                 type="text"
@@ -199,8 +178,7 @@
                                 required
                                 >
                             </div>  
-                            
-                            <div class="input-group mb-3">
+                                <div class="input-group mb-3">
                                 <label for="ciudad" class="form-label" style = "padding-right: 8px;">Ciudad</label>
                                 <input class="form-control" 
                                 type="text"
@@ -219,7 +197,7 @@
                                 feedback = "Required"
                                 required
                                 >
-                                <label for="cp" class="form-label" style="padding-left: 8px;padding-right:8px ;">Codigo Postal</label>
+                                <label for="cp" class="form-label" style="padding-left: 8px;padding-right:8px ;">Código Postal</label>
                                 <input class="form-control" 
                                 type="text"
                                 id="cp"      
@@ -249,7 +227,7 @@
                                 required
                                 >
                             </div>
-                            <h6>Es necesario que nos proporciones un numero de tarjeta en la cual quieres que te hagan tus depositos</h6>
+                            <h6 class="mb-4">Es necesario que nos proporciones un numero de tarjeta en la cual quieres que te hagan tus depositos</h6>
                             <label for="tarjeta" class="form-label mb-3" style="padding-left: 8px;padding-right:8px ;">Número de tarjeta</label>
                                 <input class="form-control" 
                                 type="text"
@@ -259,32 +237,17 @@
                                 feedback = "Required"
                                 required
                                 >
-                            <h5>Te enviaremos un correo de confirmación con la contraseña para poder acceder al sistema</h5>
-                            
-                            
-                                
-
-
-
-                            <div class="p-3"><button type="submit" class="btn btn-dark">Submit</button> </div>
-                            
+                            <h5 class="mt-4">Te enviaremos un correo de confirmación con la contraseña para poder acceder al sistema</h5>
+                            <div class="p-3"><button type="submit" class="btn btn-dark">Enviar</button> </div>
                         </form>
+
+                        <!-- Fin Form-->
                        
                     </div>
                 </div>
-
-                
             </div>
         </div>
-
-        
     </div>
-
-
-   
-
-
-
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -295,5 +258,5 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     -->
-  </body>
+</body>
 </html>
