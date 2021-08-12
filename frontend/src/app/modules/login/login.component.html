@@ -28,7 +28,7 @@
         <!-- Inicio video -->
         
         <div class="col-5">
-          <video width="369px" autoplay="autoplay" muted loop>
+          <video width="369px" autoplay="autoplay" oncanplay="this.play()" onloadedmetadata="this.muted = true" muted loop>
             <source src="../../assets/img/barrasNav/DeVolada.mp4"  type="video/mp4">Su navegador no puede reproducir este video
           </video>
         </div>
@@ -121,5 +121,4 @@
   </body>
   
   <!-- Fín : Body -->
-
-  </html>
+</html>

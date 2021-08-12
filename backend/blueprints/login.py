@@ -5,6 +5,7 @@ from flask.json import jsonify
 from models.compradorM import Comprador
 from flask import request
 
+
 login = Blueprint('login',__name__)
 
 @login.route('/loginC', methods = ['GET', 'POST'])
@@ -41,3 +42,4 @@ def entrarV():
             return jsonify({'msg': 'error_contrasenia'})
     else:
         return jsonify({'msg': 'error_datos'})
+

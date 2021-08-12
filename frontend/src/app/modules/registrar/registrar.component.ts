@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { IRegistrar } from '../../services/registrar.service';
-import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { RegistrarService } from "../../services/registrar.service";
 import { CarritoService } from '../../services/carrito.service';
@@ -11,12 +10,18 @@ import Swal from 'sweetalert2';
   templateUrl: './registrar.component.html',
   styleUrls: ['./registrar.component.css']
 })
+/**
+ * Clase del componente Registrar para que el usuario se pueda registrar a nuestro sistema
+ */
 export class RegistrarComponent implements OnInit {
-  registrar: IRegistrar;
+  
+  registrar: IRegistrar; //interfaz
 
-  correoDatos = '';
+  correoDatos = ''; //para verificar si el correo
+
+  //los datos de comprador
+
   dataC = {
-
     correoC: '',
     nombreC: '',
     telefonoC: '',
@@ -27,8 +32,10 @@ export class RegistrarComponent implements OnInit {
     calleC: '',
     numeroC: 0
   }
-  dataV = {
 
+  //los datos del vendedor
+
+  dataV = {
     correoV: '',
     nombreV: '',
     telefonoV: '',
@@ -41,22 +48,31 @@ export class RegistrarComponent implements OnInit {
     tarjetaV: ''
   }
 
+  /**
+   * Contructor de la clase
+   * @param _registrarService 
+   * @param router la ruta por si redirigimos al usuario a otra pagina
+   * @param _carritoService 
+   */
 
-
-
-
-
-
-  constructor(private _route: ActivatedRoute,
+  constructor(
     private _registrarService: RegistrarService, 
     private router: Router,
     private _carritoService: CarritoService) { }
 
+  /**
+   * Otro constructor de la clase
+   */  
+  
   ngOnInit(): void {
   }
 
+  /**
+   * Función que sube los datos del comprador al observable que es el servicio de registrar ademas de verificar
+   * que los datos son correctos
+   */
+
   submit() {
-    console.log(this.dataC)
     this._registrarService.registrarC(this.dataC).subscribe(async response => {
       this.correoDatos = response.msg;
       if (this.correoDatos == 'error_correo') {
@@ -79,7 +95,6 @@ export class RegistrarComponent implements OnInit {
           title: '¡Exito!',
           text: 'Usuario registrado correctamente, te enviamos un correo a ' + this.dataC.correoC
         })
-
         // Se crea su carrito
         let carrito = -1;
         try {
@@ -94,23 +109,20 @@ export class RegistrarComponent implements OnInit {
             text: 'No se pudo crear tu carrito :('
           })
         }
-
-
         this.router.navigate(['/']);
       }
-
-      console.log(response)
-
-
     }, error => {
       console.log(error)
       if (error.status == 400) {
         Swal.fire('Usuario o contraseña incorrectos')
       }
-
     })
-
   }
+
+  /**
+   * Función que sube los datos del vendedor al observable que es el servicio de registrar ademas de verificar
+   * que los datos son correctos
+   */
 
   submitV() {
     this._registrarService.registrarV(this.dataV).subscribe(response => {
@@ -138,13 +150,6 @@ export class RegistrarComponent implements OnInit {
         })
         this.router.navigate(['/']);
       }
-      console.log(response)
-
     })
-
-
   }
-
-
-
 }

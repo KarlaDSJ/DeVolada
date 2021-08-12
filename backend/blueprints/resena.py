@@ -1,12 +1,19 @@
 from flask import Blueprint, request, jsonify
 from models.opinarM import Opinar
 from schemas.opinarS import OpinarEsquema
+from schemas.opinionCompleta import OpinarCompletaEsquema
 from main import db
+from sqlalchemy import *
 
 resena = Blueprint('resena', __name__)
-
+engine = create_engine('mysql+pymysql://root:pruebatest@localhost/mydb')
 opinion_esquema = OpinarEsquema()
 opiniones_esquema = OpinarEsquema(many=True)
+
+opinionCompleta_esquema = OpinarCompletaEsquema()
+
+opinionCompletas_esquema = OpinarCompletaEsquema(many = True)
+
 
 @resena.route('/mostrarResenas', methods=['GET','POST'])
 def ver_resenas():
@@ -36,9 +43,11 @@ def crear_resena():
 @resena.route('/resenas/<id>', methods=['GET'])
 def ver_5_resenas(id):
      #diccionario en python
-     resenas = Opinar.query.filter_by(idProducto=id).limit(5)
-     print(resenas)
+     resenas = engine.execute('select * from comprador  inner join opinar where comprador.correo = opinar.correo')
      
-     #Creamos un archivo json con el diccionario que le pedimos a nuestra BD
-     return opiniones_esquema.jsonify(resenas)
+     
+     print(resenas)
+               #Creamos un archivo json con el diccionario que le pedimos a nuestra BD
+
+     return opinionCompletas_esquema.jsonify(resenas)
 
