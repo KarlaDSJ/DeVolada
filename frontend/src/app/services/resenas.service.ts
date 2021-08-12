@@ -70,5 +70,5 @@ export class ResenasService {
     mostrar5Resenas(idProducto:string): Observable<IResena[]>{
       return this._http.get<IResena[]>(this._url+"/resenas/"+idProducto)
     }
-    
+
 }

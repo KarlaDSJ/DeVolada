@@ -82,6 +82,7 @@ export class LoginComponent implements OnInit {
         text: this.nombre})
 
         this.cookieServive.set('token_accessC',response.session,1,'/')
+        this.cookieServive.set('nombre',this.nombre,1,'/')
         this.router.navigate(['/inicio']);
       }
     })
