@@ -3,6 +3,15 @@ from flask import Blueprint, request, jsonify # para poder hacer los JSON
 from models.compradorM import Comprador # el modelo del Comprador
 from schemas.compradorE import CompradorEsquema # el schema del Comprador
 
+__author__ = "Orduña Ávila Marco Antonio, Gramer Muñoz Omar Fernando, Trad Mateos Kethrim Guadalupe, Salas Jiménez Karla Denia, Reyes Martínez Antonio"
+__copyright__ = "Copyright 2021, Ingenieria de Software "
+__credits__ = [""]
+__license__ = ""
+__version__ = "1.0.2"
+__maintainer__ = "Orduña Ávila Marco Antonio, Gramer Muñoz Omar Fernando, Trad Mateos Kethrim Guadalupe, Salas Jiménez Karla Denia, Reyes Martínez Antonio"
+__email__ = "marcoorduna1999@cienncias.unam.mx"
+__status__ = "Development"
+
 """ 
 Archivo de rutas para poder manejar las peticiones sobre el comprador
 """
