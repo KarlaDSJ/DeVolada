@@ -25,8 +25,6 @@ Se implementa los blueprint para que el funcionamiento de flask
 se reparta en distintos archivos
 """
 
-from blueprints.before import before
-from blueprints.after import after
 from blueprints.cookie import cookie
 from blueprints.logout import logout
 from blueprints.create import create
@@ -103,8 +101,6 @@ app.register_blueprint(tarjetaComprador)
 app.register_blueprint(compra)
 app.register_blueprint(incluir)
 app.register_blueprint(cookie)
-app.register_blueprint(after)
-app.register_blueprint(before)
 
 # Iniciamos la app con la base de datos
 
