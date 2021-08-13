@@ -1,24 +1,105 @@
 from main import db
+from flask import app
 from flask import Blueprint, request, jsonify
 from models.imagenM import Imagen
+from models.productoM import Producto
 from schemas.imagenE import ImagenEsquema
-
+from werkzeug.utils import secure_filename
+import os
 
 imagen = Blueprint('imagen', __name__)
 
 imagen_esquema = ImagenEsquema()
 imagen_esquema = ImagenEsquema(many=True)
 
+# Límite de imagenes que se pueden subir por producto
+IMG_LIMIT = 5
 
-# Petición para agregar una imagen a la base de datos.
-@imagen.route('/imagen', methods=['POST'])
-def agrega_imagen():
-    imagen = request.json['imagen']
-    idProducto = request.json['idProducto']
-    imagen_nueva = Imagen(imagen, idProducto)
-    db.session.add(imagen_nueva)
+# Petición para agregar una imagen a la base de datos y guardarla en el sistema.
+@imagen.route('/imagen/subir/<idProducto>', methods = ['POST'])
+def subir_imagen(idProducto):
+
+    # Verifica que el producto exista
+    producto = db.session.query(Producto).filter_by(idProducto=idProducto).first()
+    if (producto is None):
+        return jsonify({"error": 101, 
+                        "mensaje": "No se pudo subir la imagen. El producto <" + str(idProducto) + "> no existe."})
+
+    # Cuenta las imagenes que tiene el producto
+    cantidad_imgs = db.session.query(Imagen).filter_by(idProducto=idProducto).count()
+
+    # Verifica que no se exceda la cantidad de imagenes permitidas
+    if( cantidad_imgs >= IMG_LIMIT ):
+        return jsonify({"error": 102,
+                        "mensaje": "No se pudo subir la imagen. Se ha excedido el límite de imagenes (" 
+                        + str(cantidad_imgs) + ") para el producto <" + str(idProducto) + ">"})
+
+    # Obtiene los datos de la imagen 
+    imagen_data    = request.files['imagen']
+
+    # Crea el nombre que tendrá la img
+    imagen_nombre  = "product" + idProducto + "_img" + str(cantidad_imgs + 1)
+
+    # Crea la ruta donde se guardará la img
+    imagen_url = os.path.join("static", "ImagenesProductos", secure_filename(imagen_nombre))
+
+    # Agrega a la BD la direccion donde se guardará la imagen y guarda la imagen
+    imagen_nueva = Imagen(imagen_url, idProducto)
+    db.session.add(imagen_nueva) # Guarda la entrada a la BD
+    imagen_data.save(imagen_url) # Guarda la imagen en el sistema
+
+    # Guarda los cambios en la BD
     db.session.commit()
-    return jsonify({"mensaje:": "Se subió la imagen correctamente"})
+
+    return jsonify({"mensaje": "Se subió la imagen correctamente", 
+                    "url": imagen_url })
+
+# Petición para agregar una imagen a la base de datos y guardarla en el sistema.
+@imagen.route('/imagenes/subir/<idProducto>', methods = ['POST'])
+def subir_imagenes(idProducto):
+
+    # Verifica que el producto exista
+    producto = db.session.query(Producto).filter_by(idProducto=idProducto).first()
+    if (producto is None):
+        return jsonify({"error": 101, 
+                        "mensaje": "No se pudo subir la imagen. El producto <" + str(idProducto) + "> no existe."})
+
+    # Cuenta las imagenes que tiene el producto
+    cantidad_imgs_producto = db.session.query(Imagen).filter_by(idProducto=idProducto).count()
+
+    # Cuenta las imagenes que se van a subir
+    cantidad_imgs_subir = len(request.files)
+
+    # Verifica que no se exceda la cantidad de imagenes permitidas
+    if( cantidad_imgs_producto + cantidad_imgs_subir > IMG_LIMIT ):
+        return jsonify({"error": 102,
+                        "mensaje": "No se pudieron subir las imagenes. Se ha excedido el límite de imagenes (" 
+                        + str(cantidad_imgs_producto + cantidad_imgs_subir) + ") para el producto <" + str(idProducto) + ">"})
+
+
+    for i in range(cantidad_imgs_subir):
+
+        # Obtiene los datos de la imagen 
+        imagen_data = request.files["imagen["+str(i)+"]"]
+
+        # Crea el nombre que tendrá la img
+        imagen_nombre  = "product" + idProducto + "_img" + str(cantidad_imgs_producto + i + 1)
+
+        # Crea la ruta donde se guardará la img
+        imagen_url = os.path.join("static", "ImagenesProductos", secure_filename(imagen_nombre))
+
+        # Agrega a la BD la direccion donde se guardará la imagen y guarda la imagen
+        imagen_nueva = Imagen(imagen_url, idProducto)
+        db.session.add(imagen_nueva) # Guarda la entrada a la BD
+        imagen_data.save(imagen_url) # Guarda la imagen en el sistema
+
+    # Guarda los cambios en la BD
+    db.session.commit()
+
+    return jsonify({"mensaje": "Se subió la imagen correctamente", 
+                    "url": imagen_url })
+
+
 
 
 # Petición para eliminar una imagen de la base de datos a través de su PK. 

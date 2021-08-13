@@ -65,25 +65,32 @@ def obten_productos_vendedor(correo):
     return productos_esquema.jsonify(productos)
 
 
+
 #Agrega un producto a la base de datos.
 @producto.route('/producto', methods=['POST'])
 def agrega_producto():    
     """ Agrega un producto a la base de datos
         nos regresa la información del mismo"""
     correo = request.json['correo']
-    nombre = request.json['nombre']
+    nombre = request.json['nombre'].strip()
     precio = request.json['precio']
     descripcion = request.json['descripcion']
     disponibles = request.json['disponibles']
 
+    if (correo == ""):
+        return jsonify({"error": 100, "mensaje": "No hay un correo asignado a la petición."})
     if (nombre == ""):
-        return jsonify({"error": 101, "mensaje:": "El producto debe tener un nombre."})
+        return jsonify({"error": 101, "mensaje": "El producto debe tener un nombre."})
+    if (not (type(precio) == float or type(precio) == int)):
+        return jsonify({"error": 103, "mensaje": "El precio del producto debe ser un número."})
     if (precio <= 0):
-        return jsonify({"error": 102, "mensaje:": "El precio del producto debe ser mayor a cero."})
+        return jsonify({"error": 102, "mensaje": "El precio del producto debe ser mayor a cero."})
     if (descripcion == ""):
-        return jsonify({"error": 103, "mensaje:": "El producto debe tener una descripcion."})
+        return jsonify({"error": 104, "mensaje": "El producto debe tener una descripcion."})
+    if (type(disponibles) != int):
+        return jsonify({"error": 105, "mensaje": "La cantidad de unidades disponibles debe ser un número entero."})
     if (disponibles <= 0):
-        return jsonify({"error": 104, "mensaje:": "La cantidad de unidades disponibles debe ser mayor a cero."})
+        return jsonify({"error": 106, "mensaje": "La cantidad de unidades disponibles debe ser mayor a cero."})
 
     producto_nuevo = Producto(correo, precio, nombre, descripcion, 0, disponibles)
 
@@ -99,7 +106,7 @@ def actualiza_producto(id):
     producto = db.session.query(Producto).filter_by(idProducto=id).first()
 
     if (producto is None):
-        return jsonify({"mensaje:": "No se puedo actualizar el producto <" + id + "> porque no existe."})
+        return jsonify({"mensaje": "No se puedo actualizar el producto <" + id + "> porque no existe."})
 
     json_dict = request.get_json(force=True)
     if 'nombre' in json_dict:
@@ -109,7 +116,8 @@ def actualiza_producto(id):
     if 'descripcion' in json_dict:
         producto.descripcion  = request.json['descripcion']
     if 'disponibles' in json_dict:
-        producto.disponibles  = request.json['disponibles']    
+        producto.disponibles  = request.json['disponibles']   
+
     db.session.commit()
     return producto_esquema.jsonify(producto)
 
@@ -120,8 +128,9 @@ def elimina_producto(id):
     producto_eliminar = db.session.query(Producto).filter_by(idProducto=id).first()
 
     if (producto is None):
-        return jsonify({"mensaje:": "No se puedo eliminar el producto <" + id + "> porque no existe."})
+        return jsonify({"error": 101, "mensaje": "No se puedo eliminar el producto <" + id + "> porque no existe."})
 
     db.session.delete(producto_eliminar)
     db.session.commit()
-    return jsonify({"mensaje:": "Se elimino el producto <" + id + "> correctamente"})
+    return jsonify({"mensaje": "Se elimino el producto <" + id + "> correctamente"})
+
