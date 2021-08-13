@@ -90,13 +90,23 @@ export class MetodoPagoComponent implements OnInit {
    */
   async obtenerTar(f: NgForm) {
     this.vtar = true;
-    if (f.invalid) {
+    if (f.invalid ) {
       return;
     }
-
     this.tar = f.value.tarElig;
-    // Crear la compra    
+    
+    if (this.tar == null)
+    {
+      Swal.fire({
+        title: 'Agrega un método de pago',
+        text: 'Para continuar tu compra es necesario un método de pago',
+        icon: 'warning'
+      })
+      return;
+    }
+    
     let tarElig = '' + this.tar;
+    // Crear la compra    
     try {
       let [total, tarjeta] = await Promise.all([
         this._carritoService.obtenerTotal(this.idCarrito),

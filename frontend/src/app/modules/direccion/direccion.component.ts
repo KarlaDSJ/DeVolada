@@ -79,6 +79,17 @@ export class DireccionComponent implements OnInit {
     if (f.invalid) {
       return;
     }
+
+    if (f.value.dirElig == null)
+    {
+      Swal.fire({
+        title: 'Agrega una dirección',
+        text: 'Para continuar tu compra es necesario una dirección',
+        icon: 'warning'
+      })
+      return;
+    }
+    
     // Pasarsela a metodo-pago 
     localStorage.setItem('devoladaIdDir', f.value.dirElig + '')
     this.router.navigate(['/metodo-pago'])
