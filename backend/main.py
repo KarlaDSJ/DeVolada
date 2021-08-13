@@ -50,7 +50,7 @@ __credits__ = [""]
 __license__ = ""
 __version__ = "1.0.2"
 __maintainer__ = "Orduña Ávila Marco Antonio, Gramer Muñoz Omar Fernando, Trad Mateos Kethrim Guadalupe, Salas Jiménez Karla Denia, Reyes Martínez Antonio"
-__email__ = "marcoorduna1999@cienncias.unam.mx"
+__email__ = "marcoorduna1999@ciencias.unam.mx"
 __status__ = "Development"
 
 # Iniciamos una instanica de Flask
