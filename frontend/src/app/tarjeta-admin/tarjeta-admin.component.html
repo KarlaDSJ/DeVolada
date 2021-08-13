@@ -6,7 +6,7 @@
             <!-- Imagen del producto-->
             <img class="card-img " 
                   src="https://www.punto-informatico.it/app/uploads/2020/05/lg_gram.jpg" 
-                  alt="Imagen producto">
+                  [alt]="producto.nombre">
         </div>
     
         <div class="col-md-8">
@@ -42,15 +42,19 @@
 
                 <div class="card-buttons d-flex justify-content-between">
                   <!-- Boton de editar-->
-                  <button class="btn btn-outline-primary"> 
+                  <button class="btn btn-outline-primary" 
+                    (click)="accionEditarProducto(producto.idProducto)" 
+                    data-bs-toggle="modal" data-bs-target="#formModal"> 
                     <i class="bi bi-pencil-square"></i> 
                     <span>  </span> 
                   </button> 
                   <!-- Boton de eliminar-->
-                  <button class="btn btn-outline-danger"> 
+                  <button class="btn btn-outline-danger" 
+                    (click)="accionEliminarProducto(producto.idProducto)" > 
                     <i class="bi bi-trash-fill"></i>  
                     <span>  </span> 
                   </button> 
+
                 </div>
 
               </div>

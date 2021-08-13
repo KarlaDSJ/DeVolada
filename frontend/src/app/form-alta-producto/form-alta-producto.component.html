@@ -1,18 +1,32 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" 
-    data-target="#formularioAlta"> Large modal
-</button>
+<button type="button" class="btn-menu" id="agregaProducto" data-bs-toggle="modal" data-bs-target="#formModal"
+    (click)="configuraModalAltaProducto()" >
+    Agregar nuevo Producto
+  </button>
+
+  <button type="button" class="btn-menu" id="actualizaProducto" data-bs-toggle="modal" data-bs-target="#formModal"
+  (click)="configuraModalActualizaProducto()" >
+  Actualizar Producto
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="formModal" 
+       tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+       #modalAltaProducto>
+       
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header">
+            <h4 class="modal-title w-100 text-center" >{{ datosModal.titulo }}</h4>
+        </div>
+
+        <form class="container" role="document" 
+              #form = "ngForm" 
+              (submit) = "submit()">
 
 
-    <form class="container" role="document" #form = "ngForm" (submit) = "submit()">
-        <div class="modal-content" > 
-
-            <div class="modal-header">
-                <h5 class="modal-title w-100 text-center" >Formato para dar de alta producto</h5>
-            </div>
-
-            <div class="modal-body ">
-
-
+            <div class="modal-body">
+            
                 <!-- IMAGENES -->
                 <div class="d-flex flex-column " id="imagesFormContainer" >
                     
@@ -20,125 +34,125 @@
                         <h6> Imágenes del producto </h6>
                     </div>
 
-
-                    
-                    <div class="d-flex flex-row justify-content-start border overflow-scroll" id="imagesForm" >
-
-                        <!-- Muestra las imágenes subidas -->
-
+                    <div class="d-flex border" id="imagesForm" >
+                        <div class="d-flex flex-row justify-content-start overflow-scroll" >
+                            
+                            <!-- Muestra la lista de imágenes agregadas -->
                             <div class="d-flex flex-shrink-0 img-uploaded" 
-                                 *ngFor="let img of datosProducto.imagenes_url; index as i">
+                                *ngFor="let img of datosProducto.imagenes; index as i">
                                 <img class="img-thumbnail" 
-                                [(src)]="datosProducto.imagenes_url[i]"
-                                alt="{{datosProducto.imagenes_url[i]}}">
+                                [(src)]="datosProducto.imagenes[i].img"
+                                alt="{{datosProducto.imagenes[i].nombre}}">
                                 <button type="button" class="btn-close" (click)="eliminaImg(i)" aria-label="Close"> </button>
                             </div>
 
-                        <!-- Muestra el boton de subir imagen -->
-                        <!--
-                        <div class="d-flex flex-shrink-0 border align-items-center justify-content-center flex-column overflow-hidden img-uploaded" id="imageUpload">
-                            <button type="button" class="btn" (click)="fileUpload.click()">
-                                <div class="d-flex align-items-center justify-content-center flex-column">
-                                    <i class="bi bi-images"></i>
-                                    Agregar <br> nueva imagen
-                                </div>
-                            </button>
-                            <input type='file' class="file-input" id="getFile" style="display:none"
-                                (change)="onChange($event)"
-                                #fileUpload>
-                            <input type="file" class="file-input"
-                                (change)="onFileSelected($event)" #fileUpload>
+                            <!-- Boton de subir imagen -->
+                            <div class="d-flex flex-shrink-0 border align-items-center justify-content-center flex-column overflow-hidden img-uploaded" id="imageUpload">
+                                <button type="button" class="btn" onclick="document.getElementById('getFile').click()">
+                                    <div class="d-flex align-items-center justify-content-center flex-column">
+                                        <input type="file" accept="image/*" class="d-none">
+                                        <i class="bi bi-images"></i>
+                                        Agregar <br> nueva imagen
+                                    </div>
+                                </button>
+                                <!-- El label es importante, cubre todo el boton y permite actuar a través de él
+                                    para no mostrar el input de file correspondiente cuyo estilo es feo-->
+                                <label id="boton-subirImg-label" for="boton-subirImg"> </label>
+                                <input id="boton-subirImg" class="form-control form-control-sm" multiple type="file" 
+                                        (change)="onChange($event)" style="display:none">
+                            </div>
+
                         </div>
-                        -->
+                    </div> <!-- imgForm -->
+                </div> <!-- IMAGENES -->
+
+                <div class="row-spacing"> <br> </div>
+                        
+            
+                <!-- FORMULARIO -->
+                    <div class="row">
+                        <div class="col input-container">
+                            <label for="input-name">Nombre del producto</label>
+                            <input type="text" id="input-name" class="form-control" placeholder="Escribe un nombre" 
+                                [(ngModel)] = "datosProducto.nombre"  
+                                name="nombre" >
+                        </div>
+
+                        <div class="col input-container">
+                            <label for="input-price">Precio del producto</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                                </div>
+                                <input type="number" id="input-price" class="form-control" placeholder="0.00"
+                                    [(ngModel)] = "datosProducto.precio"  
+                                    name="precio" >
+                                <div class="input-group-append ">
+                                <span class="input-group-text">MXM</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     
-                        <div class="text-center">
-                            <input class="form-control form-control-sm" multiple type="file" 
-                                    (change)="onChange($event)">
-                          
-                            <button (click)="onUpload()" 
-                                class="btn btn-success">
-                                Subir imagen
-                            </button>
+
+                    <div class="row">
+                        <div class="col input-container">
+                            <label for="input-units">Cantidad de unidades</label>
+                            <input type="number" id="input-units" min="1" class="form-control" placeholder="1"
+                                [(ngModel)] = "datosProducto.disponibles"  
+                                name="disponibles" >
                         </div>
         
-                    </div> <!-- imgForm -->
-                </div> <!-- container -->
-
-                <!-- FORMULARIO -->
-                <div class="row">
-                    <div class="col input-container">
-                        <label for="input-name">Nombre del producto</label>
-                        <input type="text" id="input-name" class="form-control is-invalid" placeholder="Escribe un nombre" 
-                            [(ngModel)] = "datosProducto.nombre"  
-                            name="nombre" >
-                        <div class="invalid-feedback"> Por favor escriba un nombre para su producto. </div>
-                    </div>
-
-                    <div class="col input-container">
-                        <label for="input-price">Precio del producto</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text">$</span>
-                            </div>
-                            <input type="number" id="input-price" class="form-control is-invalid" placeholder="0.00"
-                                [(ngModel)] = "datosProducto.precio"  
-                                name="precio" >
-                            <div class="input-group-append ">
-                              <span class="input-group-text">MXM</span>
-                            </div>
-                            <div class="invalid-feedback"> Por favor introduzca un precio válido. </div>
+                        <div class="col input-container">
+                            <label for="input-tags">Categorias 
+                                <small style="color: rgb(109, 109, 109);"> &nbsp; (separadas por coma) </small>
+                            </label>
+                            <input type="text" id="input-tags" class="form-control"
+                                [(ngModel)] = "datosProducto.categorias"  
+                                name="categorias">
                         </div>
-                        
                     </div>
 
-                </div>
+                    <div class="row-spacing"> <br> </div>
 
-                <div class="row">
+
                     <div class="col input-container">
-                        <label for="input-units">Cantidad de unidades</label>
-                        <input type="number" id="input-units" min="1" class="form-control is-invalid" placeholder="1"
-                            [(ngModel)] = "datosProducto.disponibles"  
-                            name="disponibles" >
-                        <div class="invalid-feedback"> Por favor introduzca un cantidad válida. </div>
+                        <label for="input-description">Descripción del producto</label>
+                        <textarea class="form-control" id="input-description" rows="4"
+                            [(ngModel)] = "datosProducto.descripcion"  
+                            name="descripcion" ></textarea>
                     </div>
-    
+
+                    <div class="row-spacing"> <br> </div>
+
                     <div class="col input-container">
-                        <label for="input-tags">Palabras clave</label>
-                        <input type="text" id="input-tags" class="form-control is-invalid"
-                            [(ngModel)] = "datosProducto.categorias"  
-                            name="categorias">
-                        <div class="invalid-feedback"> Por favor introduzca al menos una palabra clave. </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="input-terms"
+                                [(ngModel)] = "aceptarTerminos"  
+                                name="aceptarTerminos">
+                            <label class="form-check-label" for="input-terms">
+                                Aceptar términos y condiciones</label>
+                        </div>
                     </div>
-                </div>
+                    
+            </div> <!-- Modal body -->
+            
+        <div class="modal-footer">
 
+          <button id="btnCancelar" type="button" class="btn btn-secondary btn-stylish" 
+                  data-bs-dismiss="modal" (click)="reseteaFormulario()">
+                  Cancelar
+          </button>
 
-                <div class="col input-container">
-                    <label for="input-description">Descripción del producto</label>
-                    <textarea class="form-control is-invalid" id="input-description" rows="3"
-                        [(ngModel)] = "datosProducto.descripcion"  
-                        name="descripcion" ></textarea>
-                    <div class="invalid-feedback"> Por favor escriba una descripción para su producto. </div>
-                </div>
+          <button id="btnSubir" type="button summit" class="btn btn-primary btn-stylish">
+                  Subir
+          </button> 
 
-                <div class="col input-container">
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="input-terms"
-                            [(ngModel)] = "aceptarTerminos"  
-                            name="aceptarTerminos">
-                        <label class="form-check-label is-invalid" for="terms">Aceptar términos y condiciones</label>
-                        <div class="invalid-feedback"> Debes aceptar los términos y condiciones para continuar. </div>
-                    </div>
-                </div>
+        </div> <!-- Modal footer -->
 
+    </form>
 
-
-            </div> <!-- modal-body -->
-
-            <div class="modal-footer">
-                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button> -->
-                <button type="button summit" class="btn btn-primary">Finalizar</button> 
-            </div>
-
-        </div> <!-- modal-content -->
-
-    </form> <!-- modal-dialog -->
+      </div> <!-- Modal content -->
+    </div> <!-- Modal dialog -->
+  </div> <!-- Modal fade -->

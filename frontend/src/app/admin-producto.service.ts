@@ -27,6 +27,20 @@ export class AdminProductoService {
 
   private _url = 'http://127.0.0.1:5000/'
 
+  // Id del producto a editar
+  id_producto_seleccionado = 0;
+
+  set_Producto_seleccionado(idProducto){
+    this.id_producto_seleccionado = idProducto;
+    console.log("Se seleccionó el producto <" + this.id_producto_seleccionado + ">");
+  }
+  
+  get_Producto_seleccionado(){
+    return this.id_producto_seleccionado;
+  }
+
+
+
   constructor( private _http: HttpClient ) {}
 
   daAltaProducto( datosProducto : {correo: string, 
@@ -37,21 +51,40 @@ export class AdminProductoService {
     return this._http.post<IadminProducto>(this._url+"/producto", datosProducto);
   }
 
-  agregaCategorias( categorias : {categorias : string} )  {
-    return this._http.post<IadminProducto>(this._url+"/categorias", categorias);
+  actualizaCategorias( idProducto: number, categorias : {categorias : string} )  {
+    return this._http.post<IadminProducto>(this._url+`/categoria/actualiza/${idProducto}`, categorias);
   }
 
 
-  // Returns an observable
-  upload(imagen):Observable<any> {
+  eliminaProducto( idProducto: number )  {
+    return this._http.delete<IadminProducto>(this._url+`/producto/${idProducto}`);
+  }
+
+
+  subeImagen( idProducto: number, img_file):Observable<any> {
   
     // Create form data
     const formData = new FormData(); 
       
     // Store form name as "imagen" with imagen data
-    formData.append("file", imagen, imagen.name);
+    formData.append("imagen", img_file );
       
     // Make http post request over api with formData as req
-    return this._http.post(this._url + "/imagen/subir", formData)
+    return this._http.post(this._url + `/imagen/subir/${idProducto}`, formData)
   }
+
+
+  subeImagenes( idProducto: number, img_files: any[] ):Observable<any> {
+  
+    // Create form data
+    const formData = new FormData(); 
+
+    for( let i=0; i< img_files.length; i++ ){
+      formData.append("imagen["+i+"]", img_files[i].file );
+    }
+      
+    // Make http post request over api with formData as req
+    return this._http.post(this._url + `/imagenes/subir/${idProducto}`, formData)
+  }
+
 }
