@@ -20,7 +20,7 @@
                             {{formato(i)}}
                         </label>
                         <div *ngIf="isLast" class="invalid-feedback">
-                            Selecciona una dirección.
+                            Selecciona una dirección
                         </div>
                     </div>
                 </div>
@@ -43,28 +43,28 @@
                                     <input class="form-control" id="calle" name="calle" ngModel required>
                                     <label for="calle">Calle</label>
                                     <div class="invalid-feedback">
-                                        Ingresa tu calle.
+                                        Ingresa tu calle
                                     </div>
                                 </div>
                                 <div class="form-floating mb-3">
                                     <input class="form-control" pattern="\d+" id="numero" name="num" ngModel required>
                                     <label for="numero">Número</label>
                                     <div class="invalid-feedback">
-                                        Ingresa tu número exterior.
+                                        Ingresa tu número exterior
                                     </div>
                                 </div>
                                 <div class="form-floating mb-3">
                                     <input class="form-control" id="colonia" name="colonia" ngModel required>
                                     <label for="colonia">Colonia</label>
                                     <div class="invalid-feedback">
-                                        Ingresa tu colonia.
+                                        Ingresa tu colonia
                                     </div>
                                 </div>
                                 <div class="form-floating mb-3">
                                     <input class="form-control" id="ciudad" name="ciudad" ngModel required>
                                     <label for="ciudad">Delegación</label>
                                     <div class="invalid-feedback">
-                                        Ingresa tu delegación.
+                                        Ingresa tu delegación
                                     </div>
                                 </div>
 
@@ -107,20 +107,23 @@
                                     </select>
                                     <label for="floatingSelect">Estado</label>
                                     <div class="invalid-feedback">
-                                        Elige un estado.
+                                        Elige un estado
                                     </div>
                                 </div>
                                 <div class="form-floating mb-3">
                                     <input class="form-control" pattern="\d{5}" id="cp" name="cp" ngModel required>
                                     <label for="cp">Código Postal</label>
                                     <div class="invalid-feedback">
-                                        Ingresa tu código postal.
+                                        Ingresa tu código postal
                                     </div>
                                 </div>
 
                                 <div class="row margin-auto">
-                                    <div class="col d-flex justify-content-center">
-                                        <button type="submit" class="btn btn-outline-primary px-5">Agregar</button>
+                                    <div class="col d-flex justify-content-center" >
+                                        <button type="submit" class="btn btn-outline-primary px-5" [disabled]="cargando">
+                                            <span *ngIf="cargando" class="spinner-border spinner-border-sm mr-1"></span>                                    
+                                            Agregar
+                                        </button>
                                     </div>
                                 </div>
 
@@ -141,7 +144,8 @@
                             Cancelar compra
                         </button>
                     </div>
-                    <button type="submit" class="btn btn-primary rounded-pill me-0 me-ms-5 px-5">
+                    <button type="submit" class="btn btn-primary rounded-pill me-0 me-ms-5 px-5" [disabled]="cargando">
+                        <span *ngIf="cargando" class="spinner-border spinner-border-sm mr-1"></span>
                         Continuar
                     </button>
                 </div>
