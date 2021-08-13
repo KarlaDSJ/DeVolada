@@ -45,17 +45,17 @@
 
                   <!-- Inicio Form -->
 
-                  <form  #form = "ngForm" (ngSubmit) = "submitC()"  action="">
+                  <form  [formGroup]="myForm" (ngSubmit) = "submitC()"  action="">
                     
                     <label for="validationServer01" class="form-label">Correo Electrónico</label>
                     <input
                     [ngClass] = " (esVacioCorreoC) ? '' : ((esValidoCorreoC)? 'is-valid' :'is-invalid ')  "
 
                     class="form-control" 
-                    
+                    formControlName="correoC"
+
                     id="validationServer02"
                     type="email"
-                    [(ngModel)] = "dataC.correoC"
                     name = "correoC"
                     label = "Correo Electronico"
                     feedback = "Required"
@@ -64,7 +64,7 @@
                     <div class="valid-feedback">
                       Luce bien!
                     </div>
-                    <div *ngIf = "myForm.get('correoC').hasError('required') || myForm.get('correoC').hasError('email') "  id="validationServerUsernameFeedback" class="invalid-feedback">
+                    <div class="invalid-feedback">
                       Por favor seleciionar un correo valido
                     </div>
                       
@@ -74,10 +74,11 @@
 
                     <label for="validationServer03" class="form-label">Contraseña</label>
                     <input 
-                    [ngClass] = " (esVacioContraseniaC) ? '' : ((esValidocontraseniaC) ? 'is-valid' :'is-invalid ')  "
+                    [ngClass] = " (esVacioContraseniaC) ? '' : ((esValidocontraseniaC) ? '' :'is-invalid ')  "
                     class="form-control" 
                     type="password"
-                     [(ngModel)] = "dataC.contraseniaC"
+                    formControlName="contraseniaC"
+                    
                     name="contraseniaC"
                     label = "Contraseña"
                     feedback = "contrasenia"
@@ -85,7 +86,7 @@
                     >
                     
 
-                    <div *ngIf = "myForm.get('contraseniaC').hasError('required')"  id="validationServer03Feedback" class="invalid-feedback">
+                    <div  class="invalid-feedback">
                       Por favor selecciona una contraseña valida
                     </div>
 
@@ -112,21 +113,21 @@
                   
                   <!-- Inicio Form -->
                   
-                  <form #form = "ngForm" (submit) = "submitV()"  action="">
+                  <form [formGroup]="myForm" (submit) = "submitV()"  action="">
                     <label for="exampleInputEmail13" class="form-label">Correo Electrónico</label>
-                    <input [ngClass] = " (esVacioCorreoV) ? '' : ((esValidoCorreoV)? 'is-valid' :'is-invalid ')  " 
+                    <input  [ngClass] = "  (esVacioCorreoV) ? '' : ((esValidoCorreoV)? 'is-valid' :'is-invalid ')  "
                     class="form-control" 
                     type="email"
                     name = "correoV"
                     label = "Correo Electronico"
-                    [(ngModel)] = "dataV.correoV"
+                    formControlName="correoV"
                     feedback = "Required"
                     required
                     >
                     <div class="valid-feedback">
                       Luce bien!
                     </div>
-                    <div *ngIf = "myForm.get('correoV').hasError('required') || myForm.get('correoV').hasError('email') "  id="validationServerUsernameFeedback" class="invalid-feedback">
+                    <div class="invalid-feedback">
                       Por favor seleciionar un correo valido
                     </div>
 
@@ -137,10 +138,10 @@
                     type="password"
                     name="contraseniaV"
                     label = "Contraseña"
-                    [(ngModel)] = "dataV.contraseniaV"
+                    formControlName="contraseniaV"
                     feedback = "contrasenia"
                     >
-                    <div *ngIf = "myForm.get('contraseniaV').hasError('required')"  id="validationServer03Feedback" class="invalid-feedback">
+                    <div class="invalid-feedback">
                       Por favor selecciona una contraseña valida
                     </div>
 

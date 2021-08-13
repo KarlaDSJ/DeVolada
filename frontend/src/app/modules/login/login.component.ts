@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { textChangeRangeIsUnchanged } from 'typescript';
 
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -66,6 +67,7 @@ export class LoginComponent implements OnInit {
                 private router: Router,
                 private cookieServive: CookieService,
                 public fb: FormBuilder){
+
 this.myForm = this.fb.group({
   correoC : ['',[Validators.required, Validators.email]],
   contraseniaC : ['', [Validators.required, ]],
@@ -88,11 +90,25 @@ this.myForm = this.fb.group({
 
   submitC(){
     
+    this.esVacioCorreoC = this.myForm.get('correoC').hasError('required')
     
-    console.log(this.dataC)
+    
+    this.esValidoCorreoC =  !this.myForm.get('correoC').hasError('email')
+    
+    
+    this.esValidocontraseniaC = !this.myForm.get('contraseniaC').hasError('required')
+    
+    
+    
+    if((this.esVacioCorreoC == false) && (this.esValidoCorreoC == true) && (this.esValidocontraseniaC == true)){
+      
+      this.dataC.correoC = this.myForm.get('correoC').value
+      this.dataC.contraseniaC = this.myForm.get('contraseniaC').value
 
-    this._loginService.IniciarSesionC(this.dataC).subscribe(response => { //nos subscribimos
+
+      this._loginService.IniciarSesionC(this.dataC).subscribe(response => { //nos subscribimos
       this.datos = response.msg;
+
       if (this.datos == 'error_datos'){
         this.esVacioCorreoC = false;
         this.esValidoCorreoC = false;
@@ -101,14 +117,8 @@ this.myForm = this.fb.group({
         text: 'Los datos ingresados son incorectos'})
       }
       if(this.datos == 'error_contrasenia'){
-        this.esVacioCorreoC = false;
-        this.esValidoCorreoC = true;
-
         this.esVacioContraseniaC = false
-        
-
-
-
+        this.esValidocontraseniaC = false
         Swal.fire({icon:'error',
         title: 'oooops',
         text: 'La contraseña es incorrecta'})
@@ -116,26 +126,42 @@ this.myForm = this.fb.group({
       if(this.datos == 'success'){       
         this.sesion = response.session;
         this.nombre = response.nombre;
-
         Swal.fire({icon:'success',
         title: 'Bienvenido de nuevo',
         text: this.nombre})
-
         this.cookieServive.set('token_accessC',response.session,1,'/')
         this.cookieServive.set('nombre',this.nombre,1,'/')
         this.router.navigate(['/inicio']);
       }
     })
   }
-
+  }
    /**
    * Funcion que se subscribe al servicio de login para enviar los datos del
    * vendedor, si los datos no son correctos se manda mensaje. 
    */
 
   submitV(){
-    console.log(this.dataV)
-    this._loginService.IniciarSesionV(this.dataV).subscribe(response => {
+    this.esVacioCorreoV = this.myForm.get('correoV').hasError('required')
+    
+    console.log(this.esVacioCorreoV);
+    
+    this.esValidoCorreoV =  !this.myForm.get('correoV').hasError('email')
+    console.log(this.esValidoCorreoV);
+    
+    
+    this.esValidocontraseniaV = !this.myForm.get('contraseniaV').hasError('required')
+    console.log(this.esValidocontraseniaV);
+    
+    
+    
+    if((this.esVacioCorreoV == false) && (this.esValidoCorreoV == true) && (this.esValidocontraseniaV == true)){
+      
+      this.dataV.correoV = this.myForm.get('correoV').value
+      this.dataV.contraseniaV = this.myForm.get('contraseniaV').value
+      console.log(this.dataV);
+      
+      this._loginService.IniciarSesionV(this.dataV).subscribe(response => {
       this.datos = response.msg;
       if (this.datos == 'error_datos'){
         this.esVacioCorreoV = false;
@@ -145,15 +171,15 @@ this.myForm = this.fb.group({
         text: 'Los datos ingresados son incorectos'})
       }
       if(this.datos == 'error_contrasenia'){
-        this.esVacioCorreoV = false;
-        this.esValidoCorreoV = true;
+        this.esVacioContraseniaV = false;
+        this.esValidocontraseniaV = false;
 
         this.esVacioContraseniaV = false
         Swal.fire({icon:'error',
         title: 'oooops',
         text: 'La contraseña es incorrecta'})
       }
-      if(this.datos == 'success'){
+        if(this.datos == 'success'){
         this.sesion = response.session;
         this.nombre = response.nombre;
         Swal.fire({icon:'success',
@@ -163,5 +189,6 @@ this.myForm = this.fb.group({
         this.cookieServive.set('token_accessV',response.session,1,'/')
       }
     })
+  }
   }
 }
