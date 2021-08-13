@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -65,6 +66,7 @@ import { CarruselComponent } from './modules/carrusel/carrusel.component';
     FormsModule, // Para las entradas (inputs) o formularios
     CarouselModule, //Para mostrar los productos en Todos
     HttpClientModule, //Para hacer peticiones
+    ReactiveFormsModule,
     //=> Basic usage (forRoot can also take options, see the wiki)
     SweetAlert2Module.forRoot()
   ],

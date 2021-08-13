@@ -4,6 +4,9 @@ import { LoginService } from "../../services/login.service";
 import { Router}   from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import Swal from 'sweetalert2';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { textChangeRangeIsUnchanged } from 'typescript';
+
 
 @Component({
   selector: 'app-login',
@@ -20,16 +23,30 @@ export class LoginComponent implements OnInit {
   // Datos que vamos a ocupar, solo las inicializamos
 
   login : ILogin;
+  myForm: FormGroup;
+
   datos = '';
   sesion = '';
   nombre = '';
+
+  esValidoCorreoC= false;
+  esVacioCorreoC = true;
+  esValidocontraseniaC = false;
+  esVacioContraseniaC = true;
+
+  esValidoCorreoV= false;
+  esVacioCorreoV = true;
+  esValidocontraseniaV = false;
+  esVacioContraseniaV = true;
    
   //Diccionario con datos del comprador
 
   dataC ={
-  correoC:'',
-  contraseniaC:''
-  }
+    correoC:'',
+    contraseniaC:''
+    }
+
+  
 
   //Diccionario con datos del vendedor
 
@@ -47,7 +64,16 @@ export class LoginComponent implements OnInit {
 
   constructor(  private _loginService: LoginService, 
                 private router: Router,
-                private cookieServive: CookieService){}
+                private cookieServive: CookieService,
+                public fb: FormBuilder){
+this.myForm = this.fb.group({
+  correoC : ['',[Validators.required, Validators.email]],
+  contraseniaC : ['', [Validators.required, ]],
+  correoV : ['',[Validators.required, Validators.email]],
+  contraseniaV : ['', [Validators.required, ]]
+})
+  
+                }
     
   /**
    * Constructor que se incializa cada que se carga el componente
@@ -61,14 +87,28 @@ export class LoginComponent implements OnInit {
    */
 
   submitC(){
+    
+    
+    console.log(this.dataC)
+
     this._loginService.IniciarSesionC(this.dataC).subscribe(response => { //nos subscribimos
       this.datos = response.msg;
       if (this.datos == 'error_datos'){
+        this.esVacioCorreoC = false;
+        this.esValidoCorreoC = false;
         Swal.fire({icon:'error',
         title: 'oooops',
         text: 'Los datos ingresados son incorectos'})
       }
       if(this.datos == 'error_contrasenia'){
+        this.esVacioCorreoC = false;
+        this.esValidoCorreoC = true;
+
+        this.esVacioContraseniaC = false
+        
+
+
+
         Swal.fire({icon:'error',
         title: 'oooops',
         text: 'La contraseña es incorrecta'})
@@ -94,14 +134,21 @@ export class LoginComponent implements OnInit {
    */
 
   submitV(){
+    console.log(this.dataV)
     this._loginService.IniciarSesionV(this.dataV).subscribe(response => {
       this.datos = response.msg;
       if (this.datos == 'error_datos'){
+        this.esVacioCorreoV = false;
+        this.esValidoCorreoV = false;
         Swal.fire({icon:'error',
         title: 'oooops',
         text: 'Los datos ingresados son incorectos'})
       }
       if(this.datos == 'error_contrasenia'){
+        this.esVacioCorreoV = false;
+        this.esValidoCorreoV = true;
+
+        this.esVacioContraseniaV = false
         Swal.fire({icon:'error',
         title: 'oooops',
         text: 'La contraseña es incorrecta'})
