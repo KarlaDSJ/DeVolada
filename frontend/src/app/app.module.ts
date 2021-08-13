@@ -2,34 +2,35 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CarritoComponent } from './carrito/carrito.component';
-import { MetodoPagoComponent } from './metodo-pago/metodo-pago.component';
-import { InicioComponent } from './inicio/inicio.component';
-import { ProductoComponent } from './producto/producto.component';
-import { TarjetaProductoComponent } from './tarjeta-producto/tarjeta-producto.component';
-import { MasVendidosComponent } from './mas-vendidos/mas-vendidos.component';
-import { TodosComponent } from './todos/todos.component';
-import { DireccionComponent } from './direccion/direccion.component';
-import { TarjetaAdminComponent } from './tarjeta-admin/tarjeta-admin.component';
-import { MisProductosComponent } from './mis-productos/mis-productos.component';
-import { CompraFinalizadaComponent } from './compra-finalizada/compra-finalizada.component';
-import { ResenasComponent } from './resenas/resenas.component';
-import { CrearResenaComponent } from './crear-resena/crear-resena.component';
-import { VerResenasComponent } from './ver-resenas/ver-resenas.component';
-import { FormAltaProductoComponent } from './form-alta-producto/form-alta-producto.component';
+import { CarritoComponent } from './modules/carrito/carrito.component';
+import { MetodoPagoComponent } from './modules/metodo-pago/metodo-pago.component';
+import { InicioComponent } from './modules/inicio/inicio.component';
+import { ProductoComponent } from './modules/producto/producto.component';
+import { TarjetaProductoComponent } from './modules/tarjeta-producto/tarjeta-producto.component';
+import { MasVendidosComponent } from './modules/mas-vendidos/mas-vendidos.component';
+import { TodosComponent } from './modules/todos/todos.component';
+import { DireccionComponent } from './modules/direccion/direccion.component';
+import { TarjetaAdminComponent } from './modules/tarjeta-admin/tarjeta-admin.component';
+import { MisProductosComponent } from './modules/mis-productos/mis-productos.component';
+import { CompraFinalizadaComponent } from './modules/compra-finalizada/compra-finalizada.component';
+import { ResenasComponent } from './modules//resenas/resenas.component';
+import { CrearResenaComponent } from './modules/crear-resena/crear-resena.component';
+import { VerResenasComponent } from './modules/ver-resenas/ver-resenas.component';
+import { FormAltaProductoComponent } from './modules/form-alta-producto/form-alta-producto.component';
 import { CarouselModule } from 'primeng/carousel';
-import { LoginComponent } from './login/login.component';
-import { BarraNavCompradorComponent } from './barra-nav-comprador/barra-nav-comprador.component';
-import { BarraNavVendedorComponent } from './barra-nav-vendedor/barra-nav-vendedor.component';
-import { BarraNavLogComponent } from './barra-nav-log/barra-nav-log.component';
+import { LoginComponent } from './modules/login/login.component';
+import { BarraNavCompradorComponent } from './modules/barra-nav-comprador/barra-nav-comprador.component';
+import { BarraNavVendedorComponent } from './modules/barra-nav-vendedor/barra-nav-vendedor.component';
+import { BarraNavLogComponent } from './modules/barra-nav-log/barra-nav-log.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import { RegistrarComponent } from './registrar/registrar.component';
-import { CarruselComponent } from './carrusel/carrusel.component';
+import { RegistrarComponent } from './modules/registrar/registrar.component';
+import { CarruselComponent } from './modules/carrusel/carrusel.component';
 
 
 
@@ -65,6 +66,7 @@ import { CarruselComponent } from './carrusel/carrusel.component';
     FormsModule, // Para las entradas (inputs) o formularios
     CarouselModule, //Para mostrar los productos en Todos
     HttpClientModule, //Para hacer peticiones
+    ReactiveFormsModule,
     //=> Basic usage (forRoot can also take options, see the wiki)
     SweetAlert2Module.forRoot()
   ],

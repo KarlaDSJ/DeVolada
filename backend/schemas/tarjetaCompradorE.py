@@ -1,6 +1,8 @@
 from main import ma
-from marshmallow import fields
 
-class TarjetaCompradorEsquema(ma.Schema):    
+class TarjetaCompradorEsquema(ma.Schema):
+    """ Crea un esquema para la tarjeta de un
+    comprador, solo muestra el número
+    descifrado de la tarjeta """
     class Meta:
         fields = ['numero']
