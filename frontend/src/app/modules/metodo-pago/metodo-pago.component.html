@@ -17,7 +17,7 @@
                             {{formato(i)}}
                         </label>
                         <div *ngIf="isLast" class="invalid-feedback">
-                            Selecciona un método de pago.
+                            Selecciona un método de pago
                         </div>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                         <form class="row g-3 needs-validation" [ngClass]="{'was-validated': valida}"
                             (ngSubmit)="validarTar(f)" #f="ngForm" novalidate>
                             <div class="container">
-                                <!-- ¿Cómo hacerlo más grande cuando la pantalla es más pequeña? -->
+
                                 <div class="mb-3 row">
                                     <label for="dueno" class="col-sm-3 col-form-label">Nombre del propietario</label>
                                     <div class="col-sm-6">
@@ -47,11 +47,10 @@
                                 <div class="mb-3 row">
                                     <label for="numero" class="col-sm-3 col-form-label">Número de tarjeta</label>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control" id="numero"
-                                            placeholder="0000 0000 0000 0000" autocomplete="off"
-                                            pattern="4\d{15}|5\d{15}" name="numero" ngModel required>
+                                        <input type="text" class="form-control" id="numero" pattern="[45]\d{3}( \d{4}){3}"
+                                            placeholder="0000 0000 0000 0000" autocomplete="off" name="numero" ngModel required>
                                         <div class="invalid-feedback">
-                                            Solo aceptamos tarjetas Visa y Mastercard.
+                                            Solo aceptamos tarjetas Visa y Mastercard
                                         </div>
                                     </div>
                                 </div>
@@ -95,10 +94,15 @@
                 <!-- Continuar y cancelar compra  -->
                 <div class="row mb-3">
                     <div class="col can-con">
-                        <button type="button" class="btn btn-outline-danger rounded-pill px-5" (click)="cancelarCompra.fire()">Cancelar compra</button>
+                        <button type="button" class="btn btn-outline-danger rounded-pill px-5" (click)="cancelarCompra.fire()">
+                        Cancelar compra
+                        </button>
                     </div>
-                    <div class="col can-con">
-                        <button type="submit" class="btn btn-outline-primary rounded-pill px-5">Finalizar compra</button>
+                    <div class="col can-con">                    
+                        <button type="submit" class="btn btn-outline-primary rounded-pill px-5" [disabled]="cargando">
+                        <span *ngIf="cargando" class="spinner-border spinner-border-sm mr-1"></span>
+                        Finalizar compra
+                        </button>
                     </div>
                 </div>
 

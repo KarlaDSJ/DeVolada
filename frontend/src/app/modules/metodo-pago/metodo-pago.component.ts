@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { MetodoPagoService } from '../../services/metodo-pago.service';
 import { CarritoService } from '../../services/carrito.service';
 import { CookieService } from 'ngx-cookie-service';
+import Inputmask from 'inputmask';
 
 @Component({
   selector: 'app-metodo-pago',
@@ -22,6 +23,8 @@ export class MetodoPagoComponent implements OnInit {
   valida = false;
   vtar = false;
   tar = "";
+  cargando = false;
+
 
   /**
    * Formato en el que se muestra una tarjeta
@@ -48,8 +51,9 @@ export class MetodoPagoComponent implements OnInit {
     }
 
     let fechaCad = '20' + f.value.anio + '-' + f.value.mes + '-28'
+    let tar = (f.value.numero+'').replace(/\s/g, "");   
 
-    this._metodopagoService.agregarTar(this.comprador, f.value.numero, f.value.cvv + '', f.value.dueno, fechaCad)
+    this._metodopagoService.agregarTar(this.comprador, tar, f.value.cvv + '', f.value.dueno, fechaCad)
       .subscribe(
         data => {
           Swal.fire({
@@ -90,13 +94,15 @@ export class MetodoPagoComponent implements OnInit {
    */
   async obtenerTar(f: NgForm) {
     this.vtar = true;
-    if (f.invalid ) {
+    this.cargando = true;
+    if (f.invalid) {
+      this.cargando = false;
       return;
     }
     this.tar = f.value.tarElig;
-    
-    if (this.tar == null)
-    {
+
+    if (this.tar == null) {
+      this.cargando = false;
       Swal.fire({
         title: 'Agrega un método de pago',
         text: 'Para continuar tu compra es necesario un método de pago',
@@ -104,8 +110,9 @@ export class MetodoPagoComponent implements OnInit {
       })
       return;
     }
-    
+
     let tarElig = '' + this.tar;
+    tarElig = (tarElig).replace(/\s/g, "");   
     // Crear la compra    
     try {
       let [total, tarjeta] = await Promise.all([
@@ -135,6 +142,7 @@ export class MetodoPagoComponent implements OnInit {
       .then(
         data => {
           idCompra = data.idCompra
+          this.cargando = false;
           this.router.navigate(['/compra-finalizada', idCompra])
         },
         error => {
@@ -161,6 +169,11 @@ export class MetodoPagoComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.comprador = this.cookie.get('token_accessC');
+    let numero = document.getElementById("numero");
+    let im = new Inputmask("9999 9999 9999 9999");
+    im.mask(numero);
+
+
     try {
       let [datos, tarjetas] = await Promise.all([
         this._carritoService.obtenerCarrito(this.comprador),

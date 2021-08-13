@@ -21,6 +21,7 @@ export class ProductoComponent implements OnInit {
   responsiveOptions: any;
   // Cambiar por el carrito del comprador
   idCarrito = -1;
+  cargando = false;
 
   deshabilitar() {
     if (this.producto.disponibles <= 0) {
@@ -31,16 +32,22 @@ export class ProductoComponent implements OnInit {
 
   }
 
+  /**
+   * Agrega el producto a un carrito
+   */
   agregar(): void {
+    this.cargando = true;
     this._carritoService.agregarCarrito(this.id, this.idCarrito)
-      .subscribe(
+      .subscribe(        
         data => {
+          this.cargando = false;
           Swal.fire({
             text: data.msg,
             icon: 'success'
           })
         },
         error => {
+          this.cargando = false;
           Swal.fire({
             title: 'No se puede agregar',
             text: error.error.msg,

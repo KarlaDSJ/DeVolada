@@ -18,6 +18,7 @@ export class DireccionComponent implements OnInit {
   validez = false;
   vdir = false;
   direccionEntrega = -1;
+  cargando = false;
 
   /**
    * Formato en el que se muestra una dirección 
@@ -39,16 +40,18 @@ export class DireccionComponent implements OnInit {
    */
   validarDir(f: NgForm) {
 
+    this.cargando = true;
     this.validez = true;
     if (f.invalid) {
+      this.cargando = false;
       return;
     }
 
     this._direccionService.registrarDireccion(this.correo, f.value.estado, f.value.ciudad, f.value.colonia, f.value.cp, f.value.calle, f.value.num)
       .subscribe(data => {
+        this.cargando = false;
         Swal.fire({
           title: 'Se agregó tu dirección',
-          text: data.idDir + "",
           icon: 'success'
         })
         this.listaDir.push({
@@ -62,6 +65,7 @@ export class DireccionComponent implements OnInit {
 
       },
         error => {
+          this.cargando = false;
           Swal.fire({
             title: 'No se puede agregar',
             text: error.error.msg,
@@ -76,12 +80,15 @@ export class DireccionComponent implements OnInit {
    */
   obtenerDir(f: NgForm) {
     this.vdir = true;
+    this.cargando = true;
     if (f.invalid) {
+      this.cargando = false;
       return;
     }
 
     if (f.value.dirElig == null)
     {
+      this.cargando = false;
       Swal.fire({
         title: 'Agrega una dirección',
         text: 'Para continuar tu compra es necesario una dirección',
@@ -89,7 +96,7 @@ export class DireccionComponent implements OnInit {
       })
       return;
     }
-    
+
     // Pasarsela a metodo-pago 
     localStorage.setItem('devoladaIdDir', f.value.dirElig + '')
     this.router.navigate(['/metodo-pago'])
