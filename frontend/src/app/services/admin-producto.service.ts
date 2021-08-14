@@ -51,28 +51,30 @@ export class AdminProductoService {
     return this._http.post<IadminProducto>(this._url+"/producto", datosProducto);
   }
 
+  actualizaProducto( datosProducto : { idProducto: number,
+    correo: string, 
+    nombre: string, 
+    precio:number, 
+    descripcion: string , 
+    disponibles:number} ): Observable<IadminProducto> {
+    let idProducto = datosProducto.idProducto;
+    return this._http.patch<IadminProducto>(this._url+"/producto/"+idProducto, datosProducto);
+  }
+
   actualizaCategorias( idProducto: number, categorias : {categorias : string} )  {
     return this._http.post<IadminProducto>(this._url+`/categoria/actualiza/${idProducto}`, categorias);
   }
 
-
+  // Manda las peticiones para eliminar un producto del sistema
   eliminaProducto( idProducto: number )  {
+    // Borra el registro del producto de la BD
     return this._http.delete<IadminProducto>(this._url+`/producto/${idProducto}`);
   }
 
-
-  subeImagen( idProducto: number, img_file):Observable<any> {
-  
-    // Create form data
-    const formData = new FormData(); 
-      
-    // Store form name as "imagen" with imagen data
-    formData.append("imagen", img_file );
-      
-    // Make http post request over api with formData as req
-    return this._http.post(this._url + `/imagen/subir/${idProducto}`, formData)
+  // Borra el registro de las imagenes de la BD y los archivos correspondientes del sistema
+  eliminaImagenesProducto( idProducto: number){
+    return this._http.delete<any>(this._url+`/imagenes/producto/${idProducto}`)
   }
-
 
   subeImagenes( idProducto: number, img_files: any[] ):Observable<any> {
   

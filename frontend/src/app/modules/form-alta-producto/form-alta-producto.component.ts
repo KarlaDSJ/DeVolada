@@ -3,8 +3,7 @@ import { AdminProductoService } from '../../services/admin-producto.service';
 import { ProductosService } from '../../services/productos.service';
 import { CookieService } from 'ngx-cookie-service';
 import Swal from 'sweetalert2';
-import { Output, EventEmitter, ViewChild, AfterViewInit, ElementRef} from '@angular/core';
-import { Directive, HostListener } from '@angular/core';
+import { Output, EventEmitter, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-form-alta-producto',
@@ -15,7 +14,9 @@ import { Directive, HostListener } from '@angular/core';
 
 export class FormAltaProductoComponent implements OnInit {
 
-  
+  aceptarTerminos = false;
+
+  modoSubeProducto = true;
 
   datosProducto = {
     idProducto : 0,
@@ -36,22 +37,22 @@ export class FormAltaProductoComponent implements OnInit {
   datosModal= {
     titulo: '',
     boton_confirmar: '',
-    texto_accion: ''
+    texto_confirmar: ''
   }
 
   datosModalSubir= {
     titulo: 'Formato para dar de alta producto',
-    boton_confirmar: 'dar de alta',
-    texto_accion: 'dar de alta'
+    boton_confirmar: 'subir',
+    texto_confirmar: 'dar de alta'
   }
 
   datosModalActualizar= {
     titulo: 'Formato para actualizar producto',
-    boton_confirmar: 'guardar cambios',
-    texto_accion: 'actualizar'
+    boton_confirmar: 'guardar',
+    texto_confirmar: 'actualizar'
   }
 
-  aceptarTerminos = false
+
 
   @Output() productoDadoAltaEvent = new EventEmitter();
 
@@ -74,18 +75,15 @@ export class FormAltaProductoComponent implements OnInit {
     this.reseteaFormulario();
   }
 
-  abreModal() {
-    console.log(this.modalAltaProducto)
-    //this.modalAltaProducto.open();
-  }
-
 
   configuraModalAltaProducto(){
+    this.modoSubeProducto = true;
     this.datosModal = this.datosModalSubir;
     this.reseteaFormulario()
   }
 
   configuraModalActualizaProducto(){
+    this.modoSubeProducto = false;
     this.datosProducto.idProducto = this._adminService.get_Producto_seleccionado();
     console.log("KARLA:", this.datosProducto.idProducto)
     this.datosModal = this.datosModalActualizar;
@@ -101,11 +99,26 @@ export class FormAltaProductoComponent implements OnInit {
       this.datosProducto.precio = respuesta.precio;
       this.datosProducto.disponibles = respuesta.disponibles;
       this.datosProducto.descripcion = respuesta.descripcion.valueOf();
-      for( let categoria of respuesta.categoria ){
+
+      for( let categoria of respuesta.categoria )
         this.datosProducto.categorias += categoria.categoria.valueOf() +", ";
-      }
-        
+
+      let imgPath = "../../../../../backend/" + respuesta.imagenes[0].imagen
+      console.log(imgPath)
+      this.datosProducto.imagenes.push( 
+          { "file": "img",
+            "img": imgPath });
+      
+      
     } )
+    /*
+    this._productosService.getImagenesDecodificadas( idProducto ).subscribe(respuesta => {
+      console.log("imagenes decodificadas", respuesta)
+      this.datosProducto.imagenes.push( 
+        { "file": "img",
+          "img": respuesta[0] });
+    } ) */
+
   }
 
   // Resetea los datos del formulario
@@ -121,9 +134,9 @@ export class FormAltaProductoComponent implements OnInit {
   
 
   // Sube un nuevo producto a la BD
-  async daAltaProducto() {
+  async subeProducto() {
 
-    console.log(this.datosProducto)
+    console.log("Subiendo producto: ", this.datosProducto)
 
     // Hace la petición para agregar los datos del nuevo producto a la tabla Producto
     this._adminService.daAltaProducto(this.datosProducto).subscribe(respuesta => {
@@ -155,6 +168,37 @@ export class FormAltaProductoComponent implements OnInit {
       }
     } ) 
   }
+
+
+// Sube un nuevo producto a la BD
+async actualizaProducto() {
+
+  console.log("Actualizando producto: ", this.datosProducto)
+
+  // Hace la petición para agregar los datos del nuevo producto a la tabla Producto
+  this._adminService.actualizaProducto(this.datosProducto).subscribe(respuesta => {
+    if ( respuesta.error != undefined){
+
+      // Informa al usuario en caso de error con un mensaje
+      this.respuesta.error = respuesta.error 
+      this.respuesta.mensaje = respuesta.mensaje
+      Swal.fire({icon: 'error', title: 'Ups!', text: this.respuesta.mensaje })
+      
+    }
+    else {
+
+      // Sube las categorias del producto a la BD
+      this.subeCategoriasProducto(this.datosProducto.idProducto)
+
+      // Manda un signal para que la página de mis productos sepa que se modificó un producto.
+      this.productoDadoAltaEvent.emit()
+
+      // Informa al usuario que el producto se dió de alta correctamente con un mensaje.
+      Swal.fire({icon: 'success', title: 'Éxito', text: 'Los cambios de tu producto se han guardado correctamente.'})
+      this.cierraModal()
+    }
+  } ) 
+}
 
 
   // Actualiza y/o agrega las categorias del producto en la BD por las categorias indicadas por el usuario
@@ -194,11 +238,20 @@ export class FormAltaProductoComponent implements OnInit {
       return;
     }
 
-    console.log( "Se intentaran subir las imagenes")
-    console.log( this.datosProducto.imagenes[0].file )
-    
+    // Verifica que al menos una categoria haya sido agregada
+    if ( this.datosProducto.categorias.replace(/\,/gi, '').trim() == "" ){
+      Swal.fire({icon: 'warning', 
+                 title: 'Ups!', 
+                 text: "No has añadido ninguna categoria a tu producto" })
+      return;
+    }
 
-    this.daAltaProducto()
+    console.log("modoSube: ", this.modoSubeProducto)
+    // Decide si va a dar de alta el producto o modificarlo
+    if ( this.modoSubeProducto )
+      this.subeProducto()
+    else 
+      this.actualizaProducto()
      
   }
 

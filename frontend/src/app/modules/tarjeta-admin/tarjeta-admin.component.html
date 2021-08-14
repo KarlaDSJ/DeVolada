@@ -5,7 +5,7 @@
         <div class="col-md-4 ">
             <!-- Imagen del producto-->
             <img class="card-img " 
-                  [src]="producto.imagenes[0].imagen" class="card-img-top" [alt]="producto.nombre"
+                  [src]="producto?.imagenes[0]?.imagen"
                   [alt]="producto.nombre">
         </div>
     
@@ -43,8 +43,7 @@
                 <div class="card-buttons d-flex justify-content-between">
                   <!-- Boton de editar-->
                   <button class="btn btn-outline-primary" 
-                    (click)="accionEditarProducto(producto.idProducto)" 
-                    data-bs-toggle="modal" data-bs-target="#formModal"> 
+                    (click)="accionEditarProducto(producto.idProducto)"> 
                     <i class="bi bi-pencil-square"></i> 
                     <span>  </span> 
                   </button> 

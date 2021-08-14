@@ -1,4 +1,5 @@
 from sqlalchemy import desc, func
+from sqlalchemy.sql.expression import true
 from main import db
 from flask import Blueprint, request, jsonify
 from models.productoM import Producto
@@ -66,7 +67,7 @@ def obten_productos_vendedor(correo):
 
 
 
-#Agrega un producto a la base de datos.
+#Agrega un registro de producto a la base de datos.
 @producto.route('/producto', methods=['POST'])
 def agrega_producto():    
     """ Agrega un producto a la base de datos
@@ -74,63 +75,84 @@ def agrega_producto():
     correo = request.json['correo']
     nombre = request.json['nombre'].strip()
     precio = request.json['precio']
-    descripcion = request.json['descripcion']
+    descripcion = request.json['descripcion'].strip()
     disponibles = request.json['disponibles']
 
-    if (correo == ""):
-        return jsonify({"error": 100, "mensaje": "No hay un correo asignado a la petición."})
-    if (nombre == ""):
-        return jsonify({"error": 101, "mensaje": "El producto debe tener un nombre."})
-    if (not (type(precio) == float or type(precio) == int)):
-        return jsonify({"error": 103, "mensaje": "El precio del producto debe ser un número."})
-    if (precio <= 0):
-        return jsonify({"error": 102, "mensaje": "El precio del producto debe ser mayor a cero."})
-    if (descripcion == ""):
-        return jsonify({"error": 104, "mensaje": "El producto debe tener una descripcion."})
-    if (type(disponibles) != int):
-        return jsonify({"error": 105, "mensaje": "La cantidad de unidades disponibles debe ser un número entero."})
-    if (disponibles <= 0):
-        return jsonify({"error": 106, "mensaje": "La cantidad de unidades disponibles debe ser mayor a cero."})
+    # Valida que los datos recibidos sean correctos
+    validacion = valida_datos(correo,nombre,precio,descripcion,disponibles)
+    if(not validacion["correcto"]): return jsonify(validacion)
 
+    # Agrega el producto a la BD
     producto_nuevo = Producto(correo, precio, nombre, descripcion, 0, disponibles)
-
     db.session.add(producto_nuevo)
     db.session.commit()
 
+    # Guarda los cambios en la BD
     return producto_esquema.jsonify(producto_nuevo)
 
 
 #Actualiza un producto en la base de datos.
-@producto.route('/producto/<id>', methods=['PATCH'])
-def actualiza_producto(id):    
-    producto = db.session.query(Producto).filter_by(idProducto=id).first()
+@producto.route('/producto/<idProducto>', methods=['PATCH'])
+def actualiza_producto(idProducto):    
+    producto = db.session.query(Producto).filter_by(idProducto=idProducto).first()
+    correo = request.json['correo']
+    nombre = request.json['nombre'].strip()
+    precio = request.json['precio']
+    descripcion = request.json['descripcion'].strip()
+    disponibles = request.json['disponibles']
 
+    # Verifica que el producto exista en la BD
     if (producto is None):
-        return jsonify({"mensaje": "No se puedo actualizar el producto <" + id + "> porque no existe."})
+        return jsonify({"error": 100, "mensaje": "El producto <" + str(idProducto) + "> no existe."})
 
-    json_dict = request.get_json(force=True)
-    if 'nombre' in json_dict:
-        producto.nombre  = request.json['nombre']
-    if 'precio' in json_dict:
-        producto.precio  = request.json['precio']
-    if 'descripcion' in json_dict:
-        producto.descripcion  = request.json['descripcion']
-    if 'disponibles' in json_dict:
-        producto.disponibles  = request.json['disponibles']   
+    # Verifica que los datos recibidos sean correctos
+    validacion = valida_datos(correo,nombre,precio,descripcion,disponibles)
+    if(not validacion["correcto"]): return jsonify(validacion)
 
+    # Actualiza los valores del producto
+    producto.nombre  = request.json['nombre']
+    producto.precio  = request.json['precio']
+    producto.descripcion  = request.json['descripcion']
+    producto.disponibles  = request.json['disponibles']   
+
+    # Guarda los cambios en la BD
     db.session.commit()
     return producto_esquema.jsonify(producto)
 
 
-#Elimina un producto de la base de datos.
-@producto.route('/producto/<id>', methods=['DELETE'])
-def elimina_producto(id):    
-    producto_eliminar = db.session.query(Producto).filter_by(idProducto=id).first()
+#Elimina un registro de producto de la base de datos.
+@producto.route('/producto/<idProducto>', methods=['DELETE'])
+def elimina_producto(idProducto):    
+    producto_eliminar = db.session.query(Producto).filter_by(idProducto=idProducto).first()
 
+    # Verifica que el producto exista en la BD
     if (producto is None):
-        return jsonify({"error": 101, "mensaje": "No se puedo eliminar el producto <" + id + "> porque no existe."})
+        return jsonify({"error": 100, "mensaje": "El producto <" + str(idProducto) + "> no existe."})
 
+    # Borra el producto de la BD
     db.session.delete(producto_eliminar)
-    db.session.commit()
-    return jsonify({"mensaje": "Se elimino el producto <" + id + "> correctamente"})
 
+    # Guarda los cambios en la BDs
+    db.session.commit()
+
+    return jsonify({"mensaje": "Se eliminó el producto <" + str(idProducto) + "> correctamente"})
+
+
+# Verifica que los campos recibidos sean correctos. En caso de fallar
+# regresa un json con el mensaje de error.
+def valida_datos(correo,nombre,precio,descripcion,disponibles):
+    if (correo == ""):
+        return {"correcto": False, "error": 101, "mensaje": "No hay un correo asignado a la petición."}
+    if (nombre.strip() == ""):
+        return {"correcto": False, "error": 102, "mensaje": "El producto debe tener un nombre."}
+    if (not (type(precio) == float or type(precio) == int)):
+        return {"correcto": False, "error": 103, "mensaje": "El precio del producto debe ser un número."}
+    if (precio <= 0):
+        return {"correcto": False, "error": 104, "mensaje": "El precio del producto debe ser mayor a cero."}
+    if (descripcion.strip() == ""):
+        return {"correcto": False, "error": 105, "mensaje": "El producto debe tener una descripcion."}
+    if (type(disponibles) != int):
+        return {"correcto": False, "error": 106, "mensaje": "La cantidad de unidades disponibles debe ser un número entero."}
+    if (disponibles <= 0):
+        return {"correcto": False, "error": 107, "mensaje": "La cantidad de unidades disponibles debe ser mayor a cero."}
+    return {"correcto": True}

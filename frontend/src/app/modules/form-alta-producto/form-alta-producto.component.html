@@ -4,8 +4,8 @@
   </button>
 
   <button type="button" class="btn-menu" id="actualizaProducto" data-bs-toggle="modal" data-bs-target="#formModal"
-  (click)="configuraModalActualizaProducto()" >
-  Actualizar Producto
+    (click)="configuraModalActualizaProducto()" >
+    Actualizar Producto
   </button>
   
   <!-- Modal -->
@@ -17,7 +17,7 @@
       <div class="modal-content">
 
         <div class="modal-header">
-            <h4 class="modal-title w-100 text-center" >{{ datosModal.titulo }}</h4>
+            <h5 class="modal-title w-100 text-center" >{{ datosModal.titulo }}</h5>
         </div>
 
         <form class="container" role="document" 
@@ -42,7 +42,7 @@
                                 *ngFor="let img of datosProducto.imagenes; index as i">
                                 <img class="img-thumbnail" 
                                 [(src)]="datosProducto.imagenes[i].img"
-                                alt="{{datosProducto.imagenes[i].nombre}}">
+                                alt="{{datosProducto.imagenes[i].img}}">
                                 <button type="button" class="btn-close" (click)="eliminaImg(i)" aria-label="Close"> </button>
                             </div>
 
@@ -146,7 +146,7 @@
           </button>
 
           <button id="btnSubir" type="button summit" class="btn btn-primary btn-stylish">
-                  Subir
+                {{ datosModal.boton_confirmar }}
           </button> 
 
         </div> <!-- Modal footer -->

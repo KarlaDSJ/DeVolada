@@ -38,7 +38,12 @@ export class TarjetaAdminComponent implements OnInit {
       confirmButtonText: 'Sí, borralo'
     }).then((result) => {
       if (result.isConfirmed) {
+        
         // Realiza la peticion para borrar el producto a la BS
+        this._adminService.eliminaImagenesProducto(idProducto).subscribe(respuesta => {
+          console.log(respuesta)
+        })
+
         this._adminService.eliminaProducto(idProducto).subscribe(respuesta => {
           this.EliminarEvent.emit();
           console.log(respuesta)
