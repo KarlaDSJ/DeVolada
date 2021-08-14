@@ -35,8 +35,12 @@ export class CrearResenaComponent implements OnInit {
     this.infoProducto=this._ResenasService.getInfoProducto(); 
   }
 
+  califica(calificacion){
+    this.calificacion=calificacion
+  }
+
   submit(f:NgForm) {
-    this.calificacion=this.randomInteger(1,5)
+    console.log("hola")
     const correo = this.cookie.get('token_accessC');
     this._ResenasService.crearResenas(this.infoProducto.idProducto,correo,this.calificacion,this.opinion)
     .subscribe(data => { console.log(data);
