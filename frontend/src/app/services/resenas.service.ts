@@ -9,6 +9,9 @@ export interface IResena {
   correo: String;
   calificacion: number;
   opinion: String;
+  nombre: String;
+  promedio: number;
+  total: number;
 }
 
 export interface IInfoProducto {
@@ -56,19 +59,25 @@ export class ResenasService {
     return this._http.post<IResena[]>(this._url+"/crearResena",  params, {headers: this.headers})
   }
 
-   /*
-    Regresa todas las reseñas de un producto
-  */
-    mostrarResenas(idProducto:string): Observable<IResena[]>{
-        const params = new HttpParams().set('idProducto', idProducto);
-        return this._http.get<IResena[]>(this._url+"/mostrarResenas", { params: params });
-    }
+/*
+  Regresa todas las reseñas de un producto
+*/
+  mostrarResenas(idProducto:string): Observable<IResena[]>{
+    return this._http.get<IResena[]>(this._url+"/mostrarResenas/"+idProducto)
+  }
 
-  /*
-    Regresa las 5 primeras reseñas de un producto
-  */
-    mostrar5Resenas(idProducto:string): Observable<IResena[]>{
-      return this._http.get<IResena[]>(this._url+"/resenas/"+idProducto)
-    }
+/*
+  Regresa las 5 primeras reseñas de un producto
+*/
+  mostrar5Resenas(idProducto:string): Observable<IResena[]>{
+    return this._http.get<IResena[]>(this._url+"/resenas/"+idProducto)
+  }
 
+  obtenerPromedio(idProducto:string): Observable<IResena>{
+    return this._http.get<IResena>(this._url+"/promedio/"+idProducto)
+  }
+
+  obtenerTotal(idProducto:string): Observable<IResena>{
+    return this._http.get<IResena>(this._url+"/totalResenas/"+idProducto)
+  }
 }
