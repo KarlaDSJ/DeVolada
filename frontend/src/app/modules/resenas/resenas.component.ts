@@ -11,13 +11,22 @@ export class ResenasComponent implements OnInit {
 
   resenias: IResena[];
   @Input() idProducto: string;
-
+  id : string;
+  promedio : number;
+  total: number;
 
   constructor(private _ResenasService: ResenasService, private cookie:CookieService) {
   }
   
   
   ngOnInit(): void {
+    this._ResenasService.obtenerPromedio(this.idProducto).subscribe(respuesta => {
+      this.promedio = respuesta.promedio;
+    })
+    this._ResenasService.obtenerTotal(this.idProducto).subscribe(respuesta => {
+      this.total = respuesta.total;
+    })
+    console.log(this.id)
     this._ResenasService.mostrar5Resenas(this.idProducto)
     .subscribe(data => { 
       this.cookie.set('id', this.idProducto, 1, '/');
