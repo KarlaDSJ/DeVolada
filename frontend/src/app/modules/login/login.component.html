@@ -45,24 +45,52 @@
 
                   <!-- Inicio Form -->
 
-                  <form #form = "ngForm" (submit) = "submitC()"  action="">
-                    <label for="exampleInputEmail1" class="form-label">Correo Electrónico</label>
-                    <input class="form-control" 
+                  <form  #form = "ngForm" (ngSubmit) = "submitC()"  action="">
+                    
+                    <label for="validationServer01" class="form-label">Correo Electrónico</label>
+                    <input
+                    [ngClass] = " (esVacioCorreoC) ? '' : ((esValidoCorreoC)? 'is-valid' :'is-invalid ')  "
+
+                    class="form-control" 
+                    
+                    id="validationServer02"
                     type="email"
+                    [(ngModel)] = "dataC.correoC"
                     name = "correoC"
                     label = "Correo Electronico"
-                    [(ngModel)] = "dataC.correoC"
                     feedback = "Required"
                     required
                     >
-                    <label for="" class="form-label">Contraseña</label>
-                    <input class="form-control" 
+                    <div class="valid-feedback">
+                      Luce bien!
+                    </div>
+                    <div *ngIf = "myForm.get('correoC').hasError('required') || myForm.get('correoC').hasError('email') "  id="validationServerUsernameFeedback" class="invalid-feedback">
+                      Por favor seleciionar un correo valido
+                    </div>
+                      
+                      
+                      
+                      
+
+                    <label for="validationServer03" class="form-label">Contraseña</label>
+                    <input 
+                    [ngClass] = " (esVacioContraseniaC) ? '' : ((esValidocontraseniaC) ? 'is-valid' :'is-invalid ')  "
+                    class="form-control" 
                     type="password"
+                     [(ngModel)] = "dataC.contraseniaC"
                     name="contraseniaC"
                     label = "Contraseña"
-                    [(ngModel)] = "dataC.contraseniaC"
                     feedback = "contrasenia"
+                    required
                     >
+                    
+
+                    <div *ngIf = "myForm.get('contraseniaC').hasError('required')"  id="validationServer03Feedback" class="invalid-feedback">
+                      Por favor selecciona una contraseña valida
+                    </div>
+
+
+
                     <button type="submit" class="btn btn-dark mt-3">Submit</button>
                   </form>
 
@@ -85,8 +113,9 @@
                   <!-- Inicio Form -->
                   
                   <form #form = "ngForm" (submit) = "submitV()"  action="">
-                    <label for="exampleInputEmail1" class="form-label">Correo Electrónico</label>
-                    <input class="form-control" 
+                    <label for="exampleInputEmail13" class="form-label">Correo Electrónico</label>
+                    <input [ngClass] = " (esVacioCorreoV) ? '' : ((esValidoCorreoV)? 'is-valid' :'is-invalid ')  " 
+                    class="form-control" 
                     type="email"
                     name = "correoV"
                     label = "Correo Electronico"
@@ -94,14 +123,28 @@
                     feedback = "Required"
                     required
                     >
+                    <div class="valid-feedback">
+                      Luce bien!
+                    </div>
+                    <div *ngIf = "myForm.get('correoV').hasError('required') || myForm.get('correoV').hasError('email') "  id="validationServerUsernameFeedback" class="invalid-feedback">
+                      Por favor seleciionar un correo valido
+                    </div>
+
+
                     <label for="" class="form-label">Contraseña</label>
-                    <input class="form-control" 
+                    <input [ngClass] = " (esVacioContraseniaV) ? '' : ((esValidocontraseniaV) ? 'is-valid' :'is-invalid ')  "
+                    class="form-control" 
                     type="password"
                     name="contraseniaV"
                     label = "Contraseña"
                     [(ngModel)] = "dataV.contraseniaV"
                     feedback = "contrasenia"
                     >
+                    <div *ngIf = "myForm.get('contraseniaV').hasError('required')"  id="validationServer03Feedback" class="invalid-feedback">
+                      Por favor selecciona una contraseña valida
+                    </div>
+
+
                     <button type="submit" class="btn btn-dark mt-3">Submit</button>
                   </form>
 

@@ -13,7 +13,7 @@ export interface IProducto {
   imagenes: {
     imagen: String
   }[];
-  categorias: ICategoria[];
+  categoria: ICategoria[];
 }
 
 export interface ICategoria {
