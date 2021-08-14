@@ -1,3 +1,4 @@
+<app-barra-nav-comprador></app-barra-nav-comprador>
 <div class="container">
     <h4>Crear Reseña</h4> <br>
     <!-- Imagen, nombre y ID del producto -->
@@ -8,7 +9,7 @@
         <div class="col-9 mb-5">
         <div class="row">
             <div class="col-8 col-sm-8">
-                <p>Nombre del producto {{infoProducto.nombre}}</p>
+                <p>Nombre del producto: {{infoProducto.nombre}}</p>
             </div>
             <div class="col-4 col-sm-4">
                 <p>ID {{infoProducto.idProducto}}</p>
@@ -71,8 +72,7 @@
             <form class="row g-3" #myForm="ngForm" (submit)="submit(myForm)">
                 <div class="row mb-3">
                     <div class="form-check d-flex flex-row-reverse">
-                        <input id="radio5" type="radio" name="estrellas5" >  
-                        <label for="radio5">★</label>
+                        <input id="radio5" type="radio" name="estrellas5" ><label for="radio5">★</label>
                         <input id="radio4" type="radio" name="estrellas4" ><label for="radio4">★</label>
                         <input id="radio3" type="radio" name="estrellas3" ><label for="radio3">★</label>
                         <input id="radio2" type="radio" name="estrellas2"><label for="radio2">★</label>

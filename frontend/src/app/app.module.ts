@@ -31,6 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { RegistrarComponent } from './modules/registrar/registrar.component';
 import { CarruselComponent } from './modules/carrusel/carrusel.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -68,7 +69,8 @@ import { CarruselComponent } from './modules/carrusel/carrusel.component';
     HttpClientModule, //Para hacer peticiones
     ReactiveFormsModule,
     //=> Basic usage (forRoot can also take options, see the wiki)
-    SweetAlert2Module.forRoot()
+    SweetAlert2Module.forRoot(),
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
