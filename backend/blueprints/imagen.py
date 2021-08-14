@@ -6,6 +6,8 @@ from models.productoM import Producto
 from schemas.imagenE import ImagenEsquema
 from werkzeug.utils import secure_filename
 import os
+import base64
+import pprint
 
 imagen = Blueprint('imagen', __name__)
 
@@ -54,7 +56,7 @@ def subir_imagen(idProducto):
     return jsonify({"mensaje": "Se subió la imagen correctamente", 
                     "url": imagen_url })
 
-# Petición para agregar una imagen a la base de datos y guardarla en el sistema.
+# Petición para agregar imagenes a la base de datos y guardarlas en el sistema.
 @imagen.route('/imagenes/subir/<idProducto>', methods = ['POST'])
 def subir_imagenes(idProducto):
 
@@ -125,13 +127,21 @@ def obten_imagen():
     return jsonify({"imagen:": imagen_obtenida.imagen})
 
 
-
 # Petición para consultar todas las imagenes de un producto. 
 @imagen.route('/imagen/producto/<id>', methods=['GET'])
 def obten_imagenes_producto(id):
     producto = id
-    imagenes_producto = db.session.query(Imagen).filter_by(idProducto=producto)
-    return imagen_esquema.jsonify(imagenes_producto)
+    imagenes_producto_url = db.session.query(Imagen).filter_by(idProducto=producto).all()
+    imagenes_url =  imagen_esquema.dump(imagenes_producto_url)
+    print(imagenes_producto_url)
+    imagenes_data = []
+
+    for img_url in imagenes_url:
+        url_imagen = img_url["imagen"]
+        with open(url_imagen,"rb") as img_file:
+            imagenes_data.append( base64.b64encode(img_file.read()).decode('utf-8'))
+    print(imagenes_data)
+    return jsonify(imagenes_data)
 
 
 # Petición para eliminar todas las imagenes de un producto. 

@@ -62,7 +62,7 @@ export class FormAltaProductoComponent implements OnInit {
 
   ngOnInit(): void {
     // Obtiene el correo del vendedor
-    const correo = this._cookie.get('token_access')
+    const correo = this._cookie.get('token_accessV')
     this.datosProducto.correo = correo
     this.configuraModalAltaProducto()
   }
