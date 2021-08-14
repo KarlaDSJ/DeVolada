@@ -10,28 +10,30 @@ pertenecers_esquema = PertenecerEsquema(many=True)
 
 @pertenecer.route('/pertenecer/correo', methods=['GET'])
 def obtener_datos():    
+    '''
+    Obtiene el carrito de un comprador dado su correo
+
+    Returns: Json indicando el identificador del carrito
+    o error 404 indicando que no existe un carrito para 
+    ese comprador
+    '''
     correo = request.args.get('correo', '')    
     pertenecer = Pertenecer.query.filter_by(correo=correo).first()
     
     if pertenecer is None:
-        return jsonify({'msg': 'No existe un carrito para ese comprador :('})
+        return jsonify({'msg': 'No existe un carrito para ese comprador :('}), 404
     else:
-        return jsonify({'id_carrito': pertenecer.idCarrito})
-
-
-@pertenecer.route('/pertenecer/carrito', methods=['GET'])
-def obtener_dueno():    
-    idCarrito = request.args.get('idCarrito', '')
-    pertenecer = Pertenecer.query.filter_by(idCarrito=idCarrito).first()
-    
-    if pertenecer is None:
-        return jsonify({'msg': 'No existe un comprador asignado a ese carrito :('})
-    else:
-        return jsonify({'dueno': pertenecer.correo})
-
+        return jsonify({'msg': pertenecer.idCarrito})
 
 @pertenecer.route('/pertenecer', methods=['POST'])
 def relacion_carrito_comprador():  
+    '''
+    Crea una relación entre un carrito y un comprador 
+    Requiere del correo y el idCarrito por el 'body'
+    en formato json
+
+    Returns: Información de la relación en un json
+    '''
     correo = request.json['correo']
     idCarrito = request.json['idCarrito']
     pertenecer_nuevo = Pertenecer(correo, idCarrito)

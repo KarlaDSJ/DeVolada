@@ -2,7 +2,7 @@ from main import db
 from flask import Blueprint, request, jsonify
 from models.vendedorM import Vendedor
 from schemas.vendedorE import VendedorEsquema
-
+from pprint import pprint
 vendedor = Blueprint('vendedor',__name__)
 
 vendedor_esquema = VendedorEsquema()
@@ -11,6 +11,7 @@ vendedores_esquema = VendedorEsquema(many=True)
 @vendedor.route('/vendedor/<correo>', methods=['GET'])
 def obtener_vendedor(correo):    
     vendedor = Vendedor.query.get(correo)
+    pprint(vendedor)
     return jsonify({'correo': vendedor.correo, 'nombre': vendedor.nombre,
                     'telefono': vendedor.telefono})
 

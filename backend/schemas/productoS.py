@@ -1,5 +1,5 @@
-from schemas.imagenS import ImagenEsquema
-from schemas.categoriaS import CategoriaEsquema
+from schemas.imagenE import ImagenEsquema
+from schemas.categoriaE import CategoriaEsquema
 from main import ma
 from marshmallow import fields
 
@@ -17,4 +17,4 @@ class ProductoEsquema(ma.Schema):
 
     class Meta:
         """Formato de salida"""
-        fields = ("id", "correo", "precio", "nombre", "descripcion", "vendidos", "disponibles", "imagenes", "categoria")
+        fields = ("idProducto", "correo", "precio", "nombre", "descripcion", "vendidos", "disponibles", "imagenes", "categoria")
