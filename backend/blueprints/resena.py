@@ -9,7 +9,7 @@ import simplejson
 import json
 
 resena = Blueprint('resena', __name__)
-engine = create_engine('mysql+pymysql://root:T3-quilas@localhost/mydb')
+engine = create_engine('mysql+pymysql://root:pruebatest@localhost/mydb')
 opinion_esquema = OpinarEsquema()
 opiniones_esquema = OpinarEsquema(many=True)
 
