@@ -25,20 +25,22 @@ export class LoginComponent implements OnInit {
 
   login : ILogin;
   myForm: FormGroup;
+  enviadoC = false;
+  enviadoV = false;
 
   datos = '';
   sesion = '';
   nombre = '';
 
   esValidoCorreoC= false;
-  esVacioCorreoC = true;
-  esValidocontraseniaC = false;
-  esVacioContraseniaC = true;
+  esVacioCorreoC = false;
+  esValidoContraseniaC = false;
+  esVacioContraseniaC = false;
 
   esValidoCorreoV= false;
-  esVacioCorreoV = true;
-  esValidocontraseniaV = false;
-  esVacioContraseniaV = true;
+  esVacioCorreoV = false;
+  esValidoContraseniaV = false;
+  esVacioContraseniaV = false;
    
   //Diccionario con datos del comprador
 
@@ -64,24 +66,27 @@ export class LoginComponent implements OnInit {
    */
 
   constructor(  private _loginService: LoginService, 
-                private router: Router,
-                private cookieServive: CookieService,
-                public fb: FormBuilder){
-
-this.myForm = this.fb.group({
-  correoC : ['',[Validators.required, Validators.email]],
-  contraseniaC : ['', [Validators.required, ]],
-  correoV : ['',[Validators.required, Validators.email]],
-  contraseniaV : ['', [Validators.required, ]]
-})
-  
-                }
+    private router: Router,
+    private cookieServive: CookieService,
+    public fb: FormBuilder){
+      
+      
+      this.myForm = this.fb.group({
+        correoC : ['',[Validators.required, Validators.email]],
+        contraseniaC : ['', [Validators.required]],
+        correoV : ['',[Validators.required, Validators.email]],
+        contraseniaV : ['', [Validators.required, ]]
+      })
+    }
     
-  /**
-   * Constructor que se incializa cada que se carga el componente
-   */
+    /**
+     * Constructor que se incializa cada que se carga el componente
+     */
+    
+    ngOnInit(): void {
+      
 
-  ngOnInit(): void {}
+    }
     
   /**
    * Funcion que se subscribe al servicio de login para enviar los datos del
@@ -89,18 +94,22 @@ this.myForm = this.fb.group({
    */
 
   submitC(){
+    this.enviadoC = true;
+
     
+
     this.esVacioCorreoC = this.myForm.get('correoC').hasError('required')
     
     
     this.esValidoCorreoC =  !this.myForm.get('correoC').hasError('email')
     
     
-    this.esValidocontraseniaC = !this.myForm.get('contraseniaC').hasError('required')
+    this.esValidoContraseniaC = !this.myForm.get('contraseniaC').hasError('required')
     
     
     
-    if((this.esVacioCorreoC == false) && (this.esValidoCorreoC == true) && (this.esValidocontraseniaC == true)){
+    console.log('Hola');
+    if((this.esVacioCorreoC == false) && (this.esValidoCorreoC == true) && (this.esValidoContraseniaC == true)){
       
       this.dataC.correoC = this.myForm.get('correoC').value
       this.dataC.contraseniaC = this.myForm.get('contraseniaC').value
@@ -108,6 +117,8 @@ this.myForm = this.fb.group({
 
       this._loginService.IniciarSesionC(this.dataC).subscribe(response => { //nos subscribimos
       this.datos = response.msg;
+
+      
 
       if (this.datos == 'error_datos'){
         this.esVacioCorreoC = false;
@@ -118,7 +129,7 @@ this.myForm = this.fb.group({
       }
       if(this.datos == 'error_contrasenia'){
         this.esVacioContraseniaC = false
-        this.esValidocontraseniaC = false
+        this.esValidoContraseniaC = false
         Swal.fire({icon:'error',
         title: 'oooops',
         text: 'La contraseña es incorrecta'})
@@ -142,20 +153,20 @@ this.myForm = this.fb.group({
    */
 
   submitV(){
+    this.enviadoV = true;
     this.esVacioCorreoV = this.myForm.get('correoV').hasError('required')
     
-    console.log(this.esVacioCorreoV);
+    
     
     this.esValidoCorreoV =  !this.myForm.get('correoV').hasError('email')
-    console.log(this.esValidoCorreoV);
+   
+    
+    this.esValidoContraseniaV = !this.myForm.get('contraseniaV').hasError('required')
+   
     
     
-    this.esValidocontraseniaV = !this.myForm.get('contraseniaV').hasError('required')
-    console.log(this.esValidocontraseniaV);
     
-    
-    
-    if((this.esVacioCorreoV == false) && (this.esValidoCorreoV == true) && (this.esValidocontraseniaV == true)){
+    if((this.esVacioCorreoV == false) && (this.esValidoCorreoV == true) && (this.esValidoContraseniaV == true)){
       
       this.dataV.correoV = this.myForm.get('correoV').value
       this.dataV.contraseniaV = this.myForm.get('contraseniaV').value
@@ -171,10 +182,11 @@ this.myForm = this.fb.group({
         text: 'Los datos ingresados son incorectos'})
       }
       if(this.datos == 'error_contrasenia'){
-        this.esVacioContraseniaV = false;
-        this.esValidocontraseniaV = false;
 
-        this.esVacioContraseniaV = false
+        this.esVacioContraseniaV = false;
+        this.esValidoContraseniaV = false;
+
+       
         Swal.fire({icon:'error',
         title: 'oooops',
         text: 'La contraseña es incorrecta'})

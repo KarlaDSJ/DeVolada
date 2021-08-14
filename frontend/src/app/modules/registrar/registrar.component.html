@@ -11,6 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script>
+       
+    </script>
 </head>
  
 <body>
@@ -19,110 +22,222 @@
             <div class="col-4">
             </div>
             <div class="col-4">
-                <h2 class=" registrate pb-4 pt-4">Sé parte de nosotros</h2 >
+                <h2 class=" text-center registrate pb-4 pt-4">Sé parte de la familia <img width="50%" src="../../../assets/devolada.png" alt=""> </h2 >
             </div>
             <div class="col-4"></div>
         </div>
         <div class="row">
             <div class="col-6">
                 <div class="card">
-                    <h2 class="text-center pt-3">¿Quiéres ser Comprador?</h2>
+                    <h2 class="text-center pt-3">¿Quieres ser Comprador?</h2>
                     <div class="card-body">
                         
                         <!-- Inicio form -->                        
                         
-                        <form #form = "ngForm" (submit) = "submit()"action="">
-                            <div class="input-group mb-3">
+                        <form class="row g-3"  [formGroup]="myFormR" (submit) = "submit()"action="">
+                            <div class="col-md-6">
                                 <label for="correo" class="form-label" style = "padding-right: 8px;">Correo Electrónico</label>
                                  <input class="form-control" 
+                                 [ngClass] = " (!enviadoC)?  '' : (!correoCesVacio && correoCesValido)? 'is-valid' : 'is-invalid'  "
                                 type="email"
                                 id="correo"
+                                formControlName="correoC"
                                 feedback = "Required"
-                                [(ngModel)] = "dataC.correoC"
                                 name="correoC"
                                 required
                                 >
-                                <label for="nombre" class="form-label" style="padding-left: 8px;padding-right:8px ;">Nombre</label>
+                                <div class="valid-feedback">
+                                    ¡Luce bien!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Por favor ingresa un correo válido
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+
+                               <label for="nombre" class="form-label" style="padding-left: 8px;padding-right:8px ;">Nombre</label>
                                 <input class="form-control" 
+                                [ngClass] = " (!enviadoC) ? '' : ((nombreCesVacio)? 'is-invalid' : 'is-valid'  ) "
                                 type="text"
                                 id="nombre"
-                                [(ngModel)] = "dataC.nombreC"  
+                                formControlName="nombreC"
                                 name="nombreC"                        
                                 feedback = "Required"
                                 required
                                 >
+                                <div class="valid-feedback">
+                                    !Luce bien!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Por favor ingresa un nombre válido
+                                </div>   
+
                             </div>
-                            <div class="input-group mb-3">
+                            <div class="col-md-4">
                                 <label for="telefono" class="form-label" style = "padding-right: 8px;">Teléfono</label>
                                 <input class="form-control" 
-                                type="tel"
-                                [(ngModel)] = "dataC.telefonoC"
+                                [ngClass] = " (!enviadoC) ? '' : (( !telefonoCesVacio && telefonoCesValido ) ? 'is-valid' :'is-invalid') "
+                                type="number"
+                                formControlName="telefonoC"
                                 name="telefonoC"
                                 id="telefono"                          
                                 feedback = "Required"
                                 required
                                 >
-                                <label for="estado" class="form-label" style="padding-left: 8px;padding-right:8px">Estado</label>
-                                <input class="form-control" 
+                                <div class="valid-feedback">
+                                    !Luce bien!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Por favor ingresa un teléfono válido
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+
+                                <label for="estado" class="form-label" style="padding-left: 8px;padding-right:8px" aria-label="select example">Estado</label>
+                                <select  class="form-select customscroll-10-p"
+                                [ngClass] = " (!enviadoC) ? '' : (estadoCesVacio) ? 'is-invalid' : 'is-valid'  " 
                                 type="text"
                                 id="estado"    
-                                [(ngModel)] = "dataC.estadoC"
+                                formControlName="estadoC"
                                 name = "estadoC"                      
                                 feedback = "Required"
-                                required
-                                >
+                                required>
+                                <option>Aguascalientes</option>
+                                <option>Baja California</option>
+                                <option>Baja California Sur</option>
+                                <option>Campeche</option>
+                                <option>CDMX</option>
+                                <option>Coahuila de Zaragoza</option>
+                                <option>Colima</option>
+                                <option>Chiapas</option>
+                                <option>Chihuahua</option>
+                                <option>Durango</option>
+                                <option>EDOMEX</option>
+                                <option>Guanajuato</option>
+                                <option>Guerrero</option>
+                                <option>Hidalgo</option>
+                                <option>Jalisco</option>
+                                <option>Michoacán </option>
+                                <option>Morelos</option>
+                                <option>Nayarit</option>
+                                <option>Nuevo León</option>
+                                <option>Oaxaca</option>
+                                <option>Puebla</option>
+                                <option>Querétaro</option>
+                                <option>Quintana Roo</option>
+                                <option>San Luis Potosí</option>
+                                <option>Sinaloa</option>
+                                <option>Sonora</option>
+                                <option>Tabasco</option>
+                                <option>Tamaulipas</option>
+                                <option>Tlaxcala</option>
+                                <option>Veracruz </option>
+                                <option>Yucatán</option>
+                                <option>Zacatecas</option>
+                            </select>
+                                
+                                <div class="valid-feedback">
+                                    !Luce bien!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Por favor ingresa un estado válido
+                                </div>
                             </div>  
-                            <div class="input-group mb-3">
+                            <div class="col-md-4">
                                 <label for="ciudad" class="form-label" style = "padding-right: 8px;">Ciudad</label>
                                 <input class="form-control" 
+                                [ngClass] = " (!enviadoC) ? '' : (ciudadCesVacio) ? 'is-invalid' : 'is-valid'  "
                                 type="text"
                                 id="ciudad"             
-                                [(ngModel)] = "dataC.ciudadC"  
+                                formControlName="ciudadC"
                                 name="ciudadC"           
                                 feedback = "Required"
                                 required
                                 >
-                                <label for="colonia" class="form-label" style="padding-left: 8px;padding-right:8px ;">Colonia</label>
-                                <input class="form-control" 
-                                type="text"
-                                id="colonia"    
-                                [(ngModel)] = "dataC.coloniaC"  
-                                name="coloniaC"                    
-                                feedback = "Required"
-                                required
-                                >
+                                <div class="valid-feedback">
+                                    !Luce bien!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Por favor ingresa una ciudad válida
+                                </div>
+                            </div> 
+                            <div class="col-md-8">
+
+                                  <label for="colonia" class="form-label" style="padding-left: 8px;padding-right:8px ;">Colonia</label>
+                                  <input class="form-control" 
+                                  [ngClass] = " (!enviadoC) ? '' : (coloniaCesVacio) ? 'is-invalid' : 'is-valid'"
+                                  type="text"
+                                  id="colonia"    
+                                  formControlName="coloniaC"
+                                  name="coloniaC"                    
+                                  feedback = "Required"
+                                  required
+                                  >
+                                  <div class="valid-feedback">
+                                    !Luce bien!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Por favor ingresa una colonia válida
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+
                                 <label for="cp" class="form-label" style="padding-left: 8px;padding-right:8px ;">Código Postal</label>
                                 <input class="form-control" 
-                                type="text"
+                                [ngClass] = " (!enviadoC) ? '' : ((cpCEsVacio) ? 'is-invalid' : ((cpCesValido)? 'is-valid' : 'is-invalid')) "
+                                type="number"
                                 id="cp"           
-                                [(ngModel)] = "dataC.cpC"    
+                                formControlName="cpC"
                                 name="cpC"           
                                 feedback = "Required"
                                 required
                                 >
-                            </div> 
-                            <div class="input-group mb-3">
-                                <label for="calle" class="form-label" style = "padding-right: 8px;">Calle</label>
+                                <div class="valid-feedback">
+                                    Luce bien!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Por favor ingresa un código postal válido
+                                </div>
+                            </div>  
+                            <div class="col-md-8">
+                                    <label for="calle" class="form-label" style = "padding-right: 8px;">Calle</label>
                                 <input class="form-control" 
+                                [ngClass] = " (!enviadoC) ? '' : (calleCEsVacio) ? 'is-invalid' : 'is-valid'  "
                                 type="text"
                                 id="calle"          
-                                [(ngModel)] = "dataC.calleC"   
+                                formControlName="calleC"
                                 name="calleC"             
                                 feedback = "Required"
                                 required
                                 >
+                                <div class="valid-feedback">
+                                    !Luce bien!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Por favor ingresa una calle válida
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+
                                 <label for="numero" class="form-label" style="padding-left: 8px;padding-right:8px ;">Número</label>
                                 <input class="form-control" 
+                                [ngClass] = " (!enviadoC) ? '' : (( !numeroCesVacio && numeroCesValido ) ? 'is-valid' :'is-invalid')  "
                                 type="number"
-                                [(ngModel)] = "dataC.numeroC"
+                                formControlName="numeroC"
                                 name="numeroC"
                                 id="numoer"                          
                                 feedback = "Required"
                                 required
                                 >
+                                <div class="valid-feedback">
+                                    !Luce bien!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Por favor ingresa un número válido
+                                </div>
                             </div>
-                            <h5>Te enviaremos un correo de confirmación con la contraseña para poder acceder al sistema</h5>
-                            <div class="p-3"><button type="submit" class="btn btn-dark">Enviar</button> </div>
+                                <h5>Te enviaremos un correo de confirmación con la contraseña para poder acceder al sistema</h5>
+                                <div class="p-3"><button type="submit" class="btn btn-dark">Enviar</button> </div>
                         </form>
 
                         <!-- Fin Form-->
@@ -132,114 +247,233 @@
             </div>
             <div class="col-6">
                 <div class="card">
-                    <h2 class="text-center pt-3">¿Quiéres ser Vendedor?</h2>
+                    <h2 class="text-center pt-3">¿Quieres ser Vendedor?</h2>
                     <div class="card-body">
 
                         <!-- Inicio form --> 
-                        
-                        <form #form = "ngForm" (submit) = "submitV()">
-                            <div class="input-group mb-3">
+                        <form class="row g-3"  [formGroup]="myFormR" (submit) = "submitV()"action="">
+                            <div class="col-md-6">
                                 <label for="correo" class="form-label" style = "padding-right: 8px;">Correo Electrónico</label>
-                                <input class="form-control" 
+                                 <input class="form-control" 
+                                 [ngClass] = " (!enviadoV)?  '' : (!correoVesVacio && correoVesValido)? 'is-valid' : 'is-invalid'  "
                                 type="email"
                                 id="correo"
-                                [(ngModel)] = "dataV.correoV"
+                                formControlName="correoV"
+                                feedback = "Required"
                                 name="correoV"
-                                feedback = "Required"
                                 required
                                 >
-                                <label for="nombre" class="form-label" style="padding-left: 8px;padding-right:8px ;">Nombre</label>
-                                <input class="form-control" 
-                                type="text"
-                                [(ngModel)] = "dataV.nombreV"
-                                name="nombreV"
-                                id="nombre"                          
-                                feedback = "Required"
-                                required
-                                >
+                                <div class="valid-feedback">
+                                    ¡Luce bien!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Por favor ingresa un correo válido
+                                </div>
                             </div>
-                                <div class="input-group mb-3">
+                            <div class="col-md-6">
+
+                               <label for="nombre" class="form-label" style="padding-left: 8px;padding-right:8px ;">Nombre</label>
+                                <input class="form-control" 
+                                [ngClass] = " (!enviadoV) ? '' : ((nombreVesVacio)? 'is-invalid' : 'is-valid'  ) "
+                                type="text"
+                                id="nombre"
+                                formControlName="nombreV"
+                                name="nombreV"                        
+                                feedback = "Required"
+                                required
+                                >
+                                <div class="valid-feedback">
+                                    !Luce bien!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Por favor ingresa un nombre válido
+                                </div>   
+
+                            </div>
+                            <div class="col-md-4">
                                 <label for="telefono" class="form-label" style = "padding-right: 8px;">Teléfono</label>
                                 <input class="form-control" 
-                                type="tel"
-                                id="telefono"    
-                                [(ngModel)] = "dataV.telefonoV"   
-                                name="telefonoV"                   
+                                [ngClass] = " (!enviadoV) ? '' : (( !telefonoVesVacio && telefonoVesValido ) ? 'is-valid' :'is-invalid') "
+                                type="number"
+                                formControlName="telefonoV"
+                                name="telefonoV"
+                                id="telefono"                          
                                 feedback = "Required"
                                 required
                                 >
-                                <label for="estado" class="form-label" style="padding-left: 8px;padding-right:8px">Estado</label>
-                                <input class="form-control" 
+                                <div class="valid-feedback">
+                                    !Luce bien!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Por favor ingresa un teléfono válido
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+
+                                <label for="estado" class="form-label" style="padding-left: 8px;padding-right:8px" aria-label="select example">Estado</label>
+                                <select  class="form-select customscroll-10-p"
+                                [ngClass] = " (!enviadoV) ? '' : (estadoVesVacio) ? 'is-invalid' : 'is-valid'  " 
                                 type="text"
-                                [(ngModel)] = "dataV.estadoV"
-                                name="estadoV"
-                                id="estado"                          
+                                id="estado"    
+                                formControlName="estadoV"
+                                name = "estadoV"                      
                                 feedback = "Required"
-                                required
-                                >
+                                required>
+                                <option>Aguascalientes</option>
+                                <option>Baja California</option>
+                                <option>Baja California Sur</option>
+                                <option>Campeche</option>
+                                <option>CDMX</option>
+                                <option>Coahuila de Zaragoza</option>
+                                <option>Colima</option>
+                                <option>Chiapas</option>
+                                <option>Chihuahua</option>
+                                <option>Durango</option>
+                                <option>EDOMEX</option>
+                                <option>Guanajuato</option>
+                                <option>Guerrero</option>
+                                <option>Hidalgo</option>
+                                <option>Jalisco</option>
+                                <option>Michoacán </option>
+                                <option>Morelos</option>
+                                <option>Nayarit</option>
+                                <option>Nuevo León</option>
+                                <option>Oaxaca</option>
+                                <option>Puebla</option>
+                                <option>Querétaro</option>
+                                <option>Quintana Roo</option>
+                                <option>San Luis Potosí</option>
+                                <option>Sinaloa</option>
+                                <option>Sonora</option>
+                                <option>Tabasco</option>
+                                <option>Tamaulipas</option>
+                                <option>Tlaxcala</option>
+                                <option>Veracruz </option>
+                                <option>Yucatán</option>
+                                <option>Zacatecas</option>
+                            </select>
+                                
+                                <div class="valid-feedback">
+                                    !Luce bien!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Por favor ingresa un estado válido
+                                </div>
                             </div>  
-                                <div class="input-group mb-3">
+                            <div class="col-md-4">
                                 <label for="ciudad" class="form-label" style = "padding-right: 8px;">Ciudad</label>
                                 <input class="form-control" 
+                                [ngClass] = " (!enviadoV) ? '' : (ciudadVesVacio) ? 'is-invalid' : 'is-valid'  "
                                 type="text"
-                                id="ciudad"        
-                                [(ngModel)] = "dataV.ciudadV" 
-                                name="ciudadV"            
+                                id="ciudad"             
+                                formControlName="ciudadV"
+                                name="ciudadV"           
                                 feedback = "Required"
                                 required
                                 >
-                                <label for="colonia" class="form-label" style="padding-left: 8px;padding-right:8px ;">Colonia</label>
-                                <input class="form-control" 
-                                type="text"
-                                id="colonia"          
-                                [(ngModel)] = "dataV.coloniaV"  
-                                name="coloniaV"              
-                                feedback = "Required"
-                                required
-                                >
+                                <div class="valid-feedback">
+                                    !Luce bien!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Por favor ingresa una ciudad válida
+                                </div>
+                            </div> 
+                            <div class="col-md-8">
+
+                                  <label for="colonia" class="form-label" style="padding-left: 8px;padding-right:8px ;">Colonia</label>
+                                  <input class="form-control" 
+                                  [ngClass] = " (!enviadoV) ? '' : (coloniaVesVacio) ? 'is-invalid' : 'is-valid'"
+                                  type="text"
+                                  id="colonia"    
+                                  formControlName="coloniaV"
+                                  name="coloniaV"                    
+                                  feedback = "Required"
+                                  required
+                                  >
+                                  <div class="valid-feedback">
+                                    !Luce bien!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Por favor ingresa una colonia válida
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+
                                 <label for="cp" class="form-label" style="padding-left: 8px;padding-right:8px ;">Código Postal</label>
                                 <input class="form-control" 
+                                [ngClass] = " (!enviadoV) ? '' : ((cpVEsVacio) ? 'is-invalid' : ((cpVesValido)? 'is-valid' : 'is-invalid')) "
+                                type="number"
+                                id="cp"           
+                                formControlName="cpV"
+                                name="cpV"           
+                                feedback = "Required"
+                                required
+                                >
+                                <div class="valid-feedback">
+                                    Luce bien!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Por favor ingresa un código postal válido
+                                </div>
+                            </div>  
+                            <div class="col-md-8">
+                                    <label for="calle" class="form-label" style = "padding-right: 8px;">Calle</label>
+                                <input class="form-control" 
+                                [ngClass] = " (!enviadoV) ? '' : (calleVEsVacio) ? 'is-invalid' : 'is-valid'  "
                                 type="text"
-                                id="cp"      
-                                [(ngModel)] = "dataV.cpV" 
-                                name="cpV"                   
+                                id="calle"          
+                                formControlName="calleV"
+                                name="calleV"             
                                 feedback = "Required"
                                 required
                                 >
-                            </div> 
-                            <div class="input-group mb-3">
-                                <label for="calle" class="form-label" style = "padding-right: 8px;">Calle</label>
-                                <input class="form-control"     
-                                type="text" 
-                                [(ngModel)] = "dataV.calleV"    
-                                id="calle"         
-                                name="calleV"                 
-                                feedback = "Required"
-                                required
-                                >
+                                <div class="valid-feedback">
+                                    !Luce bien!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Por favor ingresa una calle válida
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+
                                 <label for="numero" class="form-label" style="padding-left: 8px;padding-right:8px ;">Número</label>
                                 <input class="form-control" 
+                                [ngClass] = " (!enviadoV) ? '' : (( !numeroVesVacio && numeroVesValido ) ? 'is-valid' :'is-invalid')  "
                                 type="number"
-                                id="numero"      
-                                [(ngModel)] = "dataV.numeroV"      
-                                name="numeroV"              
+                                formControlName="numeroV"
+                                name="numeroV"
+                                id="numoer"                          
                                 feedback = "Required"
                                 required
                                 >
+                                <div class="valid-feedback">
+                                    !Luce bien!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Por favor ingresa un número válido
+                                </div>
                             </div>
                             <h6 class="mb-4">Es necesario que nos proporciones un numero de tarjeta en la cual quieres que te hagan tus depositos</h6>
                             <label for="tarjeta" class="form-label mb-3" style="padding-left: 8px;padding-right:8px ;">Número de tarjeta</label>
-                                <input class="form-control" 
-                                type="text"
-                                id="tarjeta"  
-                                [(ngModel)] = "dataV.tarjetaV"   
-                                name="tarjetaV"                     
-                                feedback = "Required"
-                                required
-                                >
-                            <h5 class="mt-4">Te enviaremos un correo de confirmación con la contraseña para poder acceder al sistema</h5>
-                            <div class="p-3"><button type="submit" class="btn btn-dark">Enviar</button> </div>
+                            <input class="form-control" 
+                            [ngClass] = " (!enviadoV) ? '' : (( !tarjetaEsVacia && tarjetaEsValida ) ? 'is-valid' :'is-invalid')  "
+                            type="number"
+                            id="tarjeta"  
+                            formControlName = "tarjeta" 
+                            name="tarjeta"                     
+                            feedback = "Required"
+                            required
+                            >
+                            <div class="valid-feedback">
+                                !Luce bien!
+                            </div>
+                            <div class="invalid-feedback">
+                                Por favor ingresa una tarjeta válida
+                            </div>
+                                <h5>Te enviaremos un correo de confirmación con la contraseña para poder acceder al sistema</h5>
+                                <div class="p-3"><button type="submit" class="btn btn-dark">Enviar</button> </div>
                         </form>
+                        
 
                         <!-- Fin Form-->
                        
