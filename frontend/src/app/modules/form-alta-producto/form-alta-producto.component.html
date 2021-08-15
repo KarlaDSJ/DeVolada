@@ -41,8 +41,8 @@
                             <div class="d-flex flex-shrink-0 img-uploaded" 
                                 *ngFor="let img of datosProducto.imagenes; index as i">
                                 <img class="img-thumbnail" 
-                                [(src)]="datosProducto.imagenes[i].img"
-                                alt="{{datosProducto.imagenes[i].img}}">
+                                [(src)]="datosProducto.imagenes[i]"
+                                alt="{{datosProducto.imagenes[i]}}">
                                 <button type="button" class="btn-close" (click)="eliminaImg(i)" aria-label="Close"> </button>
                             </div>
 

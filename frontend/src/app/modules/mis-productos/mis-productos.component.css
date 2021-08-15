@@ -28,17 +28,15 @@ body {
 
 .products-container{
     width: 90%;
-    max-width: 800px;
+    max-width: 900px;
     border-radius: 15px;
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.35);
     box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.05);
     margin-bottom: 100px;
     margin-top: 70px;
 }
 
-.products-container app-tarjeta-admin{
-    width: 100%;
-}
+
 
 .background{
     position: fixed;

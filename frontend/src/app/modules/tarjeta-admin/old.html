@@ -1,0 +1,71 @@
+
+<div class="view container-sm">
+    <div class="card-admin ">
+      <div class="row">
+          <div class="col-md-4 ">
+              <!-- Imagen del producto-->
+              <img class="card-img " 
+                    [src]="producto?.imagenes[0]?.imagen"
+                    [alt]="producto.nombre">
+          </div>
+      
+          <div class="col-md-8">
+  
+              <!-- Nombre e ID del producto-->
+              <h2 class="card-title mt-2"> {{ producto.nombre }}
+                <small class="card-id text-muted"> ID: {{ producto.idProducto }} </small>
+              </h2>
+  
+              <!-- Precio del producto-->
+              <h3 class="card-price text-primary"> $ {{ producto.precio }} <small>MXM</small> </h3>
+  
+              <!-- Calificacion del producto-->
+              <p class="card-rating text-muted fs-4">
+                <span class="stars text-warning">★★★</span>
+                <span class="stars ">★★</span>
+                <span class="opinions fw-lighter font-fa"> (7 opiniones) </span> 
+              </p>
+  
+              <!-- Descripcion del producto-->
+              <p class="card-description text-secondary"> {{ producto.descripcion }} </p>
+              
+              
+              
+                <div class="card-foot d-flex justify-content-between">
+  
+                  <div class="card-units d-flex justify-content-between">
+                    <!-- Unidades vendidas -->
+                    <p class="sells font-weight-bold text-success"> {{ producto.vendidos }} <span> ventas </span></p>
+                    <!-- Unidades disponibles -->
+                    <p class="sells text-secondary"> {{ producto.disponibles }} <span> disponibles </span></p>
+                  </div>
+  
+                  <div class="card-buttons d-flex justify-content-between">
+                    <!-- Boton de editar-->
+                    <button class="btn btn-outline-primary" 
+                      (click)="accionEditarProducto(producto.idProducto)"> 
+                      <i class="bi bi-pencil-square"></i> 
+                      <span>  </span> 
+                    </button> 
+                    <!-- Boton de eliminar-->
+                    <button class="btn btn-outline-danger" 
+                      (click)="accionEliminarProducto(producto.idProducto)" > 
+                      <i class="bi bi-trash-fill"></i>  
+                      <span>  </span> 
+                    </button> 
+  
+                  </div>
+  
+                </div>
+  
+          </div>
+        </div>
+      </div>
+  </div>
+  
+  
+  
+  
+  
+  
+  

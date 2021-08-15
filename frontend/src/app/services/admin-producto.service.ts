@@ -43,6 +43,7 @@ export class AdminProductoService {
 
   constructor( private _http: HttpClient ) {}
 
+  // Realiza la petición al server para dar de alta los datos elementales de un producto 
   daAltaProducto( datosProducto : {correo: string, 
                                    nombre: string, 
                                    precio:number, 
@@ -51,6 +52,7 @@ export class AdminProductoService {
     return this._http.post<IadminProducto>(this._url+"/producto", datosProducto);
   }
 
+  // Realiza la petición al server para actualizar los datos elementales de un producto BD.
   actualizaProducto( datosProducto : { idProducto: number,
     correo: string, 
     nombre: string, 
@@ -61,31 +63,47 @@ export class AdminProductoService {
     return this._http.patch<IadminProducto>(this._url+"/producto/"+idProducto, datosProducto);
   }
 
+  // Realiza la petición al server para actualizar las categorías de un producto en la BD. 
   actualizaCategorias( idProducto: number, categorias : {categorias : string} )  {
     return this._http.post<IadminProducto>(this._url+`/categoria/actualiza/${idProducto}`, categorias);
   }
 
-  // Manda las peticiones para eliminar un producto del sistema
+  // Realiza la petición al server para actualizar las imágenes del producto en la BD y el sistema.
+  actualizaImagenes( idProducto: number, img_files: string[] ):Observable<any> {
+    return this._http.patch(this._url + `/imagenes/actualiza/${idProducto}`, img_files)
+  }
+
+  // Realiza la petición al server para eliminar un producto de la BD.
   eliminaProducto( idProducto: number )  {
     // Borra el registro del producto de la BD
     return this._http.delete<IadminProducto>(this._url+`/producto/${idProducto}`);
   }
 
-  // Borra el registro de las imagenes de la BD y los archivos correspondientes del sistema
+  // Realiza la petición para eliminar las imagenes de la BD y 
+  // sus archivos correspondientes del sistema.
   eliminaImagenesProducto( idProducto: number){
     return this._http.delete<any>(this._url+`/imagenes/producto/${idProducto}`)
   }
 
-  subeImagenes( idProducto: number, img_files: any[] ):Observable<any> {
+  // Realiza la petición al server para agregar imágenes a la BD y 
+  // guardar sus archivos correspondientes en el sistema.
+  subeImagenes( idProducto: number, img_files: string[] ):Observable<any> {
+    console.log("hola", {img_files} )
+    return this._http.post(this._url + `/imagenes/subir/${idProducto}`, img_files)
+  }
+
+  // Realiza la petición al server para agregar imágenes a la BD y 
+  // guardar sus archivos correspondientes en el sistema.
+  subeImagenesOLD( idProducto: number, img_files: any[] ):Observable<any> {
   
     // Create form data
     const formData = new FormData(); 
 
     for( let i=0; i< img_files.length; i++ ){
+      console.log("00:", img_files[i].file)
       formData.append("imagen["+i+"]", img_files[i].file );
     }
       
-    // Make http post request over api with formData as req
     return this._http.post(this._url + `/imagenes/subir/${idProducto}`, formData)
   }
 

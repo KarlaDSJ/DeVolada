@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AdminProductoService } from '../../services/admin-producto.service';
+import { ProductosService } from '../../services/productos.service';
 import { Output, EventEmitter } from '@angular/core';
 import Swal from 'sweetalert2';
 import { IProducto } from "../../services/productos.service";
@@ -13,9 +14,18 @@ export class TarjetaAdminComponent implements OnInit {
 
   @Input() producto: IProducto;
 
-  constructor( private _adminService: AdminProductoService ) { }
+  ganancias = 0;
 
-  ngOnInit(): void {}
+  constructor( private _adminService: AdminProductoService,
+               private _productoService: ProductosService ){}
+
+  ngOnInit(): void {
+    this.ganancias = this.producto.precio * this.producto.vendidos;
+    // Carga la primer imagen del producto
+    this._productoService.getImagenDecodificada(this.producto.idProducto).subscribe(respuesta => {
+      this.producto.imagenes[0] = respuesta[0]
+    })
+  }
   
   @Output() EliminarEvent = new EventEmitter();
   @Output() EditarEvent   = new EventEmitter();

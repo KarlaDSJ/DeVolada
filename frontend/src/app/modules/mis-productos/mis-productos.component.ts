@@ -33,6 +33,7 @@ export class MisProductosComponent implements OnInit {
   // Hace una peticion a la BS para obtenerlos 
   // Esta funcion debe ser llamada tras borrar, actualizar, agregar un nuevo producto y al inicio.
   cargaListaProductos(){
+    console.log("HOLAAAAAAAAA")
     this._productoService.obtenProductosVendedor(this.correo_vendedor)
           .subscribe(data => { this.lista_productos = data; }) 
   }
