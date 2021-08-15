@@ -8,20 +8,44 @@ from sqlalchemy import *
 import simplejson
 import json
 
+
+__author__ = "Orduña Ávila Marco Antonio, Gramer Muñoz Omar Fernando, Trad Mateos Kethrim Guadalupe, Salas Jiménez Karla Denia, Reyes Martínez Antonio"
+__copyright__ = "Copyright 2021, Ingenieria de Software "
+__credits__ = [""]
+__license__ = ""
+__version__ = "1.0.2"
+__maintainer__ = "Orduña Ávila Marco Antonio, Gramer Muñoz Omar Fernando, Trad Mateos Kethrim Guadalupe, Salas Jiménez Karla Denia, Reyes Martínez Antonio"
+__email__ = "marcoorduna1999@ciencias.unam.mx, omar_gramer@ciencias.unam.mx, kethrimtrad@ciencias.unam.mx, karla_dsj@ciencias.unam.mx, antonioreyes21@ciencias.unam.mx"
+__status__ = "Development"
+
+""" 
+Archivo de rutas para poder manejar las peticiones para crear una reseña
+"""
+
 resena = Blueprint('resena', __name__)
 engine = create_engine('mysql+pymysql://root:pruebatest@localhost/mydb')
+
+"""---------------- Esquemas ----------------"""
+
 opinion_esquema = OpinarEsquema()
 opiniones_esquema = OpinarEsquema(many=True)
 
 opinionCompleta_esquema = OpinarCompletaEsquema()
-
 opinionCompletas_esquema = OpinarCompletaEsquema(many = True)
 
 promedio_Esquema = Promedio(many=True)
+"""---------------- Rutas ----------------"""
 
 #Funcion que muestra todas las reseñas de un producto
 @resena.route('/mostrarResenas/<id>', methods=['GET','POST'])
 def ver_resenas(id):
+     """
+     Muestra todas las reseñas de un producto
+     Params:        
+          id: identificador del producto
+     Returns: lista de las reseñas
+     """
+
      text = 'select * from comprador  inner join opinar where comprador.correo = opinar.correo and idProducto = ' + id + ' '
      print(text) 
      #diccionario en python
@@ -35,6 +59,11 @@ def ver_resenas(id):
 
 @resena.route('/crearResena', methods=['POST'])
 def crear_resena():
+     """
+     Crea una reseña para un producto
+     Returns: mensaje de éxito
+     """
+
      correo = request.json['correo']
      idProducto = request.json['idProducto']
      opinion = request.json['opinion']
@@ -47,9 +76,16 @@ def crear_resena():
 
      return jsonify({'mensaje':'todo bien'})
 
-#Funcion que muestra las primeras 5 reseñas de un producto
+
 @resena.route('/resenas/<id>', methods=['GET'])
 def ver_5_resenas(id):
+     """
+     Muestra las primeras 5 reseñas de un producto
+     Params:        
+          id: identificador del producto
+     Returns: lista de las reseñas
+     """
+
      text = 'select * from comprador  inner join opinar where comprador.correo = opinar.correo and idProducto = ' + id + ' order by idProducto desc limit 5'
      print(text) 
      #diccionario en python
@@ -64,6 +100,13 @@ def ver_5_resenas(id):
 
 @resena.route('/promedio/<id>', methods=['GET'])
 def promedio(id):
+     """
+     Calcula la calificación de un producto según las reseñas
+     Params:        
+          id: identificador del producto
+     Returns: calificación del producto
+     """
+
      text = 'select avg(calificacion) from opinar where opinar.idProducto= ' + id +' group by idProducto'
      print(text) 
      #diccionario en python
@@ -80,6 +123,13 @@ def promedio(id):
 
 @resena.route('/totalResenas/<id>', methods=['GET'])
 def resenasTotal(id):
+     """
+     Cuenta el número de reseñas de un producto
+     Params:        
+          id: identificador del producto
+     Returns: número de reseñas de un producto
+     """
+
      text = 'select count(calificacion) from opinar where opinar.idProducto= ' + id +' group by idProducto'
      print(text) 
      #diccionario en python
