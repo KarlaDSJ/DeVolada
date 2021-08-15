@@ -95,7 +95,7 @@ button{
 
 
 .btn-editar{
-    background: linear-gradient(to top, #2959c9, #32d1f8); 
+    background: linear-gradient(to top, #297cc9, #32d1f8); 
 }
 .btn-editar:hover{
     background: linear-gradient(to top, rgb(26, 58, 131), #29a5c4); 
@@ -103,7 +103,9 @@ button{
 
 .btn-eliminar{
     background: linear-gradient(to top, #f02323, #e77d27); 
+    background: linear-gradient(to top, #7c7c7c, #afafaf); 
 }
 .btn-eliminar:hover{
     background: linear-gradient(to top, #b81a1a, #bd6925); 
+    background: linear-gradient(to top, #4b4b4b, #838383);
 }
