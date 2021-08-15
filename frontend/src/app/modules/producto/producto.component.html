@@ -1,15 +1,5 @@
 <app-barra-nav-comprador> </app-barra-nav-comprador>
-<nav aria-label="breadcrumb" class="m-3">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a routerLink="/inicio" routerLinkActive="active">
-        Inicio
-      </a>
-        </li>
-        <li class="breadcrumb-item active" aria-current="page">{{ producto?.nombre }}</li>
-    </ol>
-</nav>
-
+<app-background></app-background>
 
 <div class="w-75 mx-auto p-3">
     <div>
@@ -19,7 +9,7 @@
                     <!-- Nombre -->
                     <h3>{{ producto?.nombre }}</h3>
                     <!-- ID -->
-                    <h6 class="text-muted"> ID {{ id }}</h6>
+                    <h6 class="text-light"> ID {{ id }}</h6>
                 </div>
             </div>
             <!-- Calificación -->
@@ -47,7 +37,7 @@
 
             <!-- Agregar al carrito-->
             <div class="col-4 p-2">
-                <button class="btn btn-primary w-75 mb-3 rounded-pill mx-auto" id="agregar" (click)="agregar()" [disabled]="deshabilitar() || cargando">
+                <button class="btn btn-light border-primary w-75 mb-3 rounded-pill mx-auto" id="agregar" (click)="agregar()" [disabled]="deshabilitar() || cargando">
           <span *ngIf="cargando" class="spinner-border spinner-border-sm mr-1"></span>
           Agregar
         </button>

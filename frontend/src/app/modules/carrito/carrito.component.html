@@ -1,4 +1,6 @@
 <app-barra-nav-comprador>   </app-barra-nav-comprador>
+<app-background></app-background>
+
 <div class="container"> 
     
     <div class="row mb-3">
@@ -20,7 +22,7 @@
         </div>
         <div class="col-3 col-md-4">
             <p class="text-bolder">{{producto.nombre}}</p>
-            <p class="text-secondary">ID: {{producto.idP}} </p>
+            <p class="text-light">ID: {{producto.idP}} </p>
         </div>
         <div class="col-3">
             <div class="btn-group rounded-pill" role="group" aria-label="Basic example">
@@ -31,9 +33,9 @@
         </div>
         <div class="col-3 precio-borrar">
             <p class="text-bolder"> $ {{producto.precioP}} </p>
-            <button type="button" class="btn btn-link" (click) = "eliminarP(i)" >Eliminar</button>
+            <button type="button" class="btn btn-link link-light" (click) = "eliminarP(i)" >Eliminar</button>
         </div>
-        <hr style="background-color: rgb(182, 180, 180); margin-top: 1rem;">
+        <hr style="background-color: rgb(235, 226, 226); margin-top: 1rem;">
     </div>
 
 
@@ -45,7 +47,7 @@
     <div class="row justify-content-end mt-4" >
         <div class="col-6">
             <!-- Pasamos el id del Carrito a la vista de dirección-->
-            <a type="button" routerLink="/direccion" class="btn btn-primary rounded-pill disabled" 
+            <a type="button" routerLink="/direccion" class="btn btn-secondary rounded-pill disabled" 
             tabindex="-1" [class.disabled]="listaP.length==0">Continuar compra</a>
         </div>
     </div>
