@@ -4,6 +4,7 @@ import { ResenasService, IInfoProducto } from "../../services/resenas.service";
 import { IResena } from "../../services/resenas.service";
 import { NgForm } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -66,15 +67,24 @@ export class CrearResenaComponent implements OnInit {
   /**
    * Funcion que se subscribe al servicio de resenas para enviar los datos de la reseña creada
    */
+
   submit(f:NgForm) {
-    console.log("hola")
+    console.log(f)
+    console.log(this.opinion)
     const correo = this.cookie.get('token_accessC');
-    this._ResenasService.crearResenas(this.infoProducto.idProducto,correo,this.calificacion,this.opinion)
-    .subscribe(data => { console.log(data);
-      this.router.navigate(['/producto/'+this.infoProducto.idProducto]);
-      });
+    if(this.opinion!=""){
+      this._ResenasService.crearResenas(this.infoProducto.idProducto,correo,this.calificacion,this.opinion)
+      .subscribe(data => {
+        Swal.fire({icon:'success',
+        title: 'Perfecto',
+        text: 'Reseña guardada con éxito'})
+        this.router.navigate(['/producto/'+this.infoProducto.idProducto]);
+        });
+    }
+    Swal.fire({icon:'error',
+        title: 'oooops',
+        text: 'Debes seleccionar una calificación y escribir un comentario, por favor'})
     this.vtar = true
   }
-
 
 }
