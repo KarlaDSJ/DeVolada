@@ -1,8 +1,9 @@
 from sqlalchemy import desc, func
+from sqlalchemy.sql.functions import count
 from main import db
 from flask import Blueprint, request, jsonify
 from models.productoM import Producto
-from models.vendedorM import Vendedor
+from models.incluirM import Incluir
 from models.categoriaM import Categoria
 from schemas.productoS import ProductoEsquema
 
@@ -87,10 +88,9 @@ def top5_productos():
 
     Returns: lista de los productos
     """
-
-    ##productos = db.session.query(func.sum(Incluir.cantidad).label('count'), Incluir.producto).group_by(Incluir.producto).order_by(desc('count')).limit(5)
-    ##if len(productos) == 0: #Probar que lo de arriba funcione
-    productos = db.session.query(Producto).order_by(Producto.idProducto.desc()).limit(5)
+    productos = db.session.query(Producto).join(Incluir).order_by(desc(Incluir.cantidad)).limit(5)
+    if productos.count() == 0: 
+        productos = db.session.query(Producto).order_by(Producto.idProducto.desc()).limit(5)
     return productos_esquema.jsonify(productos)
 
 
