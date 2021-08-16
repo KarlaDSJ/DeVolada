@@ -31,7 +31,7 @@ export class TarjetaAdminComponent implements OnInit {
 
     // Carga la primer imagen del producto
     this._productoService.getImagenDecodificada(this.producto.idProducto).then(respuesta => {
-      this.producto.imagenes[0] = respuesta[0];
+      this.producto.imagenes[0] = respuesta.imagen;
     })
 
     // Carga la calificacion promedio de las resenas del producto

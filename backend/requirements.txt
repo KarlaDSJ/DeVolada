@@ -9,3 +9,4 @@ flask-mail==0.9.1
 flask-sqlalchemy==2.5.1
 flask-marshmallow==0.14.0
 marshmallow-sqlalchemy==0.26.1
+Pillow==8.3.1

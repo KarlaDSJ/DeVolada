@@ -11,7 +11,8 @@ __status__ = "Development"
 
 class Imagen(db.Model):
     __tablename__ = 'imagen'
-    imagen = db.Column(db.String(100), primary_key = True, unique=True)
+    idImagen = db.Column(db.Integer, primary_key=True, unique=True)
+    imagen = db.Column(db.Text)
     idProducto = db.Column(db.Integer, db.ForeignKey('producto.idProducto'), primary_key = True)
 
     def __init__(self,imagen,idProducto):

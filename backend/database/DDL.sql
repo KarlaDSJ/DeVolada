@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `tarjetaComprador` (
   `correo` varchar(45) not null,
   `dueno` VARCHAR(60) NOT NULL,
   `fechaCad` DATE NOT NULL,
-  `cvv` INT NOT NULL,
+  `cvv` VARCHAR(106) NOT NULL,
   PRIMARY KEY (`numero`, correo),
   CONSTRAINT correo_tarjetaComprador
     FOREIGN KEY (correo)
@@ -148,9 +148,10 @@ ENGINE = InnoDB;
 -- Table   `Imagen`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS   `imagen` (
-  `imagen` VARCHAR(100) NOT NULL,
+   idImagen INT NOT NULL AUTO_INCREMENT,
+  `imagen` TEXT NOT NULL,
   `idProducto` int NOT NULL,
-  PRIMARY KEY (`imagen`, idProducto),
+  PRIMARY KEY (idImagen, idProducto),
   CONSTRAINT idProducto_imagen
     FOREIGN KEY (idProducto)
     REFERENCES   `producto` (idProducto)

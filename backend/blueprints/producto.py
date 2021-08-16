@@ -7,6 +7,9 @@ from models.productoM import Producto
 from models.incluirM import Incluir
 from models.categoriaM import Categoria
 from schemas.productoS import ProductoEsquema
+from schemas.imagenE import ImagenEsquema
+import os
+import base64
 
 __author__ = "Orduña Ávila Marco Antonio, Gramer Muñoz Omar Fernando, Trad Mateos Kethrim Guadalupe, Salas Jiménez Karla Denia, Reyes Martínez Antonio"
 __copyright__ = "Copyright 2021, Ingenieria de Software "
@@ -53,7 +56,7 @@ def get_productos():
     """
 
     productos = db.session.query(Producto).all()
- 
+
     return productos_esquema.jsonify(productos)
 
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AdminProductoService } from '../../services/admin-producto.service';
 import { ProductosService } from '../../services/productos.service';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Output, EventEmitter, ViewChild } from '@angular/core';
 
@@ -63,7 +64,8 @@ export class FormAltaProductoComponent implements OnInit {
 
   constructor( private _adminService: AdminProductoService, 
                private _productosService: ProductosService, 
-               private _cookie: CookieService ){}
+               private _cookie: CookieService,
+               private router: Router){}
 
 
   // Función que se ejecuta al cargar la página. Obtiene el correo del vendedor a través de la sesión.
@@ -115,7 +117,7 @@ export class FormAltaProductoComponent implements OnInit {
       // Carga las imágenes del producto
       this._productosService.getImagenesDecodificadas( idProducto ).subscribe((respuesta: any[]) => {
         for( let img of respuesta)
-          this.datosProducto.imagenes.push( img );
+          this.datosProducto.imagenes.push( img.imagen );
       } ) 
     } )
   }
@@ -198,6 +200,7 @@ export class FormAltaProductoComponent implements OnInit {
         // Informa al usuario que el producto se dió de alta correctamente con un mensaje.
         Swal.fire({icon: 'success', title: 'Éxito', text: 'Los cambios de tu producto se han guardado correctamente.'})
         this.cierraModal()
+        //this.router.navigate(['/mis-productos'])
       }
     } ) 
   }

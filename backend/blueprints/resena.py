@@ -131,7 +131,8 @@ def resenasTotal(id):
      print(text) 
      #diccionario en python
      resenas = engine.execute(text)
-
+     total = 0
+     
      for i in resenas:
           total=(i['count(calificacion)'])
      

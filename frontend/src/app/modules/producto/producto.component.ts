@@ -78,6 +78,8 @@ export class ProductoComponent implements OnInit {
     this._productoService.getProducto(this.id)
       .subscribe(data => {
         this.producto = data;
+        console.log(this.producto);
+        
         this.info = { 'idProducto': this.producto.idProducto, 'nombre': this.producto.nombre, 'imagen': this.producto.imagenes[0].imagen }
         this._ResenasService.setInfoProducto(this.info)
       })

@@ -1,3 +1,4 @@
+from marshmallow.utils import pprint
 from main import db
 from flask import app
 from flask import Blueprint, request, jsonify
@@ -7,8 +8,7 @@ from schemas.imagenE import ImagenEsquema
 from werkzeug.utils import secure_filename
 from PIL import Image
 import os
-import base64
-import io
+from pprint import pprint
 
 imagen = Blueprint('imagen', __name__)
 
@@ -46,21 +46,8 @@ def sube_imagenes(idProducto):
 
     # Sube y guarda las imagenes
     for i in range(cantidad_imgs_subir):
-        # Datos de la imagen codificados en base64
-        imagen_bin = request.json[i] 
-        # Elimina el header de los datos URI
-        imagen_bin = imagen_bin[imagen_bin.find(",")+1:]
-        # Nombre que tendrá la img
-        imagen_nombre  = "product" + idProducto + "_img" + str(cantidad_imgs_producto + i + 1)
-        # Ruta donde se guardará la img
-        imagen_ruta = os.path.join(SAVE_PATH, secure_filename(imagen_nombre))
-
-        # Guarda la imagen en el sistema
-        with open(imagen_ruta, "wb") as fh:
-            fh.write(base64.b64decode(imagen_bin))
-
         # Agrega la direccion de la imagen a la BD
-        imagen_nueva = Imagen(imagen_ruta, idProducto)
+        imagen_nueva = Imagen(request.json[i], idProducto)
         db.session.add(imagen_nueva) # Guarda la entrada en la BD
 
     # Guarda los cambios en la BD
@@ -74,7 +61,7 @@ def sube_imagenes(idProducto):
 # Las imagenes deben de pasarse en formato base64
 @imagen.route('/imagenes/actualiza/<idProducto>', methods = ['PATCH'])
 def actualiza_imagenes(idProducto):
-
+    print(request.json)
     # Verifica que el producto exista
     producto = db.session.query(Producto).filter_by(idProducto=idProducto).first()
     if (producto is None):
@@ -84,21 +71,11 @@ def actualiza_imagenes(idProducto):
 
     # Busca las imagenes existentes en el producto
     imagenes_producto = db.session.query(Imagen).filter_by(idProducto=idProducto).all()
-    imagenes_cantidad = len(imagenes_producto)
 
     # Elimina las entradas de las imagenes en la BD
     for img in imagenes_producto:
         db.session.delete(img) # Elimina la entrada en la BD
     db.session.commit()
-
-    # Elimina los archivos de las imagenes de la carpeta static
-    imagenes_producto = imagenes_esquema.dump(imagenes_producto)
-    for img in imagenes_producto:
-        imgPath = img["imagen"]
-        if os.path.exists(imgPath):
-            os.remove(imgPath) # Elimina el archivo en el sistema
-        else:
-            print("No se pudo borrar el archivo de imagen <" + imgPath + "> porque no existe.")
 
     # Cuenta las imagenes que se van a subir
     cantidad_imgs_subir = len(request.json)
@@ -111,21 +88,8 @@ def actualiza_imagenes(idProducto):
 
     # Sube y guarda las nuevas imágenes
     for i in range(cantidad_imgs_subir):
-        # Datos de la imagen codificados en base64
-        imagen_bin = request.json[i] 
-        # Elimina el header de los datos URI
-        imagen_bin = imagen_bin[imagen_bin.find(",")+1:]
-        # Nombre que tendrá la img
-        imagen_nombre  = "product" + idProducto + "_img" + str( i + 1)
-        # Ruta donde se guardará la img
-        imagen_ruta = os.path.join(SAVE_PATH, secure_filename(imagen_nombre))
-
-        # Guarda la imagen en el sistema
-        with open(imagen_ruta, "wb") as fh:
-            fh.write(base64.b64decode(imagen_bin))
-
         # Agrega la direccion de la imagen a la BD
-        imagen_nueva = Imagen(imagen_ruta, idProducto)
+        imagen_nueva = Imagen(request.json[i], idProducto)
         db.session.add(imagen_nueva) # Guarda la entrada en la BD
 
     # Guarda los cambios en la BD
@@ -133,18 +97,10 @@ def actualiza_imagenes(idProducto):
 
     return jsonify({"mensaje": "Se actualizaron las imagenes del producto <" + str(idProducto) + "> correctamente." })
 
-# Petición para consultar la direccion de una imagen desde la base de datos a través de su PK. 
-@imagen.route('/imagen', methods=['GET'])
-def obten_imagen():
-    imagen = request.json['imagen']
-    idProducto = request.json['idProducto']
-    imagen_obtenida = db.session.query(Imagen).get((imagen,idProducto))
-    return jsonify({"imagen:": imagen_obtenida.imagen})
-
 
 # Petición para obtener las imagenes en base64 de un producto. 
 @imagen.route('/imagenes/producto/<idProducto>', methods=['GET'])
-def obten_imagenes64_producto(idProducto):
+def obten_imagenes_producto(idProducto):
 
     # Verifica que el producto exista
     producto = db.session.query(Producto).filter_by(idProducto=idProducto).first()
@@ -155,31 +111,13 @@ def obten_imagenes64_producto(idProducto):
 
     # Obtiene las rutas de las imagenes desde la BD
     imagenes_producto = db.session.query(Imagen).filter_by(idProducto=idProducto).all()
-    imagenes_url =  imagenes_esquema.dump(imagenes_producto)
-    imagenes_data = []
 
-    for img in imagenes_url:
-
-        # Obtiene la dirección del archivo de la imagen
-        imgPath = img["imagen"]
-        
-        # Verifica que exista el archivo de la imagen en la dirección dada
-        if not os.path.exists(imgPath):
-            return jsonify({"error": 101, "mensaje": "No se encontró la imagen con ruta <" + imgPath + ">."})
-        
-        # Decodifica la imagen en base64
-        with open(imgPath,"rb") as img_file:
-            ext = "jpeg" #imgPath.split('.')[-1]
-            prefix = f'data:image/{ext};base64,'
-            imagen_decodificada = prefix + base64.b64encode(img_file.read()).decode('utf-8')
-            imagenes_data.append( imagen_decodificada )
-
-    return jsonify(imagenes_data)
+    return imagenes_esquema.jsonify(imagenes_producto)
 
 
 # Petición para obtener la primer imagen en base64 de un producto. 
 @imagen.route('/imagen/producto/<idProducto>', methods=['GET'])
-def obten_imagen64_producto(idProducto):
+def obten_imagen_producto(idProducto):
 
     # Verifica que el producto exista
     producto = db.session.query(Producto).filter_by(idProducto=idProducto).first()
@@ -190,24 +128,7 @@ def obten_imagen64_producto(idProducto):
 
     # Obtiene las rutas de las imagenes desde la BD
     imagen_producto = db.session.query(Imagen).filter_by(idProducto=idProducto).first()
-    imagen_url =  imagen_esquema.dump(imagen_producto)
-    imagen_data = []
-
-    # Obtiene la dirección del archivo de la imagen
-    imgPath = imagen_url["imagen"]
-        
-    # Verifica que exista el archivo de la imagen en la dirección dada
-    if not os.path.exists(imgPath):
-        return jsonify({"error": 101, "mensaje": "No se encontró la imagen con ruta <" + imgPath + ">."})
-        
-    # Decodifica la imagen en base64
-    with open(imgPath,"rb") as img_file:
-        ext = "jpeg" #imgPath.split('.')[-1]
-        prefix = f'data:image/{ext};base64,'
-        imagen_decodificada = prefix + base64.b64encode(img_file.read()).decode('utf-8')
-        imagen_data.append( imagen_decodificada )
-
-    return jsonify(imagen_data)
+    return imagen_esquema.jsonify(imagen_producto)
 
 
 # Petición para eliminar todas las imagenes de un producto ( DB y archivos). 
@@ -229,15 +150,6 @@ def elimina_imagenes_producto(idProducto):
     for img in imagenes_producto:
         db.session.delete(img) # Elimina la entrada en la BD
     db.session.commit()
-
-    # Elimina los archivos de las imagenes de la carpeta static
-    imagenes_producto = imagenes_esquema.dump(imagenes_producto)
-    for img in imagenes_producto:
-        imgPath = img["imagen"]
-        if os.path.exists(imgPath):
-            os.remove(imgPath) # Elimina el archivo en el sistema
-        else:
-            print("No se pudo borrar el archivo de imagen <" + imgPath + "> porque no existe.")
 
     return jsonify({"mensaje:": "Se eliminaron " + str(imagenes_cantidad) 
         + " imagenes del producto <" + str(idProducto) + "> correctamente."})
