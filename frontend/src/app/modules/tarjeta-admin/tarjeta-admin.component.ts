@@ -16,11 +16,11 @@ export class TarjetaAdminComponent implements OnInit {
   @Input() producto: IProducto;
 
   ganancias = 0;
+
   calificacion = 0;
   cantidad_resenas = 0;
-  
-  estrellas_doradas = ""
-  estrellas_restantes = ""
+  estrellas_doradas = "";
+  estrellas_restantes = "";
 
   constructor( private _adminService: AdminProductoService,
                private _productoService: ProductosService,

@@ -5,9 +5,8 @@
     
     <div class="row mb-3">
         <div class="col text-center">
-            <h3 
-            class="mt-3 mb-4">Tienes {{listaP.length}} artículos en tu 🛒
-        </h3>
+            <i class="titulo-icon bi bi-cart4"></i>
+            <h3 class="titulo mt-3 mb-4">Tienes {{listaP.length}} artículos en tu carrito </h3>
         </div>
     </div>
     
@@ -26,9 +25,9 @@
         </div>
         <div class="col-3">
             <div class="btn-group rounded-pill" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary" (click) = "disminuirCP(i)">-</button>
-                <span class="cantidad-p">{{producto.cant}} </span>
-                <button type="button" class="btn btn-secondary" (click) = "aumentarCP(i)">+</button>
+                <button type="button" class="btn btn-dark btn-masmenos" (click) = "disminuirCP(i)">-</button>
+                <span class="cantidad-p ">{{producto.cant}} </span>
+                <button type="button" class="btn btn-dark btn-masmenos" (click) = "aumentarCP(i)">+</button>
               </div>
         </div>
         <div class="col-3 precio-borrar">

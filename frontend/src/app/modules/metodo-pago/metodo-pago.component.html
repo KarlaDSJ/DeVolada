@@ -2,7 +2,11 @@
 <app-background></app-background>
 
 <div class="products-container">
-    <p class="fs-3 text-center">¿Cómo quieres pagar? 💳 </p>
+    <div class="titulo-container d-flex flex-column">
+        <i class="titulo-icon text-center bi bi-credit-card-2-back"></i>
+        <h2 class="titulo text-center">¿Cómo deseas pagar? </h2>
+    </div>
+
 
     
     <div class="container">
@@ -25,13 +29,13 @@
                 </div>
 
                 <!-- Agregar método de pago -->
-                <div class="container mt-3 ">
-                    <button class="btn btn-light fs-5 mb-3" type="button" data-bs-toggle="collapse"
+                <div class="container mt-3 form-agregaPago">
+                    <button class="btn btn-light fs-5 mb-3 btn-agregaPago" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                         <span class="fs-6">➕ Agregar un método de pago</span>
                     </button>
 
-                    <div class="collapse border border-white p-2 py-3" id="collapseExample">
+                    <div class="collapse  border-top p-2 py-3" id="collapseExample">
 
                         <form class="row g-3 needs-validation" [ngClass]="{'was-validated': valida}"
                             (ngSubmit)="validarTar(f)" #f="ngForm" novalidate>
@@ -41,7 +45,7 @@
                                     <label for="dueno" class="col-sm-3 col-form-label">Nombre del propietario</label>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control" id="dueno"
-                                            placeholder="Sara Ramírez Costa" autocomplete="off" name="dueno" ngModel
+                                            placeholder="Nombre y apellidos" autocomplete="off" name="dueno" ngModel
                                             required>
                                     </div>
                                 </div>
@@ -60,7 +64,7 @@
                                 <div class="mb-3 row">
                                     <label for="cvv" class="col-sm-3 col-form-label ">CVV</label>
                                     <div class="col-sm-2">
-                                        <input type="text" class="form-control" id="cvv" placeholder="123"
+                                        <input type="text" class="form-control" id="cvv" placeholder="---"
                                             autocomplete="off" name="cvv" pattern="\d{3}" ngModel required>
                                     </div>
                                 </div>
@@ -80,7 +84,7 @@
 
                                 <div class="row margin-auto">
                                     <div class="col d-flex justify-content-center">
-                                        <button type="submit" class="btn btn-primary px-5">Agregar</button>
+                                        <button type="submit" class="btn btn-ligth px-5">Agregar</button>
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +100,7 @@
                 <!-- Continuar y cancelar compra  -->
                 <div class="row mb-3">
                     <div class="col can-con">
-                        <button type="button" class="btn btn-outline-danger rounded-pill px-5" (click)="cancelarCompra.fire()">
+                        <button type="button" class="btn btn-danger rounded-pill px-5" (click)="cancelarCompra.fire()">
                         Cancelar compra
                         </button>
                     </div>

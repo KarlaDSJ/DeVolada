@@ -3,12 +3,14 @@
 
   <div class="d-flex flex-left justify-content-start flex-row">
 
+    <!-- Imagen -->
     <div class="columna col-img">
       <img class="producto-img" 
           [src]="producto.imagenes[0]"
           [alt]="producto.nombre">
     </div>
 
+    <!-- Nombre, ID y precio -->
     <div class="columna col-info d-flex flex-column ">
       <h5 class="producto-nombre" > {{ producto.nombre }} 
         <span class="producto-id text-muted"> &nbsp;ID: {{ producto.idProducto }}</span> 
@@ -20,6 +22,7 @@
 
   <div class="d-flex flex-rigth justify-content-end flex-wrap flex-row">
 
+    <!-- Reseñas -->
     <div class="columna col-resenas">
       <h6> Calificación </h6>
       <h6 class="producto-resenas text-muted">
@@ -29,21 +32,25 @@
       <p class="producto-opiniones text-muted"> ({{cantidad_resenas}} reseñas) </p> 
     </div>
 
+    <!-- Ventas -->
     <div class="columna col-ventas">
       <h6> Vendidos </h6>
       <p class="producto-vendidos text-muted"> {{ producto.vendidos }}  </p>
     </div>
   
+    <!-- Disponibles -->
     <div class="columna col-ventas">
       <h6> Disponibles </h6>
       <p class="producto-vendidos text-muted"> {{ producto.disponibles }}  </p>
     </div>
   
+    <!-- Ganancias -->
     <div class="columna col-ventas">
       <h6> Ganancias </h6>
       <p class="producto-vendidos text-muted"> $ {{ ganancias }} <small>MXM</small>  </p>
     </div>
-      
+    
+    <!-- Botones -->
     <div class="columna col-btn flex-row ">
       <button class="btn-editar" (click)="accionEditarProducto(producto.idProducto)"> 
         <i class="bi bi-pencil-fill"></i> </button> 

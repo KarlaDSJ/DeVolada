@@ -75,10 +75,10 @@ def actualiza_imagenes(idProducto):
     # Elimina las entradas de las imagenes en la BD
     for img in imagenes_producto:
         db.session.delete(img) # Elimina la entrada en la BD
-    db.session.commit()
 
     # Cuenta las imagenes que se van a subir
     cantidad_imgs_subir = len(request.json)
+    print(cantidad_imgs_subir)
 
     # Verifica que no se exceda la cantidad de imagenes permitidas
     if( cantidad_imgs_subir > IMG_LIMIT ):

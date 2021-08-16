@@ -1,59 +1,59 @@
 <app-barra-nav-comprador> </app-barra-nav-comprador>
 <app-background></app-background>
 
-<div class="w-75 mx-auto p-3">
-    <div>
-        <div class="row justify-content-between">
-            <div class="col-4">
-                <div>
-                    <!-- Nombre -->
-                    <h3>{{ producto?.nombre }}</h3>
-                    <!-- ID -->
-                    <h6 class="text-light"> ID {{ id }}</h6>
+<div class="paginaProducto container">
+
+    <div class="contenedorProducto">
+
+        <div class="w-75 mx-auto p-3">
+            <div class="titulo d-flex flex-row justify-content-between">
+                <!-- Nombre -->
+                <h1 id="productoNombre">
+                    {{ producto?.nombre }} 
+                    <small id="productoID" class="text-muted"> &nbsp; ID {{ id }}</small> 
+                </h1>
+            </div>
+        
+            <!-- Imagenes del producto -->
+            <div class="content-section implementation carousel-demo">
+                <p-carousel [value]="producto?.imagenes" styleClass="custom-carousel" [numVisible]="3" [numScroll]="2" [circular]="true" [autoplayInterval]="0" [responsiveOptions]="responsiveOptions">
+                    <ng-template let-foto pTemplate="item">
+                        <img [src]="foto.imagen" class="d-block w-100" [alt]="producto.nombre">
+                    </ng-template>
+                </p-carousel>
+            </div>
+        
+            <div>
+                <div class="row justify-content-between">
+                    <div class="col-4 p-2">
+                        <!-- Precio -->
+                        <h2>${{ producto?.precio }} <small style="font-size: 0.7em;"> MXN </small></h2>
+                    </div>
+        
+                    <!-- Agregar al carrito-->
+                    <div class="col-4 p-2">
+                        <button class="btn btn-dark w-75 mb-3 rounded-pill mx-auto" id="agregar" (click)="agregar()" [disabled]="deshabilitar() || cargando">
+                            <span *ngIf="cargando" class="spinner-border spinner-border-sm mr-1"></span>
+                            <i class="bi bi-cart4"></i>
+                            &nbsp; Agregar al carrito
+                        </button>
+                    </div>
+        
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-12">
+                        <!-- Descripción -->
+                        <p class="text-justify w-100 lh-sm">
+                            {{ producto?.descripcion }}
+                        </p>
+                    </div>
                 </div>
             </div>
-            <!-- Calificación -->
-            <div class="col-4">
-                <span class="text-warning fs-2">★★★<span class="text-muted fs-2">★★</span></span>
-            </div>
+        
         </div>
-    </div>
+        <br><br><br>
+        <app-resenas [idProducto]=id></app-resenas>
 
-    <!-- Imagenes del producto -->
-    <div class="content-section implementation carousel-demo">
-        <p-carousel [value]="producto?.imagenes" styleClass="custom-carousel" [numVisible]="3" [numScroll]="2" [circular]="true" [autoplayInterval]="0" [responsiveOptions]="responsiveOptions">
-            <ng-template let-foto pTemplate="item">
-                <img [src]="foto.imagen" class="d-block w-100" [alt]="producto.nombre">
-            </ng-template>
-        </p-carousel>
-    </div>
-
-    <div>
-        <div class="row justify-content-between">
-            <div class="col-4 p-2">
-                <!-- Precio -->
-                <h4>${{ producto?.precio }} MXN</h4>
-            </div>
-
-            <!-- Agregar al carrito-->
-            <div class="col-4 p-2">
-                <button class="btn btn-light border-primary w-75 mb-3 rounded-pill mx-auto" id="agregar" (click)="agregar()" [disabled]="deshabilitar() || cargando">
-          <span *ngIf="cargando" class="spinner-border spinner-border-sm mr-1"></span>
-          Agregar
-        </button>
-            </div>
-
-        </div>
-        <div class="row align-items-center">
-            <div class="col-12">
-                <!-- Descripción -->
-                <p class="text-justify w-100 lh-sm">
-                    {{ producto?.descripcion }}
-                </p>
-            </div>
-        </div>
     </div>
 
 </div>
-
-<app-resenas [idProducto]=id></app-resenas>

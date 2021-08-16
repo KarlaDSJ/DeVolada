@@ -10,11 +10,31 @@
 }
 
 .products-container{
-    padding: 5%;
+    padding: 10px 60px;
     width: 95%;
     max-width: 800px;
     border-radius: 15px;
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.6);
     box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.05);
     margin: auto;
+}
+
+.titulo-container{
+    margin-bottom: 30px;
+}
+
+.titulo-icon{
+    font-size: 5em;
+}
+
+.form-agregaPago{
+    background-color: rgb(238, 241, 245);
+    border-radius: 30px;
+}
+
+.btn-agregaPago{
+    position: relative;
+    background: none;
+    top: 5px;
+    border: none;
 }

@@ -149,7 +149,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS   `imagen` (
    idImagen INT NOT NULL AUTO_INCREMENT,
-  `imagen` TEXT NOT NULL,
+  `imagen` MEDIUMTEXT NOT NULL,
   `idProducto` int NOT NULL,
   PRIMARY KEY (idImagen, idProducto),
   CONSTRAINT idProducto_imagen

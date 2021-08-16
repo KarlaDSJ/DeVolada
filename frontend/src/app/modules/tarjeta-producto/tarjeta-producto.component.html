@@ -1,27 +1,38 @@
-<div class="card m-2 font" style="width: 14rem;">
-  <!-- Foto principal y descripción breve del producto -->
-  <div class="img">
-    <img [src]="producto.imagenes[0].imagen" class="card-img-top" [alt]="producto.nombre">
+<div class="d-flex tarjetaProducto flex-column d-flex justify-content-start align-items-center">
+  
+  <div class="d-flex imagenContainer">
+    <img [src]="producto.imagenes[0].imagen" class="imagenProducto" [alt]="producto.nombre">
     <p class="info card-img-top p-2"> {{ producto.descripcion }}</p>
   </div>
-    <!-- Información del producto -->
-    <div class="card-body d-inline cardProducto">
-      <!-- Nombre -->
-        <h6 class="card-title tittle">{{ producto.nombre }}</h6>
-        <p class="card-text fw-light">
-          <!-- ID -->
-          ID {{ producto.idProducto }}<!-- {{ producto.id }} --> <br>
-          <!-- Precio -->
-          <span class="fw-bold">${{ producto.precio }} MXM</span> <br>
-          <!-- Calificación -->
-          <span class="text-warning">★★★★★</span> (7 opiniones) 
-        </p>
-      
-      <!-- Botón para ver información completa -->
-       <a [routerLink]="['/producto', producto.idProducto]"
-         routerLinkActive="active" 
-         class="btn btn-primary btn-sm w-100 mt-2 rounded-pill">
-        Ver producto
-     </a>
+
+  <div class="d-flex datosContainer flex-column d-flex justify-content-start align-items-start">
+
+    <!-- Nombre e ID -->
+    <h6 class="nombreProducto">{{ producto.nombre }} 
+      <small class="precioProducto text-muted "> ID {{ producto.idProducto }} </small>
+    </h6>
+
+    <!-- Precio -->
+    <p class="fw-bold">${{ producto.precio }} MXM</p>
+
+
+    <!-- Calificación -->
+    <p class="calificacionProducto text-muted">
+      <span  class="stars text-warning">{{estrellas_doradas}}</span>
+      <span  class="stars ">{{estrellas_restantes}}</span>
+      <small class="cantidadResenasProducto "> ({{cantidad_resenas}} opiniones)</small>
+    </p>
+  </div>
+
+  
+
+  <!-- Botón para ver información completa -->
+  <a [routerLink]="['/producto', producto.idProducto]"
+    routerLinkActive="active" 
+    class="btn btn-dark btn-ver">
+    Ver producto
+  </a>
+
 </div>
+
 

@@ -49,7 +49,7 @@ def agrega_categorias(idProducto):
     for categoria in categorias_nuevas:
         categoria = categoria.lower().strip() # Convertir en minisculas y eliminar espacios
         if categoria == "":
-            return jsonify({"error": 102, "mensaje": "Se intento agregar una categoria vacia."})
+            continue
         categorias_msj.append(categoria)
         categoria_no_existe = db.session.query(Categoria).get((categoria,idProducto)) is None
         if categoria_no_existe:
@@ -78,8 +78,7 @@ def actualiza_categorias(idProducto):
     # Verifica que el producto exista
     producto = db.session.query(Producto).filter_by(idProducto=idProducto).first()
     if (producto is None):
-        return jsonify({"error": 101, 
-                        "mensaje": "El producto <" + str(idProducto) + "> no existe."})
+        return jsonify({"error": 101, "mensaje": "El producto <" + str(idProducto) + "> no existe."})
 
     # Borra las categorias existentes
     categorias_producto = db.session.query(Categoria).filter_by(idProducto=idProducto).all()
@@ -94,8 +93,9 @@ def actualiza_categorias(idProducto):
     # Agrega las nuevas categorias
     for categoria in categorias_nuevas:
         categoria = categoria.lower().strip() # Convertir en minisculas y eliminar espacios
+        # Si la categoria es vacía entonces la ignora
         if categoria == "":
-            return jsonify({"error": 102, "mensaje": "Se intento agregar una categoria vacia."})
+            continue
         categorias_msj.append(categoria)
         categoria_no_existe = db.session.query(Categoria).get((categoria,idProducto)) is None
         if categoria_no_existe:
