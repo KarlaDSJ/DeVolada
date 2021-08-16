@@ -22,6 +22,9 @@ export class ProductoComponent implements OnInit {
   // Cambiar por el carrito del comprador
   idCarrito = -1;
   cargando = false;
+  promedio:number;
+  estrellaA:string = ""; //Cadena con estrellas amarillas
+  estrellaG:string = ""; //Cadena con estrellas amarillas
 
   deshabilitar() {
     if (this.producto.disponibles <= 0) {
@@ -56,6 +59,17 @@ export class ProductoComponent implements OnInit {
         })
   }
 
+  /**
+   * Obtiene la calificación del producto
+   */
+  get_promedio(){
+    this._ResenasService.obtenerPromedio(""+this.producto.idProducto).subscribe(respuesta => {
+      this.promedio = Math.floor(respuesta.promedio);
+      for (let i = 0; i < this.promedio; i++) { this.estrellaA += "★"}
+      for (let i = 0; i < 5 - this.promedio; i++) { this.estrellaG += "★"}
+    })
+  }
+
   constructor(private _route: ActivatedRoute,
     private _productoService: ProductosService,
     private _carritoService: CarritoService,
@@ -77,11 +91,12 @@ export class ProductoComponent implements OnInit {
     //Nos regresa todos los productos
     this._productoService.getProducto(this.id)
       .subscribe(data => {
-        this.producto = data;
-        console.log(this.producto);
+        this.producto = data; //Obtiene los datos del producto
         
         this.info = { 'idProducto': this.producto.idProducto, 'nombre': this.producto.nombre, 'imagen': this.producto.imagenes[0].imagen }
-        this._ResenasService.setInfoProducto(this.info)
+        this._ResenasService.setInfoProducto(this.info) //los guarda para la página de reseñas
+
+        this.get_promedio();//Obtiene la calificación del producto
       })
     let correo = this.cookie.get('token_accessC');
     try {

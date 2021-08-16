@@ -9,7 +9,6 @@ import json as simplejson #Importamos simplejson
 import json #Importamos json
 
 
-
 __author__ = "Orduña Ávila Marco Antonio, Gramer Muñoz Omar Fernando, Trad Mateos Kethrim Guadalupe, Salas Jiménez Karla Denia, Reyes Martínez Antonio"
 __copyright__ = "Copyright 2021, Ingenieria de Software "
 __credits__ = [""]
@@ -26,8 +25,7 @@ Archivo de rutas para poder manejar las peticiones para crear una reseña
 resena = Blueprint('resena', __name__)
 engine = create_engine('mysql+pymysql://root:pruebatest@localhost/mydb')
 
-"""---------------- Esquemas ----------------"""
-
+#engine = create_engine('mysql+pymysql://root:T3-quilas@localhost/mydb')
 opinion_esquema = OpinarEsquema()
 opiniones_esquema = OpinarEsquema(many=True)
 
@@ -137,3 +135,25 @@ def resenasTotal(id):
           total=(i['count(calificacion)'])
      
      return simplejson.dumps({'total':total})
+
+
+"""
+Método que verifica que un comprador haya adquirido un producto antes de que pueda escribir la reseña de este
+
+return un archivo JSON con el mensaje si o no
+"""
+
+@resena.route('/verificar/<correo>/<id>', methods=['GET'])
+def verificar(correo, id):
+     text = 'select * from compra join incluir where compra.correo = "' + correo + '" and incluir.idProducto = ' + id+' and compra.idCompra  = incluir.idCompra '     
+     resenas = engine.execute(text)
+     total = 0
+     
+     for i in resenas:          
+          total+=1
+
+     if(total==0):
+          return jsonify({'msg':'no'})
+     else: 
+          return jsonify({'msg':'si'})
+     

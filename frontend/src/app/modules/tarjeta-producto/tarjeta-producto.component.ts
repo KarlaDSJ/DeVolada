@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IProducto } from "../../services/productos.service";
+import { ResenasService, IResena } from "../../services/resenas.service";
 
 @Component({
   selector: 'app-tarjeta-producto',
@@ -10,27 +11,23 @@ export class TarjetaProductoComponent implements OnInit {
 
   @Input() producto: IProducto;
 
-  calificacion = 3;
-  cantidad_resenas = 0;
-  estrellas_doradas = "";
-  estrellas_restantes = "";
+  promedio:number;
+  estrellaA:string = ""; //Cadena con estrellas amarillas
+  estrellaG:string = ""; //Cadena con estrellas amarillas
+  total: number = 0; //número de opiniones
 
-  constructor() { }
+  constructor(private _ResenasService: ResenasService) { }
 
   ngOnInit(): void { 
-    this.calculaEstrellas(this.calificacion)
-  }
+    this._ResenasService.obtenerPromedio(""+this.producto.idProducto).subscribe(respuesta => {
+      this.promedio = Math.floor(respuesta.promedio);
+      for (let i = 0; i < this.promedio; i++) { this.estrellaA += "★"}
+      for (let i = 0; i < 5 - this.promedio; i++) { this.estrellaG += "★"}
 
-
-  calculaEstrellas(calificacion){
-    calificacion = Math.round(calificacion)
-    if (calificacion > 5) calificacion = 5;
-    if (calificacion < 0) calificacion = 0;
-    this.estrellas_doradas = "";
-    for( let i=0; i< calificacion; i++) 
-      this.estrellas_doradas += "★";
-    for( let i=calificacion; i< 5; i++) 
-      this.estrellas_restantes += "★";
+      this._ResenasService.obtenerTotal(""+this.producto.idProducto).subscribe(respuesta => {
+        this.total = respuesta.total;
+      })
+    })
   }
 
 }
