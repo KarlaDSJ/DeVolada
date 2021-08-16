@@ -7,9 +7,6 @@ from main import db # Importamos la instanica de la base de datos
 from sqlalchemy import * # Importamos sqlalchemy 
 import json as simplejson #Importamos simplejson
 import json #Importamos json
-from models.incluirM import Incluir
-from models.compraM import Compra
-
 
 
 __author__ = "Orduña Ávila Marco Antonio, Gramer Muñoz Omar Fernando, Trad Mateos Kethrim Guadalupe, Salas Jiménez Karla Denia, Reyes Martínez Antonio"
@@ -148,13 +145,15 @@ return un archivo JSON con el mensaje si o no
 
 @resena.route('/verificar/<correo>/<id>', methods=['GET'])
 def verificar(correo, id):
-     compra = Compra.query.filter_by(correo=correo).all
-     text = 'select * from compra join incluir i where c.correo =' + correo + 'and i.idProducto = ' + id
-
+     text = 'select * from compra join incluir where compra.correo = "' + correo + '" and incluir.idProducto = ' + id+' and compra.idCompra  = incluir.idCompra '     
      resenas = engine.execute(text)
+     total = 0
+     
+     for i in resenas:          
+          total+=1
 
-     if(resenas is None):
-          return jsonify({'msg':'si'})
-     else: 
+     if(total==0):
           return jsonify({'msg':'no'})
+     else: 
+          return jsonify({'msg':'si'})
      
