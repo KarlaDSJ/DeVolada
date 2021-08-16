@@ -28,7 +28,7 @@
         <!-- Inicio video -->
         
         <div class="col-5">
-          <video width="369px" autoplay="autoplay" oncanplay="this.play()" onloadedmetadata="this.muted = true" muted loop>
+          <video width="100%" autoplay="autoplay" oncanplay="this.play()" onloadedmetadata="this.muted = true" muted loop>
             <source src="../../assets/img/barrasNav/DeVolada.mp4"  type="video/mp4">Su navegador no puede reproducir este video
           </video>
         </div>
@@ -39,45 +39,49 @@
           <div class="row">
             <div class="col-6">
               <!-- Inicio card comprador-->
-              <div class="card border-dark">
+              <div class="card mt-4 border-dark">
                 <h4 class="card-header">¿Eres comprador?</h4>
                   <div class="card-body">
 
                   <!-- Inicio Form -->
 
-                  <form  #form = "ngForm" (ngSubmit) = "submitC()"  action="">
+                  <form  [formGroup]="myForm" (ngSubmit) = "submitC()"  action="">
                     
                     <label for="validationServer01" class="form-label">Correo Electrónico</label>
-                    <input
-                    [ngClass] = " (esVacioCorreoC) ? '' : ((esValidoCorreoC)? 'is-valid' :'is-invalid ')  "
-
-                    class="form-control" 
-                    
-                    id="validationServer02"
-                    type="email"
-                    [(ngModel)] = "dataC.correoC"
-                    name = "correoC"
-                    label = "Correo Electronico"
-                    feedback = "Required"
-                    required
-                    >
-                    <div class="valid-feedback">
-                      Luce bien!
-                    </div>
-                    <div *ngIf = "myForm.get('correoC').hasError('required') || myForm.get('correoC').hasError('email') "  id="validationServerUsernameFeedback" class="invalid-feedback">
-                      Por favor seleciionar un correo valido
-                    </div>
+                    <div>
                       
-                      
+                      <input
+                      [ngClass] = "(!enviadoC)?  '' : (!esVacioCorreoC && esValidoCorreoC)? 'is-valid' : 'is-invalid'  "
+  
+                      class="form-control" 
+                      formControlName="correoC"
+  
+                      id="validationServer02"
+                      type="email"
+                      name = "correoC"
+                      label = "Correo Electronico"
+                      feedback = "Required"
+                      required
+                      >
+                      <div class="valid-feedback">
+                        ¡Luce bien!
+                      </div>
+                      <div class="invalid-feedback">
+                        Por favor ingresa un correo válido
+                      </div>
+                        
+                        
+                    </div>
                       
                       
 
                     <label for="validationServer03" class="form-label">Contraseña</label>
                     <input 
-                    [ngClass] = " (esVacioContraseniaC) ? '' : ((esValidocontraseniaC) ? 'is-valid' :'is-invalid ')  "
+                    [ngClass] = "(!enviadoC)?  '' : (!esVacioContraseniaC && esValidoContraseniaC)? 'is-valid' : 'is-invalid'  "
                     class="form-control" 
                     type="password"
-                     [(ngModel)] = "dataC.contraseniaC"
+                    formControlName="contraseniaC"
+                    
                     name="contraseniaC"
                     label = "Contraseña"
                     feedback = "contrasenia"
@@ -85,13 +89,13 @@
                     >
                     
 
-                    <div *ngIf = "myForm.get('contraseniaC').hasError('required')"  id="validationServer03Feedback" class="invalid-feedback">
-                      Por favor selecciona una contraseña valida
+                    <div  class="invalid-feedback">
+                      Por favor ingresa una contraseña válida
                     </div>
 
 
 
-                    <button type="submit" class="btn btn-dark mt-3">Submit</button>
+                    <button type="submit" class="btn btn-dark mt-3">Enviar</button>
                   </form>
 
                   <!-- Fin Form -->
@@ -106,46 +110,51 @@
             </div>
             <div class="col-6">
               <!-- Inicio card vendedor-->
-              <div class="card border-dark">
+              <div class="card mt-4 border-dark">
                 <h4 class="card-header">¿Eres vendedor?</h4>
                 <div class="card-body">
                   
                   <!-- Inicio Form -->
                   
-                  <form #form = "ngForm" (submit) = "submitV()"  action="">
-                    <label for="exampleInputEmail13" class="form-label">Correo Electrónico</label>
-                    <input [ngClass] = " (esVacioCorreoV) ? '' : ((esValidoCorreoV)? 'is-valid' :'is-invalid ')  " 
-                    class="form-control" 
-                    type="email"
-                    name = "correoV"
-                    label = "Correo Electronico"
-                    [(ngModel)] = "dataV.correoV"
-                    feedback = "Required"
-                    required
-                    >
-                    <div class="valid-feedback">
-                      Luce bien!
-                    </div>
-                    <div *ngIf = "myForm.get('correoV').hasError('required') || myForm.get('correoV').hasError('email') "  id="validationServerUsernameFeedback" class="invalid-feedback">
-                      Por favor seleciionar un correo valido
-                    </div>
+                  <form [formGroup]="myForm" (submit) = "submitV()"  action="">
+                    <div>
 
-
-                    <label for="" class="form-label">Contraseña</label>
-                    <input [ngClass] = " (esVacioContraseniaV) ? '' : ((esValidocontraseniaV) ? 'is-valid' :'is-invalid ')  "
+                      <label for="exampleInputEmail13" class="form-label">Correo Electrónico</label>
+                      <input  [ngClass] = " (!enviadoV)?  '' : (!esVacioCorreoV && esValidoCorreoV)? 'is-valid' : 'is-invalid'"
+                      class="form-control" 
+                      type="email"
+                      name = "correoV"
+                      label = "Correo Electronico"
+                      formControlName="correoV"
+                      feedback = "Required"
+                      required
+                      >
+                      <div class="valid-feedback">
+                        ¡Luce bien!
+                      </div>
+                      <div class="invalid-feedback">
+                        Por favor ingresa un correo válido
+                      </div>
+                      
+                    </div>
+                      
+                      <label for="" class="form-label">Contraseña</label>
+                      <input [ngClass] = " (!enviadoV)?  '' : (!esVacioContraseniaV && esValidoContraseniaV)? 'is-valid' : 'is-invalid'   "
                     class="form-control" 
                     type="password"
                     name="contraseniaV"
                     label = "Contraseña"
-                    [(ngModel)] = "dataV.contraseniaV"
+                    formControlName="contraseniaV"
                     feedback = "contrasenia"
                     >
-                    <div *ngIf = "myForm.get('contraseniaV').hasError('required')"  id="validationServer03Feedback" class="invalid-feedback">
-                      Por favor selecciona una contraseña valida
+                    <div class="invalid-feedback">
+                      Por favor ingresa una contraseña válida
+                    </div>
+                    <div class="valid-feedback">
+                      !Luce bien!
                     </div>
 
-
-                    <button type="submit" class="btn btn-dark mt-3">Submit</button>
+                    <button type="submit" class="btn btn-dark mt-3">Enviar</button>
                   </form>
 
               <!-- Fin Form -->

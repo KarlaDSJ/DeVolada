@@ -32,9 +32,6 @@ export class AppComponent {
     }
     
     
-    console.log(this.esComprador);
-    console.log(this.esVendedor);
-    console.log(this.sinSesion);
     
 
     /*
