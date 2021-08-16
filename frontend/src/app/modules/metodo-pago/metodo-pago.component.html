@@ -1,5 +1,7 @@
 <app-barra-nav-comprador>   </app-barra-nav-comprador>
-<div class="container">
+<app-background></app-background>
+
+<div class="products-container">
     <p class="fs-3 text-center">¿Cómo quieres pagar? 💳 </p>
 
     
@@ -26,7 +28,7 @@
                 <div class="container mt-3 ">
                     <button class="btn btn-light fs-5 mb-3" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                        ➕ Agregar un método de pago
+                        <span class="fs-6">➕ Agregar un método de pago</span>
                     </button>
 
                     <div class="collapse border border-white p-2 py-3" id="collapseExample">
@@ -78,7 +80,7 @@
 
                                 <div class="row margin-auto">
                                     <div class="col d-flex justify-content-center">
-                                        <button type="submit" class="btn btn-outline-primary px-5">Agregar</button>
+                                        <button type="submit" class="btn btn-primary px-5">Agregar</button>
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +101,7 @@
                         </button>
                     </div>
                     <div class="col can-con">                    
-                        <button type="submit" class="btn btn-outline-primary rounded-pill px-5" [disabled]="cargando">
+                        <button type="submit" class="btn btn-dark rounded-pill px-5" [disabled]="cargando">
                         <span *ngIf="cargando" class="spinner-border spinner-border-sm mr-1"></span>
                         Finalizar compra
                         </button>

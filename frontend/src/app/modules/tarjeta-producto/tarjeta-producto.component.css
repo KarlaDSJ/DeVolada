@@ -2,7 +2,16 @@
 /* Mostrar descripción del producto */
 img{
    height: 180px;
-   object-fit: contain;
+   object-fit: cover;
+}
+
+.cardPrducto{
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.tittle{
+    height: 38px;
+    overflow: hidden;
 }
 
 .img:hover .info{

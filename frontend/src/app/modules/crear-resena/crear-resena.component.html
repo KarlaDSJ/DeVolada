@@ -1,14 +1,14 @@
-<!--Agregamos la barra de navegación dez-->
-<app-barra-nav-comprador></app-barra-nav-comprador>
-<div class="container">
+<app-barra-nav-comprador> </app-barra-nav-comprador>
+<app-background></app-background>
+
+<div class="products-container">
     <h4>Crear Reseña</h4> <br>
     <!-- Imagen, nombre y ID del producto -->
     <div class="row">
-        <div class="col-3 mb-5">
-        <!-- Imagen del producto -->
+        <div class="col-3 mb-2">
         <img [src]="infoProducto.imagen" class="d-block w-100" [alt]="infoProducto.nombre">
         </div>
-        <div class="col-9 mb-5">
+        <div class="col-9 mb-2">
         <div class="row">
             <!-- Nombre del producto -->
             <div class="col-8 col-sm-8">
@@ -24,7 +24,7 @@
         </div>
     </div>
     <!-- Línea de separación -->
-    <div class="row mb-3">
+    <div class="row mb-1">
         <div class="col-12">
             <hr size="3" >
         </div>
@@ -32,7 +32,7 @@
     <!-- Calificación -->
     <div class="row">
         <div class="col-12">
-            <p class="fs-5 mb-2"> Calificación</p>
+            <p class="fs-5 mb-1"> Calificación</p>
         </div>
     </div>
     <!-- Calificación del 1 al 5 a través de estrellas-->

@@ -1,9 +1,11 @@
 <!-- control+shift+i para identar todo en vs-code -->
 <app-barra-nav-comprador>   </app-barra-nav-comprador>
-<div class="container">
-    <h2 class="text-center mb-4">
-        ¿A dónde deberíamos enviar tu pedido? 📦
-    </h2>
+<app-background></app-background>
+
+<div class="products-container align-items-center">
+    <h3 class="text-center mb-4">
+        ¿A dónde deberíamos enviar tu pedido?📦
+    </h3>
 
     <!-- Lista de direcciones -->
     <div class="container">
@@ -28,9 +30,9 @@
 
                 <!-- Agregar nueva dirección -->
                 <div class="container mt-3 ">
-                    <button class="btn btn-light fs-5 mb-3" type="button" data-bs-toggle="collapse"
+                    <button class="btn btn-light btn-sm fs-5 mb-3" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                        ➕ Agregar una dirección
+                        <span class="fs-6">➕ Agregar una dirección</span>
                     </button>
 
                     <div class="collapse border border-white p-2 py-3" id="collapseExample">
@@ -120,7 +122,7 @@
 
                                 <div class="row margin-auto">
                                     <div class="col d-flex justify-content-center" >
-                                        <button type="submit" class="btn btn-outline-primary px-5" [disabled]="cargando">
+                                        <button type="submit" class="btn btn-primary px-5" [disabled]="cargando">
                                             <span *ngIf="cargando" class="spinner-border spinner-border-sm mr-1"></span>                                    
                                             Agregar
                                         </button>
@@ -144,7 +146,7 @@
                             Cancelar compra
                         </button>
                     </div>
-                    <button type="submit" class="btn btn-primary rounded-pill me-0 me-ms-5 px-5" [disabled]="cargando">
+                    <button type="submit" class="btn btn-dark rounded-pill me-0 me-ms-5 px-5" [disabled]="cargando">
                         <span *ngIf="cargando" class="spinner-border spinner-border-sm mr-1"></span>
                         Continuar
                     </button>

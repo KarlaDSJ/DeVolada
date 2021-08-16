@@ -4,17 +4,37 @@ from models.categoriaM import Categoria
 from models.productoM import Producto
 from schemas.categoriaE import CategoriaEsquema
 
+__author__ = "Orduña Ávila Marco Antonio, Gramer Muñoz Omar Fernando, Trad Mateos Kethrim Guadalupe, Salas Jiménez Karla Denia, Reyes Martínez Antonio"
+__copyright__ = "Copyright 2021, Ingenieria de Software "
+__credits__ = [""]
+__license__ = ""
+__version__ = "1.0.2"
+__maintainer__ = "Orduña Ávila Marco Antonio, Gramer Muñoz Omar Fernando, Trad Mateos Kethrim Guadalupe, Salas Jiménez Karla Denia, Reyes Martínez Antonio"
+__email__ = "marcoorduna1999@ciencias.unam.mx, omar_gramer@ciencias.unam.mx, kethrimtrad@ciencias.unam.mx, karla_dsj@ciencias.unam.mx, antonioreyes21@ciencias.unam.mx"
+__status__ = "Development"
+
+""" 
+Archivo de rutas para poder manejar las peticiones sobre la categoría de un producto
+"""
 
 categoria = Blueprint('categoria', __name__)
+
+"""---------------- Esquemas ----------------"""
 
 categoria_esquema = CategoriaEsquema()
 categorias_esquema = CategoriaEsquema(many=True)
 
+"""---------------- Rutas ----------------"""
 
 @categoria.route('/categoria/agrega/<idProducto>', methods=['POST'])
 def agrega_categorias(idProducto):
-    """Función para agregar una lista de categorías a un producto"""
-    
+    """
+    Agregar una lista de categorías a un producto
+    Params:        
+        idProducto: identificador del producto
+    Returns: lista las categorías que contiene el producto, 
+    además del identificador del mismo o un mensaje de error
+    """
     # Verifica que el producto exista
     producto = db.session.query(Producto).filter_by(idProducto=idProducto).first()
     if (producto is None):
@@ -47,8 +67,14 @@ def agrega_categorias(idProducto):
 
 @categoria.route('/categoria/actualiza/<idProducto>', methods=['POST'])
 def actualiza_categorias(idProducto):
-    """Función para cambiar las categorías de un producto remplazando las anteriores"""
-    
+    """
+    Cambia las categorías de un producto remplazando las anteriores
+    Params:        
+        idProducto: identificador del producto
+    Returns: lista de las categorías que contiene el producto, 
+    además del identificador del producto o un mensaje de error
+    """
+
     # Verifica que el producto exista
     producto = db.session.query(Producto).filter_by(idProducto=idProducto).first()
     if (producto is None):
@@ -85,7 +111,14 @@ def actualiza_categorias(idProducto):
 
 @categoria.route('/categoria/elimina/<idProducto>', methods=['DELETE'])
 def elimina_categoria(idProducto):
-    """Función para eliminar una categoría de un producto"""
+    """
+    Eliminar una categoría de un producto
+    Params:        
+        idProducto: identificador del producto
+    Returns: Las categoría que se eliminó, 
+    además del identificador del producto o un mensaje de error
+    """
+
     categoria  = request.json['categoria']
     categoria_eliminar = db.session.query(Categoria).get((categoria,idProducto))
     if( categoria_eliminar is None):
@@ -97,7 +130,14 @@ def elimina_categoria(idProducto):
 
 @categoria.route('/categoria/producto/<id>', methods=['GET'])
 def obten_categorias_producto(id):
-    """Función para obtener las categorías de un producto"""
+    """
+    Obtine las categorías de un producto
+    Params:        
+        id: identificador del producto
+    Returns: La lista de las categoría, 
+    además del identificador del producto
+    """
+
     categorias_producto = db.session.query(Categoria).filter_by(idProducto=id)
     print( categorias_producto)
     return categorias_esquema.jsonify(categorias_producto)
@@ -105,6 +145,10 @@ def obten_categorias_producto(id):
 
 @categoria.route('/categorias', methods=['GET'])
 def obtener_todas_las_categorias():
-    """Función para obtener todas las categorías existentes en la base de datos"""
+    """
+    Obtiene todas las categorías existentes en la base de datos
+    Returns: La lista de las categoría
+    """
+
     categoria_obtenida = db.session.query(Categoria.categoria).distinct()
     return categorias_esquema.jsonify(categoria_obtenida)

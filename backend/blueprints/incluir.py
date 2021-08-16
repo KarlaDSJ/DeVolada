@@ -6,15 +6,30 @@ from models.incluirM import Incluir
 from models.productoM import Producto
 from pprint import pprint
 
+__author__ = "Orduña Ávila Marco Antonio, Gramer Muñoz Omar Fernando, Trad Mateos Kethrim Guadalupe, Salas Jiménez Karla Denia, Reyes Martínez Antonio"
+__copyright__ = "Copyright 2021, Ingenieria de Software "
+__credits__ = [""]
+__license__ = ""
+__version__ = "1.0.2"
+__maintainer__ = "Orduña Ávila Marco Antonio, Gramer Muñoz Omar Fernando, Trad Mateos Kethrim Guadalupe, Salas Jiménez Karla Denia, Reyes Martínez Antonio"
+__email__ = "marcoorduna1999@ciencias.unam.mx, omar_gramer@ciencias.unam.mx, kethrimtrad@ciencias.unam.mx, karla_dsj@ciencias.unam.mx, antonioreyes21@ciencias.unam.mx"
+__status__ = "Development"
+
+""" 
+Archivo de rutas para poder manejar las peticiones para crear la relación incluir entre compra y producto
+"""
 incluir = Blueprint('incluir', __name__)
 
 @incluir.route('/incluir', methods=['POST'])
 def incluir_productos():
-    ''' Incluye un producto a una compra con una cantidad
+    ''' 
+    Incluye un producto a una compra con una cantidad
     
     Returns:
     Json indicando si se pudo o no completar la inclusión
-    En caso de que no se produce el error 400'''
+    En caso de que no se produce el error 400
+    '''
+    
     producto = request.json['producto']
     compra = request.json['compra']
     cantidad = request.json['cantidad']

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ICategoria, ProductosService } from "../../services/productos.service";
 import { IProducto } from "../../services/productos.service";
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
@@ -40,6 +41,14 @@ export class BarraNavCompradorComponent implements OnInit {
           .subscribe(data => {
             this.productos = data;
             this.busqueda = true;
+            if (this.productos.length == 0){
+              this.busqueda = false;
+              Swal.fire({
+                title: 'Lo sentimos :(',
+                text: 'No hay productos con esa descripción, inicia sesión como vendedor para registrar uno',
+                icon: 'error'
+              })
+            }
           })
   }
 

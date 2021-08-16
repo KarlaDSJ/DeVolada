@@ -11,10 +11,27 @@ from schemas.incluirE import IncluirEsquema
 from schemas.productoS import ProductoEsquema
 from pprint import pprint
 
+__author__ = "Orduña Ávila Marco Antonio, Gramer Muñoz Omar Fernando, Trad Mateos Kethrim Guadalupe, Salas Jiménez Karla Denia, Reyes Martínez Antonio"
+__copyright__ = "Copyright 2021, Ingenieria de Software "
+__credits__ = [""]
+__license__ = ""
+__version__ = "1.0.2"
+__maintainer__ = "Orduña Ávila Marco Antonio, Gramer Muñoz Omar Fernando, Trad Mateos Kethrim Guadalupe, Salas Jiménez Karla Denia, Reyes Martínez Antonio"
+__email__ = "marcoorduna1999@ciencias.unam.mx, omar_gramer@ciencias.unam.mx, kethrimtrad@ciencias.unam.mx, karla_dsj@ciencias.unam.mx, antonioreyes21@ciencias.unam.mx"
+__status__ = "Development"
+
+""" 
+Archivo de rutas para poder manejar las peticiones sobre una compra
+"""
+
 compra = Blueprint('compra', __name__)
+
+"""---------------- Esquemas ----------------"""
 
 compra_esquema = CompraEsquema()
 compras_esquema = CompraEsquema(many=True)
+
+"""---------------- Rutas ----------------"""
 
 @compra.route('/compra', methods=['POST'])
 def finalizar_compra():
@@ -25,6 +42,7 @@ def finalizar_compra():
     Json con la info de la compra.
     No incluye los productos comprados.
     """
+
     correo = request.json['correo']    
     # Ingreso la tarjeta ya cifrada
     idDir = request.json['idDir']
@@ -43,14 +61,17 @@ def finalizar_compra():
 
 @compra.route('/compra/<id_compra>', methods=['GET'])
 def productos_comprados (id_compra):
-    '''Obtiene todos los productos comprados en una compra 
+    '''
+    Obtiene todos los productos comprados en una compra 
     en una lista de json
     
     Params:
         id_compra: identificador de la compra de la que se quiere 
                    saber la info
     Returns:
-    Lista de los productos y sus cantidades en formato json'''
+    Lista de los productos y sus cantidades en formato json
+    '''
+
     compra = Compra.query.get(id_compra)  
     productos_incluidos = Incluir.query.filter_by(idCompra=id_compra).all()
     inclusion_esquema = IncluirEsquema(many=True, only=('idProducto', 'cantidad'))
@@ -72,19 +93,18 @@ def productos_comprados (id_compra):
     return jsonify(datos)
 
 
-
-
-
-
 def enviar_correo(correo, nombre, total):
-    '''Manda un correo con el total de la compra a un comprador
+    '''
+    Manda un correo con el total de la compra a un comprador
     
     Params:
         correo: destinatario
         nombre: nombre del comprador
         total: total de la compra    
     Returns: 
-    Mensaje indicando que se ha enviado'''
+    Mensaje indicando que se ha enviado
+    '''
+
     mail = Mail(app)
     try:
         mensaje = Message('Compra en DeVolada', sender='mercadodevolada@gmail.com', recipients=[f'{correo}'])
