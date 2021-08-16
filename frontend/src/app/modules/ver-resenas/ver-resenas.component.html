@@ -1,61 +1,52 @@
+<!-- Agregamos la barra de navegación -->
 <app-barra-nav-comprador></app-barra-nav-comprador>
 <div class="w-75 mx-auto p-3">
     <div class="d-flex flex-row justify-content-between align-items-center">
-      <!-- Nombre -->
         <div class="container">
-            <h4>Reseñas de usuarios</h4><br>
-            <!-- Primer columna -->
+            <h4 class="mb-3">Reseñas de usuarios</h4><br>
+            <!-- Promedios-->
             <div class="row">
-                <!-- Calificaciones -->
-                <div class="col-12">
-                    <div class="row justify-content-start">
-                        <!-- Promedio entre 0 y 5 -->
-                        <div class="col-12">
-                            <p align="left" class="fs-1 mb-1">{{promedio}} de 5 estrellas
-                            </p>
-                        </div>
-                        <!-- Promedio Total entre # Total de calificaciones -->
-                        <div class="col-12" style="text-align: left;">
-                            <small>Promedio entre {{total}} calificaciones</small>
-                        </div>
-                    </div> <br>
+                <!-- Promedio de calificación -->
+                <p align="left" class="fs-1 mb-1 text-center">{{promedio}} de 5 estrellas
+                </p>
+                <!-- Promedio del # total de calificaciones -->
+                <div class="col-12 mb-5 text-center" style="text-align: left;">
+                    <small >Promedio entre {{total}} calificaciones</small>
                 </div>
             </div>
+            <!-- Fin de Promedios -->
 
-            <!-- Tercer Columna: List completa de comentarios -->
+            <!-- Inicio de Todos los comentarios en forma de lista -->
             <div class="row">
-                <div class="col-12">
-                    <div class="list-group">
-                        <!-- Usuario 1-->
-                        <div *ngFor="let resena of resenias">
-                            <!-- Usuario 1-->
-                            <div class="d-flex w-100 justify-content-between">
-                                <!-- Nombre del usuario -->
-                                <h6 class="mb-2">{{resena.nombre}}</h6>
-                                <!-- Calificación-->
-                                    <div *ngIf="1==resena.calificacion">
-                                        <span class="text-warning fs-4 bd-highlight">★<span class="text-muted fs-4 bd-highlight">★★★★</span></span>
-                                    </div>
-                                    <div *ngIf="2==resena.calificacion">
-                                        <span class="text-warning fs-4 bd-highlight">★★<span class="text-muted fs-4 bd-highlight">★★★</span></span>
-                                    </div>
-                                    <div *ngIf="3==resena.calificacion">
-                                        <span class="text-warning fs-4 bd-highlight">★★★<span class="text-muted fs-4 bd-highlight">★★</span></span>
-                                    </div>
-                                    <div *ngIf="4==resena.calificacion">
-                                        <span class="text-warning fs-4 bd-highlight">★★★★<span class="text-muted fs-4 bd-highlight">★</span></span>
-                                    </div>
-                                    <div *ngIf="5==resena.calificacion">
-                                        <span class="text-warning fs-4 bd-highlight">★★★★★<span class="text-muted fs-4 bd-highlight"></span></span>
-                                    </div>
+                <div class="list-group">
+                    <div *ngFor="let resena of resenias">
+                        <!-- Usuario n-->
+                        <div class="d-flex w-100 justify-content-between">
+                            <!-- Nombre del usuario -->
+                            <h6>{{resena.nombre}}</h6>
+                            <!-- Calificación del usuario-->
+                            <div *ngIf="1==resena.calificacion">
+                                <span class="text-warning fs-4 bd-highlight">★<span class="text-muted fs-4 bd-highlight">★★★★</span></span>
                             </div>
-                            <!-- Puedo agregar una etiqueta p aquí -->
-                            <!-- Comentario -->
-                            <small>{{resena.opinion}}</small> <br> 
-                        </div>  <br>
-                    </div>
+                            <div *ngIf="2==resena.calificacion">
+                                <span class="text-warning fs-4 bd-highlight">★★<span class="text-muted fs-4 bd-highlight">★★★</span></span>
+                            </div>
+                            <div *ngIf="3==resena.calificacion">
+                                <span class="text-warning fs-4 bd-highlight">★★★<span class="text-muted fs-4 bd-highlight">★★</span></span>
+                            </div>
+                            <div *ngIf="4==resena.calificacion">
+                                <span class="text-warning fs-4 bd-highlight">★★★★<span class="text-muted fs-4 bd-highlight">★</span></span>
+                            </div>
+                            <div *ngIf="5==resena.calificacion">
+                                <span class="text-warning fs-4 bd-highlight">★★★★★<span class="text-muted fs-4 bd-highlight"></span></span>
+                            </div>
+                        </div>
+                            <!-- Comentario del usuario-->
+                            <small>{{resena.opinion}}</small> <br> <br> <br>
+                    </div> 
                 </div>
             </div>
+            <!-- Fin de Todos los comentarios en forma de lista -->
         </div>
     </div>
 </div>

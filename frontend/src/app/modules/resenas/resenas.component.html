@@ -1,37 +1,31 @@
 <div class="w-75 mx-auto p-3">
     <div class="row justify-content-between">
-        <!-- Calificaciones de clientes -->
-        <!-- Columna izquierda-->
+        <!-- Calificaciones de usuarios -->
+        <!-- Inicio de Columna izquierda-->
         <div class="col-5">
             <h5>Calificaciones de usuarios</h5> <br>
             <!-- Calificaciones globales-->
             <div class="container">
                 <div class="row justify-content-start">
-                    <!-- Promedio entre 0 y 5 -->
-                    <div class="col-12">
+                    <!-- Promedio entre 0 estrellas y 5 estrellas -->
+                    <div class="col">
                         <p align="left" class="fs-1 mb-1">{{promedio}} de 5 estrellas
                         </p>
                     </div>
-                    <!-- Promedio Total entre # Total de calificaciones -->
-                    <div class="col-12 mb-3" style="text-align: left;">
+                    <!-- Promedio del # total de calificaciones -->
+                    <div class="col-12 mb-3 text-left">
                         <small>Promedio entre {{total}} calificaciones</small>
                     </div>
                 </div> <br>
             </div> 
 
             <!-- Escribir reseña sobre este producto -->
-            <div class="row justify-content-start">
+            <div class="row justify-content-start mt-4">
                 <div class="col-12">
                     <p align="left" class="fs-5 mb-3">Escribir reseña sobre este producto </p>
                 </div>
                 <small class="mb-3">Comparte tu reseña con otros usuarios</small>
-                <!-- Botón de Escribir Reseña -->
-                <!--
-                    <div class="d-grid gap-2 mx-auto">
-                        <button class="btn btn-primary" type="button">Escribir Reseña</button>
-                    </div>
-                -->
-
+                <!--Botón para crear una reseña-->
                 <div class="col-11">
                     <div class="d-grid">
                         <a routerLink="/crear-resena" routerLinkActive="active"
@@ -42,18 +36,19 @@
                 </div>
             </div> <br>            
         </div> <br>
-        
+        <!-- Fin Columna izquierda -->
+
+        <!-- Inicio Columna derecha-->
         <!--Comentarios-->
-        <!-- Columna derecha-->
         <div class="col-6">
             <h5> Comentarios </h5> <br>
             <div class="list-group">
                 <div *ngFor="let resena of resenias">
-                    <!-- Usuario 1-->
+                    <!-- Usuario-->
                     <div class="d-flex w-100 justify-content-between">
                         <!-- Nombre del usuario -->
                         <h6 class="mb-2">{{resena.nombre}}</h6>
-                        <!-- Calificación-->
+                        <!-- Calificación del usuario -->
                             <div *ngIf="1==resena.calificacion">
                                 <span class="text-warning fs-4 bd-highlight">★<span class="text-muted fs-4 bd-highlight">★★★★</span></span>
                             </div>
@@ -70,14 +65,14 @@
                                 <span class="text-warning fs-4 bd-highlight">★★★★★<span class="text-muted fs-4 bd-highlight"></span></span>
                             </div>
                     </div>
-                    <!-- Puedo agregar una etiqueta p aquí -->
-                    <!-- Comentario -->
-                    <small>{{resena.opinion}}</small> <br> 
-                </div>   
-                <div class="col-11 mt-5">
+                    <!-- Comentario del usuario -->
+                    <small class="mb-5">{{resena.opinion}}</small> <br><br><br>
+                </div> 
+                <!-- Botón para ver todas las reseñas del producto -->
+                <div class="col-11">
                     <div class="d-grid">
-                        <a routerLink="/ver-resenas" routerLinkActive="active"
-                        class="btn btn-light border-primary btn-ms rounded-pill">
+                        <a tabindex="-1" routerLink="/ver-resenas" routerLinkActive="active"
+                        class="btn btn-light border-primary btn-ms rounded-pill disabled" [class.disabled]="resenias.length==0">
                         Ver todas reseñas
                         </a>
                     </div> 

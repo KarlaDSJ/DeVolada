@@ -1,25 +1,32 @@
-from flask import Blueprint, request, jsonify
-from models.opinarM import Opinar
-from schemas.opinarS import OpinarEsquema
-from schemas.opinionCompleta import OpinarCompletaEsquema
-from schemas.promedioE import Promedio
-from main import db
-from sqlalchemy import *
-import simplejson
-import json
+from flask import Blueprint, request, jsonify #Para poder hacer los JSON
+from models.opinarM import Opinar #El modelo de Opinar
+from schemas.opinarS import OpinarEsquema #Esquema de Opinar
+from schemas.opinionCompleta import OpinarCompletaEsquema #Esquema de Opinion Completa
+from schemas.promedioE import Promedio #Esquema de Promedio
+from main import db # Importamos la instanica de la base de datos
+from sqlalchemy import * # Importamos sqlalchemy 
+import simplejson #Importamos simplejson
+import json #Importamos json
 
+# Inicializamos el blueprint
 resena = Blueprint('resena', __name__)
 engine = create_engine('mysql+pymysql://root:T3-quilas@localhost/mydb')
+
+# Instnaciamos los eschemas
 opinion_esquema = OpinarEsquema()
 opiniones_esquema = OpinarEsquema(many=True)
 
 opinionCompleta_esquema = OpinarCompletaEsquema()
-
 opinionCompletas_esquema = OpinarCompletaEsquema(many = True)
 
 promedio_Esquema = Promedio(many=True)
 
-#Funcion que muestra todas las reseñas de un producto
+"""
+Método que muestra todas las reseñas de un producto
+
+return un archivo JSON con los datos de todas las reseñas del producto
+"""
+
 @resena.route('/mostrarResenas/<id>', methods=['GET','POST'])
 def ver_resenas(id):
      text = 'select * from comprador  inner join opinar where comprador.correo = opinar.correo and idProducto = ' + id + ' '
@@ -27,11 +34,17 @@ def ver_resenas(id):
      #diccionario en python
      resenas = engine.execute(text)
      
-     
      print(resenas)
-               #Creamos un archivo json con el diccionario que le pedimos a nuestra BD
 
      return opinionCompletas_esquema.jsonify(resenas)
+
+
+"""
+Método que crear un reseña (calificacion y comentario de un usuario)
+
+return un archivo JSON con los datos de la nueva reseña creada
+manda un mensaje de: todo bien
+"""
 
 @resena.route('/crearResena', methods=['POST'])
 def crear_resena():
@@ -47,20 +60,31 @@ def crear_resena():
 
      return jsonify({'mensaje':'todo bien'})
 
-#Funcion que muestra las primeras 5 reseñas de un producto
+
+"""
+Método que muestra en la página de producto (en la parte de abajo), 
+las primeras 5 reseñas hechas por otros usuarios
+
+return un archivo JSON con los datos de los 5 primeros comentarios
+"""
+
 @resena.route('/resenas/<id>', methods=['GET'])
 def ver_5_resenas(id):
      text = 'select * from comprador  inner join opinar where comprador.correo = opinar.correo and idProducto = ' + id + ' order by idProducto desc limit 5'
      print(text) 
      #diccionario en python
      resenas = engine.execute(text)
-     
-     
-     print(resenas)
-               #Creamos un archivo json con el diccionario que le pedimos a nuestra BD
 
+     print(resenas)
+          
      return opinionCompletas_esquema.jsonify(resenas)
 
+
+"""
+Método que regresa el promedio de todas las calificaciones que se han dejado en un producto
+
+return una cadena de datos JSON con el promedio de todas las de calificaciones
+"""
 
 @resena.route('/promedio/<id>', methods=['GET'])
 def promedio(id):
@@ -73,10 +97,15 @@ def promedio(id):
           promedio=(i['avg(calificacion)'])
           
      promedio = "{0:.1f}".format(promedio)
-     
-               #Creamos un archivo json con el diccionario que le pedimos a nuestra BD
+
      return simplejson.dumps({'promedio':promedio})
 
+
+"""
+Método que regresa el # total de calificaciones que se han dejado en un producto
+
+return una cadena de datos JSON con el # total de calificaciones
+"""
 
 @resena.route('/totalResenas/<id>', methods=['GET'])
 def resenasTotal(id):
@@ -88,5 +117,4 @@ def resenasTotal(id):
      for i in resenas:
           total=(i['count(calificacion)'])
      
-               #Creamos un archivo json con el diccionario que le pedimos a nuestra BD
      return simplejson.dumps({'total':total})

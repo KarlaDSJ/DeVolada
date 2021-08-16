@@ -11,7 +11,13 @@ import { CookieService } from 'ngx-cookie-service';
   templateUrl: './crear-resena.component.html',
   styleUrls: ['./crear-resena.component.css']
 })
+
+/**
+ * Clase para el funcionamiento del componente Crear una Reseña
+ */
 export class CrearResenaComponent implements OnInit {
+
+  // Datos que vamos a ocupar, solo las inicializamos
 
   resenas :  IResena;
   listaT = ['★','★','★','★','★'];
@@ -28,17 +34,38 @@ export class CrearResenaComponent implements OnInit {
   currentRate = 6;
   
 
-  constructor(private router: Router, private _ResenasService: ResenasService, private cookie: CookieService) { 
+  /**
+   * Constructor de la clase
+   * @param router una ruta para dirigir a otra ruta si es necesario
+   * @param _ResenasService varible del servicio de resenas para crear una reseña
+   * @param cookie cookie que manda el servidor para mantener la sesión
+   */
+
+  constructor(private router: Router, 
+              private _ResenasService: ResenasService, 
+              private cookie: CookieService) { 
   }
   
+
+  /**
+   * Constructor que se incializa cada que se carga el componente
+   */
   ngOnInit(): void {
     this.infoProducto=this._ResenasService.getInfoProducto(); 
   }
 
+
+ /**
+   * Funcion que asigna la calificación a la reseña
+   */
   califica(calificacion){
     this.calificacion=calificacion
   }
 
+
+  /**
+   * Funcion que se subscribe al servicio de resenas para enviar los datos de la reseña creada
+   */
   submit(f:NgForm) {
     console.log("hola")
     const correo = this.cookie.get('token_accessC');
@@ -47,10 +74,6 @@ export class CrearResenaComponent implements OnInit {
       this.router.navigate(['/producto/'+this.infoProducto.idProducto]);
       });
     this.vtar = true
-  }
-
-  randomInteger(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
 
