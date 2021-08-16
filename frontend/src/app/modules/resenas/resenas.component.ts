@@ -21,6 +21,8 @@ export class ResenasComponent implements OnInit {
   id : string;
   promedio : number;
   total: number;
+  puede: boolean;
+  
 
   /**
    * Constructor de la clase
@@ -45,13 +47,18 @@ export class ResenasComponent implements OnInit {
     this._ResenasService.obtenerTotal(this.idProducto).subscribe(respuesta => {
       this.total = respuesta.total;
     })
-    console.log(this.id)
     this._ResenasService.mostrar5Resenas(this.idProducto)
     .subscribe(data => { 
       this.cookie.set('id', this.idProducto, 1, '/');
       this.resenias = data;
-      console.log(data);
     });
-  }
+    //this.puede=false;   se deshabilita la opción de escribir reseña
+    this._ResenasService.verificar(this.idProducto).subscribe(data => {
+    let bandera = data.msg 
+      if(bandera=='si'){
+        this.puede=false
+      }else this.puede=true
+    }
+  );}
 
 }

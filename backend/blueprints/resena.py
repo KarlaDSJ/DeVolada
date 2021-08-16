@@ -7,10 +7,14 @@ from main import db # Importamos la instanica de la base de datos
 from sqlalchemy import * # Importamos sqlalchemy 
 import simplejson #Importamos simplejson
 import json #Importamos json
+from models.incluirM import Incluir
+from models.compraM import Compra
 
 # Inicializamos el blueprint
 resena = Blueprint('resena', __name__)
 engine = create_engine('mysql+pymysql://root:pruebatest@localhost/mydb')
+
+#engine = create_engine('mysql+pymysql://root:T3-quilas@localhost/mydb')
 opinion_esquema = OpinarEsquema()
 opiniones_esquema = OpinarEsquema(many=True)
 
@@ -116,3 +120,24 @@ def resenasTotal(id):
           total=(i['count(calificacion)'])
      
      return simplejson.dumps({'total':total})
+
+
+"""
+Método que verifica que un comprador haya adquirido un producto antes de que pueda escribir la reseña de este
+
+return un archivo JSON con el mensaje si o no
+"""
+
+@resena.route('/verificar/<id>', methods=['GET'])
+def verificar(id):
+     correo = request.json['correo']
+     compra = Compra.query.filter_by(correo=correo).all
+     text = 'select * from compra join incluir i where c.correo =' + correo + 'and i.idProducto = ' + id
+
+     resenas = engine.execute(text)
+
+     if(resenas is None):
+          return jsonify({'msg':'si'})
+     else: 
+          return jsonify({'msg':'no'})
+     

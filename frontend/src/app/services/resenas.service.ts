@@ -15,6 +15,7 @@ export interface IResena {
   nombre: String;
   promedio: number;
   total: number;
+  msg: string;
 }
 
 /**
@@ -130,5 +131,16 @@ export class ResenasService {
 
   obtenerTotal(idProducto:string): Observable<IResena>{
     return this._http.get<IResena>(this._url+"/totalResenas/"+idProducto)
+  }
+
+
+  /**
+   * Metodo que verifica que un usuario haya comprado un producto para
+   * poder dejar una reseña en él
+   * @param idProducto el id del Producto que deseamos
+   */
+
+   verificar(idProducto:string): Observable<IResena>{
+    return this._http.get<IResena>(this._url+"/verificar/"+idProducto)
   }
 }
