@@ -43,7 +43,7 @@ export class MisProductosComponent implements OnInit {
 
   // Carga el correo del vendedor a través de las cookies.
   cargaCorreoVendedor(){
-    this.correo_vendedor = this._cookie.get('token_access')
+    this.correo_vendedor = this._cookie.get('token_accessV')
   }
 
 }

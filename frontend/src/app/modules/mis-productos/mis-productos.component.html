@@ -2,26 +2,11 @@
 <app-barra-nav-vendedor>  </app-barra-nav-vendedor>
 <body>
     
-    <div class="background" >
-        <ul class="circles">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-        </ul>
-    </div >
-
-
+    <app-background></app-background>
 
     <div class="content d-flex justify-content-center">
 
-        <div class="products-container d-flex flex-column justify-content-start align-items-center">
+        <div class="products-container d-flex flex-column justify-content-center align-items-center">
 
             <div id="title" class="container">
                 <h1> <i class="bi bi-shop-window"> </i>Mis Productos</h1>
@@ -34,7 +19,6 @@
                 (EditarEvent)  = "accionEditarProducto()" >
             </app-tarjeta-admin>
 
-
             <app-form-alta-producto 
             (productoDadoAltaEvent)="cargaListaProductos()">
             </app-form-alta-producto>
@@ -43,7 +27,5 @@
         </div>
         
     </div>
-
-
     
 </body>

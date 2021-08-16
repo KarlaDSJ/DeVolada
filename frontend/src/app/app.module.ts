@@ -32,6 +32,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { RegistrarComponent } from './modules/registrar/registrar.component';
 import { CarruselComponent } from './modules/carrusel/carrusel.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BackgroundComponent } from './modules/background/background.component';
 
 
 
@@ -58,7 +59,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BarraNavVendedorComponent,
     BarraNavLogComponent,
     RegistrarComponent,
-    CarruselComponent
+    CarruselComponent,
+    BackgroundComponent
   ],
   imports: [
     BrowserModule,

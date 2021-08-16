@@ -5,12 +5,26 @@ from schemas.opinionCompleta import OpinarCompletaEsquema #Esquema de Opinion Co
 from schemas.promedioE import Promedio #Esquema de Promedio
 from main import db # Importamos la instanica de la base de datos
 from sqlalchemy import * # Importamos sqlalchemy 
-import simplejson #Importamos simplejson
+import json as simplejson #Importamos simplejson
 import json #Importamos json
 from models.incluirM import Incluir
 from models.compraM import Compra
 
-# Inicializamos el blueprint
+
+
+__author__ = "Orduña Ávila Marco Antonio, Gramer Muñoz Omar Fernando, Trad Mateos Kethrim Guadalupe, Salas Jiménez Karla Denia, Reyes Martínez Antonio"
+__copyright__ = "Copyright 2021, Ingenieria de Software "
+__credits__ = [""]
+__license__ = ""
+__version__ = "1.0.2"
+__maintainer__ = "Orduña Ávila Marco Antonio, Gramer Muñoz Omar Fernando, Trad Mateos Kethrim Guadalupe, Salas Jiménez Karla Denia, Reyes Martínez Antonio"
+__email__ = "marcoorduna1999@ciencias.unam.mx, omar_gramer@ciencias.unam.mx, kethrimtrad@ciencias.unam.mx, karla_dsj@ciencias.unam.mx, antonioreyes21@ciencias.unam.mx"
+__status__ = "Development"
+
+""" 
+Archivo de rutas para poder manejar las peticiones para crear una reseña
+"""
+
 resena = Blueprint('resena', __name__)
 engine = create_engine('mysql+pymysql://root:pruebatest@localhost/mydb')
 
@@ -22,6 +36,7 @@ opinionCompleta_esquema = OpinarCompletaEsquema()
 opinionCompletas_esquema = OpinarCompletaEsquema(many = True)
 
 promedio_Esquema = Promedio(many=True)
+"""---------------- Rutas ----------------"""
 
 """
 Método que muestra todas las reseñas de un producto
@@ -90,11 +105,12 @@ return una cadena de datos JSON con el promedio de todas las de calificaciones
 
 @resena.route('/promedio/<id>', methods=['GET'])
 def promedio(id):
+
      text = 'select avg(calificacion) from opinar where opinar.idProducto= ' + id +' group by idProducto'
      print(text) 
      #diccionario en python
      resenas = engine.execute(text)
-
+     promedio = 0
      for i in resenas:
           promedio=(i['avg(calificacion)'])
           
@@ -111,11 +127,13 @@ return una cadena de datos JSON con el # total de calificaciones
 
 @resena.route('/totalResenas/<id>', methods=['GET'])
 def resenasTotal(id):
+
      text = 'select count(calificacion) from opinar where opinar.idProducto= ' + id +' group by idProducto'
      print(text) 
      #diccionario en python
      resenas = engine.execute(text)
-
+     total = 0
+     
      for i in resenas:
           total=(i['count(calificacion)'])
      

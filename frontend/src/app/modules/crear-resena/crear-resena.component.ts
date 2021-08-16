@@ -67,6 +67,7 @@ export class CrearResenaComponent implements OnInit {
   /**
    * Funcion que se subscribe al servicio de resenas para enviar los datos de la reseña creada
    */
+
   submit(f:NgForm) {
     console.log(f)
     console.log(this.opinion)
@@ -85,6 +86,5 @@ export class CrearResenaComponent implements OnInit {
         text: 'Debes seleccionar una calificación y escribir un comentario, por favor'})
     this.vtar = true
   }
-
 
 }

@@ -6,6 +6,7 @@ img{
  p {
     text-align: justify;
  }
+ 
 
  /* Tuve que agregar esto porque el col-sm no funcionaba :( */
  @media only screen and (max-width: 760px) {

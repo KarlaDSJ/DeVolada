@@ -8,21 +8,39 @@ from pprint import pprint
 
 from marshmallow import Schema, fields
 
+__author__ = "Orduña Ávila Marco Antonio, Gramer Muñoz Omar Fernando, Trad Mateos Kethrim Guadalupe, Salas Jiménez Karla Denia, Reyes Martínez Antonio"
+__copyright__ = "Copyright 2021, Ingenieria de Software "
+__credits__ = [""]
+__license__ = ""
+__version__ = "1.0.2"
+__maintainer__ = "Orduña Ávila Marco Antonio, Gramer Muñoz Omar Fernando, Trad Mateos Kethrim Guadalupe, Salas Jiménez Karla Denia, Reyes Martínez Antonio"
+__email__ = "marcoorduna1999@ciencias.unam.mx, omar_gramer@ciencias.unam.mx, kethrimtrad@ciencias.unam.mx, karla_dsj@ciencias.unam.mx, antonioreyes21@ciencias.unam.mx"
+__status__ = "Development"
+
+""" 
+Archivo de rutas para poder manejar las peticiones sobre la tabla contener
+"""
+
 contener = Blueprint('contener', __name__)
+
+"""---------------- Esquemas ----------------"""
 
 contener_esquema = ContenerEsquema()
 conteneres_esquema = ContenerEsquema(
     only=("idProducto", "cantidad"), many=True)
 
+"""---------------- Rutas ----------------"""
 
 @contener.route('/contener', methods=['POST'])
 def agregar_producto():
-    '''Crea una relación contener entre un carrito y un producto.
+    '''
+    Crea una relación contener entre un carrito y un producto.
     Ambos son pasados en el cuerpo como  "idProducto" y "idCarrito".
     Si ya existe la relación intenta aumentar la cantidad.
     
     Returns:
-    Un mensaje en formato json indicando si se agregó o no. '''
+    Un mensaje en formato json indicando si se agregó o no. 
+    '''
 
     idProducto = request.json['idProducto']
     idCarrito = request.json['idCarrito']
@@ -49,14 +67,16 @@ def agregar_producto():
 
 @contener.route('/contener', methods=['PUT'])
 def actualizar_cantidad():
-    '''Actualiza la cantidad de un producto en un carrito.
+    '''
+    Actualiza la cantidad de un producto en un carrito.
     Ambos parámetros de la ruta, "idCarrito" y "idProducto".
     La cantidad se pide en un json con "cantidad".
     
     Returns:
     En ambos casos un json con la información de la
     relación. En caso de no poder aumentar la cantidad la deja
-    cómo estaba'''
+    cómo estaba
+    '''
 
 
     idProducto = request.args.get('idProducto', '')
@@ -77,7 +97,8 @@ def actualizar_cantidad():
 
 @contener.route('/contener', methods=['GET'])
 def productos_en_el_carrito():
-    '''Obtiene todos los productos del carrito.
+    '''
+    Obtiene todos los productos del carrito.
     Necesita el id del carrito por parámetro de 
     ruta "idCarrito".
 
@@ -103,7 +124,17 @@ def productos_en_el_carrito():
 
 
 @contener.route('/totalCarrito', methods=['GET'])
-def obtener_total ():   
+def obtener_total ():
+    '''
+    Obtiene la suma del precio de los productos
+    agregados a un carrito
+
+    Params:        
+        idCarrito: identificador del carrito
+    Returns:
+    Total del carrito.
+    '''
+
     idCarrito = request.args.get('idCarrito', '')
     productos = Contener.query.filter_by(idCarrito=idCarrito).all()
 
@@ -119,11 +150,13 @@ def obtener_total ():
 
 @contener.route('/contener', methods=['DELETE'])
 def eliminar_producto():
-    '''Elimina el producto del carrito, ambos son parámetros 
+    '''
+    Elimina el producto del carrito, ambos son parámetros 
     de la ruta. "idCarrito" y "idProducto". 
     
     Returns:
-    Mensaje en formato json indicando si se pudo eliminar o no.'''
+    Mensaje en formato json indicando si se pudo eliminar o no.
+    '''
 
     idCarrito = request.args.get('idCarrito', '')
     idProducto = request.args.get('idProducto', '')
@@ -141,11 +174,13 @@ def eliminar_producto():
 
 @contener.route('/limpiarCarrito', methods=['DELETE'])
 def limpiar_carrito():
-    '''Limpia el carrito del que se le pasa el id en la ruta
+    '''
+    Limpia el carrito del que se le pasa el id en la ruta
     como "idCarrito".
     
     Returns:
-    Mensaje en formato json indicando si se pudo limpiar o no.'''
+    Mensaje en formato json indicando si se pudo limpiar o no.
+    '''
     
     idCarrito = request.args.get('idCarrito', '')
 

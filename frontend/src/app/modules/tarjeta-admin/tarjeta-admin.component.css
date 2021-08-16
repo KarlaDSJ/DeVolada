@@ -1,113 +1,111 @@
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css");
 
-.view{
-    padding: 20px;
+.tarjetaProducto{
+    background: rgba(234, 235, 238, 0.8);
+    margin: 10px 20px;
+    padding-right: 10px;
+    border-radius: 10px;
 }
 
-.card-admin{
-    border-radius:5px;
-    box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.1);
-    line-height: 0em;
-    background: white;
+.columna{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 5px 5px;
 }
 
-.col-md-8{
-    padding-right: 25px;
-    padding-left: 0px;
+.flex-left .columna{
+    justify-content: flex-start;
 }
 
-.card-img{
-    border-radius:5px;
-    padding: 2px;
-    height: 200px;
-    background: rgb(236, 236, 236);
+.flex-rigth{
+    min-width: 370px;
+}
+
+.flex-rigth .columna{
+    justify-content: flex-start;
+    margin: 15px 10px;
+    width: 70px;
+}
+
+
+.col-info {
+    width: 240px;
+    align-items: flex-start;
+    justify-content: space-around;
+    margin-top: 5px;
+    margin-left: 0px;
+    margin-bottom: 5px;
+    padding: 0px 8px;
+    border-left: 1px solid rgb(184, 184, 184);
+}
+
+.col-img{
+    background: rgba(255, 255, 255, 0.35);
+    width: 80px;
+    min-width: 80px;
+    height: 80px;
+    border-radius: 4px;
+    font-size: 0.7em;
+    padding: 0px;
+}
+
+.col-btn{
+    margin: 0px 0px;
+    padding: 0;
+}
+
+
+h5{
+    font-size: 0.85em;
+}
+h6{
+    font-size: 0.8em;
+}
+p, span{
+    font-size: 0.8em;
+    margin: 0;
+}
+
+.producto-img{
     object-fit:cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
 }
 
-
-.card-title{
-    text-align: left; 
-    font-size: 1.2em;
-}
-
-.card-price {
-    font-size: 1.4em;
-}
-
-.card-price small{
-    font-size: 0.7em;
-}
-
-.card-id {
-    position: relative;
+.producto-opiniones{
     font-size: 0.65em;
-    left: 5px;
+    line-height: 0.2;
+}
+.producto-id {
+    font-size: 0.8em;
 }
 
-.card-rating {
-    position: relative;
-    top: 5px;
-}
-
-.card-rating .opinions {
-    position: relative;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 0.55em;
-    top: -2px;
-}
-
-.card-description {
-    position: relative;
-    font-size: 0.75em;
-    line-height: 1.5em;
-}
-
-
-.card-foot {
-    position: relative;
-}
-
-.card-units {
-    height: 25px;
-}
-
-
-.sells {
-    font-family: Helvetica;
-    font-weight:bolder;
-    font-size: 1.2em;
-    padding: 15px 10px;
-}
-.sells span {
-    font-weight:normal;
-    font-size: 0.7em;
-}
-
-
-.card-buttons{
-    position: relative;
-    width: 60px;
-    right: 5px;
-    
-}
-
-.info{
-    display: none;
-}
-
-
-.btn{
-    position: relative;
+button{
     border-radius: 5px;
-    padding: 0px 0px;
-    height: 25px;
+    border: none;
     width: 25px;
-    border-style: hidden;
+    height: 25px;
+    position: relative;
+    color: white;
+    font-size: 14px;
+    margin: 0px 5px;
 }
 
 
-.btn i{
-    position: relative;
-    font-size: 19px;
-    top: -1px;
+.btn-editar{
+    background: linear-gradient(to top, #297cc9, #32d1f8); 
+}
+.btn-editar:hover{
+    background: linear-gradient(to top, rgb(26, 58, 131), #29a5c4); 
+}
+
+.btn-eliminar{
+    background: linear-gradient(to top, #f02323, #e77d27); 
+    background: linear-gradient(to top, #7c7c7c, #afafaf); 
+}
+.btn-eliminar:hover{
+    background: linear-gradient(to top, #b81a1a, #bd6925); 
+    background: linear-gradient(to top, #4b4b4b, #838383);
 }

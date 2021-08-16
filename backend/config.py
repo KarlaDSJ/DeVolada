@@ -50,7 +50,9 @@ class DevelopmentConfig(Config):
 
     # SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:root@localhost/mydb'
     
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:T3-quilas@localhost/mydb'
+    # SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:T3-quilas@localhost/mydb'
+
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:pruebatest@localhost/mydb'
     
     # Evitar warning de los errores
 

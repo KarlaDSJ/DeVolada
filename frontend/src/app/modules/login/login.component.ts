@@ -125,7 +125,7 @@ export class LoginComponent implements OnInit {
         this.esValidoCorreoC = false;
         Swal.fire({icon:'error',
         title: 'oooops',
-        text: 'Los datos ingresados son incorectos'})
+        text: 'Los datos ingresados son incorrectos'})
       }
       if(this.datos == 'error_contrasenia'){
         this.esVacioContraseniaC = false
@@ -179,7 +179,7 @@ export class LoginComponent implements OnInit {
         this.esValidoCorreoV = false;
         Swal.fire({icon:'error',
         title: 'oooops',
-        text: 'Los datos ingresados son incorectos'})
+        text: 'Los datos ingresados son incorrectos'})
       }
       if(this.datos == 'error_contrasenia'){
 

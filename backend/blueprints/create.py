@@ -16,7 +16,22 @@ from flask_mail import Message,Mail
 from flask import render_template
 import re
 
+__author__ = "Orduña Ávila Marco Antonio, Gramer Muñoz Omar Fernando, Trad Mateos Kethrim Guadalupe, Salas Jiménez Karla Denia, Reyes Martínez Antonio"
+__copyright__ = "Copyright 2021, Ingenieria de Software "
+__credits__ = [""]
+__license__ = ""
+__version__ = "1.0.2"
+__maintainer__ = "Orduña Ávila Marco Antonio, Gramer Muñoz Omar Fernando, Trad Mateos Kethrim Guadalupe, Salas Jiménez Karla Denia, Reyes Martínez Antonio"
+__email__ = "marcoorduna1999@ciencias.unam.mx, omar_gramer@ciencias.unam.mx, kethrimtrad@ciencias.unam.mx, karla_dsj@ciencias.unam.mx, antonioreyes21@ciencias.unam.mx"
+__status__ = "Development"
+
+""" 
+Archivo de rutas para poder manejar las peticiones para crear un usuario
+"""
+
 create = Blueprint('create',__name__)
+
+"""---------------- Esquemas ----------------"""
 
 comprador_esquema = CompradorEsquema()
 compradores_esquema = CompradorEsquema(many=True)
@@ -27,10 +42,25 @@ vendedores_esquema = VendedorEsquema(many=True)
 direccion_esquema = DireccionEsquema()
 direccion_esquema = DireccionEsquema(many=True)
 
-
+"""---------------- Rutas ----------------"""
 
 @create.route('/createC', methods=['POST'])
 def agrega_comprador():
+    """
+    Registra a un comprador en la base de datos
+    Params:        
+        correoC: correo del comprador
+        nombreC: nombre del comprador
+        telefonoC: teléfono del comprador
+        estadoC: estado en donde vive
+        ciudadC: ciudad en donde vive
+        coloniaC: colonia en donde vive
+        cpC: código postal 
+        calleC: calle en donde vive
+        numeroC: número de la casa
+    Returns: mensaje de éxito o error al registrar
+    """
+
     correo = request.json['correoC']
    
     nombre = request.json['nombreC']
@@ -65,9 +95,23 @@ def agrega_comprador():
     else: 
         return jsonify({'msg':'correo_registrado'})
 
+
 @create.route('/createV', methods=['POST'])
 def agrega_vendedor():
-
+    """
+    Registra a un vendedor en la base de datos
+    Params:        
+        correoV: correo del vendedor
+        nombreV: nombre del vendedor
+        telefonoV: teléfono del cvendedor
+        estadoV: estado en donde vive
+        ciudadV: ciudad en donde vive
+        coloniaV: colonia en donde vive
+        cpV: código postal 
+        calleV: calle en donde vive
+        numeroV: número de la casa
+    Returns: mensaje de éxito o error al registrar
+    """
     correo = request.json['correoV']
     nombre = request.json['nombreV']
     telefono = request.json['telefonoV']
@@ -107,6 +151,16 @@ def agrega_vendedor():
         
     
 def enviar_correoC(correo, nombre, contrasenia):
+    """
+    Envia un correo con los datos al comprador
+    Params:        
+        correo: correo del comprador
+        nombre: nombre del comprador
+        contrasenia: contraseña generada por el sistema 
+                     para el comprador
+    Returns: mensaje de éxito o error al enviar el correo
+    """
+
     mail = Mail(app)
     try:
 
@@ -149,7 +203,18 @@ def enviar_correoC(correo, nombre, contrasenia):
         raise
     return "Correo enviado :)"
 
+
 def enviar_correoV(correo, nombre, contrasenia):
+    """
+    Envia un correo con los datos al vendedor
+    Params:        
+        correo: correo del vendedor
+        nombre: nombre del vendedor
+        contrasenia: contraseña generada por el sistema 
+                     para el vendedor
+    Returns: mensaje de éxito o error al enviar el correo
+    """
+
     mail = Mail(app)
     try:
 

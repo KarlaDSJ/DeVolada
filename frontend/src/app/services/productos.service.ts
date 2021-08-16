@@ -72,7 +72,25 @@ export class ProductosService {
   }
 
   /*
-    BNos regresa todas las categorías
+    Nos regresa los archivos de imagenes de un producto
+  */
+  getImagenes(id:number): Observable<IProducto>{
+    return this._http.get<IProducto>(this._url+"/imagen/"+id);
+  }
+
+
+  // Regresa un json con las imagenes del producto codificadas en base64 URI.
+  getImagenesDecodificadas( idProducto ){
+    return this._http.get(this._url +`/imagenes/producto/${idProducto}`)
+  }
+
+  // Regresa un json con la primer imagen del producto codificada en base64 URI.
+  getImagenDecodificada( idProducto ): Promise <any> {
+    return this._http.get(this._url +`/imagen/producto/${idProducto}`).toPromise()
+  }
+
+  /*
+    Nos regresa todas las categorías
   */
   getCaregoria(): Observable<ICategoria[]>{
     return this._http.get<ICategoria[]>(this._url+"/categorias");

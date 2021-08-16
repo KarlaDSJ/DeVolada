@@ -1,71 +1,58 @@
 
-<div class="view container-sm">
-  <div class="card-admin ">
-    <div class="row">
-        <div class="col-md-4 ">
-            <!-- Imagen del producto-->
-            <img class="card-img " 
-                  src="https://www.punto-informatico.it/app/uploads/2020/05/lg_gram.jpg" 
-                  [alt]="producto.nombre">
-        </div>
-    
-        <div class="col-md-8">
+<div class="d-flex justify-content-between flex-wrap flex-row tarjetaProducto">
 
-            <!-- Nombre e ID del producto-->
-            <h2 class="card-title mt-2"> {{ producto.nombre }}
-              <small class="card-id text-muted"> ID: {{ producto.idProducto }} </small>
-            </h2>
+  <div class="d-flex flex-left justify-content-start flex-row">
 
-            <!-- Precio del producto-->
-            <h3 class="card-price text-primary"> $ {{ producto.precio }} <small>MXM</small> </h3>
-
-            <!-- Calificacion del producto-->
-            <p class="card-rating text-muted fs-4">
-              <span class="stars text-warning">★★★</span>
-              <span class="stars ">★★</span>
-              <span class="opinions fw-lighter font-fa"> (7 opiniones) </span> 
-            </p>
-
-            <!-- Descripcion del producto-->
-            <p class="card-description text-secondary"> {{ producto.descripcion }} </p>
-            
-            
-            
-              <div class="card-foot d-flex justify-content-between">
-
-                <div class="card-units d-flex justify-content-between">
-                  <!-- Unidades vendidas -->
-                  <p class="sells font-weight-bold text-success"> {{ producto.vendidos }} <span> ventas </span></p>
-                  <!-- Unidades disponibles -->
-                  <p class="sells text-secondary"> {{ producto.disponibles }} <span> disponibles </span></p>
-                </div>
-
-                <div class="card-buttons d-flex justify-content-between">
-                  <!-- Boton de editar-->
-                  <button class="btn btn-outline-primary" 
-                    (click)="accionEditarProducto(producto.idProducto)" 
-                    data-bs-toggle="modal" data-bs-target="#formModal"> 
-                    <i class="bi bi-pencil-square"></i> 
-                    <span>  </span> 
-                  </button> 
-                  <!-- Boton de eliminar-->
-                  <button class="btn btn-outline-danger" 
-                    (click)="accionEliminarProducto(producto.idProducto)" > 
-                    <i class="bi bi-trash-fill"></i>  
-                    <span>  </span> 
-                  </button> 
-
-                </div>
-
-              </div>
-
-        </div>
-      </div>
+    <div class="columna col-img">
+      <img class="producto-img" 
+          [src]="producto.imagenes[0]"
+          [alt]="producto.nombre">
     </div>
+
+    <div class="columna col-info d-flex flex-column ">
+      <h5 class="producto-nombre" > {{ producto.nombre }} 
+        <span class="producto-id text-muted"> &nbsp;ID: {{ producto.idProducto }}</span> 
+      </h5>
+      <h5 class="producto-precio "> $ {{ producto.precio }} <small>MXM</small> </h5>
+    </div>
+
+  </div>
+
+  <div class="d-flex flex-rigth justify-content-end flex-wrap flex-row">
+
+    <div class="columna col-resenas">
+      <h6> Calificación </h6>
+      <h6 class="producto-resenas text-muted">
+        <span class="stars fs-6 text-warning">{{estrellas_doradas}}</span>
+        <span class="stars fs-6">{{estrellas_restantes}}</span>
+      </h6>
+      <p class="producto-opiniones text-muted"> ({{cantidad_resenas}} reseñas) </p> 
+    </div>
+
+    <div class="columna col-ventas">
+      <h6> Vendidos </h6>
+      <p class="producto-vendidos text-muted"> {{ producto.vendidos }}  </p>
+    </div>
+  
+    <div class="columna col-ventas">
+      <h6> Disponibles </h6>
+      <p class="producto-vendidos text-muted"> {{ producto.disponibles }}  </p>
+    </div>
+  
+    <div class="columna col-ventas">
+      <h6> Ganancias </h6>
+      <p class="producto-vendidos text-muted"> $ {{ ganancias }} <small>MXM</small>  </p>
+    </div>
+      
+    <div class="columna col-btn flex-row ">
+      <button class="btn-editar" (click)="accionEditarProducto(producto.idProducto)"> 
+        <i class="bi bi-pencil-fill"></i> </button> 
+
+      <button class="btn-eliminar" (click)="accionEliminarProducto(producto.idProducto)" > 
+        <i class="bi bi-trash-fill"></i> </button> 
+    </div>
+
+  </div>
+
 </div>
-
-
-
-
-
 
