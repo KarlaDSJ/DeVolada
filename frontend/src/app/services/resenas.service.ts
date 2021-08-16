@@ -140,7 +140,7 @@ export class ResenasService {
    * @param idProducto el id del Producto que deseamos
    */
 
-   verificar(idProducto:string): Observable<IResena>{
-    return this._http.get<IResena>(this._url+"/verificar/"+idProducto)
+   verificar(idProducto:string, correo: string): Observable<IResena>{
+    return this._http.get<IResena>(this._url+"/verificar/"+correo+"/"+idProducto)
   }
 }

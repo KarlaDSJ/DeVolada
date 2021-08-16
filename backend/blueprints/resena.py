@@ -146,9 +146,8 @@ Método que verifica que un comprador haya adquirido un producto antes de que pu
 return un archivo JSON con el mensaje si o no
 """
 
-@resena.route('/verificar/<id>', methods=['GET'])
-def verificar(id):
-     correo = request.json['correo']
+@resena.route('/verificar/<correo>/<id>', methods=['GET'])
+def verificar(correo, id):
      compra = Compra.query.filter_by(correo=correo).all
      text = 'select * from compra join incluir i where c.correo =' + correo + 'and i.idProducto = ' + id
 

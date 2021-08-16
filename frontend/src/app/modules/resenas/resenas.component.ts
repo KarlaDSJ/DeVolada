@@ -52,12 +52,15 @@ export class ResenasComponent implements OnInit {
       this.cookie.set('id', this.idProducto, 1, '/');
       this.resenias = data;
     });
-    //this.puede=false;   se deshabilita la opción de escribir reseña
-    this._ResenasService.verificar(this.idProducto).subscribe(data => {
+    let correo = this.cookie.get('toke_accessC');
+    this.puede=false;   //se deshabilita la opción de escribir reseña
+    this._ResenasService.verificar(this.idProducto,correo ).subscribe(data => {
     let bandera = data.msg 
       if(bandera=='si'){
+        this.puede=true
+      }else {
         this.puede=false
-      }else this.puede=true
+      }
     }
   );}
 
