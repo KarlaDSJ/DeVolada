@@ -29,6 +29,7 @@ class Producto(db.Model):
     categoria = db.relationship('Categoria', cascade="all, delete-orphan", lazy='select')
     incluir   = db.relationship('Incluir',   cascade="all, delete-orphan")
     contener  = db.relationship('Contener',  cascade="all, delete-orphan")
+    opinar    = db.relationship('Opinar', cascade="all, delete-orphan")
 
     def __init__(self, correo, precio, nombre, descripcion, vendidos, disponible):
         """
