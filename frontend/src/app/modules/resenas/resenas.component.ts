@@ -7,18 +7,37 @@ import { CookieService } from 'ngx-cookie-service';
   templateUrl: './resenas.component.html',
   styleUrls: ['./resenas.component.css']
 })
+
+/**
+ * Clase para el funcionamiento de ver las calificaciones globas 
+ * de un producto y las primeras 5 reseñas de éste.
+ */ 
+
 export class ResenasComponent implements OnInit {
 
+  // Datos que vamos a ocupar, solo las inicializamos
   resenias: IResena[];
   @Input() idProducto: string;
   id : string;
   promedio : number;
   total: number;
 
+  /**
+   * Constructor de la clase
+   * @param _ResenasService varible del servicio de resenas para ver promedios globales y las 5 primeras reseñas, de un producto
+   * @param cookie cookie que manda el servidor para mantener la sesión
+   */
+
   constructor(private _ResenasService: ResenasService, private cookie:CookieService) {
   }
   
-  
+   
+  /**
+   * Constructor que se inicializa cada que se carga el componente,
+   * para obtener el promedio, # total, y las primeras 5 reseñas
+   * de un producto.
+   */
+
   ngOnInit(): void {
     this._ResenasService.obtenerPromedio(this.idProducto).subscribe(respuesta => {
       this.promedio = respuesta.promedio;
