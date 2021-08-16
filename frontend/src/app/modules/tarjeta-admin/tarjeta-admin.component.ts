@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AdminProductoService } from '../../services/admin-producto.service';
 import { ProductosService } from '../../services/productos.service';
+import { ResenasService, IInfoProducto } from "../../services/resenas.service";
 import { Output, EventEmitter } from '@angular/core';
 import Swal from 'sweetalert2';
 import { IProducto } from "../../services/productos.service";
@@ -15,15 +16,22 @@ export class TarjetaAdminComponent implements OnInit {
   @Input() producto: IProducto;
 
   ganancias = 0;
+  calificacion = 0;
 
   constructor( private _adminService: AdminProductoService,
-               private _productoService: ProductosService ){}
+               private _productoService: ProductosService,
+               private _resenaService: ResenasService ){}
 
   ngOnInit(): void {
     this.ganancias = this.producto.precio * this.producto.vendidos;
     // Carga la primer imagen del producto
     this._productoService.getImagenDecodificada(this.producto.idProducto).subscribe(respuesta => {
-      this.producto.imagenes[0] = respuesta[0]
+      this.producto.imagenes[0] = respuesta[0];
+    })
+
+    // Carga la calificacion promedio de las resenas del producto
+    this._resenaService.obtenerPromedio(String(this.producto.idProducto)).subscribe(respuesta => {
+        this.calificacion = respuesta.promedio;
     })
   }
   
