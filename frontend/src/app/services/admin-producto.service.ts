@@ -69,8 +69,8 @@ export class AdminProductoService {
   }
 
   // Realiza la petición al server para actualizar las imágenes del producto en la BD y el sistema.
-  actualizaImagenes( idProducto: number, img_files: string[] ):Observable<any> {
-    return this._http.patch(this._url + `/imagenes/actualiza/${idProducto}`, img_files)
+  actualizaImagenes( idProducto: number, img_files: string[] ):Promise<any> {
+    return this._http.patch(this._url + `/imagenes/actualiza/${idProducto}`, img_files).toPromise()
   }
 
   // Realiza la petición al server para eliminar un producto de la BD.

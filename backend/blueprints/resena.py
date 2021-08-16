@@ -5,12 +5,12 @@ from schemas.opinionCompleta import OpinarCompletaEsquema #Esquema de Opinion Co
 from schemas.promedioE import Promedio #Esquema de Promedio
 from main import db # Importamos la instanica de la base de datos
 from sqlalchemy import * # Importamos sqlalchemy 
-import simplejson #Importamos simplejson
+import json as simplejson #Importamos simplejson
 import json #Importamos json
 
 # Inicializamos el blueprint
 resena = Blueprint('resena', __name__)
-engine = create_engine('mysql+pymysql://root:pruebatest@localhost/mydb')
+engine = create_engine('mysql+pymysql://root:root@localhost/mydb')
 opinion_esquema = OpinarEsquema()
 opiniones_esquema = OpinarEsquema(many=True)
 
@@ -90,7 +90,7 @@ def promedio(id):
      print(text) 
      #diccionario en python
      resenas = engine.execute(text)
-
+     promedio = 0
      for i in resenas:
           promedio=(i['avg(calificacion)'])
           

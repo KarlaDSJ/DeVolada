@@ -17,6 +17,10 @@ export class TarjetaAdminComponent implements OnInit {
 
   ganancias = 0;
   calificacion = 0;
+  cantidad_resenas = 0;
+  
+  estrellas_doradas = ""
+  estrellas_restantes = ""
 
   constructor( private _adminService: AdminProductoService,
                private _productoService: ProductosService,
@@ -24,19 +28,37 @@ export class TarjetaAdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.ganancias = this.producto.precio * this.producto.vendidos;
+
     // Carga la primer imagen del producto
-    this._productoService.getImagenDecodificada(this.producto.idProducto).subscribe(respuesta => {
+    this._productoService.getImagenDecodificada(this.producto.idProducto).then(respuesta => {
       this.producto.imagenes[0] = respuesta[0];
     })
 
     // Carga la calificacion promedio de las resenas del producto
     this._resenaService.obtenerPromedio(String(this.producto.idProducto)).subscribe(respuesta => {
         this.calificacion = respuesta.promedio;
+        this.calculaEstrellas(this.calificacion)
+    })
+
+    // Carga la calificacion promedio de las resenas del producto
+    this._resenaService.obtenerTotal(String(this.producto.idProducto)).subscribe(respuesta => {
+        this.cantidad_resenas = respuesta.total;
     })
   }
   
   @Output() EliminarEvent = new EventEmitter();
   @Output() EditarEvent   = new EventEmitter();
+
+  calculaEstrellas(calificacion){
+    calificacion = Math.round(calificacion)
+    if (calificacion > 5) calificacion = 5;
+    if (calificacion < 0) calificacion = 0;
+    this.estrellas_doradas = "";
+    for( let i=0; i< calificacion; i++) 
+      this.estrellas_doradas += "★";
+    for( let i=calificacion; i< 5; i++) 
+      this.estrellas_restantes += "★";
+  }
 
   accionEditarProducto(idProducto){
     this._adminService.set_Producto_seleccionado(idProducto);

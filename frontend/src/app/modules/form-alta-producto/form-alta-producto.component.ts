@@ -216,10 +216,8 @@ export class FormAltaProductoComponent implements OnInit {
 
   // Hace la petición al service para reemplazar y/o agregar las imágenes del producto en la BD.
   subeImagenesProductos(idProducto){
-        
     // Reemplaza las imagenes del producto por las actuales en el formulario.
-    this._adminService.actualizaImagenes( idProducto, this.datosProducto.imagenes )
-        .subscribe(respuesta => {
+    this._adminService.actualizaImagenes( idProducto, this.datosProducto.imagenes ).then(respuesta => {
           console.log(respuesta)
         } )
   }

@@ -85,8 +85,8 @@ export class ProductosService {
   }
 
   // Regresa un json con la primer imagen del producto codificada en base64 URI.
-  getImagenDecodificada( idProducto ){
-    return this._http.get(this._url +`/imagen/producto/${idProducto}`)
+  getImagenDecodificada( idProducto ): Promise <any> {
+    return this._http.get(this._url +`/imagen/producto/${idProducto}`).toPromise()
   }
 
   /*
